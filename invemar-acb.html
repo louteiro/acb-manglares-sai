@@ -1,0 +1,234 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>INVEMAR y el ACB de manglares</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,650;12..96,700&family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+/* Layout: una columna de lectura de 72rem; bandas de sección separadas por regla, tabla filtrable al centro */
+:root{
+  --bg:#f3f6f4; --surface:#ffffff; --ink:#132422; --muted:#4f625e; --line:#d5dfdb;
+  --mangle:#1d6a4e; --mangle-soft:#e1efe8; --tide:#1f5f8b; --tide-soft:#e2edf5;
+  --crit:#b3261e; --crit-soft:#fbe7e5; --alta:#8a5a00; --alta-soft:#fbf0d9; --media:#4f625e; --media-soft:#e9eeec;
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1817; --surface:#16211f; --ink:#e4ece9; --muted:#9db0ab; --line:#2a3a37;
+  --mangle:#5fc49b; --mangle-soft:#173228; --tide:#7ab7e3; --tide-soft:#16293a;
+  --crit:#ff8a80; --crit-soft:#3a1916; --alta:#f0c060; --alta-soft:#33280f; --media:#a9bab6; --media-soft:#22302d;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1817; --surface:#16211f; --ink:#e4ece9; --muted:#9db0ab; --line:#2a3a37;
+  --mangle:#5fc49b; --mangle-soft:#173228; --tide:#7ab7e3; --tide-soft:#16293a;
+  --crit:#ff8a80; --crit-soft:#3a1916; --alta:#f0c060; --alta-soft:#33280f; --media:#a9bab6; --media-soft:#22302d;
+  color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.6 var(--f-body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+.wrap{max-width:72rem;margin:0 auto;display:grid;gap:56px}
+a{color:var(--tide)} a:focus-visible,button:focus-visible,select:focus-visible{outline:2px solid var(--tide);outline-offset:2px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(1.9rem,4.4vw,3rem);font-weight:700;letter-spacing:-.01em;max-width:22ch}
+h2{font-size:1.5rem;font-weight:650}
+.eyebrow{font:500 .75rem/1.4 var(--f-mono);text-transform:uppercase;letter-spacing:.08em;color:var(--mangle)}
+.lead{font-size:1.08rem;color:var(--muted);max-width:62ch;margin:0}
+header{padding-top:48px;display:grid;gap:16px;border-bottom:1px solid var(--line);padding-bottom:40px}
+.stats{display:flex;flex-wrap:wrap;gap:12px 40px;margin-top:8px}
+.stat b{display:block;font:700 2rem/1 var(--f-display);color:var(--mangle);font-variant-numeric:tabular-nums}
+.stat span{font-size:.85rem;color:var(--muted)}
+section{display:grid;gap:20px}
+.sec-head{display:grid;gap:6px}
+.sec-head p{margin:0;color:var(--muted);max-width:64ch}
+/* qué es */
+.about{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:32px}
+.about p{margin:0 0 12px;max-width:62ch}
+dl.facts{margin:0;display:grid;grid-template-columns:max-content minmax(0,1fr);gap:10px 20px;
+  background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px}
+dl.facts dt{font:500 .72rem/1.6 var(--f-mono);text-transform:uppercase;letter-spacing:.07em;color:var(--muted);padding-top:2px}
+dl.facts dd{margin:0}
+.systems{display:flex;flex-wrap:wrap;gap:6px}
+.sys{font:500 .78rem/1 var(--f-mono);padding:5px 8px;border-radius:4px;background:var(--tide-soft);color:var(--tide)}
+/* competencias */
+.comps{display:grid;grid-template-columns:repeat(auto-fill,minmax(15.5rem,1fr));gap:10px}
+.comp{all:unset;cursor:pointer;display:grid;grid-template-rows:auto auto 1fr auto;gap:4px;padding:14px 16px;
+  background:var(--surface);border:1px solid var(--line);border-radius:10px;transition:border-color .15s,background .15s}
+.comp:hover{border-color:var(--mangle)}
+.comp[aria-pressed="true"]{background:var(--mangle-soft);border-color:var(--mangle)}
+.comp .num{font:500 .72rem/1 var(--f-mono);color:var(--mangle);letter-spacing:.05em}
+.comp .ct{font:650 1rem/1.25 var(--f-display)}
+.comp .cd{font-size:.83rem;color:var(--muted);line-height:1.45}
+.comp .cc{font:500 .75rem/1 var(--f-mono);color:var(--muted);margin-top:6px}
+/* filtros + tabla */
+.filters{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center}
+.filters label{font-size:.85rem;color:var(--muted);display:flex;gap:8px;align-items:center}
+select{font:inherit;font-size:.9rem;padding:6px 10px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.clear{font:inherit;font-size:.85rem;background:none;border:1px solid var(--line);color:var(--ink);border-radius:6px;padding:6px 12px;cursor:pointer}
+.clear:hover{border-color:var(--mangle)}
+.shown{font:500 .8rem var(--f-mono);color:var(--muted);margin-left:auto}
+.tablebox{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+table{width:100%;border-collapse:collapse;min-width:58rem;font-size:.9rem}
+th{text-align:left;font:500 .7rem/1.3 var(--f-mono);text-transform:uppercase;letter-spacing:.07em;color:var(--muted);
+  padding:12px 14px;border-bottom:1px solid var(--line);background:var(--surface);position:sticky;top:0}
+td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.id{font:500 .8rem var(--f-mono);color:var(--muted);white-space:nowrap}
+td.when{white-space:nowrap;font-variant-numeric:tabular-nums}
+td.when small{display:block;font:500 .72rem var(--f-mono);color:var(--muted)}
+.tags{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}
+.tag{font:500 .7rem/1 var(--f-mono);padding:3px 6px;border-radius:3px;background:var(--mangle-soft);color:var(--mangle)}
+.tag.hit{background:var(--mangle);color:var(--surface)}
+.pill{display:inline-block;font:600 .75rem/1 var(--f-body);padding:4px 8px;border-radius:999px;white-space:nowrap}
+.p-crí{background:var(--crit-soft);color:var(--crit)} .p-alt{background:var(--alta-soft);color:var(--alta)} .p-med{background:var(--media-soft);color:var(--media)}
+.none{color:var(--muted);font-style:italic}
+.empty{padding:24px;color:var(--muted);text-align:center}
+/* gantt */
+.gantt{display:grid;grid-template-columns:minmax(0,15rem) minmax(0,1fr);gap:8px 16px;align-items:center;
+  background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px}
+.glabel{font-size:.88rem} .glabel b{font-family:var(--f-mono);font-weight:500;color:var(--mangle);margin-right:6px}
+.gtrack,.gmonths{display:grid;grid-template-columns:repeat(11,1fr);position:relative}
+.gtrack{height:18px;background:repeating-linear-gradient(90deg,transparent 0 calc(100%/11 - 1px),var(--line) calc(100%/11 - 1px) calc(100%/11))}
+.gbar{height:100%;border-radius:3px;background:var(--tide)}
+.gF1,.gF2{background:var(--mangle)}
+.gmonths span{font:500 .7rem var(--f-mono);color:var(--muted);text-align:center}
+.gnote{grid-column:2;display:grid;grid-template-columns:repeat(11,1fr);font-size:.8rem;color:var(--muted)}
+.gnote .mk{grid-column:2 / 4;border-top:2px solid var(--crit);padding-top:4px;color:var(--crit)}
+.legend{font-size:.85rem;color:var(--muted);margin:0}
+/* acceso */
+.ask{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:12px;margin:0;padding:0;list-style:none}
+.ask li{border-top:2px solid var(--mangle);padding-top:10px}
+.ask b{display:block;font-family:var(--f-display);font-size:1rem;margin-bottom:4px}
+.ask span{color:var(--muted);font-size:.9rem}
+footer{border-top:1px solid var(--line);padding-top:20px;font-size:.82rem;color:var(--muted)}
+footer ul{margin:6px 0 0;padding-left:18px}
+@media (max-width:760px){
+  .about{grid-template-columns:1fr}
+  .gantt{grid-template-columns:1fr} .gnote{grid-column:1}
+  .shown{margin-left:0;width:100%}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<div class="wrap">
+<header>
+  <span class="eyebrow">Reunión con INVEMAR · 29 oct 2026 · ACB manglares San Andrés, Providencia y Santa Catalina</span>
+  <h1>Qué datos pedimos a INVEMAR y en qué función se apoya cada uno</h1>
+  <p class="lead">La consultoría para FORLIANCE (proyecto IKI «De Raíces a Mareas») evalúa en costo-beneficio la restauración de manglar como adaptación al cambio climático. Los datos de proyecto previstos en los TdR (MangRes, batimetría) no están disponibles, así que INVEMAR, por su mandato legal, es la fuente pública principal.</p>
+  <div class="stats">
+    <div class="stat"><b>20</b><span>datos solicitados</span></div>
+    <div class="stat"><b>8</b><span>críticos: bloquean una fase</span></div>
+    <div class="stat"><b>15</b><span>necesarios antes de enero 2027</span></div>
+    <div class="stat"><b>14</b><span>funciones legales que los sustentan</span></div>
+  </div>
+</header>
+
+<section aria-labelledby="h-que">
+  <div class="sec-head"><span class="eyebrow">1 · La institución</span><h2 id="h-que">Qué es INVEMAR</h2></div>
+  <div class="about">
+    <div>
+      <p>El Instituto de Investigaciones Marinas y Costeras «José Benito Vives de Andréis» es el instituto de investigación del Sistema Nacional Ambiental (SINA) encargado de los mares y costas de Colombia. Hace investigación básica y aplicada sobre los recursos naturales renovables y los ecosistemas costeros y oceánicos.</p>
+      <p>Da apoyo científico y técnico al Ministerio de Ambiente, emite conceptos técnicos sobre conservación y uso sostenible de los recursos marinos, y asesora a las entidades territoriales y a las corporaciones autónomas, como CORALINA en el Archipiélago.</p>
+      <p>Para este proyecto lo más relevante es que coordina la información ambiental marino-costera del país: los datos de manglar, erosión, ecosistemas y cambio climático costero pasan por sus sistemas.</p>
+    </div>
+    <dl class="facts">
+      <dt>Naturaleza</dt><dd>Corporación civil sin ánimo de lucro, de carácter público y sometida al derecho privado</dd>
+      <dt>Vinculación</dt><dd>Ministerio de Ambiente y Desarrollo Sostenible</dd>
+      <dt>Base legal</dt><dd>Ley 99 de 1993, art. 18 · Decreto 1276 de 1994 (22 funciones en su art. 3), compilado en el Decreto 1076 de 2015</dd>
+      <dt>Sede</dt><dd>Santa Marta (Punta Betín)</dd>
+      <dt>Sistemas</dt><dd><div class="systems"><span class="sys">SIAM</span><span class="sys">SIGMA manglares</span><span class="sys">REDCAM</span><span class="sys">CLIMARES</span><span class="sys">SMEC-MAbE</span><span class="sys">Geoportal ArcGIS</span></div></dd>
+    </dl>
+  </div>
+</section>
+
+<section aria-labelledby="h-comp">
+  <div class="sec-head"><span class="eyebrow">2 · Competencias</span><h2 id="h-comp">Las funciones que sustentan la solicitud</h2>
+  <p>Son 14 de los 22 numerales del art. 3 del Decreto 1276 de 1994, resumidos. Pulsa una función para ver en la tabla qué datos se apoyan en ella.</p></div>
+  <div class="comps"><button type="button" class="comp" id="comp-1" data-c="1" aria-pressed="false"><span class="num">Num. 1</span><span class="ct">Información oceanográfica y de ecosistemas</span><span class="cd">Obtener, analizar y difundir información básica sobre oceanografía y ecosistemas marinos y costeros.</span><span class="cc">6 datos</span></button><button type="button" class="comp" id="comp-2" data-c="2" aria-pressed="false"><span class="num">Num. 2</span><span class="ct">Evaluación ecológico-pesquera</span><span class="cd">Evaluar parámetros ecológico-pesqueros y estudiar los recursos vivos marinos.</span><span class="cc">1 dato</span></button><button type="button" class="comp" id="comp-3" data-c="3" aria-pressed="false"><span class="num">Num. 3</span><span class="ct">Seguimiento del estado de los recursos</span><span class="cd">Hacer seguimiento a los recursos marinos de la Nación: extinción, contaminación y degradación.</span><span class="cc">3 datos</span></button><button type="button" class="comp" id="comp-4" data-c="4" aria-pressed="false"><span class="num">Num. 4</span><span class="ct">Factores de deterioro</span><span class="cd">Estudiar emisiones, vertimientos y otros factores de deterioro marino y costero.</span><span class="cc">2 datos</span></button><button type="button" class="comp" id="comp-5" data-c="5" aria-pressed="false"><span class="num">Num. 5</span><span class="ct">Modelos predictivos con el IDEAM</span><span class="cd">Coordinar con otros institutos y apoyar al IDEAM con información y modelos predictivos.</span><span class="cc">3 datos</span></button><button type="button" class="comp" id="comp-6" data-c="6" aria-pressed="false"><span class="num">Num. 6</span><span class="ct">Sistema de información marino-costero</span><span class="cd">Coordinar el Sistema de Información Ambiental en lo marino y costero (SIAM).</span><span class="cc">5 datos</span></button><button type="button" class="comp" id="comp-7" data-c="7" aria-pressed="false"><span class="num">Num. 7</span><span class="ct">Redes de monitoreo</span><span class="cd">Establecer y operar con el IDEAM infraestructura de monitoreo en sitios estratégicos.</span><span class="cc">1 dato</span></button><button type="button" class="comp" id="comp-9" data-c="9" aria-pressed="false"><span class="num">Num. 9</span><span class="ct">Indicadores y modelos</span><span class="cd">Apoyar la coordinación de indicadores y modelos sobre ecosistemas marinos y costeros.</span><span class="cc">5 datos</span></button><button type="button" class="comp" id="comp-10" data-c="10" aria-pressed="false"><span class="num">Num. 10</span><span class="ct">Cuentas ambientales</span><span class="cd">Servir de enlace para las Cuentas Nacionales Ambientales de recursos marinos y costeros.</span><span class="cc">1 dato</span></button><button type="button" class="comp" id="comp-12" data-c="12" aria-pressed="false"><span class="num">Num. 12</span><span class="ct">Cambio global</span><span class="cd">Colaborar en estudios de cambio global y en la política ambiental internacional.</span><span class="cc">4 datos</span></button><button type="button" class="comp" id="comp-15" data-c="15" aria-pressed="false"><span class="num">Num. 15</span><span class="ct">Modelos de desarrollo sostenible</span><span class="cd">Investigar modelos alternos de desarrollo sostenible del medio marino y costero.</span><span class="cc">2 datos</span></button><button type="button" class="comp" id="comp-16" data-c="16" aria-pressed="false"><span class="num">Num. 16</span><span class="ct">Estado de los ambientes marinos</span><span class="cd">Producir un balance anual sobre el estado del ambiente marino y costero.</span><span class="cc">1 dato</span></button><button type="button" class="comp" id="comp-17" data-c="17" aria-pressed="false"><span class="num">Num. 17</span><span class="ct">Asesoría a entidades territoriales y CAR</span><span class="cd">Prestar asesoría científica y técnica al Ministerio, entidades territoriales y Corporaciones (CORALINA).</span><span class="cc">3 datos</span></button><button type="button" class="comp" id="comp-19" data-c="19" aria-pressed="false"><span class="num">Num. 19</span><span class="ct">Información geológica</span><span class="cd">Coordinar el suministro de información geológica marina y costera.</span><span class="cc">2 datos</span></button></div>
+</section>
+
+<section aria-labelledby="h-datos" id="datos">
+  <div class="sec-head"><span class="eyebrow">3 · Solicitud</span><h2 id="h-datos">Datos que necesitamos</h2>
+  <p>Ordenados por la fecha en que hacen falta. El ID remite a la matriz de disponibilidad del proyecto; los números verdes son las funciones de INVEMAR.</p></div>
+  <div class="filters">
+    <label for="fprio">Prioridad <select id="fprio"><option value="">Todas</option><option>Crítica</option><option>Alta</option><option>Media</option></select></label>
+    <label for="ffase">Fase <select id="ffase"><option value="">Todas</option><option value="F1">F1 · Diagnóstico de línea base</option><option value="F2">F2 · Áreas críticas y escenarios</option><option value="F3">F3 · Costos CAPEX/OPEX</option><option value="F4">F4 · Modelado biofísico</option><option value="F5">F5 · Valoración económica</option><option value="F6">F6 · ACB y marco de decisión</option></select></label>
+    <button type="button" class="clear" id="clear">Quitar filtros</button>
+    <span class="shown" id="shown" aria-live="polite"></span>
+  </div>
+  <div class="tablebox">
+    <table>
+      <thead><tr><th>ID</th><th>Dato y funciones</th><th>Prioridad</th><th>Lo necesitamos</th><th>Lo que ya vemos en línea</th><th>Qué pedimos</th></tr></thead>
+      <tbody><tr data-c="1,6" data-p="Crítica" data-f="F1"><td class="id">1.04</td><td><strong>Extensión actual del manglar</strong><div class="tags"><span class="tag" title="Información oceanográfica y de ecosistemas">1</span><span class="tag" title="Sistema de información marino-costero">6</span></div></td><td><span class="pill p-crí">Crítica</span></td><td class="when">nov 2026<small>F1</small></td><td><a href="https://gis.invemar.org.co/arcgis/rest/services/SIGMA/MANGLARES_COLOMBIA/MapServer" target="_blank" rel="noopener">SIGMA · Manglares de Colombia 1:5.000</a></td><td>Capa original (GDB/SHP) con metadatos: año y tipo de imagen, método; versión posterior a Iota si existe.</td></tr><tr data-c="1,3" data-p="Crítica" data-f="F1"><td class="id">1.05</td><td><strong>Estado, especies y estructura del manglar</strong><div class="tags"><span class="tag" title="Información oceanográfica y de ecosistemas">1</span><span class="tag" title="Seguimiento del estado de los recursos">3</span></div></td><td><span class="pill p-crí">Crítica</span></td><td class="when">nov 2026<small>F1</small></td><td><a href="https://gis.invemar.org.co/arcgis/rest/services/SIGMA/SECTORES_MANGLARES/MapServer" target="_blank" rel="noopener">SIGMA · Sectores de manglar</a></td><td>Tablas de parcelas georreferenciadas (densidad, DAP, altura, regeneración) y datos de la evaluación post-Iota de enero de 2021.</td></tr><tr data-c="1,19" data-p="Crítica" data-f="F4"><td class="id">4.01</td><td><strong>Batimetría nearshore (manglar, laguna, arrecife)</strong><div class="tags"><span class="tag" title="Información oceanográfica y de ecosistemas">1</span><span class="tag" title="Información geológica">19</span></div></td><td><span class="pill p-crí">Crítica</span></td><td class="when">nov 2026<small>F4</small></td><td><span class="none">Nada utilizable en línea</span></td><td>Levantamientos, ecosondas o perfiles de proyectos INVEMAR en el Archipiélago (CLIMARES, expediciones Seaflower).</td></tr><tr data-c="5,9" data-p="Crítica" data-f="F4"><td class="id">4.04</td><td><strong>Modelo digital de terreno costero</strong><div class="tags"><span class="tag" title="Modelos predictivos con el IDEAM">5</span><span class="tag" title="Indicadores y modelos">9</span></div></td><td><span class="pill p-crí">Crítica</span></td><td class="when">nov 2026<small>F4</small></td><td><span class="none">Nada utilizable en línea</span></td><td>MDT usado en las manchas de inundación de CLIMARES20 o en otros estudios; resolución y fecha.</td></tr><tr data-c="9,17" data-p="Crítica" data-f="F2"><td class="id">1.09</td><td><strong>Modelo de priorización de restauración y zonificación</strong><div class="tags"><span class="tag" title="Indicadores y modelos">9</span><span class="tag" title="Asesoría a entidades territoriales y CAR">17</span></div></td><td><span class="pill p-crí">Crítica</span></td><td class="when">nov 2026<small>F2</small></td><td><a href="https://gis.invemar.org.co/arcgis/rest/services/SIGMA/ZONIFICACION/MapServer" target="_blank" rel="noopener">SIGMA · Zonificación</a></td><td>Modelo multicriterio original: capas de entrada, criterios, pesos y método, para el análisis de sensibilidad.</td></tr><tr data-c="5,12" data-p="Crítica" data-f="F1"><td class="id">1.10</td><td><strong>Inundación actual y futura por aumento del nivel del mar</strong><div class="tags"><span class="tag" title="Modelos predictivos con el IDEAM">5</span><span class="tag" title="Cambio global">12</span></div></td><td><span class="pill p-crí">Crítica</span></td><td class="when">nov 2026<small>F1</small></td><td><a href="https://gis.invemar.org.co/arcgis/rest/services/CLIMARES20/CLIMARES20_TM_Caso_SAI_Providencia/MapServer" target="_blank" rel="noopener">CLIMARES20 · Caso SAI/Providencia</a></td><td>Escenarios de nivel del mar y horizontes usados, MDT de base y método de las manchas.</td></tr><tr data-c="10,12" data-p="Crítica" data-f="F5"><td class="id">5.04</td><td><strong>Carbono en biomasa y suelo del manglar</strong><div class="tags"><span class="tag" title="Cuentas ambientales">10</span><span class="tag" title="Cambio global">12</span></div></td><td><span class="pill p-crí">Crítica</span></td><td class="when">nov 2026<small>F5</small></td><td><span class="none">Nada utilizable en línea</span></td><td>Mediciones locales de carbono (biomasa aérea, subterránea y suelo) y factores que INVEMAR usa en carbono azul.</td></tr><tr data-c="16,6" data-p="Media" data-f="F1"><td class="id">—</td><td><strong>Informes técnicos de referencia</strong><div class="tags"><span class="tag" title="Estado de los ambientes marinos">16</span><span class="tag" title="Sistema de información marino-costero">6</span></div></td><td><span class="pill p-med">Media</span></td><td class="when">nov 2026<small>F1</small></td><td><a href="https://siam.invemar.org.co/" target="_blank" rel="noopener">SIAM</a></td><td>Informes CORALINA–INVEMAR de manglar, CLIMARES, evaluación post-Iota y el informe del estado de los ambientes marinos.</td></tr><tr data-c="6,9" data-p="Crítica" data-f="F1"><td class="id">1.07</td><td><strong>Cobertura y uso del suelo 1:5.000</strong><div class="tags"><span class="tag" title="Sistema de información marino-costero">6</span><span class="tag" title="Indicadores y modelos">9</span></div></td><td><span class="pill p-crí">Crítica</span></td><td class="when">dic 2026<small>F1</small></td><td><a href="https://gis.invemar.org.co/arcgis/rest/services/CLIMARES20/CLIMARES20_TM_Caso_SAI_Providencia/MapServer" target="_blank" rel="noopener">CLIMARES20 · capas 1–4</a></td><td>Capas originales, año de referencia y leyenda CORINE adaptada; actualizaciones posteriores.</td></tr><tr data-c="3,9" data-p="Alta" data-f="F2"><td class="id">1.06</td><td><strong>Serie histórica de cobertura de manglar</strong><div class="tags"><span class="tag" title="Seguimiento del estado de los recursos">3</span><span class="tag" title="Indicadores y modelos">9</span></div></td><td><span class="pill p-alt">Alta</span></td><td class="when">dic 2026<small>F2</small></td><td><span class="none">Nada utilizable en línea</span></td><td>Cortes anteriores de cobertura del Archipiélago para estimar la tasa de degradación del escenario base.</td></tr><tr data-c="1,6" data-p="Alta" data-f="F1"><td class="id">1.08</td><td><strong>Arrecifes, pastos marinos y comunidades marinas</strong><div class="tags"><span class="tag" title="Información oceanográfica y de ecosistemas">1</span><span class="tag" title="Sistema de información marino-costero">6</span></div></td><td><span class="pill p-alt">Alta</span></td><td class="when">dic 2026<small>F1</small></td><td><a href="https://gis.invemar.org.co/arcgis/rest/services/PastosMarinos/Atlas_pastos_Marinos/MapServer" target="_blank" rel="noopener">Atlas de pastos marinos</a></td><td>Cartografía bentónica de mayor detalle (escala, año) y cobertura coralina de las estaciones de monitoreo.</td></tr><tr data-c="12,19" data-p="Alta" data-f="F1"><td class="id">1.13</td><td><strong>Erosión costera y geomorfología</strong><div class="tags"><span class="tag" title="Cambio global">12</span><span class="tag" title="Información geológica">19</span></div></td><td><span class="pill p-alt">Alta</span></td><td class="when">dic 2026<small>F1</small></td><td><a href="https://gis.invemar.org.co/arcgis/rest/services/ErosionCostera/1_TM_ErosionCostera/MapServer" target="_blank" rel="noopener">Erosión costera</a></td><td>Capas originales, tasas de cambio de línea de costa y perfiles de playa, incluidos los levantados tras Iota.</td></tr><tr data-c="1,6" data-p="Alta" data-f="F4"><td class="id">4.05</td><td><strong>Línea de costa de muy alta resolución</strong><div class="tags"><span class="tag" title="Información oceanográfica y de ecosistemas">1</span><span class="tag" title="Sistema de información marino-costero">6</span></div></td><td><span class="pill p-alt">Alta</span></td><td class="when">dic 2026<small>F4</small></td><td><span class="none">Nada utilizable en línea</span></td><td>Límite de Isla 1:800 (convenio CORALINA–INVEMAR) original y fecha; equivalente para Providencia y Santa Catalina.</td></tr><tr data-c="2" data-p="Media" data-f="F1"><td class="id">1.17</td><td><strong>Pesca artesanal y medios de vida</strong><div class="tags"><span class="tag" title="Evaluación ecológico-pesquera">2</span></div></td><td><span class="pill p-med">Media</span></td><td class="when">dic 2026<small>F1</small></td><td><span class="none">Nada utilizable en línea</span></td><td>Series de captura y caracterizaciones pesqueras del Archipiélago, si las hay.</td></tr><tr data-c="5,12" data-p="Media" data-f="F1"><td class="id">1.11</td><td><strong>Proyecciones de temperatura y precipitación</strong><div class="tags"><span class="tag" title="Modelos predictivos con el IDEAM">5</span><span class="tag" title="Cambio global">12</span></div></td><td><span class="pill p-med">Media</span></td><td class="when">dic 2026<small>F1</small></td><td><a href="https://gis.invemar.org.co/arcgis/rest/services/CLIMARES20/CLIMARES20_TM_TCNCC_Amenazas/MapServer" target="_blank" rel="noopener">CLIMARES20 · TCNCC Amenazas</a></td><td>Confirmar fuente (IDEAM) y resolución.</td></tr><tr data-c="3,4" data-p="Alta" data-f="F2"><td class="id">2.02</td><td><strong>Presiones y amenazas sobre el manglar</strong><div class="tags"><span class="tag" title="Seguimiento del estado de los recursos">3</span><span class="tag" title="Factores de deterioro">4</span></div></td><td><span class="pill p-alt">Alta</span></td><td class="when">ene 2027<small>F2</small></td><td><a href="https://gis.invemar.org.co/arcgis/rest/services/SIGMA/PRESIONES/MapServer" target="_blank" rel="noopener">SIGMA · Presiones</a></td><td>Capa de presiones del Archipiélago con fecha: rellenos, residuos, urbanización.</td></tr><tr data-c="15,17" data-p="Alta" data-f="F2"><td class="id">2.03</td><td><strong>Áreas con potencial de restauración</strong><div class="tags"><span class="tag" title="Modelos de desarrollo sostenible">15</span><span class="tag" title="Asesoría a entidades territoriales y CAR">17</span></div></td><td><span class="pill p-alt">Alta</span></td><td class="when">ene 2027<small>F2</small></td><td><a href="https://gis.invemar.org.co/arcgis/rest/services/SIGMA/MOSAICO_RESTAURACION/MapServer" target="_blank" rel="noopener">SIGMA · Mosaico de restauración</a></td><td>Capa y criterios aplicados al Archipiélago.</td></tr><tr data-c="4,7" data-p="Media" data-f="F4"><td class="id">—</td><td><strong>Calidad de agua y variables oceanográficas</strong><div class="tags"><span class="tag" title="Factores de deterioro">4</span><span class="tag" title="Redes de monitoreo">7</span></div></td><td><span class="pill p-med">Media</span></td><td class="when">ene 2027<small>F4</small></td><td><span class="none">Nada utilizable en línea</span></td><td>Series de las estaciones REDCAM en San Andrés y Providencia; registros de nivel del mar o corrientes.</td></tr><tr data-c="1,9" data-p="Alta" data-f="F4"><td class="id">4.10</td><td><strong>Parámetros de vegetación para la rugosidad</strong><div class="tags"><span class="tag" title="Información oceanográfica y de ecosistemas">1</span><span class="tag" title="Indicadores y modelos">9</span></div></td><td><span class="pill p-alt">Alta</span></td><td class="when">feb 2027<small>F4</small></td><td><span class="none">Nada utilizable en línea</span></td><td>Altura de dosel y densidad de raíces aéreas de Rhizophora medidas en parcelas.</td></tr><tr data-c="15,17" data-p="Media" data-f="F3"><td class="id">3.05</td><td><strong>Costos de monitoreo y restauración</strong><div class="tags"><span class="tag" title="Modelos de desarrollo sostenible">15</span><span class="tag" title="Asesoría a entidades territoriales y CAR">17</span></div></td><td><span class="pill p-med">Media</span></td><td class="when">feb 2027<small>F3</small></td><td><span class="none">Nada utilizable en línea</span></td><td>Protocolos SIGMA y costos unitarios de proyectos INVEMAR (MAbE-KfW, recuperación post-Iota).</td></tr></tbody>
+    </table>
+    <div class="empty" id="empty" hidden>Ningún dato cumple estos filtros. Pulsa «Quitar filtros».</div>
+  </div>
+</section>
+
+<section aria-labelledby="h-cal">
+  <div class="sec-head"><span class="eyebrow">4 · Calendario</span><h2 id="h-cal">Cuándo entra cada dato en el análisis</h2>
+  <p>El contrato empieza el 1 de noviembre de 2026 y dura 11 meses. Los datos críticos tienen que llegar antes de enero, porque alimentan la selección de áreas críticas y el taller de validación con CORALINA.</p></div>
+  <div class="gantt" role="img" aria-label="Fases del proyecto de noviembre 2026 a septiembre 2027">
+    <div></div><div class="gmonths"><span>nov</span><span>dic</span><span>ene</span><span>feb</span><span>mar</span><span>abr</span><span>may</span><span>jun</span><span>jul</span><span>ago</span><span>sep</span></div>
+    <div class="glabel"><b>F1</b> Diagnóstico de línea base</div><div class="gtrack"><span class="gbar gF1" style="grid-column:1 / 4"></span></div><div class="glabel"><b>F2</b> Áreas críticas y escenarios</div><div class="gtrack"><span class="gbar gF2" style="grid-column:3 / 5"></span></div><div class="glabel"><b>F3</b> Costos CAPEX/OPEX</div><div class="gtrack"><span class="gbar gF3" style="grid-column:5 / 7"></span></div><div class="glabel"><b>F4</b> Modelado biofísico</div><div class="gtrack"><span class="gbar gF4" style="grid-column:5 / 9"></span></div><div class="glabel"><b>F5</b> Valoración económica</div><div class="gtrack"><span class="gbar gF5" style="grid-column:8 / 11"></span></div><div class="glabel"><b>F6</b> ACB y marco de decisión</div><div class="gtrack"><span class="gbar gF6" style="grid-column:10 / 12"></span></div>
+    <div class="gnote"><span class="mk">Taller de validación 15 dic – 15 ene</span></div>
+  </div>
+  <p class="legend">Verde: fases que dependen sobre todo de datos de INVEMAR (línea base y áreas críticas). Azul: fases de costos, modelado y valoración.</p>
+</section>
+
+<section aria-labelledby="h-acc">
+  <div class="sec-head"><span class="eyebrow">5 · Acceso</span><h2 id="h-acc">Lo que necesitamos acordar hoy</h2></div>
+  <ul class="ask">
+    <li><b>Formato original</b><span>Los servicios web sirven para ver. Para modelar necesitamos GDB/SHP y ráster con metadatos, en MAGNA-SIRGAS 2018.</span></li>
+    <li><b>Permisos</b><span>Qué datos entrega INVEMAR directamente y cuáles requieren autorización de CORALINA por los convenios.</span></li>
+    <li><b>Vía formal</b><span>Si basta una carta de FORLIANCE o hace falta un acuerdo de uso de datos (num. 21, convenios).</span></li>
+    <li><b>Persona de enlace</b><span>Quién coordina las entregas y en qué plazo, con los críticos antes del 31 de diciembre de 2026.</span></li>
+  </ul>
+</section>
+
+<footer>
+  Fuentes:
+  <ul>
+    <li><a href="https://normas.cra.gov.co/gestor/docs/decreto_1276_1994.htm" target="_blank" rel="noopener">Decreto 1276 de 1994</a> (objeto y funciones, resumidas aquí)</li>
+    <li><a href="https://portal.invemar.org.co/marco-legal" target="_blank" rel="noopener">Marco legal de INVEMAR</a></li>
+    <li><a href="https://www.minambiente.gov.co/asuntos-marinos-costeros-y-recursos-acuaticos/informacion-ambiental-marino-costera/" target="_blank" rel="noopener">Información ambiental marino-costera, Minambiente</a> (SIAM, REDCAM, SMEC-MAbE, CLIMARES)</li>
+    <li><a href="https://www.minambiente.gov.co/primera-expedicion-cientifica-en-providencia-dejo-grandes-hallazgos-para-su-recuperacion/" target="_blank" rel="noopener">Expedición Cangrejo Negro en Providencia, enero 2021</a></li>
+    <li>Matriz de disponibilidad de datos del proyecto (19-10-2026) y <a href="https://gis.invemar.org.co/arcgis/rest/services" target="_blank" rel="noopener">directorio de servicios de INVEMAR</a></li>
+  </ul>
+</footer>
+</div>
+<script>
+(() => {
+  const rows = [...document.querySelectorAll('tbody tr[data-c]')];
+  const comps = [...document.querySelectorAll('.comp')];
+  const fp = document.getElementById('fprio'), ff = document.getElementById('ffase');
+  const shown = document.getElementById('shown'), empty = document.getElementById('empty');
+  const active = new Set();
+  function apply(){
+    let n = 0;
+    rows.forEach(r => {
+      const cs = r.dataset.c.split(',');
+      const okC = !active.size || cs.some(c => active.has(c));
+      const okP = !fp.value || r.dataset.p === fp.value;
+      const okF = !ff.value || r.dataset.f === ff.value;
+      r.hidden = !(okC && okP && okF);
+      if (!r.hidden) n++;
+      r.querySelectorAll('.tag').forEach(t => t.classList.toggle('hit', active.has(t.textContent)));
+    });
+    shown.textContent = n + ' de ' + rows.length + ' datos';
+    empty.hidden = n > 0;
+  }
+  comps.forEach(b => b.addEventListener('click', () => {
+    const c = b.dataset.c;
+    active.has(c) ? active.delete(c) : active.add(c);
+    b.setAttribute('aria-pressed', active.has(c));
+    apply();
+    if (active.has(c)) document.getElementById('datos').scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start'});
+  }));
+  fp.addEventListener('change', apply); ff.addEventListener('change', apply);
+  document.getElementById('clear').addEventListener('click', () => {
+    active.clear(); comps.forEach(b => b.setAttribute('aria-pressed', 'false'));
+    fp.value = ''; ff.value = ''; apply();
+  });
+  apply();
+})();
+</script>
+
+</body></html>

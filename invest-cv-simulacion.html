@@ -1,0 +1,941 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<title>InVEST CV — Simulación Outputs SAI</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+
+<style>
+/* ─── TOKENS ─────────────────────────────────────────────── */
+:root {
+  --bg:       #f7f6f3;
+  --surface:  #fcfcfb;
+  --border:   #e2e0d8;
+  --fg:       #0b0b0b;
+  --fg-2:     #52514e;
+  --fg-3:     #8a8880;
+  --accent:   #1baf7a;
+  --accent-d: #14855c;
+
+  /* CVI score ramp (sequential green→red) */
+  --cvi-1: #1a9850;
+  --cvi-2: #91cf60;
+  --cvi-3: #fee08b;
+  --cvi-4: #fc8d59;
+  --cvi-5: #d73027;
+
+  /* Categorical (first 4 from validated palette) */
+  --s1: #2a78d6;   /* azul – Escenario Base */
+  --s2: #1baf7a;   /* aqua – Escenario Intervención */
+  --s3: #eb6834;   /* naranja – Delta */
+  --s4: #eda100;   /* amarillo – referencia */
+
+  --radius: 10px;
+  --radius-sm: 6px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111110;
+    --surface: #1a1a19;
+    --border: #2e2e2c;
+    --fg: #f0efec;
+    --fg-2: #c3c2b7;
+    --fg-3: #6e6d68;
+    --accent: #199e70;
+    --accent-d: #22c78d;
+    --cvi-1: #1a9850;
+    --cvi-2: #78b850;
+    --cvi-3: #c8a820;
+    --cvi-4: #d96830;
+    --cvi-5: #c83020;
+    --s1: #3987e5;
+    --s2: #199e70;
+    --s3: #d95926;
+    --s4: #c98500;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111110; --surface: #1a1a19; --border: #2e2e2c;
+  --fg: #f0efec; --fg-2: #c3c2b7; --fg-3: #6e6d68;
+  --accent: #199e70; --accent-d: #22c78d;
+  --s1: #3987e5; --s2: #199e70; --s3: #d95926; --s4: #c98500;
+  color-scheme: dark;
+}
+
+/* ─── RESET / BASE ───────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0 }
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  font-size: 14px;
+  line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 32px 48px;
+}
+a { color: inherit }
+
+/* ─── LAYOUT ─────────────────────────────────────────────── */
+.page-header {
+  max-width: 900px;
+  margin: 0 auto 32px;
+}
+.page-header h1 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -.3px;
+  margin-bottom: 6px;
+}
+.page-header p {
+  color: var(--fg-2);
+  font-size: 13px;
+  max-width: 680px;
+}
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .2px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--fg-2);
+}
+.badge.sim { background: #fff9e6; border-color: #f0d060; color: #7a5a00 }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .badge.sim { background: #2a2200; border-color: #6a5000; color: #f0c040 } }
+:root[data-theme="dark"] .badge.sim { background: #2a2200; border-color: #6a5000; color: #f0c040 }
+
+.section {
+  max-width: 900px;
+  margin: 0 auto 40px;
+}
+.section-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+}
+.card + .card { margin-top: 16px }
+.card-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.card-sub {
+  font-size: 12px;
+  color: var(--fg-2);
+  margin-bottom: 16px;
+}
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 560px) { .two-col { grid-template-columns: 1fr } }
+
+/* ─── SHORE MAP (SVG simulation) ─────────────────────────── */
+.map-wrap {
+  position: relative;
+  background: #2a5a8a;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  aspect-ratio: 16/9;
+  max-height: 340px;
+}
+.map-wrap svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.map-legend {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(0,0,0,.65);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 10px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  backdrop-filter: blur(4px);
+}
+.legend-row { display: flex; align-items: center; gap: 6px }
+.legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0 }
+
+/* ─── CVI SCORE BARS ─────────────────────────────────────── */
+.cvi-bar-group { display: flex; flex-direction: column; gap: 8px }
+.cvi-row {
+  display: grid;
+  grid-template-columns: 90px 1fr 36px;
+  gap: 8px;
+  align-items: center;
+  font-size: 12px;
+}
+.cvi-label { color: var(--fg-2); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
+.cvi-track {
+  height: 8px;
+  background: var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+.cvi-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width .4s ease;
+}
+.cvi-val { font-variant-numeric: tabular-nums; font-size: 11px; font-weight: 600; color: var(--fg-2); text-align: right }
+
+/* ─── RUNS GRID ──────────────────────────────────────────── */
+.runs-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+@media (max-width: 560px) { .runs-grid { grid-template-columns: repeat(2, 1fr) } }
+.run-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  position: relative;
+}
+.run-card.base { border-top: 3px solid var(--s1) }
+.run-card.inter { border-top: 3px solid var(--s2) }
+.run-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  margin-bottom: 4px;
+}
+.run-cvi {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  font-variant-numeric: tabular-nums;
+}
+.run-cvi.low { color: var(--cvi-2) }
+.run-cvi.med { color: var(--cvi-3) }
+.run-cvi.high { color: var(--cvi-4) }
+.run-cvi.vhigh { color: var(--cvi-5) }
+.run-sub { font-size: 10px; color: var(--fg-3); margin-top: 2px }
+.run-delta {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+  font-weight: 600;
+  margin-top: 6px;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.run-delta.good { background: #e8f8f0; color: #0d6e40 }
+.run-delta.warn { background: #fff3e0; color: #a05000 }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .run-delta.good { background: #0d2e1e; color: #40c880 }
+  :root:not([data-theme="light"]) .run-delta.warn { background: #2e1e00; color: #d09040 }
+}
+:root[data-theme="dark"] .run-delta.good { background: #0d2e1e; color: #40c880 }
+:root[data-theme="dark"] .run-delta.warn { background: #2e1e00; color: #d09040 }
+
+/* ─── ACI SELECTION TABLE ────────────────────────────────── */
+.aci-table { width: 100%; border-collapse: collapse; font-size: 12px }
+.aci-table th {
+  text-align: left;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+}
+.aci-table td {
+  padding: 10px 10px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.aci-table tr:last-child td { border-bottom: none }
+.aci-table tr:hover td { background: var(--bg) }
+.aci-name {
+  font-weight: 600;
+  font-size: 13px;
+}
+.aci-sector { font-size: 11px; color: var(--fg-3); margin-top: 2px }
+.chip {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-size: 10px;
+  font-weight: 600;
+}
+.chip.alta { background: #ffe4e4; color: #8a1010 }
+.chip.media { background: #fff3da; color: #7a4500 }
+.chip.baja { background: #e6f4ea; color: #1a6030 }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .chip.alta { background: #3a0a0a; color: #f08080 }
+  :root:not([data-theme="light"]) .chip.media { background: #2e1e00; color: #d09040 }
+  :root:not([data-theme="light"]) .chip.baja { background: #0a2a14; color: #60c880 }
+}
+:root[data-theme="dark"] .chip.alta { background: #3a0a0a; color: #f08080 }
+:root[data-theme="dark"] .chip.media { background: #2e1e00; color: #d09040 }
+:root[data-theme="dark"] .chip.baja { background: #0a2a14; color: #60c880 }
+
+.star-row { display: flex; gap: 2px }
+.star { font-size: 13px; color: var(--border) }
+.star.on { color: #eda100 }
+
+.vpn-val { font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums }
+.vpn-val.pos { color: var(--cvi-1) }
+.vpn-val.neg { color: var(--cvi-5) }
+
+/* ─── LINE CHART ─────────────────────────────────────────── */
+.chart-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+.chart-svg { width: 100%; min-width: 320px; overflow: visible }
+.axis-label { font-size: 10px; fill: var(--fg-3) }
+.grid-line { stroke: var(--border); stroke-width: 1 }
+.series-line { stroke-width: 2; fill: none }
+.dot { stroke-width: 2 }
+
+/* ─── DELTA HEATMAP ──────────────────────────────────────── */
+.heatmap-grid {
+  display: grid;
+  grid-template-columns: 80px repeat(4, 1fr);
+  gap: 4px;
+  font-size: 11px;
+}
+.hm-header { font-size: 10px; font-weight: 700; color: var(--fg-3); text-align: center; padding: 4px 0 }
+.hm-row-label { font-size: 11px; color: var(--fg-2); display: flex; align-items: center; padding: 2px 0 }
+.hm-cell {
+  border-radius: 4px;
+  padding: 8px 4px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0,0,0,.3);
+}
+
+/* ─── TOOLTIP ────────────────────────────────────────────── */
+.tooltip {
+  position: fixed;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  font-size: 12px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .15s;
+  z-index: 100;
+  box-shadow: 0 4px 16px rgba(0,0,0,.12);
+  max-width: 200px;
+}
+.tooltip.show { opacity: 1 }
+.tooltip-title { font-weight: 600; margin-bottom: 4px; font-size: 11px; color: var(--fg-2) }
+.tooltip-val { font-size: 14px; font-weight: 700 }
+
+/* ─── THEME TOGGLE ───────────────────────────────────────── */
+.theme-btn {
+  position: fixed;
+  top: 14px;
+  right: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 4px 12px;
+  font-size: 11px;
+  cursor: pointer;
+  color: var(--fg-2);
+  z-index: 50;
+}
+
+/* ─── SYNTHESIS BOX ──────────────────────────────────────── */
+.synthesis {
+  background: linear-gradient(135deg, #e8f8f0 0%, #f0f8ff 100%);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .synthesis { background: linear-gradient(135deg, #0d2e1e 0%, #0d1e2e 100%); border-color: var(--accent) }
+}
+:root[data-theme="dark"] .synthesis { background: linear-gradient(135deg, #0d2e1e 0%, #0d1e2e 100%); border-color: var(--accent) }
+.synthesis h3 { font-size: 14px; font-weight: 700; margin-bottom: 10px; color: var(--accent-d) }
+.synthesis ul { list-style: none; display: flex; flex-direction: column; gap: 6px }
+.synthesis li { font-size: 13px; display: flex; gap: 8px }
+.synthesis li::before { content: "→"; color: var(--accent); font-weight: 700; flex-shrink: 0 }
+</style>
+
+<button class="theme-btn" onclick="toggleTheme()">☀ / ☾</button>
+<div class="tooltip" id="tt"></div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- HEADER                                                  -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="page-header">
+  <h1>InVEST Coastal Vulnerability — Simulación de Outputs</h1>
+  <p>8 runs (4 horizontes × 2 escenarios) → CVI por punto de costa → síntesis comparativa → selección 3 ACI. Datos simulados a escala realista para San Andrés Archipiélago (SAI). Los valores son representativos de la bibliografía InVEST CV publicada para islas del Caribe.</p>
+  <div class="badge-row">
+    <span class="badge sim">⚠ SIMULACIÓN — no son datos reales</span>
+    <span class="badge">149.6 ha manglar histórico</span>
+    <span class="badge">RCP 4.5</span>
+    <span class="badge">30 sectores INVEMAR</span>
+    <span class="badge">n = 312 puntos de costa</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 1. ¿QUÉ PRODUCE InVEST CV? ─ CVI por punto de costa    -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title">Output primario — CVI por punto de costa (línea de costa)</div>
+  <div class="card">
+    <div class="card-title">Mapa simulado: Índice de Vulnerabilidad Costera (CVI) — t₀ Escenario Base</div>
+    <div class="card-sub">Cada punto = 500 m de costa. Color = CVI geométrico de los 8 sub-índices. n=312 puntos. Sectores INVEMAR Ar1–Ar30 marcados.</div>
+
+    <div class="map-wrap">
+      <svg id="coastMap" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+        <!-- Ocean background -->
+        <rect width="800" height="400" fill="#1a4a7a"/>
+        <!-- Island shape (San Andrés simplified) -->
+        <ellipse cx="400" cy="200" rx="160" ry="90" fill="#c8b880" opacity=".9"/>
+        <!-- Lagoon -->
+        <ellipse cx="390" cy="205" rx="80" ry="40" fill="#2a6aaa" opacity=".7"/>
+        <!-- Mangrove patches (green zones) -->
+        <ellipse cx="320" cy="160" rx="22" ry="12" fill="#1a8a40" opacity=".85"/>
+        <ellipse cx="280" cy="195" rx="18" ry="10" fill="#1a8a40" opacity=".85"/>
+        <ellipse cx="300" cy="230" rx="25" ry="11" fill="#1a8a40" opacity=".85"/>
+        <ellipse cx="340" cy="255" rx="20" ry="9" fill="#1a8a40" opacity=".85"/>
+        <ellipse cx="460" cy="250" rx="15" ry="8" fill="#1a8a40" opacity=".85"/>
+        <!-- Shore points colored by CVI -->
+        <g id="shorePoints"></g>
+        <!-- Sector labels -->
+        <text x="305" y="130" fill="white" font-size="9" font-family="Inter,sans-serif" opacity=".9">Ar3</text>
+        <text x="255" y="195" fill="white" font-size="9" font-family="Inter,sans-serif" opacity=".9">Ar7</text>
+        <text x="275" y="245" fill="white" font-size="9" font-family="Inter,sans-serif" opacity=".9">Ar12</text>
+        <text x="470" y="150" fill="white" font-size="9" font-family="Inter,sans-serif" opacity=".9">Ar21</text>
+        <text x="520" y="210" fill="white" font-size="9" font-family="Inter,sans-serif" opacity=".9">Ar25</text>
+        <text x="450" y="270" fill="white" font-size="9" font-family="Inter,sans-serif" opacity=".9">Ar18</text>
+        <!-- ACI selection halos (shown after rendering) -->
+        <circle cx="290" cy="215" r="38" fill="none" stroke="#ffe066" stroke-width="2.5" stroke-dasharray="6 3" opacity=".9"/>
+        <text x="290" y="265" fill="#ffe066" font-size="10" font-family="Inter,sans-serif" text-anchor="middle" font-weight="700">ACI-1</text>
+        <circle cx="330" cy="155" r="32" fill="none" stroke="#ffe066" stroke-width="2.5" stroke-dasharray="6 3" opacity=".9"/>
+        <text x="330" y="120" fill="#ffe066" font-size="10" font-family="Inter,sans-serif" text-anchor="middle" font-weight="700">ACI-2</text>
+        <circle cx="460" cy="245" r="28" fill="none" stroke="#ffe066" stroke-width="2.5" stroke-dasharray="6 3" opacity=".9"/>
+        <text x="460" y="285" fill="#ffe066" font-size="10" font-family="Inter,sans-serif" text-anchor="middle" font-weight="700">ACI-3</text>
+        <!-- North arrow -->
+        <text x="750" y="30" fill="white" font-size="11" font-family="Inter,sans-serif" text-anchor="middle" opacity=".8">N ↑</text>
+        <!-- Scale -->
+        <line x1="680" y1="370" x2="760" y2="370" stroke="white" stroke-width="1.5" opacity=".7"/>
+        <text x="720" y="384" fill="white" font-size="9" font-family="Inter,sans-serif" text-anchor="middle" opacity=".7">2 km</text>
+      </svg>
+      <div class="map-legend">
+        <div style="font-size:10px;font-weight:700;margin-bottom:4px;color:#ccc">CVI Score</div>
+        <div class="legend-row"><div class="legend-dot" style="background:#1a9850"></div>1 — Muy Bajo</div>
+        <div class="legend-row"><div class="legend-dot" style="background:#91cf60"></div>2 — Bajo</div>
+        <div class="legend-row"><div class="legend-dot" style="background:#fee08b"></div>3 — Medio</div>
+        <div class="legend-row"><div class="legend-dot" style="background:#fc8d59"></div>4 — Alto</div>
+        <div class="legend-row"><div class="legend-dot" style="background:#d73027"></div>5 — Muy Alto</div>
+        <div class="legend-row" style="margin-top:4px"><div class="legend-dot" style="background:#1a8a40"></div>Manglar</div>
+        <div class="legend-row"><div style="width:10px;height:2px;border:1.5px dashed #ffe066"></div>ACI seleccionada</div>
+      </div>
+    </div>
+    <div style="margin-top:10px;font-size:11px;color:var(--fg-3)">
+      El modelo InVEST CV calcula el CVI = √(R×W×S×SL×Sl×G×H×E) donde cada variable es ranking 1–5.
+      La escala de color es divergente del verde (protegido) al rojo (muy expuesto).
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 2. LOS 8 SUB-ÍNDICES EN UN SECTOR REPRESENTATIVO        -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title">Sub-índices del CVI — Sector Ar7 (zona de máxima vulnerabilidad)</div>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Escenario Base degradado — t₀</div>
+      <div class="card-sub">Manglar en estado degradado, tendencia histórica de pérdida</div>
+      <div class="cvi-bar-group" id="subBase"></div>
+      <div style="margin-top:14px;padding:10px;background:var(--bg);border-radius:6px;display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:12px;color:var(--fg-2)">CVI geométrico Ar7 Base t₀</span>
+        <span style="font-size:22px;font-weight:700;color:var(--cvi-5)">4.2</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Escenario Intervención — t₀</div>
+      <div class="card-sub">Manglar restaurado tras intervención en ACI-1</div>
+      <div class="cvi-bar-group" id="subInter"></div>
+      <div style="margin-top:14px;padding:10px;background:var(--bg);border-radius:6px;display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:12px;color:var(--fg-2)">CVI geométrico Ar7 Intervención t₀</span>
+        <span style="font-size:22px;font-weight:700;color:var(--cvi-3)">2.8</span>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:12px;font-size:11px;color:var(--fg-3);max-width:700px">
+    <strong>Nota metodológica:</strong> La mayor diferencia entre escenarios se produce en los sub-índices de <em>Natural Habitats</em> (cap 3) y <em>Wave Exposure</em> (cap 4) porque el manglar restaurado atenúa oleaje. Geomorfología, relieve y pendiente costera no cambian entre escenarios.
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 3. LOS 8 RUNS — OUTPUTS NUMÉRICOS                       -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title">Los 8 runs — CVI medio ponderado por sector (Ar7 representativo)</div>
+  <div class="runs-grid" id="runsGrid"></div>
+  <div style="margin-top:12px;font-size:11px;color:var(--fg-3)">
+    El output del modelo es un CSV/raster con CVI por punto. Aquí se muestra el promedio ponderado por sector para facilitar la comparación. El delta = reducción de CVI por la intervención restaurativa.
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 4. LÍNEA TEMPORAL: CVI BASE vs INTERVENCIÓN             -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title">Evolución del CVI en el tiempo — Base vs Intervención (Ar7)</div>
+  <div class="card">
+    <div class="card-title">Trayectorias CVI 2025–2055 · RCP 4.5</div>
+    <div class="card-sub">Forzamiento SLR: +10 cm (t10) · +22 cm (t20) · +38 cm (t30)</div>
+    <div class="chart-wrap">
+      <svg class="chart-svg" viewBox="0 0 680 260" id="lineChart"></svg>
+    </div>
+    <div style="display:flex;gap:16px;margin-top:12px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:6px;font-size:11px">
+        <div style="width:24px;height:2px;background:var(--s1);border-radius:2px"></div>
+        <span style="color:var(--fg-2)">Escenario Base degradado</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:11px">
+        <div style="width:24px;height:2px;background:var(--s2);border-radius:2px"></div>
+        <span style="color:var(--fg-2)">Escenario Intervención restaurado</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:11px">
+        <div style="width:24px;height:4px;background:var(--s3);border-radius:2px;opacity:.5"></div>
+        <span style="color:var(--fg-2)">Δ CVI (beneficio de intervención)</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 5. HEATMAP Δ CVI POR SECTOR × HORIZONTE                 -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title">Δ CVI (Base − Intervención) por sector y horizonte temporal — síntesis de 8 runs</div>
+  <div class="card">
+    <div class="card-title">Mapa de calor: reducción de vulnerabilidad por restauración</div>
+    <div class="card-sub">Mayor valor = mayor beneficio de la restauración del manglar. Negativo = escenario base más protegido en ese punto (no ocurre en SAI). Los 9 sectores priorizados por INVEMAR aparecen sombreados.</div>
+    <div class="heatmap-grid" id="heatmap"></div>
+    <div style="margin-top:14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <span style="font-size:11px;color:var(--fg-3)">Δ CVI:</span>
+      <div style="display:flex;gap:4px">
+        <div style="width:30px;height:12px;border-radius:3px;background:#e8f4ec"></div>
+        <span style="font-size:10px;color:var(--fg-3)">0.0–0.5</span>
+      </div>
+      <div style="display:flex;gap:4px">
+        <div style="width:30px;height:12px;border-radius:3px;background:#78c878"></div>
+        <span style="font-size:10px;color:var(--fg-3)">0.5–1.0</span>
+      </div>
+      <div style="display:flex;gap:4px">
+        <div style="width:30px;height:12px;border-radius:3px;background:#1a9850"></div>
+        <span style="font-size:10px;color:var(--fg-3)">1.0–1.5</span>
+      </div>
+      <div style="display:flex;gap:4px">
+        <div style="width:30px;height:12px;border-radius:3px;background:#116030"></div>
+        <span style="font-size:10px;color:var(--fg-3)">&gt;1.5</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 6. SELECCIÓN DE 3 ACI — TABLA SÍNTESIS                  -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title">Selección de 3 ACI — Síntesis multi-criterio final</div>
+  <div class="card">
+    <div class="card-title">Output integrado: InVEST CV + AHP-WLC + VPN → ranking ACI</div>
+    <div class="card-sub">Los 3 ACI seleccionados combinan mayor ΔCVI (beneficio CV), mayor puntaje AHP (viabilidad ecológica + factibilidad), y VPN positivo al 5%. Presentados en Taller 1 (ene 2027).</div>
+    <div style="overflow-x:auto">
+      <table class="aci-table" id="aciTable">
+        <thead>
+          <tr>
+            <th>ACI</th>
+            <th>Sectores</th>
+            <th>Prioridad INVEMAR</th>
+            <th>ΔCVI t30</th>
+            <th>Score AHP</th>
+            <th>VPN 30a (USD)</th>
+            <th>Factibilidad</th>
+            <th>Selección</th>
+          </tr>
+        </thead>
+        <tbody id="aciBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 7. SÍNTESIS METODOLÓGICA                                -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title">Síntesis metodológica</div>
+  <div class="synthesis">
+    <h3>¿Cómo se integran los 8 runs en la selección de 3 ACI?</h3>
+    <ul>
+      <li>Cada run produce un raster/CSV de CVI por punto de costa (312 puntos en SAI). El modelo usa la fórmula geométrica CVI = √(R·W·S·SL·Sl·G·H·E) donde cada variable es ranking 1–5 según tablas de Hammar et al.</li>
+      <li>Se calculan <strong>ΔCVI = CVI_base − CVI_interv</strong> para cada horizonte (t10/t20/t30) y se agrega por sector Ar1–Ar30 como promedio ponderado por longitud de costa.</li>
+      <li>El ΔCVI t30 entra en el ACB como proxy de reducción de daños: se monetiza usando la curva de daños de COAST-RP (USD/m de costa) × longitud del sector.</li>
+      <li>El score AHP-WLC (D1+D2+D3) pondera 3 dimensiones independientes del CV. La selección final ordena por VPN = Σ[(Δdaños + ΔC×Precio_C − Costos) / (1+r)^t].</li>
+      <li>Los 3 ACI con mayor VPN positivo <strong>y</strong> factibilidad ≥ Media se presentan en el <strong>Taller 1</strong> para validación comunitaria e institucional.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SCRIPTS                                                 -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<script>
+// ─── DATA ────────────────────────────────────────────────
+const SUB_INDICES = [
+  { label: 'Geomorfología',    base: 3, inter: 3 },
+  { label: 'Relieve (Relief)', base: 4, inter: 4 },
+  { label: 'Hábitats nat.',    base: 5, inter: 2 },
+  { label: 'Exposición oleaje',base: 4, inter: 3 },
+  { label: 'Marea de tormenta',base: 4, inter: 4 },
+  { label: 'SLR (t₀)',         base: 3, inter: 3 },
+  { label: 'Pendiente costera',base: 3, inter: 3 },
+  { label: 'Exposición viento',base: 4, inter: 4 },
+];
+
+const RUNS = [
+  { t:'t₀', year:2025, esc:'Base',   cvi:4.2, cls:'vhigh' },
+  { t:'t10',year:2035, esc:'Base',   cvi:4.5, cls:'vhigh' },
+  { t:'t20',year:2045, esc:'Base',   cvi:4.7, cls:'vhigh' },
+  { t:'t30',year:2055, esc:'Base',   cvi:5.0, cls:'vhigh' },
+  { t:'t₀', year:2025, esc:'Interv.',cvi:2.8, cls:'med' },
+  { t:'t10',year:2035, esc:'Interv.',cvi:3.0, cls:'med' },
+  { t:'t20',year:2045, esc:'Interv.',cvi:3.3, cls:'high' },
+  { t:'t30',year:2055, esc:'Interv.',cvi:3.6, cls:'high' },
+];
+
+// Heatmap: 9 sectores priorizados × 4 horizontes → ΔCVI
+const SECTORES = ['Ar3','Ar5','Ar7','Ar9','Ar12','Ar14','Ar18','Ar21','Ar25'];
+const PRIORIDAD = ['Alta','Alta','Alta','Alta','Media','Media','Baja','Alta','Alta'];
+const DELTA_DATA = [
+  // t0  t10  t20  t30
+  [0.4, 0.5, 0.6, 0.8],
+  [0.6, 0.7, 0.9, 1.1],
+  [1.4, 1.5, 1.4, 1.4],
+  [0.8, 1.0, 1.1, 1.3],
+  [0.3, 0.4, 0.5, 0.6],
+  [0.5, 0.6, 0.7, 0.9],
+  [0.2, 0.2, 0.3, 0.3],
+  [1.0, 1.1, 1.2, 1.3],
+  [0.7, 0.8, 0.9, 1.0],
+];
+
+const ACI_DATA = [
+  {
+    id:'ACI-1', sectores:'Ar7, Ar9', prior:'Alta', delta:1.45, ahp:0.78,
+    vpn: '+USD 2.4M', fact:'Alta', sel:true, stars:5
+  },
+  {
+    id:'ACI-2', sectores:'Ar3, Ar5', prior:'Alta', delta:0.95, ahp:0.71,
+    vpn: '+USD 1.8M', fact:'Alta', sel:true, stars:4
+  },
+  {
+    id:'ACI-3', sectores:'Ar21, Ar25',prior:'Alta', delta:1.15, ahp:0.65,
+    vpn: '+USD 1.2M', fact:'Media', sel:true, stars:4
+  },
+  {
+    id:'ACI-4', sectores:'Ar12, Ar14',prior:'Media',delta:0.65, ahp:0.60,
+    vpn: '+USD 0.7M', fact:'Media', sel:false, stars:3
+  },
+  {
+    id:'ACI-5', sectores:'Ar18',      prior:'Baja', delta:0.30, ahp:0.42,
+    vpn: '+USD 0.2M', fact:'Baja', sel:false, stars:2
+  },
+];
+
+// ─── CVI COLOR ───────────────────────────────────────────
+function cviColor(v) {
+  if (v <= 1.5) return '#1a9850';
+  if (v <= 2.5) return '#78c860';
+  if (v <= 3.5) return '#fee08b';
+  if (v <= 4.2) return '#fc8d59';
+  return '#d73027';
+}
+function deltaColor(d) {
+  if (d < 0.3) return '#e8f4ec';
+  if (d < 0.7) return '#78c878';
+  if (d < 1.2) return '#1a9850';
+  return '#116030';
+}
+
+// ─── SHORE POINTS ────────────────────────────────────────
+function renderShorePoints() {
+  const g = document.getElementById('shorePoints');
+  const cx = 400, cy = 200, rx = 162, ry = 92;
+  const n = 48;
+  for (let i = 0; i < n; i++) {
+    const angle = (i / n) * 2 * Math.PI - Math.PI/2;
+    const x = cx + (rx + 12) * Math.cos(angle);
+    const y = cy + (ry + 8) * Math.sin(angle);
+    // Simulate: western coast higher CVI (more mangroves but more exposure)
+    let raw;
+    if (angle > Math.PI*0.3 && angle < Math.PI*0.9) raw = 4 + Math.random()*1;
+    else if (angle > -Math.PI*0.5 && angle < Math.PI*0.2) raw = 3.5 + Math.random()*1;
+    else raw = 2 + Math.random()*2;
+    raw = Math.min(5, raw);
+    const col = cviColor(raw);
+    const el = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    el.setAttribute('cx', x.toFixed(1));
+    el.setAttribute('cy', y.toFixed(1));
+    el.setAttribute('r', '5');
+    el.setAttribute('fill', col);
+    el.setAttribute('stroke', 'rgba(0,0,0,.3)');
+    el.setAttribute('stroke-width', '0.5');
+    el.setAttribute('data-cvi', raw.toFixed(1));
+    el.style.cursor = 'pointer';
+    el.addEventListener('mouseenter', e => showTT(e, `CVI: ${raw.toFixed(1)}`, 'Punto de costa'));
+    el.addEventListener('mouseleave', hideTT);
+    g.appendChild(el);
+  }
+}
+
+// ─── SUB-ÍNDICES BARS ────────────────────────────────────
+function renderSubBars(id, field) {
+  const wrap = document.getElementById(id);
+  SUB_INDICES.forEach(s => {
+    const val = s[field];
+    const pct = (val / 5) * 100;
+    const col = cviColor(val);
+    wrap.innerHTML += `
+      <div class="cvi-row">
+        <div class="cvi-label" title="${s.label}">${s.label}</div>
+        <div class="cvi-track">
+          <div class="cvi-fill" style="width:${pct}%;background:${col}"></div>
+        </div>
+        <div class="cvi-val" style="color:${col}">${val}</div>
+      </div>`;
+  });
+}
+
+// ─── RUNS GRID ────────────────────────────────────────────
+function renderRuns() {
+  const g = document.getElementById('runsGrid');
+  const bases = RUNS.filter(r => r.esc === 'Base');
+  const ints  = RUNS.filter(r => r.esc === 'Interv.');
+  bases.forEach((b, i) => {
+    const iv = ints[i];
+    const delta = (b.cvi - iv.cvi).toFixed(1);
+    const deltaBase = `<span class="run-delta good">▼ ${delta} vs Base</span>`;
+    g.innerHTML += `
+      <div class="run-card base">
+        <div class="run-label">Base · ${b.t} (${b.year})</div>
+        <div class="run-cvi ${b.cls}">${b.cvi}</div>
+        <div class="run-sub">CVI medio Ar7</div>
+      </div>`;
+    g.innerHTML += `
+      <div class="run-card inter">
+        <div class="run-label">Interv. · ${iv.t} (${iv.year})</div>
+        <div class="run-cvi ${iv.cls}">${iv.cvi}</div>
+        <div class="run-sub">CVI medio Ar7</div>
+        ${deltaBase}
+      </div>`;
+  });
+}
+
+// ─── LINE CHART ───────────────────────────────────────────
+function renderLineChart() {
+  const svg = document.getElementById('lineChart');
+  const W = 680, H = 260;
+  const pad = { t: 24, r: 24, b: 40, l: 48 };
+  const cw = W - pad.l - pad.r;
+  const ch = H - pad.t - pad.b;
+
+  const xs = [0, 1, 2, 3];
+  const labels = ['t₀ 2025','t10 2035','t20 2045','t30 2055'];
+  const baseVals  = [4.2, 4.5, 4.7, 5.0];
+  const interVals = [2.8, 3.0, 3.3, 3.6];
+  const minV = 0, maxV = 5.5;
+
+  function xp(i) { return pad.l + (i / 3) * cw; }
+  function yp(v) { return pad.t + (1 - (v - minV) / (maxV - minV)) * ch; }
+
+  let html = '';
+  // Grid
+  [1,2,3,4,5].forEach(v => {
+    const y = yp(v);
+    html += `<line x1="${pad.l}" y1="${y}" x2="${pad.l+cw}" y2="${y}" class="grid-line"/>`;
+    html += `<text x="${pad.l - 6}" y="${y+4}" class="axis-label" text-anchor="end">${v}</text>`;
+  });
+  // X labels
+  labels.forEach((lb, i) => {
+    html += `<text x="${xp(i)}" y="${H - 8}" class="axis-label" text-anchor="middle">${lb}</text>`;
+  });
+  // Delta area
+  let areaPath = `M${xp(0)},${yp(baseVals[0])}`;
+  baseVals.forEach((v,i) => { if(i) areaPath += ` L${xp(i)},${yp(v)}`; });
+  [2,1,0].forEach(i => { areaPath += ` L${xp(i)},${yp(interVals[i])}`; });
+  areaPath += ' Z';
+  html += `<path d="${areaPath}" fill="#eb6834" opacity=".12"/>`;
+  // Base line
+  let bPath = `M${xp(0)},${yp(baseVals[0])}`;
+  baseVals.forEach((v,i)=>{ if(i) bPath += ` L${xp(i)},${yp(v)}`; });
+  html += `<path d="${bPath}" class="series-line" stroke="var(--s1)"/>`;
+  // Inter line
+  let iPath = `M${xp(0)},${yp(interVals[0])}`;
+  interVals.forEach((v,i)=>{ if(i) iPath += ` L${xp(i)},${yp(v)}`; });
+  html += `<path d="${iPath}" class="series-line" stroke="var(--s2)"/>`;
+  // Dots
+  baseVals.forEach((v,i) => {
+    html += `<circle cx="${xp(i)}" cy="${yp(v)}" r="5" fill="var(--s1)" stroke="var(--surface)" class="dot"
+      data-v="${v}" data-lbl="Base ${labels[i]}" onmouseenter="showTT(event,'CVI ${v}','Base ${labels[i]}')" onmouseleave="hideTT()"/>`;
+  });
+  interVals.forEach((v,i) => {
+    html += `<circle cx="${xp(i)}" cy="${yp(v)}" r="5" fill="var(--s2)" stroke="var(--surface)" class="dot"
+      data-v="${v}" data-lbl="Interv. ${labels[i]}" onmouseenter="showTT(event,'CVI ${v}','Interv. ${labels[i]}')" onmouseleave="hideTT()"/>`;
+  });
+  // Delta labels
+  baseVals.forEach((bv,i) => {
+    const iv = interVals[i];
+    const mid = yp((bv+iv)/2);
+    html += `<text x="${xp(i)+10}" y="${mid}" fill="var(--s3)" font-size="10" font-family="Inter,sans-serif" font-weight="600">Δ${(bv-iv).toFixed(1)}</text>`;
+  });
+  // Y axis label
+  html += `<text x="10" y="${H/2}" class="axis-label" text-anchor="middle" transform="rotate(-90,10,${H/2})">CVI score</text>`;
+  svg.innerHTML = html;
+}
+
+// ─── HEATMAP ──────────────────────────────────────────────
+function renderHeatmap() {
+  const wrap = document.getElementById('heatmap');
+  const horizons = ['t₀','t10','t20','t30'];
+  let html = '<div class="hm-header"></div>';
+  horizons.forEach(h => { html += `<div class="hm-header">${h}</div>`; });
+  SECTORES.forEach((s, si) => {
+    const isp = ['Alta','Alta'].includes(PRIORIDAD[si]) ? 'font-weight:700' : '';
+    html += `<div class="hm-row-label" style="${isp}">${s} <span style="font-size:9px;color:var(--fg-3);margin-left:3px">${PRIORIDAD[si]}</span></div>`;
+    DELTA_DATA[si].forEach(d => {
+      const bg = deltaColor(d);
+      const textCol = d < 0.3 ? '#2a5a30' : 'white';
+      html += `<div class="hm-cell" style="background:${bg};color:${textCol}"
+        onmouseenter="showTT(event,'Δ CVI ${d}','${s} · ${horizons[DELTA_DATA[si].indexOf(d)]}')"
+        onmouseleave="hideTT()">${d.toFixed(1)}</div>`;
+    });
+  });
+  wrap.innerHTML = html;
+}
+
+// Fix heatmap horizons index (delta data is always 4 cols)
+// Rebuild with correct horizon labels
+function renderHeatmapFixed() {
+  const wrap = document.getElementById('heatmap');
+  const horizons = ['t₀','t10','t20','t30'];
+  let html = '<div class="hm-header"></div>';
+  horizons.forEach(h => { html += `<div class="hm-header">${h}</div>`; });
+  SECTORES.forEach((s, si) => {
+    const hi = PRIORIDAD[si] === 'Alta' ? 'font-weight:700' : '';
+    html += `<div class="hm-row-label" style="${hi}">${s} <span style="font-size:9px;color:var(--fg-3);margin-left:3px">${PRIORIDAD[si]}</span></div>`;
+    DELTA_DATA[si].forEach((d,di) => {
+      const bg = deltaColor(d);
+      const textCol = d < 0.3 ? '#2a5a30' : 'white';
+      html += `<div class="hm-cell" style="background:${bg};color:${textCol}"
+        onmouseenter="showTT(event,'Δ CVI = ${d}','${s} · ${horizons[di]}')"
+        onmouseleave="hideTT()">${d.toFixed(1)}</div>`;
+    });
+  });
+  wrap.innerHTML = html;
+}
+
+// ─── ACI TABLE ────────────────────────────────────────────
+function renderACI() {
+  const tb = document.getElementById('aciBody');
+  ACI_DATA.forEach(a => {
+    const stars = Array.from({length:5},(_,i)=>
+      `<span class="star${i<a.stars?' on':''}">${i<a.stars?'★':'☆'}</span>`).join('');
+    const factCls = a.fact==='Alta'?'baja':a.fact==='Media'?'media':'alta';
+    const vpnColor = a.vpn.startsWith('+') ? 'pos' : 'neg';
+    const selMark = a.sel
+      ? '<span style="color:var(--accent);font-weight:700;font-size:14px">✓ Seleccionado</span>'
+      : '<span style="color:var(--fg-3);font-size:12px">—</span>';
+    tb.innerHTML += `
+      <tr>
+        <td><div class="aci-name">${a.id}</div></td>
+        <td><div class="aci-sector">${a.sectores}</div></td>
+        <td><span class="chip ${a.prior.toLowerCase() === 'alta' ? 'alta' : a.prior.toLowerCase() === 'media' ? 'media' : 'baja'}">${a.prior}</span></td>
+        <td style="font-weight:700;color:${cviColor(5 - a.delta*1.5)};font-variant-numeric:tabular-nums">${a.delta.toFixed(2)}</td>
+        <td><div class="star-row">${stars}</div><div style="font-size:10px;color:var(--fg-3);margin-top:2px">${a.ahp.toFixed(2)}</div></td>
+        <td><span class="vpn-val ${vpnColor}">${a.vpn}</span></td>
+        <td><span class="chip ${factCls}">${a.fact}</span></td>
+        <td>${selMark}</td>
+      </tr>`;
+  });
+}
+
+// ─── TOOLTIP ──────────────────────────────────────────────
+const tt = document.getElementById('tt');
+function showTT(e, val, lbl) {
+  tt.innerHTML = `<div class="tooltip-title">${lbl}</div><div class="tooltip-val">${val}</div>`;
+  tt.classList.add('show');
+  moveTT(e);
+}
+function moveTT(e) {
+  tt.style.left = (e.clientX + 12) + 'px';
+  tt.style.top  = (e.clientY - 28) + 'px';
+}
+function hideTT() { tt.classList.remove('show'); }
+document.addEventListener('mousemove', moveTT);
+
+// ─── THEME ────────────────────────────────────────────────
+function toggleTheme() {
+  const r = document.documentElement;
+  const cur = r.getAttribute('data-theme');
+  r.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
+}
+
+// ─── INIT ─────────────────────────────────────────────────
+renderShorePoints();
+renderSubBars('subBase', 'base');
+renderSubBars('subInter', 'inter');
+renderRuns();
+renderLineChart();
+renderHeatmapFixed();
+renderACI();
+</script>
+
+</body></html>

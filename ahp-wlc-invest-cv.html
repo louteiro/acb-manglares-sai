@@ -1,0 +1,1671 @@
+<!doctype html>
+<title>AHP-WLC &amp; InVEST CV — Datos y Escenarios</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS ── */
+:root {
+  --bg:#f8f9fb; --bg-card:#ffffff; --bg-subtle:#f1f3f6; --bg-deep:#e8eaf0;
+  --fg:#0f1117; --fg-muted:#4b5563; --fg-faint:#9ca3af;
+  --border:#e2e5ea; --border-strong:#c9cdd5;
+  --accent:#2563eb; --accent-soft:#eff6ff;
+  --ahp:#7c3aed; --ahp-soft:#f5f3ff;
+  --cv:#0891b2; --cv-soft:#ecfeff;
+  --ok:#059669; --ok-soft:#ecfdf5;
+  --warn:#d97706; --warn-soft:#fffbeb;
+  --err:#dc2626; --err-soft:#fef2f2;
+  --f1:#2563eb; --f2:#0891b2;
+  --font-body:'Inter',system-ui,sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+  --radius:12px; --radius-sm:8px; --shadow:0 1px 3px rgba(0,0,0,.08),0 4px 16px rgba(0,0,0,.04);
+  color-scheme:light;
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0d0f14; --bg-card:#161922; --bg-subtle:#1e2230; --bg-deep:#252a3a;
+  --fg:#f0f2f7; --fg-muted:#9ca3af; --fg-faint:#4b5563;
+  --border:#2a2f3e; --border-strong:#3a3f52;
+  --accent:#3b82f6; --accent-soft:#1e2a4a;
+  --ahp:#a78bfa; --ahp-soft:#1e1a3a;
+  --cv:#22d3ee; --cv-soft:#0a2030;
+  --ok:#34d399; --ok-soft:#0a2418;
+  --warn:#fbbf24; --warn-soft:#271e06;
+  --err:#f87171; --err-soft:#2a0a0a;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0d0f14; --bg-card:#161922; --bg-subtle:#1e2230; --bg-deep:#252a3a;
+  --fg:#f0f2f7; --fg-muted:#9ca3af; --fg-faint:#4b5563;
+  --border:#2a2f3e; --border-strong:#3a3f52;
+  --accent:#3b82f6; --accent-soft:#1e2a4a;
+  --ahp:#a78bfa; --ahp-soft:#1e1a3a;
+  --cv:#22d3ee; --cv-soft:#0a2030;
+  --ok:#34d399; --ok-soft:#0a2418;
+  --warn:#fbbf24; --warn-soft:#271e06;
+  --err:#f87171; --err-soft:#2a0a0a;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--bg);color:var(--fg);
+  font-family:var(--font-body);font-size:14px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0;
+}
+
+
+/* ── CARTOGRAFÍA MANGLAR ── */
+.carto-svg{width:100%;height:auto;display:block}
+.carto-svg .axis{stroke:var(--border-strong);stroke-width:1.5}
+.carto-svg .tick{fill:var(--fg-faint);font:500 11px var(--font-body)}
+.carto-svg .row-lbl{fill:var(--fg);font:700 13px var(--font-body)}
+.carto-svg .val{fill:var(--fg);font:700 12px var(--font-body)}
+.carto-svg .sub{fill:var(--fg-muted);font:500 10px var(--font-body)}
+.carto-svg .m-cor{fill:#6b7b76}.carto-svg .m-inv{fill:var(--ok)}.carto-svg .m-glo{fill:var(--accent)}
+.carto-svg .m-hol{fill:none;stroke:var(--accent);stroke-width:2}
+.carto-svg .iota{stroke:var(--err);stroke-width:1.5;stroke-dasharray:5 4}
+.carto-svg .iota-t{fill:var(--err);font:700 11px var(--font-body)}
+.carto-svg .gap{fill:var(--err-soft);stroke:var(--err);stroke-dasharray:5 4}
+.carto-svg .gap-t{fill:var(--err);font:700 10.5px var(--font-body)}
+.carto-legend{display:flex;flex-wrap:wrap;gap:14px;font-size:11.5px;color:var(--fg-muted);margin:6px 0 2px}
+.carto-legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.carto-scroll{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg-card);box-shadow:var(--shadow)}
+.carto-scroll .cv-table{min-width:1180px}
+.carto-scroll .cv-table td{font-size:12px}
+.carto-scroll .cv-table td.num{font-family:var(--font-mono);font-size:11.5px}
+#page-carto .card{overflow-x:auto}
+#page-carto .card .cv-table{min-width:520px}
+.carto-note{font-size:12px;color:var(--fg-muted);margin:8px 2px 0}
+.carto-callout{border-left:4px solid var(--dc,var(--accent));background:var(--dc-soft,var(--accent-soft));border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:12px 16px;font-size:13px;margin-bottom:16px}
+.carto-h2{font-size:17px;font-weight:700;margin:28px 0 4px}
+.carto-p{font-size:13px;color:var(--fg-muted);margin-bottom:12px;max-width:110ch}
+.prio-a{color:var(--err);font-weight:700}.prio-m{color:var(--warn);font-weight:700}.prio-b{color:var(--fg-muted);font-weight:700}
+
+/* ── NAV ── */
+.topbar{
+  position:sticky;top:env(safe-area-inset-top,0px);z-index:20;
+  background:var(--bg-card);border-bottom:1px solid var(--border);
+  padding:0 max(16px,env(safe-area-inset-left,0px));
+}
+body::before{
+  content:"";position:fixed;inset:0 0 auto;
+  height:env(safe-area-inset-top,0px);background:var(--bg-card);z-index:21;
+}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:0;flex-wrap:wrap;}
+.nav-title{font-weight:800;font-size:13px;letter-spacing:-.2px;padding:12px 16px 12px 0;border-right:1px solid var(--border);margin-right:8px;white-space:nowrap;}
+.tab-btn{
+  background:none;border:none;font-family:var(--font-body);font-size:13px;font-weight:500;
+  color:var(--fg-muted);cursor:pointer;padding:14px 14px;border-bottom:2px solid transparent;
+  transition:color .15s,border-color .15s;white-space:nowrap;
+}
+.tab-btn:hover{color:var(--fg);}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:700;}
+.theme-toggle{
+  margin-left:auto;background:var(--bg-subtle);border:1px solid var(--border);
+  border-radius:6px;font-size:13px;padding:5px 10px;cursor:pointer;font-family:var(--font-body);
+  color:var(--fg-muted);
+}
+
+/* ── PAGES ── */
+.page{display:none;max-width:1200px;margin:0 auto;padding:28px 0 60px;}
+.page.active{display:block;}
+.section-label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-faint);margin-bottom:6px;}
+.page-title{font-size:26px;font-weight:800;letter-spacing:-.5px;line-height:1.2;margin-bottom:6px;}
+.page-subtitle{font-size:14px;color:var(--fg-muted);margin-bottom:24px;max-width:720px;}
+
+/* ── GRID / KPI ── */
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:24px;}
+.kpi-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);
+  padding:16px 18px;box-shadow:var(--shadow);
+}
+.kpi-value{font-size:28px;font-weight:800;letter-spacing:-.5px;line-height:1;}
+.kpi-label{font-size:12px;font-weight:600;color:var(--fg-muted);margin-top:4px;}
+.kpi-sub{font-size:11px;color:var(--fg-faint);margin-top:2px;}
+
+/* ── TWO-COL ── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;}
+@media(max-width:720px){.two-col{grid-template-columns:1fr;}}
+
+/* ── CARD ── */
+.card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:20px 22px;box-shadow:var(--shadow);
+}
+.card-title{font-size:15px;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:8px;}
+.card-sub{font-size:12.5px;color:var(--fg-muted);margin-bottom:14px;}
+
+/* ── DIMENSION CARDS (AHP) ── */
+.dim-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-bottom:24px;}
+.dim-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:18px 20px;box-shadow:var(--shadow);position:relative;overflow:hidden;
+}
+.dim-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--dc);}
+.dim-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--dc-soft);color:var(--dc);
+  font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;margin-bottom:8px;
+}
+.dim-weight{
+  position:absolute;top:14px;right:16px;
+  font-size:22px;font-weight:800;color:var(--dc);opacity:.18;
+  font-family:var(--font-mono);
+}
+.dim-title{font-size:14px;font-weight:700;margin-bottom:6px;}
+.dim-desc{font-size:12.5px;color:var(--fg-muted);margin-bottom:12px;line-height:1.5;}
+.crit-list{list-style:none;display:flex;flex-direction:column;gap:4px;}
+.crit-item{
+  display:flex;align-items:flex-start;gap:8px;
+  font-size:12px;padding:6px 8px;border-radius:6px;
+  background:var(--bg-subtle);
+}
+.crit-dot{width:7px;height:7px;border-radius:50%;background:var(--dc);flex-shrink:0;margin-top:4px;}
+.crit-src{font-size:10.5px;color:var(--fg-faint);margin-top:1px;}
+.status-badge{
+  font-size:10px;font-weight:700;padding:1px 6px;border-radius:999px;
+  margin-left:auto;flex-shrink:0;
+}
+.s-ok{background:var(--ok-soft);color:var(--ok);}
+.s-warn{background:var(--warn-soft);color:var(--warn);}
+.s-err{background:var(--err-soft);color:var(--err);}
+.s-inv{background:var(--cv-soft);color:var(--cv);}
+
+/* ── CV LAYERS ── */
+.cv-table{width:100%;border-collapse:collapse;font-size:12.5px;}
+.cv-table th{
+  background:var(--bg-deep);font-weight:700;font-size:11px;text-transform:uppercase;
+  letter-spacing:.05em;color:var(--fg-faint);padding:8px 10px;text-align:left;
+  border-bottom:2px solid var(--border);
+}
+.cv-table td{padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+.cv-table tr:last-child td{border-bottom:none;}
+.cv-table tr:hover td{background:var(--bg-subtle);}
+.tag{font-size:10px;font-weight:700;padding:2px 6px;border-radius:999px;}
+.tag-ahp{background:var(--ahp-soft);color:var(--ahp);}
+.tag-cv{background:var(--cv-soft);color:var(--cv);}
+.tag-both{background:var(--ok-soft);color:var(--ok);}
+.tag-f4{background:#fef3c7;color:#b45309;}
+.tag-f5{background:#f0fdf4;color:#166534;}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .tag-f4{background:#78350f44;color:#fcd34d;}:root:not([data-theme="light"]) .tag-f5{background:#14532d44;color:#86efac;}}
+:root[data-theme="dark"] .tag-f4{background:#78350f44;color:#fcd34d;}
+:root[data-theme="dark"] .tag-f5{background:#14532d44;color:#86efac;}
+
+/* ── SCENARIO FLOW ── */
+.scenario-grid{display:grid;grid-template-columns:1fr 48px 1fr;gap:0;align-items:start;margin-bottom:24px;}
+@media(max-width:640px){.scenario-grid{grid-template-columns:1fr;}.sc-arrow{display:none;}}
+.sc-col{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:18px 20px;box-shadow:var(--shadow);
+}
+.sc-base{border-top:4px solid var(--err);}
+.sc-int{border-top:4px solid var(--ok);}
+.sc-arrow{display:flex;align-items:flex-start;justify-content:center;padding-top:60px;font-size:22px;color:var(--fg-faint);}
+.sc-title{font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;margin-bottom:4px;}
+.sc-sub{font-size:12px;color:var(--fg-muted);margin-bottom:14px;}
+.sc-steps{display:flex;flex-direction:column;gap:6px;}
+.sc-step{
+  background:var(--bg-subtle);border-radius:6px;padding:8px 10px;
+  font-size:12px;display:flex;gap:8px;align-items:flex-start;
+}
+.sc-num{
+  width:20px;height:20px;border-radius:50%;
+  font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:1px;
+}
+.base-num{background:var(--err-soft);color:var(--err);}
+.int-num{background:var(--ok-soft);color:var(--ok);}
+.sc-step-text{flex:1;min-width:0;}
+.sc-label{font-weight:600;color:var(--fg);}
+.sc-detail{font-size:11px;color:var(--fg-muted);margin-top:1px;}
+.delta-box{
+  background:var(--accent-soft);border:1px solid var(--accent);border-radius:var(--radius);
+  padding:14px 18px;text-align:center;margin-bottom:24px;
+}
+.delta-formula{font-family:var(--font-mono);font-size:13px;font-weight:600;color:var(--accent);}
+.delta-label{font-size:12px;color:var(--fg-muted);margin-top:4px;}
+
+/* ── RUNS TABLE ── */
+.runs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:24px;}
+.run-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);
+  padding:12px 14px;box-shadow:var(--shadow);
+}
+.run-id{font-family:var(--font-mono);font-size:10px;font-weight:700;color:var(--fg-faint);margin-bottom:4px;}
+.run-title{font-size:12.5px;font-weight:700;margin-bottom:3px;}
+.run-detail{font-size:11.5px;color:var(--fg-muted);}
+.run-base{border-left:3px solid var(--err);}
+.run-int{border-left:3px solid var(--ok);}
+
+/* ── TIMELINE ── */
+.timeline{display:flex;flex-direction:column;gap:0;}
+.tl-item{display:grid;grid-template-columns:120px 1px 1fr;gap:0 16px;align-items:start;padding-bottom:20px;}
+.tl-date{font-size:12px;font-weight:700;color:var(--fg-muted);text-align:right;padding-top:4px;}
+.tl-line{background:var(--border);width:1px;position:relative;}
+.tl-dot{width:10px;height:10px;border-radius:50%;background:var(--accent);position:absolute;left:-5px;top:5px;}
+.tl-body{padding-top:2px;padding-bottom:20px;}
+.tl-title{font-size:13px;font-weight:700;margin-bottom:4px;}
+.tl-list{list-style:none;display:flex;flex-direction:column;gap:3px;}
+.tl-list li{font-size:12px;color:var(--fg-muted);padding-left:12px;position:relative;}
+.tl-list li::before{content:"▸";position:absolute;left:0;color:var(--fg-faint);}
+.tl-inv{color:var(--cv)!important;font-weight:600;}
+.tl-crit{color:var(--err)!important;font-weight:600;}
+
+/* ── CHECKLIST ── */
+.checklist{display:flex;flex-direction:column;gap:6px;}
+.check-item{
+  display:flex;align-items:flex-start;gap:10px;
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);
+  padding:10px 12px;box-shadow:0 1px 2px rgba(0,0,0,.04);
+}
+.check-box{
+  width:18px;height:18px;border-radius:4px;flex-shrink:0;margin-top:1px;
+  display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;
+}
+.cb-ok{background:var(--ok-soft);color:var(--ok);}
+.cb-warn{background:var(--warn-soft);color:var(--warn);}
+.cb-err{background:var(--err-soft);color:var(--err);}
+.check-body{flex:1;min-width:0;}
+.check-title{font-size:12.5px;font-weight:600;}
+.check-detail{font-size:11.5px;color:var(--fg-muted);margin-top:2px;}
+.check-badges{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;}
+
+/* ── MISC ── */
+.divider{border:none;border-top:1px solid var(--border);margin:24px 0;}
+.mono{font-family:var(--font-mono);}
+.pill{font-size:10px;font-weight:700;padding:2px 7px;border-radius:999px;white-space:nowrap;}
+.pill-ahp{background:var(--ahp-soft);color:var(--ahp);}
+.pill-cv{background:var(--cv-soft);color:var(--cv);}
+.pill-inv{background:var(--cv-soft);color:var(--cv);}
+.pill-err{background:var(--err-soft);color:var(--err);}
+.pill-ok{background:var(--ok-soft);color:var(--ok);}
+.pill-warn{background:var(--warn-soft);color:var(--warn);}
+/* Scope banner F2 */
+.scope-banner{display:flex;align-items:center;gap:12px;padding:10px 18px;background:var(--cv);color:#fff;font-size:12px;font-weight:600;border-radius:0;}
+.scope-banner .scope-outputs{display:flex;gap:8px;flex-wrap:wrap;}
+.scope-pill{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700;}
+/* Post-Taller steps */
+.sc-step-future{opacity:.55;border-left:2px dashed var(--fg-faint);padding-left:8px;margin-left:4px;}
+.sc-step-future .sc-num{background:var(--fg-faint)!important;}
+.future-label{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;background:var(--bg-subtle);color:var(--fg-faint);border:1px solid var(--border-light);border-radius:4px;padding:1px 6px;margin-bottom:4px;}
+/* Siguientes fases box */
+.next-phases-box{margin-top:28px;border:1px dashed var(--border-light);border-radius:var(--radius-sm);overflow:hidden;}
+.next-phases-header{background:var(--bg-subtle);padding:10px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border-light);}
+.next-phases-tag{font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--fg-faint);}
+.next-phases-body{padding:14px 16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;}
+.nphase-card{background:var(--bg-subtle);border-radius:6px;padding:10px 12px;}
+.nphase-phase{font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--fg-faint);margin-bottom:4px;}
+.nphase-title{font-size:12px;font-weight:700;color:var(--fg-muted);margin-bottom:3px;}
+.nphase-desc{font-size:11px;color:var(--fg-faint);}
+.nphase-formula{font-family:var(--mono);font-size:11px;color:var(--fg-muted);background:var(--bg-card);border:1px solid var(--border-light);border-radius:4px;padding:6px 10px;margin-top:8px;grid-column:1/-1;}
+</style>
+
+<!-- ── SCOPE BANNER F2 ── -->
+<div class="scope-banner">
+  <span style="font-size:13px;letter-spacing:.3px">📍 Alcance F2 → Taller 1 (ene 2027)</span>
+  <span style="opacity:.5;font-size:14px">|</span>
+  <span style="font-weight:400;font-size:11px;opacity:.85">Dos mapas de salida:</span>
+  <div class="scope-outputs">
+    <span class="scope-pill">🗺 Mapa AHP-WLC · sectores rankeados</span>
+    <span class="scope-pill">🌊 Mapa InVEST CV · índice CVI por punto de costa</span>
+  </div>
+  <span style="font-weight:400;font-size:10px;opacity:.7;margin-left:auto">VPN · daños · carbono → Fases 3-5</span>
+</div>
+
+<!-- ── NAV ── -->
+<div class="topbar">
+  <div class="nav-inner">
+    <div class="nav-title">ACB Manglares · F2</div>
+    <button class="tab-btn active" onclick="showPage('ahp')">AHP-WLC</button>
+    <button class="tab-btn" onclick="showPage('cv')">InVEST CV</button>
+    <button class="tab-btn" onclick="showPage('scenarios')">Escenarios</button>
+    <button class="tab-btn" onclick="showPage('runs')">Corridas CV</button>
+    <button class="tab-btn" onclick="showPage('timeline')">Datos críticos</button>
+    <button class="tab-btn" onclick="showPage('carto')">Cartografía manglar</button>
+    <button class="tab-btn" onclick="showPage('taller')">Checklist taller</button>
+    <button class="theme-toggle" onclick="toggleTheme()">◑ tema</button>
+  </div>
+</div>
+
+<!-- ════════════════════ PAGE: AHP-WLC ════════════════════ -->
+<div id="page-ahp" class="page active">
+  <p class="section-label">Fase 2 · Diagnóstico Integrado</p>
+  <h1 class="page-title">Arquitectura AHP-WLC</h1>
+  <p class="page-subtitle">Análisis jerárquico multicriterio para seleccionar las 3 Áreas Críticas de Intervención (ACI). Tres dimensiones, pesos acordados en el Taller 1 (ene 2027). CR &lt; 0.10.</p>
+
+  <div class="kpi-row">
+    <div class="kpi-card" style="border-left:3px solid var(--ahp)">
+      <div class="kpi-value" style="color:var(--ahp)">3</div>
+      <div class="kpi-label">Dimensiones AHP</div>
+      <div class="kpi-sub">D1 + D2 + D3</div>
+    </div>
+    <div class="kpi-card" style="border-left:3px solid var(--cv)">
+      <div class="kpi-value" style="color:var(--cv)">15–20</div>
+      <div class="kpi-label">Combinaciones sensibilidad</div>
+      <div class="kpi-sub">Variaciones de pesos</div>
+    </div>
+    <div class="kpi-card" style="border-left:3px solid var(--ok)">
+      <div class="kpi-value" style="color:var(--ok)">3</div>
+      <div class="kpi-label">ACI seleccionadas</div>
+      <div class="kpi-sub">Output del taller</div>
+    </div>
+    <div class="kpi-card" style="border-left:3px solid var(--warn)">
+      <div class="kpi-value" style="color:var(--warn)">CR&lt;0.10</div>
+      <div class="kpi-label">Umbral consistencia</div>
+      <div class="kpi-sub">Saaty 1980</div>
+    </div>
+  </div>
+
+  <!-- DIMENSIONS -->
+  <p class="section-label" style="margin-bottom:12px">Tres dimensiones · datos necesarios por criterio</p>
+  <div class="dim-cards">
+
+    <!-- D1 -->
+    <div class="dim-card" style="--dc:var(--err);--dc-soft:var(--err-soft)">
+      <div class="dim-weight">45%</div>
+      <div class="dim-badge">D1</div>
+      <div class="dim-title">Exposición y riesgo socioeconómico</div>
+      <div class="dim-desc">Qué tan expuestos están los asentamientos, la infraestructura y los medios de vida a las amenazas costeras. Peso propuesto: <strong>45 %</strong>.</div>
+      <ul class="crit-list">
+        <li class="crit-item">
+          <div class="crit-dot"></div>
+          <div>
+            <div>Población por manzana/sector (DANE CNPV 2018)</div>
+            <div class="crit-src">✅ DESCARGADO · microdatos.dane.gov.co · MGN manzanas 88001 · 722 manzanas · 42.236 hab · 15.989 viv · gpkg EPSG:4326</div>
+          </div>
+          <span class="status-badge s-ok">✅ en mano</span>
+        </li>
+        <li class="crit-item">
+          <div class="crit-dot"></div>
+          <div>
+            <div>Edificaciones y predios (huellas)</div>
+            <div class="crit-src">Gobernación UrbanoSAI ✓ — sin avalúos</div>
+          </div>
+          <span class="status-badge s-warn">nov 26</span>
+        </li>
+        <li class="crit-item">
+          <div class="crit-dot"></div>
+          <div>
+            <div>Infraestructura crítica (vías, muelles, hoteles)</div>
+            <div class="crit-src">Gobernación InfraestructuraSAI — vacía 19-10</div>
+          </div>
+          <span class="status-badge s-err">🔴 nov 26</span>
+        </li>
+        <li class="crit-item">
+          <div class="crit-dot"></div>
+          <div>
+            <div>Amenaza inundación actual + futura SAI — polígono</div>
+            <div class="crit-src">✅ DESCARGADO · CLIMARES20 · 10+11+11 polígonos SAI · formato SHP/GeoJSON válido</div>
+          </div>
+          <span class="status-badge s-ok">✅ en mano</span>
+        </li>
+        <li class="crit-item">
+          <div class="crit-dot"></div>
+          <div>
+            <div>Erosión costera actual SAI — línea</div>
+            <div class="crit-src">✅ DESCARGADO · CLIMARES20 · 51 líneas SAI · formato válido · normalizar a MultiLineString</div>
+          </div>
+          <span class="status-badge s-ok">✅ en mano</span>
+        </li>
+        <li class="crit-item">
+          <div class="crit-dot"></div>
+          <div>
+            <div>Exposición socioeconómica por manzana (MGN)</div>
+            <div class="crit-src">✅ DESCARGADO · CLIMARES20 · MGN_SocioEcono_SAI_v3 · 577 manzanas · deduplicar (aparece 4 veces)</div>
+          </div>
+          <span class="status-badge s-ok">✅ en mano</span>
+        </li>
+        <li class="crit-item">
+          <div class="crit-dot"></div>
+          <div>
+            <div>Proyecciones SLR — AR6 SSP2-4.5 + VLM GNSS SAN0</div>
+            <div class="crit-src">Garner et al. 2021 · Zenodo doi:10.5281/zenodo.5914710 · +7.8 / +16.7 / +25.7 cm (t=10/20/30) · mediana · interpolado 12.58°N 81.70°W</div>
+          </div>
+          <span class="status-badge s-ok">calculado</span>
+        </li>
+        <li class="crit-item">
+          <div class="crit-dot"></div>
+          <div>
+            <div>Daños Iota 2020 SAI — puntos por estructura</div>
+            <div class="crit-src">✅ DESCARGADO 09-11 · UNOSAT TC20201123COL (vía HDX; ficha AmeriGEOSS sin recursos) · WV-2 18-11-2020 · SAI: 31 dañadas + 221 potencialmente dañadas · <strong>PUNTOS, no polígono</strong> · solo zonas sin nubes (sin máscara de nubes para SAI) → conteo mínimo · GPKG EPSG:9377 · ver mejoras INVEMAR abajo</div>
+          </div>
+          <span class="status-badge s-ok">✅ en mano</span>
+        </li>
+        <li class="crit-item">
+          <div class="crit-dot"></div>
+          <div>
+            <div>Medios de vida: pesca, turismo</div>
+            <div class="crit-src">DANE GEIH + AUNAP SEPEC · Proximidad muelles/zonas pesca: ✅ SIGMA Caribe insular descargado</div>
+          </div>
+          <span class="status-badge s-warn">parcial</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- D2 -->
+    <div class="dim-card" style="--dc:var(--ok);--dc-soft:var(--ok-soft)">
+      <div class="dim-weight">35%</div>
+      <div class="dim-badge">D2</div>
+      <div class="dim-title">Viabilidad y potencial ecológico</div>
+      <div class="dim-desc">Qué áreas tienen más capacidad de recuperación del manglar y albergan hábitats de mayor valor. Peso propuesto: <strong>35 %</strong>. Comparte datos con InVEST CV.</div>
+      <ul class="crit-list">
+        <li class="crit-item">
+          <div class="crit-dot"></div>
+          <div>
+            <div>Extensión manglar actual — polígono 1:5.000</div>
+            <div class="crit-src">✅ DESCARGADO · SIGMA 2021 (1:5.000, imágenes dic 2020–jun 2021) · proyecto SeaFlower = San Andrés: 105 manglar (126,4 ha) + 85 deteriorado (8,5 ha) · proyecto BPIN = Providencia: 368 «manglar vivo» (14,0 ha) · áreas en CTM12 (+2,1 %) → SAI ≈ 132 ha reales · Geoportal SAI = capa INVEMAR–CORALINA 2016 (128 pol., 140,0 ha) · reconciliado 09-11 · islas confirmadas 10-11</div>
+          </div>
+          <span class="status-badge s-ok">✅ en mano</span>
+        </li>
+        <li class="crit-item">
+          <div class="crit-dot"></div>
+          <div>
+            <div>Estado y estructura: densidad, DAP, altura (parcelas)</div>
+            <div class="crit-src">MangRes — NO RECIBIDO · no sustituible con lo descargado · más crítico del ACB</div>
+          </div>
+          <span class="status-badge s-err">🔴 CRÍTICO</span>
+        </li>
+        <li class="crit-item">
+          <div class="crit-dot"></div>
+          <div>
+            <div>Cambio de cobertura manglar — polígono (serie histórica espacial)</div>
+            <div class="crit-src">✅ DESCARGADO · SIGMA Caribe insular · cambio_coberturamanglar · 242 pol. · ráster ~10 m vectorizado, sin fechas ni metadatos · SAI: pérdida 13,7 / ganancia 22,1 / estable 140,0 ha (neto +8,4, contradice la serie 1:5.000) · Providencia: −76 % (Iota) · usar para localizar la pérdida, no para áreas · pedir fechas y método a INVEMAR</div>
+          </div>
+          <span class="status-badge s-ok">✅ en mano</span>
+        </li>
+        <li class="crit-item">
+          <div class="crit-dot"></div>
+          <div>
+            <div>LULC cobertura/uso suelo SAI — polígono 1:5.000</div>
+            <div class="crit-src">✅ DESCARGADO · CLIMARES20 · Cobrt_SAI 884 polígonos · Corine LC · ortofoto IGAC 2008 · ⚠ una sola fecha (2008) — pedir corte 2019-22 a INVEMAR</div>
+          </div>
+          <span class="status-badge s-warn">✅ parcial — 1 fecha</span>
+        </li>
+        <li class="crit-item">
+          <div class="crit-dot"></div>
+          <div>
+            <div>Pastos marinos, áreas coralinas, comunidades marinas</div>
+            <div class="crit-src">✅ DESCARGADO · Geoportal SAI · pastos (30) + coralinas (14) + comunidades (19) · formato válido para capa Natural Habitats CV</div>
+          </div>
+          <span class="status-badge s-ok">✅ en mano</span>
+        </li>
+        <li class="crit-item">
+          <div class="crit-dot"></div>
+          <div>
+            <div>Geomorfología costera SAI — polígono</div>
+            <div class="crit-src">✅ DESCARGADO · CLIMARES20 · 124 polígonos · directo a capa Geomorphology de InVEST CV</div>
+          </div>
+          <span class="status-badge s-ok">✅ en mano</span>
+        </li>
+        <li class="crit-item">
+          <div class="crit-dot"></div>
+          <div>
+            <div>Áreas protegidas (AMP Seaflower, PNR Old Point, PNR Johnny Cay)</div>
+            <div class="crit-src">✅ DESCARGADO · Geoportal SAI · AMP (34) + PNR Old Point (15) + PNR Johnny Cay (4) + Reserva Biósfera (3)</div>
+          </div>
+          <span class="status-badge s-ok">✅ en mano</span>
+        </li>
+        <li class="crit-item">
+          <div class="crit-dot"></div>
+          <div>
+            <div>Priorización de restauración por sector — polígono</div>
+            <div class="crit-src">✅ DESCARGADO · SIGMA · 30 sectores Ar1–Ar30 · atributos Alta/Media/Baja · 9 priorizados · ⚠ area_ha_ vs area_calc no cuadran — revisar · las ≈210 ha son área de sector o del archipiélago, no manglar de SAI · el modelo de priorización de INVEMAR (Hub, 10-11) usa capas como cambio_coberturamanglar como criterios (prior_rest y calificaci = puntuación del criterio): pedir resultado final y pesos</div>
+          </div>
+          <span class="status-badge s-ok">✅ en mano</span>
+        </li>
+        <li class="crit-item">
+          <div class="crit-dot"></div>
+          <div>
+            <div>Presiones sobre el manglar (proximidad centros poblados, muelles)</div>
+            <div class="crit-src">✅ DESCARGADO · SIGMA Caribe insular · proximidad a centros poblados, escuelas, muelles, zonas pesca · proxy de presión antrópica</div>
+          </div>
+          <span class="status-badge s-ok">✅ en mano</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- D3 -->
+    <div class="dim-card" style="--dc:var(--warn);--dc-soft:var(--warn-soft)">
+      <div class="dim-weight">20%</div>
+      <div class="dim-badge">D3</div>
+      <div class="dim-title">Factibilidad de intervención</div>
+      <div class="dim-desc">Condiciones legales, de tenencia y de acceso operativo para ejecutar la restauración. Peso propuesto: <strong>20 %</strong>.</div>
+      <ul class="crit-list">
+        <li class="crit-item">
+          <div class="crit-dot"></div>
+          <div>
+            <div>Marco normativo (Res. 1263/2018, Ley 2243/2022)</div>
+            <div class="crit-src">SUIN-Juriscol + Función Pública</div>
+          </div>
+          <span class="status-badge s-ok">disponible</span>
+        </li>
+        <li class="crit-item">
+          <div class="crit-dot"></div>
+          <div>
+            <div>Titularidad / tenencia predial en zonas de manglar</div>
+            <div class="crit-src">UrbanoSAI (huellas) + CORALINA</div>
+          </div>
+          <span class="status-badge s-warn">gestionar</span>
+        </li>
+        <li class="crit-item">
+          <div class="crit-dot"></div>
+          <div>
+            <div>Planes territoriales (POT, PIGCCT, PTACCSA 2022)</div>
+            <div class="crit-src">Gobernación + Minambiente</div>
+          </div>
+          <span class="status-badge s-ok">disponible</span>
+        </li>
+        <li class="crit-item">
+          <div class="crit-dot"></div>
+          <div>
+            <div>Actores: CORALINA, comunidades raizales, turismo</div>
+            <div class="crit-src">Taller 1 · CORALINA punto focal</div>
+          </div>
+          <span class="status-badge s-warn">taller ene</span>
+        </li>
+        <li class="crit-item">
+          <div class="crit-dot"></div>
+          <div>
+            <div>Accesibilidad operativa (logística insular)</div>
+            <div class="crit-src">Costos insulares +20–40 % continental</div>
+          </div>
+          <span class="status-badge s-warn">F3</span>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- WLC FORMULA -->
+  <div class="delta-box" style="margin-bottom:24px">
+    <div class="delta-formula">Score_WLC(píxel) = 0.45 × D1_norm + 0.35 × D2_norm + 0.20 × D3_norm</div>
+    <div class="delta-label">Pesos propuestos · se validan en el Taller 1 · 15–20 combinaciones de sensibilidad · CR &lt; 0.10 exigido</div>
+  </div>
+
+  <!-- IOTA UNOSAT + MEJORAS INVEMAR -->
+  <div class="card" style="margin-bottom:24px;border-left:3px solid var(--err)">
+    <div class="card-title">🌀 Capa Daños Iota 2020 — estado y mejoras posibles con INVEMAR</div>
+    <div class="card-sub">UNOSAT TC20201123COL descargado el 09-11-2026 (zip SHP + GDB, mismo contenido). El zip trae San Andrés y Providencia. Todo son puntos por estructura; el único polígono es la máscara de nubes de Providencia.</div>
+    <table class="cv-table" style="margin-bottom:14px">
+      <thead><tr><th>Capa</th><th>Isla · fecha imagen</th><th>n</th><th>Geometría</th><th>Uso</th></tr></thead>
+      <tbody>
+        <tr><td>DamageStructure</td><td>San Andrés · 18-11-2020</td><td class="mono">31</td><td>Punto</td><td>D1 · validación hidro</td></tr>
+        <tr><td>PotentiallyDamageStructure</td><td>San Andrés · 18-11-2020</td><td class="mono">221</td><td>Punto</td><td>D1 (peso 0,5)</td></tr>
+        <tr><td>DamageStructure</td><td>Providencia · 21-11-2020</td><td class="mono">1100</td><td>Punto</td><td>Calibración hidro (fuera del AHP SAI)</td></tr>
+        <tr><td>PotentiallyDamageStructure</td><td>Providencia · 21-11-2020</td><td class="mono">10</td><td>Punto</td><td>Calibración hidro</td></tr>
+        <tr><td>CloudMask</td><td>Providencia · 21-11-2020</td><td class="mono">1</td><td>Multipolígono</td><td>Excluir zona no analizada</td></tr>
+      </tbody>
+    </table>
+    <div style="font-size:12.5px;margin-bottom:14px"><strong>Cómo entra al AHP (D1):</strong> puntos → densidad kernel (dañada = 1, potencialmente dañada = 0,5; radio 100–150 m) o conteo por manzana MGN (577) → normalización 0–1. Peso bajo dentro de D1: es un conteo mínimo (solo zonas sin nubes) y solo mide edificaciones, no ecosistema. <strong>Limitaciones:</strong> (1) no hay máscara de nubes de SAI → no se sabe qué zonas no se analizaron (pedirla a UNOSAT, no a INVEMAR); (2) n = 31 dañadas en SAI es poco para validar el modelo hidrodinámico → la calibración fuerte sigue siendo Providencia.</div>
+    <div class="card-title" style="font-size:13.5px">Mejoras que puede aportar INVEMAR (llevar a la reunión del 10-11)</div>
+    <table class="cv-table">
+      <thead><tr><th>Mejora</th><th>Dato INVEMAR</th><th>Isla</th><th>Qué resuelve</th><th>Prior.</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Daño al manglar (no solo edificaciones)</strong></td><td>Parcelas de carbono azul INVEMAR + CORALINA medidas en 2021 (22 en SAI): biomasa muerta en pie por parcela</td><td>SAI</td><td>Índice de daño ecosistémico por sitio en SAI; sustituye la ausencia de daño a manglar en UNOSAT. Alimenta D1/D2 y la fracción perturbada de CBC</td><td><span class="pill pill-err">Alta</span></td></tr>
+        <tr><td><strong>Exposición real vs. modelada</strong></td><td>MDT y cotas de inundación de CLIMARES20</td><td>SAI</td><td>Cruzar los 252 puntos UNOSAT con las manchas de inundación: ¿qué % de daños cae dentro? Valida la capa de amenaza y el EI de InVEST CV</td><td><span class="pill pill-err">Alta</span></td></tr>
+        <tr><td><strong>Observaciones de campo del evento</strong></td><td>Puntos monitoreados por el SINA en las islas tras Iota (nov–dic 2020): marcas de agua, sobrelavado, arena isla adentro</td><td>SAI + PRO</td><td>Cotas observadas para calibrar el modelo hidrodinámico; UNOSAT no da profundidad de inundación</td><td><span class="pill pill-err">Alta</span></td></tr>
+        <tr><td><strong>Daño y recuperación del manglar</strong></td><td>Evaluación post-Iota de la Expedición Cangrejo Negro (ene 2021): mortalidad ~32 %, ~60 % con rebrote, por sitio</td><td>PRO</td><td>Fracción perturbada «impacto alto huracán» (CBC) y curva de recuperación natural (D2, F3). No entra al AHP de SAI</td><td><span class="pill pill-warn">Media</span></td></tr>
+        <tr><td><strong>Erosión por evento</strong></td><td>Perfiles de playa y granulometría post-Iota (SMEC); preguntar si hay perfiles en SAI</td><td>PRO (¿SAI?)</td><td>Erosión episódica para D1 y validación morfodinámica (XBeach)</td><td><span class="pill pill-warn">Media</span></td></tr>
+        <tr><td><strong>Daño en hábitats protectores</strong></td><td>Evaluación rápida de arrecifes y pastos marinos INVEMAR + CORALINA (dic 2020)</td><td>PRO/SC</td><td>Contrasta el rank y la distancia de protección de hábitats en InVEST CV</td><td><span class="pill pill-warn">Baja</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- LULC CLASES -->
+  <div class="card">
+    <div class="card-title">🗺 6 clases LULC unificadas — base de todos los modelos</div>
+    <div class="card-sub">La misma leyenda se usa en AHP-WLC, InVEST CV, InVEST CBC y el modelo hidrodinámico. Fuente maestra: INVEMAR CLIMARES20 + clasificación propia sobre ortofoto IGAC 2025.</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px">
+      <div style="background:var(--bg-subtle);border-radius:6px;padding:10px 12px;font-size:12.5px"><strong>C1</strong> Manglar maduro · &gt;70 % cobertura dosel</div>
+      <div style="background:var(--bg-subtle);border-radius:6px;padding:10px 12px;font-size:12.5px"><strong>C2</strong> Manglar degradado · 30–70 % cobertura</div>
+      <div style="background:var(--bg-subtle);border-radius:6px;padding:10px 12px;font-size:12.5px"><strong>C3</strong> Manglar en recuperación · signos regeneración</div>
+      <div style="background:var(--bg-subtle);border-radius:6px;padding:10px 12px;font-size:12.5px"><strong>C4</strong> Área deforestada / abierta · sin cobertura</div>
+      <div style="background:var(--bg-subtle);border-radius:6px;padding:10px 12px;font-size:12.5px"><strong>C5</strong> Cuerpos de agua · laguna, canales</div>
+      <div style="background:var(--bg-subtle);border-radius:6px;padding:10px 12px;font-size:12.5px"><strong>C6</strong> Infraestructura / área urbanizada</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════ PAGE: InVEST CV ════════════════════ -->
+<div id="page-cv" class="page">
+  <p class="section-label">Fase 2 · InVEST Coastal Vulnerability</p>
+  <h1 class="page-title">InVEST CV — Capas de entrada</h1>
+  <p class="page-subtitle">El modelo CV de InVEST calcula el Índice de Exposición Costera (IEC) integrando 8 biofísicos en cada píxel de shore-point. Se corre 4 veces (2 escenarios × 2 horizontes = 4 corridas base + 4 de intervención = 8 runs totales).</p>
+
+  <div class="kpi-row">
+    <div class="kpi-card" style="border-left:3px solid var(--cv)">
+      <div class="kpi-value" style="color:var(--cv)">8</div>
+      <div class="kpi-label">Capas de entrada CV</div>
+      <div class="kpi-sub">Biofísicos obligatorios</div>
+    </div>
+    <div class="kpi-card" style="border-left:3px solid var(--ahp)">
+      <div class="kpi-value" style="color:var(--ahp)">8</div>
+      <div class="kpi-label">Corridas totales</div>
+      <div class="kpi-sub">4 cortes × 2 escenarios</div>
+    </div>
+    <div class="kpi-card" style="border-left:3px solid var(--warn)">
+      <div class="kpi-value" style="color:var(--warn)">3</div>
+      <div class="kpi-label">Capas críticas sin confirmar</div>
+      <div class="kpi-sub">Batimetría · MDT · MangRes</div>
+    </div>
+    <div class="kpi-card" style="border-left:3px solid var(--ok)">
+      <div class="kpi-value" style="color:var(--ok)">5+</div>
+      <div class="kpi-label">Geoservicios verificados</div>
+      <div class="kpi-sub">al 19-10-2026</div>
+    </div>
+  </div>
+
+  <table class="cv-table">
+    <thead>
+      <tr>
+        <th style="width:32px">#</th>
+        <th>Capa InVEST CV</th>
+        <th>Parámetro / valor rango</th>
+        <th>Fuente primaria (TdR)</th>
+        <th>Alternativa verificada</th>
+        <th>Usa en AHP?</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="mono">1</td>
+        <td><strong>Geomorphology</strong><br><span style="color:var(--fg-faint);font-size:11px">Tipo de línea de costa</span></td>
+        <td>1–5 playas/rocas/manglar/arrecife/duna</td>
+        <td>INVEMAR CLIMARES20 geomorfología</td>
+        <td>Geoportal SAI (litoral rocoso, playas, escarpes, cayos)</td>
+        <td><span class="tag tag-ahp">D1+D2</span></td>
+        <td><span class="tag tag-cv" style="background:var(--ok-soft);color:var(--ok);font-size:10px;padding:2px 6px">✅ descargado · 124 polígonos</span></td>
+      </tr>
+      <tr>
+        <td class="mono">2</td>
+        <td><strong>Relief</strong><br><span style="color:var(--fg-faint);font-size:11px">Elevación costera media</span></td>
+        <td>Gradiente m/km · rank 1–5</td>
+        <td>MDT costero ≤5 m (IGAC)</td>
+        <td>Curvas de nivel Geoportal SAI (400) · FABDEM 30m provisional</td>
+        <td><span class="tag tag-ahp">D1</span></td>
+        <td><span class="tag" style="background:var(--warn-soft);color:var(--warn);font-size:10px;padding:2px 6px">⚠ curvas SAI ≠ MDT · pedir IGAC</span></td>
+      </tr>
+      <tr>
+        <td class="mono">3</td>
+        <td><strong>Natural Habitats</strong><br><span style="color:var(--fg-faint);font-size:11px">Hábitats protectores</span></td>
+        <td>Tipo: manglar / arrecife / pastos / duna</td>
+        <td>SIGMA manglares + Geoportal SAI habitats</td>
+        <td>Global Mangrove Watch + Allen Coral Atlas</td>
+        <td><span class="tag tag-both">D2 clave</span></td>
+        <td><span class="tag tag-cv" style="background:var(--ok-soft);color:var(--ok);font-size:10px;padding:2px 6px">✅ descargado · manglar+arrecife+pastos+comunidades</span></td>
+      </tr>
+      <tr>
+        <td class="mono">4</td>
+        <td><strong>Wave Exposure</strong><br><span style="color:var(--fg-faint);font-size:11px">Exposición al oleaje</span></td>
+        <td>Hs percentil 90 (m) · rank 1–5</td>
+        <td>ERA5 / DIMAR series oleaje</td>
+        <td>Copernicus Marine GLOBAL_WAV + COAST-RP</td>
+        <td>—</td>
+        <td><span class="tag" style="background:var(--err-soft);color:var(--err);font-size:10px;padding:2px 6px">🔴 pendiente · Copernicus CDS</span></td>
+      </tr>
+      <tr>
+        <td class="mono">5</td>
+        <td><strong>Surge</strong><br><span style="color:var(--fg-faint);font-size:11px">Marea de tormenta máxima</span></td>
+        <td>Storm surge máximo histórico (m)</td>
+        <td>COAST-RP Dullaart et al. (4TU)</td>
+        <td>GTSM CMIP6 (Copernicus CDS)</td>
+        <td><span class="tag tag-ahp">D1</span></td>
+        <td><span class="tag" style="background:var(--warn-soft);color:var(--warn);font-size:10px;padding:2px 6px">⚠ verificar descarga 4TU</span></td>
+      </tr>
+      <tr>
+        <td class="mono">6</td>
+        <td><strong>Sea Level Change</strong><br><span style="color:var(--fg-faint);font-size:11px">Tendencia SLR (mm/año)</span></td>
+        <td><strong>SSP2-4.5 mediana + VLM GNSS SAN0:</strong><br>t=10 → <strong>+7.8 cm</strong> (5.7–9.9) · t=20 → <strong>+16.7 cm</strong> (12.5–20.9) · t=30 → <strong>+25.7 cm</strong> (19.3–32.2)<br><span style="color:var(--fg-faint);font-size:10px">Prueba de estrés (cifras TdR): +10 / +22 / +38 cm · t₀ = 2026</span></td>
+        <td>Garner et al. 2021 · Zenodo doi:10.5281/zenodo.5914710 · scripts R ar6_slr_sanandres.R + vlm_gnss_san0.R</td>
+        <td>INVEMAR CLIMARES20 proyecciones SAI · NASA Sea Level Projection Tool</td>
+        <td><span class="tag tag-ahp">D1</span></td>
+        <td><span class="tag tag-cv" style="background:var(--ok-soft);color:var(--ok);font-size:10px;padding:2px 6px">✅ calculado · interpolación 12.58°N 81.70°W</span></td>
+      </tr>
+      <tr>
+        <td class="mono">7</td>
+        <td><strong>Coastal Slope</strong><br><span style="color:var(--fg-faint);font-size:11px">Pendiente submarina</span></td>
+        <td>% pendiente plataforma nearshore</td>
+        <td>Batimetría Geoportal SAI (88 entidades) · DIMAR-CIOH</td>
+        <td>SDB Sentinel-2 + ICESat-2 (elaboración propia)</td>
+        <td>—</td>
+        <td><span class="tag" style="background:var(--err-soft);color:var(--err);font-size:10px;padding:2px 6px">🔴 batimetría SAI · verificar resolución y geometría</span></td>
+      </tr>
+      <tr>
+        <td class="mono">8</td>
+        <td><strong>Wind Exposure</strong><br><span style="color:var(--fg-faint);font-size:11px">Fetch efectivo + viento</span></td>
+        <td>U10 percentil 90 (m/s)</td>
+        <td>ERA5 reanalysis (Copernicus CDS)</td>
+        <td>STORM + parametric Holland model</td>
+        <td>—</td>
+        <td><span class="tag" style="background:var(--err-soft);color:var(--err);font-size:10px;padding:2px 6px">🔴 pendiente · Copernicus CDS</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top:14px;padding:12px 14px;background:var(--bg-subtle);border-radius:var(--radius-sm);font-size:12px;color:var(--fg-muted);display:flex;flex-direction:column;gap:8px">
+    <div><strong>✅ Capas 1, 3 ya disponibles</strong> — Geomorfología (CLIMARES20, 124 polígonos) y Natural Habitats (manglar SIGMA + pastos/arrecifes/comunidades Geoportal SAI) están descargadas y en formato vectorial válido. Hay que rasterizarlas a la resolución del CV antes de correr el modelo.</div>
+    <div><strong>⚠ Cap 2 (Relief):</strong> las curvas de nivel del Geoportal SAI (400 entidades) no sustituyen un MDT raster — hay que interpolarlas o esperar el MDT IGAC. FABDEM 30m como provisional para el CV; insuficiente para XBeach.</div>
+    <div><strong>⚠ Cap 7 (Coastal Slope):</strong> la batimetría del Geoportal SAI (88 entidades) existe pero hay que verificar si son puntos de sondeo, isolíneas o polígonos, y si la resolución cubre el nearshore ≤30m que necesita el CV.</div>
+    <div><strong>🔴 MangRes (parcelas):</strong> sigue siendo el dato más crítico — lo descargado no lo sustituye. Sin datos de dosel local, la altura de manglar para atenuación de oleaje usa Simard et al. 2019 (ORNL DAAC) como proxy.</div>
+    <div><strong>✅ Cap 6 (Sea Level Change):</strong> valores AR6 SSP2-4.5 calculados con interpolación bilineal en coords SAI (12.58°N / 81.70°W) + VLM GNSS estación SAN0 (hundimiento −1.9 ± 0.7 mm/año). Central: +7.8 / +16.7 / +25.7 cm (t=10/20/30). Las cifras del TdR (+10/+22/+38 cm) se conservan como prueba de estrés — equivalen al p83–cola alta de SSP2-4.5. Pendiente decidir si el E1 usa el central o mantiene TdR como valor único.</div>
+    <div><strong>✅ Manglar de San Andrés reconciliado (09-11):</strong> no eran fuentes en conflicto sino una serie: CORALINA 168 ha (1996) → 149 ha (2009) → INVEMAR–CORALINA 140,0 ha (2013–16, Geoportal) → SIGMA ≈ 132 ha (2021, SeaFlower: 126,4 manglar + 8,5 deteriorado en CTM12, −2,1 %). Pérdida ≈ 0,8–1 %/año, coherente con la tasa provisional. Las 126 ha eran solo la clase «Manglar»; las ≈210 ha son área de sectores, no manglar de SAI. Calcular áreas en UTM 17N: EPSG:9377 infla +2,1 % y UTM 19N +4,8 % en la isla. La capa cambio_coberturamanglar (ráster ~10 m, sin fechas) da ganancia neta en SAI: solo para localizar la pérdida.</div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">🔢 Tabla de ranking de hábitats (obligatoria)</div>
+      <div class="card-sub">Archivo CSV que mapea tipo de hábitat → rank de protección (1–5). Se construye manualmente.</div>
+      <table class="cv-table">
+        <thead><tr><th>Hábitat</th><th>Rank</th><th>Justificación</th></tr></thead>
+        <tbody>
+          <tr><td>Manglar maduro (C1)</td><td class="mono">1</td><td>Máxima protección</td></tr>
+          <tr><td>Arrecife coralino</td><td class="mono">2</td><td>Alta atenuación oleaje</td></tr>
+          <tr><td>Pastos marinos</td><td class="mono">3</td><td>Reducción turbulencia</td></tr>
+          <tr><td>Manglar degradado (C2)</td><td class="mono">3</td><td>Protección parcial</td></tr>
+          <tr><td>Manglar en rec. (C3)</td><td class="mono">4</td><td>Protección incipiente</td></tr>
+          <tr><td>Sin hábitat</td><td class="mono">5</td><td>Sin protección</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">📍 Shore points — geometría de la corrida</div>
+      <div class="card-sub">Puntos equidistantes sobre la línea de costa. El CV calcula el IEC para cada punto.</div>
+      <ul class="crit-list" style="gap:6px">
+        <li class="crit-item"><div class="crit-dot" style="background:var(--cv)"></div><div>Espaciado: 250–500 m según resolución MDT<div class="crit-src">≈60–120 puntos en los 30 km de costa SAI</div></div></li>
+        <li class="crit-item"><div class="crit-dot" style="background:var(--cv)"></div><div>Fuente línea de costa: CartografiaBaseSAI id 3 (1:800) ✓<div class="crit-src">Gobernación SAI · verificado 19-10-2026</div></div></li>
+        <li class="crit-item"><div class="crit-dot" style="background:var(--cv)"></div><div>Depth contour (batimetría): 30 m isobata<div class="crit-src">⚠ pendiente DIMAR-CIOH / Gobernación id 4</div></div></li>
+        <li class="crit-item"><div class="crit-dot" style="background:var(--cv)"></div><div>Output: raster IEC + CSV por punto + informe HTML<div class="crit-src">1 raster por corrida → 8 rasters totales</div></div></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════ PAGE: ESCENARIOS ════════════════════ -->
+<div id="page-scenarios" class="page">
+  <p class="section-label">Arquitectura de escenarios</p>
+  <h1 class="page-title">Escenario Base vs. Intervención</h1>
+  <p class="page-subtitle">En F2, los escenarios generan los <strong>6 rasters LULC futuros</strong> que alimentan las 8 corridas de InVEST CV. El diferencial entre escenarios se valora económicamente (VPN, daños, carbono) en Fases 3-5, <em>después</em> del Taller 1.</p>
+
+  <div style="display:flex;align-items:center;gap:10px;padding:9px 14px;background:var(--cv);color:#fff;border-radius:var(--radius-sm);margin-bottom:20px;font-size:12px">
+    <span style="font-size:16px">🎯</span>
+    <span><strong>Output F2 de esta página:</strong> los 6 mapas LULC (3 horizontes × 2 escenarios) listos para entrar en InVEST CV como capa «Natural Habitats». No se calcula VPN aquí.</span>
+  </div>
+
+  <div class="scenario-grid">
+    <!-- BASE -->
+    <div class="sc-col sc-base">
+      <div class="sc-title" style="color:var(--err)">Escenario Base · «No actuar»</div>
+      <div class="sc-sub">Continúa la pérdida y degradación observada (tasa provisional ≤ 1 %/año, CORALINA 1996–2009; el −74,2 % de Biomaps no se usa, E1 §11.4)</div>
+      <div class="sc-steps">
+        <div class="sc-step">
+          <div class="sc-num base-num">1</div>
+          <div class="sc-step-text">
+            <div class="sc-label">LULC futuro degradado</div>
+            <div class="sc-detail">Tasa histórica C1→C2→C4 (SIGMA + CLIMARES20) aplicada por sector Ar1–Ar30. 3 rasters: LULC_base_t10/20/30</div>
+          </div>
+        </div>
+        <div class="sc-step">
+          <div class="sc-num base-num">2</div>
+          <div class="sc-step-text">
+            <div class="sc-label">InVEST CV con manglar degradado</div>
+            <div class="sc-detail">Natural Habitats = C2 (degradado) o C4 (deforestado) según proyección. IEC_base por ACI</div>
+          </div>
+        </div>
+        <div class="sc-step sc-step-future">
+          <div class="sc-num base-num">3</div>
+          <div class="sc-step-text">
+            <div class="future-label">Fase 4 · post-Taller 1</div>
+            <div class="sc-label">Modelo hidrodinámico</div>
+            <div class="sc-detail">XBeach / ADCIRC+SWAN con manglar degradado · Tr 10/25/50/100 años × 3 horizontes SLR</div>
+          </div>
+        </div>
+        <div class="sc-step sc-step-future">
+          <div class="sc-num base-num">4</div>
+          <div class="sc-step-text">
+            <div class="future-label">Fase 5 · post-Taller 1</div>
+            <div class="sc-label">Cuantificación de daños</div>
+            <div class="sc-detail">Curvas profundidad-daño JRC Huizinga 2017 × mapa inundación base</div>
+          </div>
+        </div>
+        <div class="sc-step sc-step-future">
+          <div class="sc-num base-num">5</div>
+          <div class="sc-step-text">
+            <div class="future-label">Fase 5 · post-Taller 1</div>
+            <div class="sc-label">Carbono base (InVEST CBC)</div>
+            <div class="sc-detail">Stock C decreciente según LULC_base. Pérdida neta de C acumulada en el horizonte</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc-arrow">⇄</div>
+
+    <!-- INTERVENCIÓN -->
+    <div class="sc-col sc-int">
+      <div class="sc-title" style="color:var(--ok)">Escenario Intervención · «Restaurar»</div>
+      <div class="sc-sub">Restauración activa en las 3 ACI seleccionadas en el Taller 1 (ene 2027)</div>
+      <div class="sc-steps">
+        <div class="sc-step">
+          <div class="sc-num int-num">1</div>
+          <div class="sc-step-text">
+            <div class="sc-label">LULC futuro restaurado</div>
+            <div class="sc-detail">Curva logística de recuperación ecológica por ACI (pendiente: calibración con datos locales / literatura Caribe)</div>
+          </div>
+        </div>
+        <div class="sc-step">
+          <div class="sc-num int-num">2</div>
+          <div class="sc-step-text">
+            <div class="sc-label">InVEST CV con manglar restaurado</div>
+            <div class="sc-detail">Natural Habitats = C1 (maduro) al t=30. Rank 1 → máxima protección. IEC_int por ACI</div>
+          </div>
+        </div>
+        <div class="sc-step sc-step-future">
+          <div class="sc-num int-num">3</div>
+          <div class="sc-step-text">
+            <div class="future-label">Fase 4 · post-Taller 1</div>
+            <div class="sc-label">Modelo hidrodinámico</div>
+            <div class="sc-detail">Misma malla, mismas tormentas. Rugosidad aumentada por dosel de manglar restaurado</div>
+          </div>
+        </div>
+        <div class="sc-step sc-step-future">
+          <div class="sc-num int-num">4</div>
+          <div class="sc-step-text">
+            <div class="future-label">Fase 5 · post-Taller 1</div>
+            <div class="sc-label">Cuantificación de daños</div>
+            <div class="sc-detail">Curvas JRC × mapa inundación reducida por manglar. Daños_int &lt; Daños_base</div>
+          </div>
+        </div>
+        <div class="sc-step sc-step-future">
+          <div class="sc-num int-num">5</div>
+          <div class="sc-step-text">
+            <div class="future-label">Fase 5 · post-Taller 1</div>
+            <div class="sc-label">Carbono intervención (InVEST CBC)</div>
+            <div class="sc-detail">Stock C creciente: 320 tC/ha (campo INVEMAR+CORALINA 2022). Acumulación neta en horizonte</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LULC FUTUROS — BLOQUE NUEVO -->
+  <div style="margin:28px 0 0">
+    <p class="section-label" style="margin-bottom:10px">Construcción de LULC futuros — datos necesarios</p>
+
+    <!-- FLUJO LULC -->
+    <div class="card" style="margin-bottom:14px">
+      <div class="card-title">🗺 Flujo para generar los 6 mapas LULC futuros (3 horizontes × 2 escenarios)</div>
+      <div class="card-sub">Inputs → Tasa de transición → Proyección Base → Proyección Intervención → 6 rasters para InVEST CV y CBC</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;align-items:stretch">
+
+        <!-- Paso A -->
+        <div style="flex:1;min-width:160px;background:var(--bg-subtle);border-radius:var(--radius-sm);padding:12px 14px;border-left:3px solid var(--cv)">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--cv);margin-bottom:6px">A · LULC de partida</div>
+          <div style="font-size:12px;font-weight:600;margin-bottom:4px">SIGMA 2019–21</div>
+          <div style="font-size:11px;color:var(--fg-muted)">SAI ≈ 132 ha (SeaFlower 2021, corregido a UTM 17N) · 6 clases C1–C6. <span style="font-weight:600">✅ reconciliado 09-11</span></div>
+        </div>
+
+        <div style="display:flex;align-items:center;color:var(--fg-faint);font-size:18px;padding:0 2px">+</div>
+
+        <!-- Paso B -->
+        <div style="flex:1;min-width:160px;background:var(--bg-subtle);border-radius:var(--radius-sm);padding:12px 14px;border-left:3px solid var(--warn)">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--warn);margin-bottom:6px">B · Serie temporal</div>
+          <div style="font-size:12px;font-weight:600;margin-bottom:4px">SIGMA cambio_cobertura 242 pol.</div>
+          <div style="font-size:11px;color:var(--fg-muted)">Sin fechas ni metadatos (ráster ~10 m). Serie para la tasa: CORALINA 1996 y 2009 + INVEMAR 2016 + SIGMA 2021. <span style="color:var(--warn);font-weight:600">⚠ cambio_cobertura solo localiza la pérdida</span></div>
+        </div>
+
+        <div style="display:flex;align-items:center;color:var(--fg-faint);font-size:18px;padding:0 2px">→</div>
+
+        <!-- Paso C -->
+        <div style="flex:1;min-width:160px;background:var(--bg-subtle);border-radius:var(--radius-sm);padding:12px 14px;border-left:3px solid var(--err)">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--err);margin-bottom:6px">C · LULC Base t10/20/30</div>
+          <div style="font-size:12px;font-weight:600;margin-bottom:4px">Tasa histórica de pérdida lineal</div>
+          <div style="font-size:11px;color:var(--fg-muted)">C1→C2→C4 con la tasa sectorial de la serie propia (cota superior ≈1 %/año). Sin recuperación espontánea.</div>
+        </div>
+
+        <div style="display:flex;align-items:center;color:var(--fg-faint);font-size:18px;padding:0 2px">+</div>
+
+        <!-- Paso D -->
+        <div style="flex:1;min-width:160px;background:var(--bg-subtle);border-radius:var(--radius-sm);padding:12px 14px;border-left:3px solid var(--ok)">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--ok);margin-bottom:6px">D · LULC Intervención t10/20/30</div>
+          <div style="font-size:12px;font-weight:600;margin-bottom:4px">Curva logística recuperación en ACI</div>
+          <div style="font-size:11px;color:var(--fg-muted)">C4/C2→C3 (t10) → C1 (t20–t30) en sectores ACI. Fuera de ACI = igual que Base.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABLA DATOS LULC -->
+    <div class="card" style="margin-bottom:14px">
+      <div class="card-title">📋 Inventario de datos para construir los LULC futuros</div>
+      <div class="card-sub">Cada fila es un dato o parámetro necesario para el flujo A→B→C/D. Estado actual según inventario ArcGIS REST (27 oct 2026).</div>
+      <div style="overflow-x:auto">
+        <table class="cv-table" style="min-width:640px">
+          <thead>
+            <tr>
+              <th style="width:200px">Dato / Parámetro</th>
+              <th>Para qué sirve</th>
+              <th>Estado</th>
+              <th>Fuente / Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- PARTIDA -->
+            <tr><td colspan="4" style="background:var(--bg-subtle);font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--fg-faint);padding:6px 10px">A · LULC de partida (año base ~2021)</td></tr>
+            <tr>
+              <td class="mono" style="font-size:11px">SIGMA cobertura manglar<br><span style="color:var(--fg-faint)">105+85+368 pol.</span></td>
+              <td style="font-size:12px">Extensión y clase inicial de cada polígono manglar (C1/C2/C3). Base geométrica de todos los LULC futuros.</td>
+              <td><span class="s-ok">✅ en mano</span></td>
+              <td style="font-size:11px">INVEMAR SIGMA Caribe insular · Descargado 27 oct · <span style="font-weight:600">✅ Reconciliado 09-11: SAI = SeaFlower, ≈ 132 ha reales (126 ha era solo la clase Manglar; 210 ha = sectores)</span></td>
+            </tr>
+            <tr>
+              <td class="mono" style="font-size:11px">Sectores INVEMAR Ar1–Ar30<br><span style="color:var(--fg-faint)">30 sectores</span></td>
+              <td style="font-size:12px">Delimita las unidades de proyección — la tasa de pérdida y la intervención se aplican sector a sector, no a toda la isla por igual.</td>
+              <td><span class="s-ok">✅ en mano</span></td>
+              <td style="font-size:11px">INVEMAR SIGMA Zonificación · 9 sectores priorizados Alta/Media/Baja</td>
+            </tr>
+            <tr>
+              <td class="mono" style="font-size:11px">LULC SAI completo (C1–C6)<br><span style="color:var(--fg-faint)">884 pol. CLIMARES20</span></td>
+              <td style="font-size:12px">Clases C4 (área deforestada), C5 (cuerpos agua) y C6 (infraestructura) necesarias para construir el mapa completo, no solo el manglar.</td>
+              <td><span class="s-warn">⚠ parcial — solo 2008</span></td>
+              <td style="font-size:11px">CLIMARES20 · Pedir actualización 2019–22 a INVEMAR · Mientras tanto usar Geoportal SAI como proxy</td>
+            </tr>
+
+            <!-- TASA DE TRANSICIÓN -->
+            <tr><td colspan="4" style="background:var(--bg-subtle);font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--fg-faint);padding:6px 10px">B · Tasa de transición y pérdida histórica</td></tr>
+            <tr>
+              <td class="mono" style="font-size:11px">cambio_cobertura_manglar<br><span style="color:var(--fg-faint)">242 pol. SIGMA</span></td>
+              <td style="font-size:12px">Calcula la tasa media anual C1→C2→C4 (ha/año por sector) para proyectar el Escenario Base.</td>
+              <td><span class="s-ok">✅ en mano</span></td>
+              <td style="font-size:11px">INVEMAR SIGMA Caribe insular · ráster ~10 m sin fechas; en SAI da ganancia neta (+8,4 ha), en contra de la serie 1:5.000 → no usar para la tasa; sí para localizar la pérdida y para el impacto de Iota en Providencia (−76 %). Pedir fechas y método a INVEMAR.</td>
+            </tr>
+            <tr>
+              <td class="mono" style="font-size:11px">Serie histórica multitemporal<br><span style="color:var(--fg-faint)">SHP/raster 1985–2022</span></td>
+              <td style="font-size:12px">Serie larga para calcular variabilidad interanual de la pérdida (no solo promedio). Permite detectar aceleraciones recientes.</td>
+              <td><span class="s-err">🔴 pendiente — pedir dic 26</span></td>
+              <td style="font-size:11px">INVEMAR SIGMA o CLIMARES20 · Si no disponible: calcular con Landsat en GEE (Hansen GFC como referencia)</td>
+            </tr>
+            <tr>
+              <td class="mono" style="font-size:11px">Tasa global TdR (Biomaps)<br><span style="color:var(--fg-faint)">−74,2 % desde 1985 · 149,6 ha en 2022</span></td>
+              <td style="font-size:12px">Calibración de referencia — la tasa por sector debe sumar aproximadamente este total histórico.</td>
+              <td><span class="s-ok">✅ en TdR</span></td>
+              <td style="font-size:11px">No usar como tasa ni como control: 149,6 ha es el área que queda en 2022 (no la perdida) e implica ≈580 ha en 1985, inverosímil frente a CORALINA (≈210 ha archipiélago). Solo contraste (E1 §11.4)</td>
+            </tr>
+            <tr>
+              <td class="mono" style="font-size:11px">NDVI manglar SIGMA<br><span style="color:var(--fg-faint)">capa raster</span></td>
+              <td style="font-size:12px">Indicador proxy del estado de degradación actual por polígono. Ayuda a diferenciar C1 vs C2 donde la clasificación visual es ambigua.</td>
+              <td><span class="s-ok">✅ en mano</span></td>
+              <td style="font-size:11px">INVEMAR SIGMA Caribe insular · Verificar resolución y fecha de adquisición</td>
+            </tr>
+
+            <!-- ESCENARIO INTERVENCIÓN -->
+            <tr><td colspan="4" style="background:var(--bg-subtle);font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--fg-faint);padding:6px 10px">D · Parámetros de recuperación ecológica (Escenario Intervención)</td></tr>
+            <tr>
+              <td class="mono" style="font-size:11px">Curva logística recuperación<br><span style="color:var(--fg-faint)">parámetro calibración</span></td>
+              <td style="font-size:12px">Define la velocidad C3→C1 en cada ACI. Sin esto no se puede construir el LULC de intervención a t10/20/30.</td>
+              <td><span class="s-warn">⚠ literatura Caribe</span></td>
+              <td style="font-size:11px">Ellison 2008 · Osland et al. 2014 · Spalding et al. 2014 · Calibrar con MangRes si se recibe. t½ ≈ 8–12 años.</td>
+            </tr>
+            <tr>
+              <td class="mono" style="font-size:11px">MangRes parcelas SAI<br><span style="color:var(--fg-faint)">datos de campo</span></td>
+              <td style="font-size:12px">Estado actual del dosel (altura, DAP, densidad) por sector. Permite ajustar la curva logística a condiciones locales.</td>
+              <td><span class="s-err">🔴 CRÍTICO — esperando INVEMAR</span></td>
+              <td style="font-size:11px">INVEMAR/CORALINA · Sin esto usar Simard et al. 2019 (ORNL DAAC) como proxy de altura de dosel</td>
+            </tr>
+            <tr>
+              <td class="mono" style="font-size:11px">Extensión a restaurar por ACI<br><span style="color:var(--fg-faint)">ha por sector</span></td>
+              <td style="font-size:12px">Define cuántos polígonos C4/C2 se reclasifican en cada ACI a t10/20/30. Depende del plan de restauración.</td>
+              <td><span class="s-warn">⚠ pendiente Taller 1</span></td>
+              <td style="font-size:11px">Se define en Taller 1 (ene 2027) con comunidades e INVEMAR · Usar escenario "óptimo" como placeholder</td>
+            </tr>
+            <tr>
+              <td class="mono" style="font-size:11px">Proximidades muelles / pesca<br><span style="color:var(--fg-faint)">SIGMA Caribe insular</span></td>
+              <td style="font-size:12px">Determina los polígonos excluidos de la restauración por presión socioeconómica activa (C6 no reclasificable).</td>
+              <td><span class="s-ok">✅ en mano</span></td>
+              <td style="font-size:11px">INVEMAR SIGMA · Muelles y zonas de pesca descargados · Integrar como máscara de exclusión</td>
+            </tr>
+
+            <!-- OUTPUT -->
+            <tr><td colspan="4" style="background:var(--bg-subtle);font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--fg-faint);padding:6px 10px">Output esperado — 6 rasters LULC</td></tr>
+            <tr>
+              <td class="mono" style="font-size:11px">LULC_base_t10 / t20 / t30</td>
+              <td style="font-size:12px">Entran en InVEST CV (cap 3 Natural Habitats) y en InVEST CBC (lulc_transition_matrix). Manglar C1→C2→C4 progresivamente.</td>
+              <td><span class="s-err">🔴 por construir</span></td>
+              <td style="font-size:11px">Script Python rasterio · Necesita datos A+B antes de ejecutar</td>
+            </tr>
+            <tr>
+              <td class="mono" style="font-size:11px">LULC_int_t10 / t20 / t30</td>
+              <td style="font-size:12px">Igual que base pero con C3/C1 en polígonos ACI. Misma resolución y CRS que el raster base.</td>
+              <td><span class="s-err">🔴 por construir</span></td>
+              <td style="font-size:11px">Script Python · Necesita A+B+D (curva logística + extensión ACI) · Fecha objetivo: feb 2027 post-Taller 1</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TRANSICIÓN POR CLASE -->
+    <div class="two-col" style="margin-bottom:14px">
+      <div class="card">
+        <div class="card-title">📉 Escenario Base — lógica de transición por clase</div>
+        <div class="card-sub">Tasa calculada con la serie 1:5.000 de San Andrés: 168 ha (1996) → 149 (2009) → 140 (2016) → ≈ 132 (2021)</div>
+        <table class="cv-table">
+          <thead><tr><th>Clase origen</th><th>Clase destino</th><th>Tasa ref.</th><th>Horizonte</th></tr></thead>
+          <tbody>
+            <tr><td>C1 Manglar maduro</td><td style="color:var(--warn)">C2 Degradado</td><td class="mono">−1.2 ha/año</td><td>t10/20/30</td></tr>
+            <tr><td>C2 Manglar degradado</td><td style="color:var(--err)">C4 Deforestado</td><td class="mono">−2.6 ha/año</td><td>t10/20/30</td></tr>
+            <tr><td>C4 Área deforestada</td><td style="color:var(--fg-muted)">C5/C6 (fijo)</td><td class="mono">presión urb.</td><td>t20/30</td></tr>
+            <tr><td>C3 En recuperación</td><td style="color:var(--err)">C2 (sin mantenimiento)</td><td class="mono">variable</td><td>sin interv.</td></tr>
+          </tbody>
+        </table>
+        <div style="margin-top:10px;font-size:11px;color:var(--fg-muted);padding:8px;background:var(--bg-subtle);border-radius:6px">
+          <strong>Nota:</strong> La tasa global de los TdR (Biomaps, −74,2 % desde 1985) no se usa; la cota provisional es ≈1 %/año (CORALINA 1996–2009). Por sector, usar el atributo de cambio de cobertura del SIGMA y normalizar. Las tasas por clase son estimaciones de referencia — calibrar con la serie 1:5.000 (1996–2021); la capa de cambio de 242 polígonos solo localiza dónde hubo pérdida.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">📈 Escenario Intervención — curva logística de recuperación</div>
+        <div class="card-sub">Literatura Caribe (Ellison 2008, Osland 2014). Ajustar con MangRes cuando se reciba.</div>
+        <table class="cv-table">
+          <thead><tr><th>Horizonte</th><th>Polígonos ACI</th><th>Clase asignada</th><th>Nota</th></tr></thead>
+          <tbody>
+            <tr><td>t0 (2025)</td><td>C4/C2 degradado</td><td style="color:var(--warn)">C2/C3 (inicio)</td><td style="font-size:11px">Estado inicial sin interv.</td></tr>
+            <tr><td>t10 (2035)</td><td>ACI activo</td><td style="color:var(--warn)">C3 (recuperación)</td><td style="font-size:11px">Siembra + mgt activo</td></tr>
+            <tr><td>t20 (2045)</td><td>ACI mejor respuesta</td><td style="color:var(--ok)">C1 (maduro parcial)</td><td style="font-size:11px">t½ ≈ 8–12 años</td></tr>
+            <tr><td>t30 (2055)</td><td>ACI consolidado</td><td style="color:var(--ok)">C1 maduro pleno</td><td style="font-size:11px">Rank 1 en InVEST CV</td></tr>
+          </tbody>
+        </table>
+        <div style="margin-top:10px;font-size:11px;color:var(--fg-muted);padding:8px;background:var(--bg-subtle);border-radius:6px">
+          <strong>Fuera de ACI:</strong> Mismo comportamiento que el Escenario Base degradado. La diferencia entre escenarios es espacialmente localizada en los 3 ACI seleccionados.
+        </div>
+      </div>
+    </div>
+
+    <!-- GAP CRÍTICO -->
+    <div style="padding:14px 16px;background:var(--err-soft);border:1px solid var(--err);border-radius:var(--radius-sm);display:flex;flex-direction:column;gap:6px">
+      <div style="font-size:12px;font-weight:700;color:var(--err)">🔴 Gap crítico antes de construir los LULC futuros</div>
+      <div style="font-size:12px;color:var(--fg-muted)">
+        <strong>1. ✅ Fuentes de manglar reconciliadas (09-11)</strong>: capa de partida SIGMA 2021 SeaFlower (manglar + deteriorado, ≈ 132 ha en UTM 17N); Geoportal 2016 (140,0 ha) como corte anterior. Confirmado 10-11: SeaFlower Plus = San Andrés (WorldView-3 12/12/2020 + WorldView-2 4/06/2021) y BPIN Restauración = Providencia (GeoEye 15/06/2021). Pendiente: limpiar la geometría (MultiPolygon, sin solapamientos).<br>
+        <strong>2. Pedir a INVEMAR</strong> la capa LULC 2019–22 actualizada (CLIMARES20 solo tiene 2008) para calcular la tasa de transición con coherencia temporal.<br>
+        <strong>3. Definir extensión por ACI</strong> en Taller 1 (ene 2027) — sin esto el LULC de intervención usa un placeholder que hay que reemplazar.<br>
+        <strong>Script Python</strong> disponible para construir los 6 rasters una vez resueltos los gaps 1 y 2.
+      </div>
+    </div>
+  </div>
+
+  <!-- SIGUIENTES FASES — separación explícita -->
+  <div class="next-phases-box" style="margin-top:28px">
+    <div class="next-phases-header">
+      <span style="font-size:15px">🚧</span>
+      <div>
+        <div class="next-phases-tag">Lo que viene después del Taller 1 — Fases 3-5</div>
+        <div style="font-size:11px;color:var(--fg-muted);margin-top:2px">Los 6 LULC futuros y los 8 outputs de InVEST CV son los <em>inputs</em> para estas fases. No se construyen en F2.</div>
+      </div>
+    </div>
+    <div class="next-phases-body">
+      <div class="nphase-card">
+        <div class="nphase-phase">Fase 3</div>
+        <div class="nphase-title">Modelo hidrodinámico</div>
+        <div class="nphase-desc">XBeach / ADCIRC+SWAN · Tr 10/25/50/100 años × 3 horizontes SLR × 2 escenarios → mapas de inundación</div>
+      </div>
+      <div class="nphase-card">
+        <div class="nphase-phase">Fase 4</div>
+        <div class="nphase-title">Cuantificación de daños</div>
+        <div class="nphase-desc">Curvas profundidad-daño JRC Huizinga 2017 × mapa inundación · Daños_base − Daños_int por Tr y horizonte</div>
+      </div>
+      <div class="nphase-card">
+        <div class="nphase-phase">Fase 4</div>
+        <div class="nphase-title">Carbono (InVEST CBC)</div>
+        <div class="nphase-desc">Stock C acumulado/perdido según LULC_base vs LULC_int · ΔC × precio C por horizonte</div>
+      </div>
+      <div class="nphase-card" style="grid-column:1/-1">
+        <div class="nphase-phase">Fase 5 · Síntesis ACB</div>
+        <div class="nphase-title">VPN del proyecto — fórmula de cierre</div>
+        <div class="nphase-desc" style="margin-bottom:8px">Integra los diferenciales de daños, carbono y costos en un único indicador descontado. Se corre con dos tasas de descuento en análisis de sensibilidad.</div>
+        <div class="nphase-formula">VPN = Σ [(Daños_base − Daños_int) + (ΔC × precio_C) − Costos_intervención] / (1 + r)^t</div>
+        <div style="font-size:10px;color:var(--fg-faint);margin-top:6px">r = 5% (marco IKI/GIZ) · r = 9% (DNP Res. 1092/2022) · horizonte t = 10, 20, 30 años · Tr 10/25/50/100 años</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORZAMIENTO CLIMÁTICO -->
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">🌊 Forzamiento climático compartido</div>
+      <div class="card-sub">Idéntico en ambos escenarios. Solo cambia el manglar.</div>
+      <table class="cv-table">
+        <thead><tr><th>Variable</th><th>Valores</th><th>Fuente</th></tr></thead>
+        <tbody>
+          <tr><td>SLR (SSP2-4.5 + VLM)</td><td class="mono">+7.8 / +16.7 / +25.7 cm<br><span style="font-size:10px;color:var(--fg-faint)">prueba estrés (TdR): +10/+22/+38</span></td><td>Garner et al. 2021 · Zenodo AR6 · GNSS SAN0 ✓</td></tr>
+          <tr><td>Horizontes</td><td class="mono">t=10 / t=20 / t=30 años</td><td>TdR</td></tr>
+          <tr><td>Periodos retorno</td><td class="mono">Tr 10 / 25 / 50 / 100 años</td><td>TdR + COAST-RP</td></tr>
+          <tr><td>Evento validación</td><td class="mono">Huracán Iota Cat.5 · nov 2020</td><td>IBTrACS + UNOSAT ✓ (SAI 31+221 · PRO 1100+10 pts)</td></tr>
+          <tr><td>Ciclones sintéticos</td><td class="mono">STORM dataset</td><td>Bloemendaal et al. ✓</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">🌿 Lo que cambia entre escenarios</div>
+      <div class="card-sub">Tres variables que diferencian base de intervención.</div>
+      <table class="cv-table">
+        <thead><tr><th>Variable</th><th>Base</th><th>Intervención</th></tr></thead>
+        <tbody>
+          <tr><td>LULC manglar</td><td class="mono" style="color:var(--err)">C2/C4 (dec.)</td><td class="mono" style="color:var(--ok)">C1 (rec.)</td></tr>
+          <tr><td>CV habitat rank</td><td class="mono" style="color:var(--err)">rank 3–5</td><td class="mono" style="color:var(--ok)">rank 1</td></tr>
+          <tr><td>Manning n (hidrod.)</td><td class="mono" style="color:var(--err)">bajo ≈0.02</td><td class="mono" style="color:var(--ok)">alto ≈0.12</td></tr>
+          <tr><td>Stock C (CBC)</td><td class="mono" style="color:var(--err)">decreciente</td><td class="mono" style="color:var(--ok)">320 tC/ha</td></tr>
+          <tr><td>Costos (F3)</td><td class="mono">0</td><td class="mono">CAPEX+OPEX</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════ PAGE: RUNS ════════════════════ -->
+<div id="page-runs" class="page">
+  <p class="section-label">InVEST CV · Plan de corridas</p>
+  <h1 class="page-title">8 corridas de InVEST CV</h1>
+  <p class="page-subtitle">4 cortes temporales × 2 escenarios. Sin matrices de transición (InVEST CV no las usa — eso es InVEST CBC). Cada corrida produce un raster IEC y un CSV de shore-points.</p>
+
+  <div class="runs-grid">
+    <div class="run-card run-base">
+      <div class="run-id">RUN-01</div>
+      <div class="run-title">Base · t=0 (actual)</div>
+      <div class="run-detail">LULC 2022 · SLR = 0 cm<br>Manglar actual (cifra reconciliada en act. 1.3; Biomaps 149,6 ha solo contraste · C2 dominante)</div>
+    </div>
+    <div class="run-card run-base">
+      <div class="run-id">RUN-02</div>
+      <div class="run-title">Base · t=10 años</div>
+      <div class="run-detail">LULC_base_2032 · SLR +10 cm<br>Continuación tendencia histórica pérdida</div>
+    </div>
+    <div class="run-card run-base">
+      <div class="run-id">RUN-03</div>
+      <div class="run-title">Base · t=20 años</div>
+      <div class="run-detail">LULC_base_2042 · SLR +22 cm<br>Degradación avanzada ACI</div>
+    </div>
+    <div class="run-card run-base">
+      <div class="run-id">RUN-04</div>
+      <div class="run-title">Base · t=30 años</div>
+      <div class="run-detail">LULC_base_2052 · SLR +38 cm<br>Estado final «no actuar»</div>
+    </div>
+    <div class="run-card run-int">
+      <div class="run-id">RUN-05</div>
+      <div class="run-title">Intervención · t=0</div>
+      <div class="run-detail">LULC 2022 · SLR = 0 cm<br>Igual que RUN-01 (línea base compartida)</div>
+    </div>
+    <div class="run-card run-int">
+      <div class="run-id">RUN-06</div>
+      <div class="run-title">Intervención · t=10</div>
+      <div class="run-detail">LULC_int_2032 · SLR +10 cm<br>Restauración incipiente (curva logística año 5–10)</div>
+    </div>
+    <div class="run-card run-int">
+      <div class="run-id">RUN-07</div>
+      <div class="run-title">Intervención · t=20</div>
+      <div class="run-detail">LULC_int_2042 · SLR +22 cm<br>Manglar en consolidación (50–70% cobertura)</div>
+    </div>
+    <div class="run-card run-int">
+      <div class="run-id">RUN-08</div>
+      <div class="run-title">Intervención · t=30</div>
+      <div class="run-detail">LULC_int_2052 · SLR +38 cm<br>Manglar maduro restaurado (C1, rank 1)</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">🔄 Qué cambia entre corridas del mismo escenario</div>
+      <div class="card-sub">Tres inputs se actualizan en cada corte temporal.</div>
+      <ul class="crit-list" style="gap:6px">
+        <li class="crit-item"><div class="crit-dot" style="background:var(--cv)"></div><div><strong>LULC raster:</strong> 1 raster por corte temporal (GeoTIFF, misma resolución y CRS)<div class="crit-src">Generado con Python/QGIS a partir de la curva logística</div></div></li>
+        <li class="crit-item"><div class="crit-dot" style="background:var(--cv)"></div><div><strong>Sea Level Change:</strong> valor escalar en el CSV de shore-points<div class="crit-src">+0 / +10 / +22 / +38 cm según horizonte (NASA AR6)</div></div></li>
+        <li class="crit-item"><div class="crit-dot" style="background:var(--cv)"></div><div><strong>Natural Habitats rank:</strong> cambia si el LULC cambia clase de manglar<div class="crit-src">Tabla habitat_protection_ranking.csv se actualiza por corte</div></div></li>
+        <li class="crit-item"><div class="crit-dot" style="background:var(--cv)"></div><div><strong>Lo que NO cambia:</strong> geomorfología, batimetría, oleaje, viento, MDT<div class="crit-src">Inputs físicos estáticos en todas las corridas</div></div></li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">📦 InVEST CV vs. InVEST CBC — diferencia clave</div>
+      <div class="card-sub">Confusión frecuente: cada modelo usa inputs distintos.</div>
+      <table class="cv-table">
+        <thead><tr><th>Modelo</th><th>Inputs</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>InVEST CV</strong></td>
+            <td>8 capas biofísicas<br>Shore-points<br>Raster LULC</td>
+            <td>Índice Exposición<br>Costera (IEC)<br>por shore-point</td>
+          </tr>
+          <tr>
+            <td><strong>InVEST CBC</strong></td>
+            <td>carbon_pool_initial<br>lulc_transition_matrix<br>carbon_pool_transient</td>
+            <td>Stock C acumulado<br>Δ carbono<br>por píxel</td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="margin-top:8px;font-size:11.5px;color:var(--fg-muted)">InVEST CV <strong>no usa</strong> matrices de transición. CBC sí las necesita (3 tablas CSV). Ambos comparten el raster LULC como input.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════ PAGE: TIMELINE ════════════════════ -->
+<div id="page-timeline" class="page">
+  <p class="section-label">Datos críticos para AHP + InVEST CV</p>
+  <h1 class="page-title">Línea de tiempo de datos</h1>
+  <p class="page-subtitle">Lo que necesitas para arrancar F2 y no bloquear el Taller 1. Marcados en azul: INVEMAR fuente directa. En rojo: crítico sin confirmar.</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-date">Nov 2026<br><span style="font-size:10px;color:var(--fg-faint)">16 datos · 13 críticos</span></div>
+      <div class="tl-line"><div class="tl-dot" style="background:var(--err)"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">🔴 Bloque de arranque — sin estos no hay AHP ni CV</div>
+        <ul class="tl-list">
+          <li><span class="tl-inv">INVEMAR:</span> Cobertura manglar SIGMA 1:5.000 (1.04)</li>
+          <li><span class="tl-inv">INVEMAR:</span> Parcelas MangRes — estado, especie, estructura (1.05) <span class="tl-crit">MÁS CRÍTICO</span></li>
+          <li><span class="tl-inv">INVEMAR:</span> Modelo priorización + pesos (1.09) — confirmar cobertura SAI</li>
+          <li>NASA AR6 Sea Level Tool — SLR projections (1.10) ✓ disponible</li>
+          <li>Gobernación UrbanoSAI — huellas predios (1.18) ✓ sin avalúos</li>
+          <li><span class="tl-crit">⚠ Gobernación InfraestructuraSAI (1.19) — capas vacías al 19-10</span></li>
+          <li><span class="tl-crit">⚠ Batimetría nearshore DIMAR-CIOH (4.01) — solicitud formal urgente</span></li>
+          <li>Cartas náuticas CIOH 201 San Andrés (4.02) — para CV Coastal Slope</li>
+          <li><span class="tl-crit">⚠ MDT costero IGAC 2025 (4.04) — DEM 30m insuficiente XBeach</span></li>
+          <li>Simard et al. 2019 ORNL DAAC — biomasa carbono (5.04) si no llega MangRes</li>
+          <li>Sanderman et al. 2018 — carbono suelo (5.05) como contraste</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date">Dic 2026<br><span style="font-size:10px;color:var(--fg-faint)">15 datos · 3 críticos</span></div>
+      <div class="tl-line"><div class="tl-dot" style="background:var(--warn)"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">🟡 Completar F1 y preparar F2 para el taller</div>
+        <ul class="tl-list">
+          <li><span class="tl-inv">INVEMAR CLIMARES20:</span> LULC 2–3 cortes temporales (1.07) — IDs 1-4</li>
+          <li><span class="tl-inv">INVEMAR / CORALINA:</span> Arrecifes, pastos marinos (1.08) — capa natural habitats CV</li>
+          <li><span class="tl-inv">INVEMAR CLIMARES20:</span> Amenaza inundación + geomorfología (1.13) — capa relief + geomorph CV</li>
+          <li><span class="tl-inv">INVEMAR CLIMARES20:</span> Proyecciones temp/precipitación (1.11)</li>
+          <li>DANE CNPV 2018 — población por manzana (1.16)</li>
+          <li>✅ UNOSAT SAI/Providencia — daños Iota 2020 (1.20) · descargado 09-11 · puntos</li>
+          <li><span class="tl-inv">INVEMAR:</span> daño a manglar post-Iota (parcelas 2021 SAI + Cangrejo Negro PRO) y cotas de inundación observadas — mejora de 1.20</li>
+          <li>COAST-RP — niveles extremos Tr 10/25/50/100 (4.07) ✓ 4TU disponible</li>
+          <li>ERA5 / Copernicus Marine — oleaje (4.08) para wave exposure CV</li>
+          <li>IOC / TPXO — mareas astronómicas (4.06)</li>
+          <li>Gobernación UrbanoSAI/aval. + solicitud catastral (5.01)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date">Ene 2027<br><span style="font-size:10px;color:var(--fg-faint)">Taller 1</span></div>
+      <div class="tl-line"><div class="tl-dot" style="background:var(--ok)"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">✅ Taller de validación ACI (12–15 ene 2027 objetivo)</div>
+        <ul class="tl-list">
+          <li>Presentar mapa AHP-WLC preliminar con capas disponibles</li>
+          <li>Validar pesos D1/D2/D3 con actores (CORALINA, comunidades, turismo)</li>
+          <li>Seleccionar 3 ACI → acordar polígonos en el mapa</li>
+          <li>Confirmar participación INVEMAR en el taller</li>
+          <li><span class="tl-inv">INVEMAR:</span> Presiones sobre el manglar (2.02) para completar F2</li>
+          <li>Cartografía integrada activos (2.01) depende de que 1.16+1.18+1.19 estén</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date">Feb–Jun 2027<br><span style="font-size:10px;color:var(--fg-faint)">F3, F4, F5</span></div>
+      <div class="tl-line"><div class="tl-dot" style="background:var(--fg-faint)"></div></div>
+      <div class="tl-body">
+        <div class="tl-title">⚙ Fases aguas abajo — dependen de que F1/F2 estén cerradas</div>
+        <ul class="tl-list">
+          <li>STORM dataset ciclones sintéticos (4.09) — para periodos retorno 50/100 años</li>
+          <li>SECOP II + Mintrabajo — costos locales restauración (3.01, 3.02)</li>
+          <li>JRC Huizinga 2017 — funciones daño Sudamérica (5.02)</li>
+          <li>Verra VM0033 — prefactibilidad carbono azul (5.06)</li>
+          <li>Ecosystem Marketplace + World Bank — precio carbono voluntario (5.07)</li>
+          <li>DNP Res. 1092/2022 — tasa descuento 9% vs 5% IKI (6.01) — acordar con FORLIANCE</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════ PAGE: CARTOGRAFÍA MANGLAR ════════════════════ -->
+<div id="page-carto" class="page">
+  <p class="section-label">Línea base F1 · insumo de F2</p>
+  <h1 class="page-title">Cartografía del manglar: qué tenemos y qué falta</h1>
+  <p class="page-subtitle">Todas las fuentes de cobertura de manglar del Archipiélago reunidas hasta el 10-11-2026: origen, fecha de imagen, sensor, escala, clases, área por isla y uso en el ACB. Áreas de INVEMAR recalculadas en UTM 17N.</p>
+
+  <div class="kpi-row">
+    <div class="kpi-card" style="border-left:3px solid var(--ok)"><div class="kpi-value" style="color:var(--ok)">≈ 132 ha</div><div class="kpi-label">San Andrés · línea base 2021</div><div class="kpi-sub">SIGMA SeaFlower Plus, 1:5.000</div></div>
+    <div class="kpi-card" style="border-left:3px solid var(--err)"><div class="kpi-value" style="color:var(--err)">≈ 14 ha</div><div class="kpi-label">Providencia · solo manglar vivo 2021</div><div class="kpi-sub">SIGMA BPIN; sin dañado ni muerto</div></div>
+    <div class="kpi-card" style="border-left:3px solid var(--accent)"><div class="kpi-value" style="color:var(--accent)">6 fechas</div><div class="kpi-label">Serie de San Andrés</div><div class="kpi-sub">1996 · c. 2007 · 2013–16 · 2020 · 2021 · 2024</div></div>
+    <div class="kpi-card" style="border-left:3px solid var(--warn)"><div class="kpi-value" style="color:var(--warn)">≈ −0,8 a −1 %/año</div><div class="kpi-label">Pérdida en San Andrés</div><div class="kpi-sub">Serie 1:5.000; sensibilidad ±20 %</div></div>
+  </div>
+
+  <div class="card" style="margin-bottom:24px">
+    <div class="card-title">🗺 Serie espacio-temporal por isla</div>
+    <div class="carto-legend"><span><i style="background:#6b7b76"></i>CORALINA</span><span><i style="background:var(--ok)"></i>INVEMAR o conjunto</span><span><i style="background:var(--accent)"></i>Universidad o global</span></div>
+    <svg class="carto-svg" viewBox="0 0 1100 250" role="img" aria-label="Serie temporal de cobertura de manglar por isla, 1996-2024"><line class="axis" x1="200" y1="80" x2="1080" y2="80"/><line class="axis" x1="200" y1="175" x2="1080" y2="175"/><text class="row-lbl" x="0" y="85">San Andrés</text><text class="row-lbl" x="0" y="172">Providencia y</text><text class="row-lbl" x="0" y="188">Santa Catalina</text><line class="axis" x1="214.2" y1="222" x2="214.2" y2="228"/><text class="tick" x="214.2" y="243" text-anchor="middle">1995</text><line class="axis" x1="356.1" y1="222" x2="356.1" y2="228"/><text class="tick" x="356.1" y="243" text-anchor="middle">2000</text><line class="axis" x1="498.1" y1="222" x2="498.1" y2="228"/><text class="tick" x="498.1" y="243" text-anchor="middle">2005</text><line class="axis" x1="640.0" y1="222" x2="640.0" y2="228"/><text class="tick" x="640.0" y="243" text-anchor="middle">2010</text><line class="axis" x1="781.9" y1="222" x2="781.9" y2="228"/><text class="tick" x="781.9" y="243" text-anchor="middle">2015</text><line class="axis" x1="923.9" y1="222" x2="923.9" y2="228"/><text class="tick" x="923.9" y="243" text-anchor="middle">2020</text><line class="axis" x1="1065.8" y1="222" x2="1065.8" y2="228"/><text class="tick" x="1065.8" y="243" text-anchor="middle">2025</text><line class="iota" x1="948.6" y1="30" x2="948.6" y2="224"/><text class="iota-t" x="942.6" y="26" text-anchor="end">Iota · nov 2020</text><rect class="gap" x="600.3" y="161" width="300.9" height="28" rx="6"/><text class="gap-t" x="750.7" y="179" text-anchor="middle">sin cartografía 1:5.000 entre c. 2007 e Iota</text><circle class="m-cor" cx="242.6" cy="80" r="8"/><text class="val" x="242.6" y="64" text-anchor="middle">168 ha</text><text class="sub" x="242.6" y="50" text-anchor="middle">CORALINA</text><circle class="m-inv" cx="569.0" cy="80" r="8"/><text class="val" x="569.0" y="64" text-anchor="middle">≈ 148 ha</text><text class="sub" x="569.0" y="50" text-anchor="middle">ULTRACAM</text><rect class="m-inv" x="725.2" y="73" width="85.2" height="14" rx="4"/><text class="val" x="767.7" y="64" text-anchor="middle">140 ha</text><text class="sub" x="767.7" y="50" text-anchor="middle">WorldView-2</text><circle class="m-glo" cx="932.4" cy="80" r="8"/><text class="val" x="919.4" y="84" text-anchor="end">140</text><circle class="m-inv" cx="959.4" cy="80" r="8"/><text class="val" x="959.4" y="64" text-anchor="middle">≈ 132 ha</text><text class="sub" x="959.4" y="50" text-anchor="middle">SIGMA</text><circle class="m-glo" cx="1037.4" cy="80" r="8"/><text class="val" x="1037.4" y="64" text-anchor="middle">151 ha</text><text class="sub" x="1037.4" y="50" text-anchor="middle">GMW</text><circle class="m-cor" cx="242.6" cy="175" r="8"/><text class="val" x="242.6" y="159" text-anchor="middle">54 ha</text><text class="sub" x="242.6" y="145" text-anchor="middle">CORALINA</text><circle class="m-inv" cx="569.0" cy="175" r="8"/><text class="val" x="569.0" y="159" text-anchor="middle">60 ha</text><text class="sub" x="569.0" y="145" text-anchor="middle">ULTRACAM</text><circle class="m-glo" cx="932.4" cy="175" r="8"/><text class="val" x="919.4" y="179" text-anchor="end">47</text><circle class="m-inv" cx="965.0" cy="175" r="8"/><text class="val" x="965.0" y="159" text-anchor="middle">≈ 14 ha vivo</text><text class="sub" x="965.0" y="145" text-anchor="middle">SIGMA BPIN</text></svg>
+    <p class="carto-note">Sentinel-2 (Univ. Nacional): 140 ha en SAI y 47 ha en Providencia en abril de 2020; 90 ha en SAI en 2021, cifra que sobrestima la pérdida. GMW 2024 es global y solo sirve como tendencia.</p>
+  </div>
+
+  <h2 class="carto-h2">Inventario completo de fuentes</h2>
+  <p class="carto-p">Una fila por fuente, de la más antigua a la más reciente. Área en hectáreas; «P / G / E» = pérdida, ganancia, estable.</p>
+  <div class="carto-scroll"><table class="cv-table">
+    <thead><tr><th>#</th><th>Capa o fuente</th><th>Institución y autoría</th><th>Fecha de imagen</th><th>Sensor y método</th><th>Escala</th><th>Clases y atributos</th><th>Área SAI (ha)</th><th>Área PRO+SC (ha)</th><th>Limitaciones</th><th>Acceso</th><th>Uso en el ACB</th></tr></thead>
+    <tbody><tr><td class='num'>1</td><td><b>Coberturas de manglar 1996</b></td><td>CORALINA (2010), García Escobar (ed.); tablas de Mitchell Chui, Machacón, García y Lasso</td><td>1996</td><td>No descrito en el documento</td><td>—</td><td>Manglar por sitio (7 sitios SAI, 7 PRO+SC)</td><td class='num' style='min-width:120px'>167,99 (suma de sitios)</td><td class='num' style='min-width:110px'>53,68</td><td>Sin capa: solo tablas (pp. 6 y 8) y mapas en PDF</td><td>Observatorio CORALINA (PDF abierto)</td><td>Tasa histórica. Parte del cambio 1996–2009 es mejora de resolución</td></tr><tr><td class='num'>2</td><td><b>Inventario y zonificación de manglar 2009</b></td><td>CORALINA–INVEMAR (2009); Atlas Seaflower 2012 (Machacón, Lasso y Ward)</td><td>c. 2007 (vuelo ULTRACAM del IGAC)</td><td>Interpretación sobre ortofoto Vexcel ULTRACAM 2007; SIG CORALINA 2009–2010</td><td>1:10.000 (zonificación)</td><td>19 unidades; preservación, recuperación, uso sostenible; estado de conservación</td><td class='num' style='min-width:120px'>149,44 (CORALINA 2010) / 147,7 (Atlas)</td><td class='num' style='min-width:110px'>59,70</td><td>Diferencias texto–tabla en el Atlas; capa del inventario no disponible</td><td>Zonificación en SIGMA/ZONIFICACION; capa del inventario a pedir</td><td>Línea base c. 2007; techo de restauración (≈ 22 ha en recuperación)</td></tr><tr><td class='num'>3</td><td><b>Coberturas de la tierra CLIMARES20</b></td><td>INVEMAR–CORALINA, Convenio 003/2013</td><td>Ortofoto ULTRACAM IGAC (2007/2008, ¿mismo vuelo que 2?)</td><td>Corine Land Cover adaptado, interpretación visual</td><td>1:5.000</td><td>884 polígonos en SAI; leyenda Corine</td><td class='num' style='min-width:120px'>Por calcular</td><td class='num' style='min-width:110px'>Por calcular</td><td>Una sola fecha; manglar sin tabular</td><td>CLIMARES20_TM_Caso_SAI_Providencia (ids 1–4)</td><td>LULC de partida (clases no manglar C4–C6)</td></tr><tr><td class='num'>4</td><td><b>Sectores de manglar Ar1–Ar30</b></td><td>Portafolio de restauración INVEMAR–MADS (Gómez-Cubillos et al., 2015)</td><td>Cartografía c. 2007–2009</td><td>Unidades de manejo; priorización con estado, potencial de restauración y servicios</td><td>Nacional</td><td>30 sectores; 9 evaluados y priorizados (Alta/Media/Baja)</td><td class='num' style='min-width:120px'>209,72 = archipiélago (no SAI)</td><td class='num' style='min-width:110px'>—</td><td>area_ha_ no cuadra con el área calculada; 21 de 30 sectores sin evaluar; anterior a Iota</td><td>SIGMA (zonificación); informe técnico 2014 a pedir</td><td>Unidades para proyectar la tasa; antecedente de priorización</td></tr><tr><td class='num'>5</td><td><b>Manglar 2016 (Geoportal SAI, AmbientalSAI/11)</b></td><td>INVEMAR–CORALINA; intérprete S. Rifaterra (Labsis)</td><td>2013–2016</td><td>WorldView-2, interpretación visual; verificación de especie en campo donde fue posible</td><td>1:5.000</td><td>Manglar (108), deteriorado (1), otra cobertura (13), agua (6); especie; incertidumbre (43 baja, 71 media, 14 alta); 16 subsectores</td><td class='num' style='min-width:120px'>140,0 (AREA_HAS) · manglar 140,0 + deteriorado 0,1</td><td class='num' style='min-width:110px'>— (solo SAI)</td><td>AREA_HA = 146,7 calculado en UTM 19N (×1,048); ficha con errores: Providencia en el resumen, «Málaga», CRS contradictorio</td><td>Geoportal SAI (REST)</td><td>Corte anterior de la serie; especies por polígono</td></tr><tr><td class='num'>6</td><td><b>Cambio de coberturas Eta/Iota</b></td><td>Álvarez-Echeverry et al. (2025), DYNA 92(235), Universidad Nacional</td><td>abr–may 2020 y abr–may 2021</td><td>Sentinel-2, SVM con 9 clases; Kappa 0,89 / 0,93; validación con puntos de imagen, sin campo</td><td>10–20 m</td><td>Manglar, áreas degradadas y 7 clases más</td><td class='num' style='min-width:120px'>140,33 → 89,57* (−56,7 %); 21,3 ha degradadas</td><td class='num' style='min-width:110px'>46,6 → 0*</td><td>*Sobrestima la pérdida: manglar defoliado clasificado como otra cobertura</td><td>Artículo abierto; clasificaciones a pedir</td><td>Único punto pre-Iota en ambas islas; localizar el daño</td></tr><tr><td class='num'>7</td><td><b>SIGMA 2021 · SeaFlower Plus</b></td><td>INVEMAR · Minambiente (MANGLARES_COLOMBIA/0 = SIGMA_Insular/0)</td><td>12/12/2020 y 4/06/2021 (el campo FECHA_IMAG dice «2019–2020»)</td><td>WorldView-3 + WorldView-2, interpretación visual</td><td>1:5.000</td><td>Manglar (105 pol.) y manglar deteriorado (85 pol.)</td><td class='num' style='min-width:120px'>≈ 132,2 (126,39 + 8,54 en CTM12 ÷ 1,021)</td><td class='num' style='min-width:110px'>—</td><td>AREA_HA calculado en CTM12 (+2,1 % en la isla)</td><td>SIGMA (REST, descargado)</td><td>Línea base LULC t0 de San Andrés</td></tr><tr><td class='num'>8</td><td><b>SIGMA 2021 · BPIN Restauración</b></td><td>INVEMAR · Minambiente</td><td>15/06/2021</td><td>GeoEye, interpretación visual</td><td>1:5.000</td><td>Solo «manglar vivo» (368 pol., media 0,04 ha)</td><td class='num' style='min-width:120px'>—</td><td class='num' style='min-width:110px'>≈ 13,8 (14,02 ÷ 1,019)</td><td>No mapea manglar dañado ni muerto</td><td>SIGMA (REST, descargado)</td><td>Manglar vivo post-Iota en Providencia; t0 incompleto</td></tr><tr><td class='num'>9</td><td><b>Cambio de cobertura (SIGMA_Caribe_insular/12)</b></td><td>INVEMAR; criterio del modelo de priorización</td><td>Sin fechas ni metadatos (fecha 2 posterior a Iota)</td><td>Ráster de ~10 m vectorizado (píxel ≈ 99 m²)</td><td>~10 m</td><td>Pérdida, estable, ganancia; prior_rest y calificaci (puntuación del criterio)</td><td class='num' style='min-width:120px'>P 13,7 · G 22,1 · E 140,0 (153,7 → 162,0)</td><td class='num' style='min-width:110px'>P 31,2 · G 4,1 · E 4,6 (35,7 → 8,6)</td><td>Islas separadas por tamaño de píxel (inferencia); en SAI da ganancia neta, en contra de la serie 1:5.000</td><td>SIGMA (REST, descargado)</td><td>Dónde se pierde; impacto de Iota en Providencia (−76 %)</td></tr><tr><td class='num'>10</td><td><b>Modelo de priorización de restauración</b></td><td>INVEMAR (Hub «Modelos priorización restauración manglar»); ¿Conv. 924/2023?</td><td>Base: SIGMA 2021</td><td>Multicriterio con ~22 criterios biofísicos y socioambientales y criterio experto</td><td>1:5.000 (insular)</td><td>Muy Alta, Alta, Moderada, Baja</td><td class='num' style='min-width:120px'>—</td><td class='num' style='min-width:110px'>—</td><td>En el servicio están los criterios, no el resultado final ni los pesos</td><td>GDB en el Hub (descargar); servicio SIGMA_Caribe_insular 0–25</td><td>Referencia y contraste para el AHP (D2)</td></tr><tr><td class='num'>11</td><td><b>Stock de carbono SAI y PROV (capas 24 y 25)</b></td><td>INVEMAR · Minambiente</td><td>Base SIGMA 2021</td><td>Carbono orgánico total por polígono</td><td>1:5.000</td><td>Clases 0–317, 317–539 y 539–760 Mg/ha</td><td class='num' style='min-width:120px'>Por polígono</td><td class='num' style='min-width:110px'>Por polígono</td><td>Origen por confirmar (¿parcelas de carbono azul 2021–2022?)</td><td>SIGMA (REST)</td><td>Stocks por clase en InVEST CBC</td></tr><tr><td class='num'>12</td><td><b>Global Mangrove Watch 2024</b></td><td>GMW (citado por Echeverry Hernández et al., 2025)</td><td>2024</td><td>Satélite, global</td><td>Resolución media</td><td>Manglar</td><td class='num' style='min-width:120px'>151</td><td class='num' style='min-width:110px'>—</td><td>Resolución gruesa para islas pequeñas</td><td>Abierto</td><td>Solo tendencia</td></tr><tr><td class='num'>13</td><td><b>BIOMAPS / MapBiomas</b></td><td>MapBiomas</td><td>1985–2022</td><td>Landsat, global</td><td>30 m</td><td>Manglar</td><td class='num' style='min-width:120px'>149,6 (departamento, 2022)</td><td class='num' style='min-width:110px'>—</td><td>El −74,2 % desde 1985 implica ≈ 580 ha en 1985: inverosímil</td><td>Abierto</td><td>Descartado (E1 §11.4)</td></tr></tbody>
+  </table></div>
+
+  <div class="two-col" style="margin-top:24px">
+    <div class="card">
+      <div class="card-title">📈 Serie consolidada · San Andrés</div>
+      <div class="card-sub">Tasas como cambio logarítmico anual entre puntos a 1:5.000. Las cifras de CORALINA no están corregidas por proyección (desconocida).</div>
+      <table class="cv-table"><thead><tr><th>Fecha</th><th>Área (ha)</th><th>Fuente</th><th>Tasa</th><th>Nota</th></tr></thead><tbody><tr><td class='num'>1996</td><td class='num'><b>168,0</b></td><td>CORALINA 2010 (suma de sitios)</td><td class='num'>—</td><td>Imagen y método desconocidos</td></tr><tr><td class='num'>c. 2007</td><td class='num'><b>≈ 148 (147,7–149,4)</b></td><td>Inventario CORALINA–INVEMAR, ULTRACAM</td><td class='num'>-1.1 %/año (1996–2007)</td><td>Parte del cambio es mejora de resolución</td></tr><tr><td class='num'>2013–2016</td><td class='num'><b>140,0</b></td><td>INVEMAR–CORALINA, WorldView-2</td><td class='num'>-0.8 %/año (2007–2014,5)</td><td>1:5.000 visual</td></tr><tr><td class='num'>abr 2020</td><td class='num'><b>140,3</b></td><td>Sentinel-2 (UNAL)</td><td class='num'>—</td><td>Otro método (10–20 m); solo contraste</td></tr><tr><td class='num'>dic 2020 – jun 2021</td><td class='num'><b>≈ 132,2</b></td><td>SIGMA SeaFlower Plus</td><td class='num'>-0.9 %/año (2014,5–2021,1)</td><td>Incluye el efecto de Iota</td></tr><tr><td class='num'>2024</td><td class='num'><b>151</b></td><td>GMW</td><td class='num'>—</td><td>Global; no comparable en área</td></tr></tbody></table>
+    </div>
+    <div class="card">
+      <div class="card-title">📉 Serie consolidada · Providencia y Santa Catalina</div>
+      <div class="card-sub">La isla con el mayor hueco: no hay cartografía a 1:5.000 entre c. 2007 e Iota, y en 2021 solo está mapeado lo vivo.</div>
+      <table class="cv-table"><thead><tr><th>Fecha</th><th>Área (ha)</th><th>Fuente</th><th>Nota</th></tr></thead><tbody><tr><td class='num'>1996</td><td class='num'><b>53,7</b></td><td>CORALINA 2010</td><td>Imagen y método desconocidos</td></tr><tr><td class='num'>c. 2007</td><td class='num'><b>59,7</b></td><td>Inventario CORALINA–INVEMAR</td><td>+10 % frente a 1996, en parte por resolución</td></tr><tr><td class='num'>2013–2019</td><td class='num'><b>—</b></td><td>Sin cartografía 1:5.000</td><td>Hueco crítico</td></tr><tr><td class='num'>abr 2020</td><td class='num'><b>46,6</b></td><td>Sentinel-2 (UNAL)</td><td>Único dato pre-Iota; otro método</td></tr><tr><td class='num'>2021</td><td class='num'><b>≈ 13,8 vivo · 8,6 (capa de cambio) · 0* (UNAL)</b></td><td>SIGMA BPIN · INVEMAR · UNAL</td><td>Tres métodos, tres cifras: falta el manglar dañado y muerto</td></tr></tbody></table>
+    </div>
+  </div>
+
+  <h2 class="carto-h2">Cómo se resolvieron las discrepancias</h2>
+  <div class="carto-callout" style="--dc:var(--ok);--dc-soft:var(--ok-soft)">
+    <b>126 ha</b> era solo la clase «Manglar» de SeaFlower; con «deteriorado» y corregido a UTM 17N, San Andrés tiene ≈ 132 ha en 2021.
+    <b>≈ 210 ha</b> son los 30 sectores Ar1–Ar30 del Portafolio 2015 (209,72 ha) y el inventario 2009 del Atlas (207,5 ha): archipiélago completo, no manglar de San Andrés.
+    <b>140 ha frente a 146,7 ha</b> en la capa de 2016: el segundo valor está calculado en UTM 19N. Islas confirmadas el 10-11: SeaFlower Plus = San Andrés (WorldView-3/2) y BPIN = Providencia (GeoEye).
+  </div>
+  <div class="card" style="margin-bottom:24px">
+    <div class="card-title">📐 Distorsión de área por proyección en el Archipiélago</div>
+    <table class="cv-table"><thead><tr><th>Proyección</th><th>Factor SAI</th><th>Factor PRO</th><th>Efecto</th><th>Dónde aparece</th></tr></thead><tbody><tr><td><b>UTM 17N (EPSG:32617)</b></td><td class='num'>×0,999</td><td class='num'>×0,999</td><td>Recomendada para áreas y stocks</td><td>—</td></tr><tr><td><b>MAGNA-SIRGAS Origen Nacional / CTM12 (EPSG:9377)</b></td><td class='num'>×1,021</td><td class='num'>×1,019</td><td>Infla +2 %</td><td>AREA_HA de SIGMA; SHAPE__Area de los servicios Hosted</td></tr><tr><td><b>WGS 84 / UTM 19N (EPSG:32619)</b></td><td class='num'>×1,048</td><td class='num'>×1,045</td><td>Infla +5 %</td><td>AREA_HA de la capa 2016 (Geoportal)</td></tr></tbody></table>
+  </div>
+
+  <h2 class="carto-h2">Lo que falta para avanzar con pie seguro</h2>
+  <p class="carto-p">Ordenado por prioridad. «Alta» = afecta la línea base o el LULC de partida de la Fase 2; «Media» = afecta la tasa o la tendencia; «Baja» = trazabilidad.</p>
+  <div class="carto-scroll"><table class="cv-table" style="min-width:900px">
+    <thead><tr><th>Hueco</th><th>Por qué importa</th><th>A quién</th><th>Prioridad</th><th>Estado</th></tr></thead>
+    <tbody><tr><td><b>Manglar dañado y muerto en Providencia 2021 (clases de BPIN o evaluación post-Iota)</b></td><td>LULC t0 y fracción perturbada de CBC; sin esto Providencia queda incompleta</td><td>INVEMAR</td><td class='prio-a'>Alta</td><td>Pedido en el correo del 10-11 (parcelas)</td></tr><tr><td><b>Providencia antes de Iota a 1:5.000 (2013–2020)</b></td><td>Línea base pre-Iota y magnitud del daño</td><td>INVEMAR · CORALINA</td><td class='prio-a'>Alta</td><td>Pendiente de pedir</td></tr><tr><td><b>Resultado final y pesos del modelo de priorización</b></td><td>Referencia para los pesos del AHP y contraste del mapa preliminar</td><td>INVEMAR (GDB del Hub)</td><td class='prio-a'>Alta</td><td>Descargar del Hub; pedir método y pesos si no vienen</td></tr><tr><td><b>Criterio de clases «deteriorado» y «vivo»</b></td><td>Llevar SIGMA 2021 a las 6 clases LULC comunes a los modelos</td><td>INVEMAR</td><td class='prio-a'>Alta</td><td>Pendiente</td></tr><tr><td><b>Origen de los stocks de carbono por polígono</b></td><td>Usarlos en InVEST CBC con trazabilidad</td><td>INVEMAR</td><td class='prio-a'>Alta</td><td>Pendiente</td></tr><tr><td><b>Zonificación de manglar vigente tras la Res. 1263/2018</b></td><td>Techo de la intervención (≈ 22 ha en recuperación en 2009) y D3</td><td>CORALINA</td><td class='prio-a'>Alta</td><td>Reunión solicitada</td></tr><tr><td><b>Fechas, sensor y método de la capa de cambio</b></td><td>Interpretar la ganancia neta en SAI y usarla para localizar pérdida</td><td>INVEMAR</td><td class='prio-m'>Media</td><td>Pendiente</td></tr><tr><td><b>Capa del inventario 2009 y método de 1996</b></td><td>Tasa del Escenario Base con métodos comparables</td><td>CORALINA · INVEMAR</td><td class='prio-m'>Media</td><td>Pendiente</td></tr><tr><td><b>Corte reciente 2023–2025</b></td><td>Tendencia post-Iota (recuperación en Providencia, presión urbana en SAI)</td><td>Propio (Sentinel-2) · INVEMAR</td><td class='prio-m'>Media</td><td>Por planificar</td></tr><tr><td><b>Series de parcelas CARICOMP y de crecimiento desde 1998</b></td><td>Curva de recuperación y madurez por sitio</td><td>CORALINA</td><td class='prio-m'>Media</td><td>Reunión solicitada</td></tr><tr><td><b>Confirmar vuelo ULTRACAM 2007 o 2008</b></td><td>Fecha exacta del punto c. 2007</td><td>IGAC · INVEMAR</td><td class='prio-b'>Baja</td><td>Pendiente</td></tr><tr><td><b>Corrección de la ficha de la capa 2016</b></td><td>Trazabilidad (CRS, extensión, resumen)</td><td>INVEMAR</td><td class='prio-b'>Baja</td><td>Pendiente</td></tr><tr><td><b>Clasificaciones de Álvarez-Echeverry et al.</b></td><td>Contraste del daño por Iota</td><td>Universidad Nacional</td><td class='prio-b'>Baja</td><td>Pendiente</td></tr></tbody>
+  </table></div>
+
+  <h2 class="carto-h2">Decisiones de trabajo adoptadas</h2>
+  <div class="card" style="margin-bottom:24px">
+    <ul class="tl-list">
+      <li><b>Línea base de San Andrés:</b> SIGMA 2021 SeaFlower Plus (manglar + deteriorado), recalculada en UTM 17N.</li>
+      <li><b>Tasa del Escenario Base:</b> serie 1:5.000 (c. 2007 → 2016 → 2021) con 1996 como contraste; sensibilidad de ±20 %.</li>
+      <li><b>Capa de cambio de INVEMAR:</b> solo para localizar dónde se pierde y para el impacto de Iota en Providencia; no para áreas absolutas.</li>
+      <li><b>Sentinel-2 (UNAL):</b> único punto pre-Iota en Providencia; sus cifras de 2021 no se usan como pérdida.</li>
+      <li><b>BIOMAPS:</b> descartado. <b>GMW:</b> solo tendencia.</li>
+      <li><b>Providencia:</b> se trata aparte; su línea base queda abierta hasta tener el manglar dañado y muerto de 2021.</li>
+      <li><b>Áreas y stocks:</b> siempre en UTM 17N.</li>
+    </ul>
+  </div>
+
+  <p class="carto-note">Fuentes: <a href="https://observatorio.coralina.gov.co/index.php/es/publicaciones/item/download/178_72af4a6703452633cc731bb773922bee" target="_blank" rel="noopener">CORALINA (2010)</a> ·
+  CORALINA–INVEMAR (2012), Atlas Seaflower, cap. Bosques de manglar ·
+  Gómez-Cubillos et al. (2015), Portafolio de restauración ·
+  <a href="https://doi.org/10.15446/dyna.v92n235.113880" target="_blank" rel="noopener">Álvarez-Echeverry et al. (2025)</a> ·
+  <a href="https://geoportal.sanandres.gov.co/server/rest/services/AmbientalSAI/MapServer/11" target="_blank" rel="noopener">Geoportal SAI, capa 11</a> ·
+  <a href="https://gis.invemar.org.co/arcgis/rest/services/SIGMA/MANGLARES_COLOMBIA/MapServer/0" target="_blank" rel="noopener">SIGMA Manglares de Colombia</a> ·
+  <a href="https://gis.invemar.org.co/ArcGIS/rest/services/Hosted/SIGMA_Caribe_insular/FeatureServer" target="_blank" rel="noopener">SIGMA Caribe insular</a> ·
+  <a href="https://acceso-datos-ambientales-invemar.hub.arcgis.com/maps/2e7273cdd8f6466ea020e3a32366189b/about" target="_blank" rel="noopener">Hub INVEMAR, modelos de priorización</a></p>
+</div>
+
+<!-- ════════════════════ PAGE: TALLER ════════════════════ -->
+<div id="page-taller" class="page">
+  <p class="section-label">Preparación · Taller INVEMAR ene 2027</p>
+  <h1 class="page-title">Checklist — Sin olvidar nada</h1>
+  <p class="page-subtitle">Todo lo que necesitas tener listo, confirmado o acordado antes del taller de validación de ACI con INVEMAR y CORALINA.</p>
+
+  <div class="kpi-row">
+    <div class="kpi-card" style="border-left:3px solid var(--err)" id="kpi-pending">
+      <div class="kpi-value" style="color:var(--err)" id="cnt-err">—</div>
+      <div class="kpi-label">Pendientes críticos</div>
+    </div>
+    <div class="kpi-card" style="border-left:3px solid var(--warn)" id="kpi-warn">
+      <div class="kpi-value" style="color:var(--warn)" id="cnt-warn">—</div>
+      <div class="kpi-label">En gestión</div>
+    </div>
+    <div class="kpi-card" style="border-left:3px solid var(--ok)">
+      <div class="kpi-value" style="color:var(--ok)" id="cnt-ok">—</div>
+      <div class="kpi-label">Disponibles / cubiertos</div>
+    </div>
+    <div class="kpi-card" style="border-left:3px solid var(--accent)">
+      <div class="kpi-value" style="color:var(--accent)" id="cnt-total">—</div>
+      <div class="kpi-label">Ítems totales</div>
+    </div>
+  </div>
+
+  <div class="checklist" id="checklist">
+
+    <!-- INVEMAR DATA -->
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--fg-faint);margin:8px 0 4px">Datos de INVEMAR (pedir en nov 2026)</div>
+
+    <div class="check-item" data-status="err">
+      <div class="check-box cb-err">✗</div>
+      <div class="check-body">
+        <div class="check-title">Parcelas MangRes — estado, especie, densidad, DAP, altura</div>
+        <div class="check-detail">Input D2 AHP + capa Natural Habitats InVEST CV. Sin esto no hay parámetro de dosel local para atenuación de oleaje.</div>
+        <div class="check-badges"><span class="pill pill-ahp">AHP D2</span><span class="pill pill-cv">InVEST CV</span><span class="pill pill-err">🔴 CRÍTICO</span></div>
+      </div>
+    </div>
+    <div class="check-item" data-status="err">
+      <div class="check-box cb-err">✗</div>
+      <div class="check-body">
+        <div class="check-title">Modelo priorización INVEMAR + pesos explícitos — confirmar cobertura SAI</div>
+        <div class="check-detail">Si cubre SAI: usar como referencia del AHP. Si no: reconstrucción propia. Actualización 10-11: INVEMAR indicó el Hub «Modelos priorización restauración manglar» (GDB multicriterio, Muy Alta–Baja). El servicio SIGMA_Caribe_insular publica sus criterios; faltan el resultado final y los pesos. Ver pestaña «Cartografía manglar».</div>
+        <div class="check-badges"><span class="pill pill-ahp">AHP D2</span><span class="pill pill-err">🔴 CRÍTICO</span></div>
+      </div>
+    </div>
+    <div class="check-item" data-status="warn">
+      <div class="check-box cb-warn">⟳</div>
+      <div class="check-body">
+        <div class="check-title">LULC multi-temporal CLIMARES20 (ids 1-4) — descargar y verificar leyenda</div>
+        <div class="check-detail">Servicio verificado. Comprobar que la leyenda es compatible con las 6 clases unificadas del ACB antes del taller.</div>
+        <div class="check-badges"><span class="pill pill-ahp">AHP D1+D2</span><span class="pill pill-cv">InVEST CV</span><span class="pill pill-warn">en gestión</span></div>
+      </div>
+    </div>
+    <div class="check-item" data-status="warn">
+      <div class="check-box cb-warn">⟳</div>
+      <div class="check-body">
+        <div class="check-title">Amenaza inundación + geomorfología costera CLIMARES20 SAI</div>
+        <div class="check-detail">Capa Geomorphology y Relief de InVEST CV. Servicio verificado; descargar GeoTIFF y verificar cobertura exacta de SAI (no solo Providencia).</div>
+        <div class="check-badges"><span class="pill pill-cv">InVEST CV cap 1+2</span><span class="pill pill-warn">pedir dic 26</span></div>
+      </div>
+    </div>
+    <div class="check-item" data-status="ok">
+      <div class="check-box cb-ok">✓</div>
+      <div class="check-body">
+        <div class="check-title">Cobertura manglar SIGMA 1:5.000 (WMS + WFS)</div>
+        <div class="check-detail">Servicio INVEMAR SIGMA MANGLARES_COLOMBIA verificado al 19-10-2026. Descargar WFS para análisis espacial.</div>
+        <div class="check-badges"><span class="pill pill-ahp">AHP D2</span><span class="pill pill-cv">InVEST CV cap 3</span><span class="pill pill-ok">✓ verificado</span></div>
+      </div>
+    </div>
+    <div class="check-item" data-status="ok">
+      <div class="check-box cb-ok">✓</div>
+      <div class="check-body">
+        <div class="check-title">Arrecifes y pastos marinos (AmbientalSAI ids 22, 26)</div>
+        <div class="check-detail">Geoservicio Gobernación verificado. Descargar como SHP para capa Natural Habitats del CV.</div>
+        <div class="check-badges"><span class="pill pill-cv">InVEST CV cap 3</span><span class="pill pill-ok">✓ verificado</span></div>
+      </div>
+    </div>
+
+    <!-- DATOS FÍSICOS -->
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--fg-faint);margin:16px 0 4px">Datos físicos (batimetría, MDT, oleaje)</div>
+
+    <div class="check-item" data-status="err">
+      <div class="check-box cb-err">✗</div>
+      <div class="check-body">
+        <div class="check-title">Batimetría nearshore ≤10 m — DIMAR-CIOH + Gobernación id 4</div>
+        <div class="check-detail">Input obligatorio: Coastal Slope (CV) y malla XBeach (F4). Solicitud formal a DIMAR urgente. Alt: SDB Sentinel-2 + ICESat-2 como provisional.</div>
+        <div class="check-badges"><span class="pill pill-cv">InVEST CV cap 7</span><span class="pill pill-err">🔴 nov 26</span></div>
+      </div>
+    </div>
+    <div class="check-item" data-status="err">
+      <div class="check-box cb-err">✗</div>
+      <div class="check-body">
+        <div class="check-title">MDT costero ≤5 m (IGAC 2025 fotogramétrico)</div>
+        <div class="check-detail">Capa Relief CV + malla XBeach. DEM 30m FABDEM/Copernicus insuficiente para zona urbana SAI. Pedir GeoTIFF en misma solicitud que ortofoto IGAC.</div>
+        <div class="check-badges"><span class="pill pill-cv">InVEST CV cap 2</span><span class="pill pill-err">🔴 nov 26</span></div>
+      </div>
+    </div>
+    <div class="check-item" data-status="ok">
+      <div class="check-box cb-ok">✓</div>
+      <div class="check-body">
+        <div class="check-title">SLR projections NASA IPCC AR6 + COAST-RP niveles extremos</div>
+        <div class="check-detail">Verificados. NASA AR6 para Sea Level Change (CV). COAST-RP (4TU) para Storm Surge (CV) y Tr 10/25/50/100 (F4).</div>
+        <div class="check-badges"><span class="pill pill-cv">InVEST CV cap 5+6</span><span class="pill pill-ok">✓ disponible</span></div>
+      </div>
+    </div>
+    <div class="check-item" data-status="warn">
+      <div class="check-box cb-warn">⟳</div>
+      <div class="check-body">
+        <div class="check-title">ERA5 oleaje + viento (Hs p90 · U10 p90)</div>
+        <div class="check-detail">Copernicus CDS requiere cuenta gratuita. Descargar series históricas SAI (10°N, 81°W). Nota: ERA5 subestima picos de huracán → combinar con STORM.</div>
+        <div class="check-badges"><span class="pill pill-cv">InVEST CV cap 4+8</span><span class="pill pill-warn">dic 26</span></div>
+      </div>
+    </div>
+
+    <!-- SOCIOECÓNOMICO -->
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--fg-faint);margin:16px 0 4px">Socioeconómico y activos (D1 AHP)</div>
+
+    <div class="check-item" data-status="warn">
+      <div class="check-box cb-warn">⟳</div>
+      <div class="check-body">
+        <div class="check-title">Infraestructura crítica — capas vacías al 19-10-2026</div>
+        <div class="check-detail">Gobernación InfraestructuraSAI sin datos. Solicitar por carta vía FORLIANCE. Alt: OSM Geofabrik Colombia.</div>
+        <div class="check-badges"><span class="pill pill-ahp">AHP D1</span><span class="pill pill-err">🔴 nov 26</span></div>
+      </div>
+    </div>
+    <div class="check-item" data-status="warn">
+      <div class="check-box cb-warn">⟳</div>
+      <div class="check-body">
+        <div class="check-title">Avalúos catastrales — solicitar al gestor catastral SAI</div>
+        <div class="check-detail">UrbanoSAI tiene huellas pero no avalúos. Gestionar con FORLIANCE/Gobernación antes del Mes 2.</div>
+        <div class="check-badges"><span class="pill pill-ahp">AHP D1</span><span class="pill pill-warn">nov-dic 26</span></div>
+      </div>
+    </div>
+    <div class="check-item" data-status="ok">
+      <div class="check-box cb-ok">✓</div>
+      <div class="check-body">
+        <div class="check-title">Edificaciones y predios UrbanoSAI ✓ + UNOSAT daños Iota ✓</div>
+        <div class="check-detail">Geoservicio Gobernación verificado (construcciones, terrenos, manzanas). UNOSAT TC20201123COL descargado 09-11: SAI 31+221 pts, PRO 1100+10 pts. Pendiente: máscara de nubes SAI (UNOSAT) y daño a manglar (INVEMAR).</div>
+        <div class="check-badges"><span class="pill pill-ahp">AHP D1</span><span class="pill pill-ok">✓ verificado</span></div>
+      </div>
+    </div>
+
+    <!-- TALLER LOGÍSTICA -->
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--fg-faint);margin:16px 0 4px">Logística del taller (ene 2027)</div>
+
+    <div class="check-item" data-status="err">
+      <div class="check-box cb-err">✗</div>
+      <div class="check-body">
+        <div class="check-title">Confirmar fecha exacta taller (ventana 12–15 ene 2027)</div>
+        <div class="check-detail">Acordar con FORLIANCE + CORALINA + INVEMAR antes de dic 2026. Sin fecha fija no hay planificación de viaje ni logística.</div>
+        <div class="check-badges"><span class="pill pill-err">🔴 urgente</span></div>
+      </div>
+    </div>
+    <div class="check-item" data-status="err">
+      <div class="check-box cb-err">✗</div>
+      <div class="check-body">
+        <div class="check-title">Confirmar punto focal INVEMAR para datos y revisión técnica</div>
+        <div class="check-detail">Acordar hoy (reunión nov 2026): nombre, cargo, canal de comunicación y plazos de entrega de cada dato.</div>
+        <div class="check-badges"><span class="pill pill-err">🔴 reunión hoy</span></div>
+      </div>
+    </div>
+    <div class="check-item" data-status="err">
+      <div class="check-box cb-err">✗</div>
+      <div class="check-body">
+        <div class="check-title">Enviar Matriz de Disponibilidad a INVEMAR para que marquen qué tienen</div>
+        <div class="check-detail">Compartir Excel de 53 datos esta semana para que INVEMAR marque fuente / disponibilidad / formato / fecha de entrega.</div>
+        <div class="check-badges"><span class="pill pill-err">🔴 esta semana</span></div>
+      </div>
+    </div>
+    <div class="check-item" data-status="warn">
+      <div class="check-box cb-warn">⟳</div>
+      <div class="check-body">
+        <div class="check-title">Mapa AHP-WLC preliminar para presentar en el taller</div>
+        <div class="check-detail">Con los datos disponibles en dic 2026, generar versión preliminar del mapa de priorización para someter a validación de actores.</div>
+        <div class="check-badges"><span class="pill pill-ahp">AHP output</span><span class="pill pill-warn">dic 26</span></div>
+      </div>
+    </div>
+    <div class="check-item" data-status="warn">
+      <div class="check-box cb-warn">⟳</div>
+      <div class="check-body">
+        <div class="check-title">Preparar 3 escenarios de pesos AHP para votar en el taller</div>
+        <div class="check-detail">Proponer D1=45/D2=35/D3=20 como base + 2 alternativas (e.g. ecológico-primero, riesgo-primero). Cálculo CR previo.</div>
+        <div class="check-badges"><span class="pill pill-ahp">AHP sensibilidad</span><span class="pill pill-warn">dic 26</span></div>
+      </div>
+    </div>
+
+    <!-- METODOLÓGICO -->
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--fg-faint);margin:16px 0 4px">Decisiones metodológicas a cerrar antes del taller</div>
+
+    <div class="check-item" data-status="err">
+      <div class="check-box cb-err">✗</div>
+      <div class="check-body">
+        <div class="check-title">Tasa social de descuento: acordar con FORLIANCE 5% (IKI) vs 9% (DNP Res. 1092/2022)</div>
+        <div class="check-detail">A horizonte 100 años la diferencia es sustancial en el VPN. Documentar en acta de E1. Sensibilidad: 3%, 5%, 9%, 12%.</div>
+        <div class="check-badges"><span class="pill pill-err">🔴 E1 / E2</span></div>
+      </div>
+    </div>
+    <div class="check-item" data-status="warn">
+      <div class="check-box cb-warn">⟳</div>
+      <div class="check-body">
+        <div class="check-title">Confirmar modelo hidrodinámico: XBeach vs ADCIRC+SWAN (con FORLIANCE/Antonio)</div>
+        <div class="check-detail">Sin batimetría alta resolución XBeach solo puede correr en perfil 1D. Con batimetría ≥5m: XBeach 2D o ADCIRC+SWAN. Decisión condiciona malla y F4.</div>
+        <div class="check-badges"><span class="pill pill-warn">F4 decisión</span></div>
+      </div>
+    </div>
+    <div class="check-item" data-status="ok">
+      <div class="check-box cb-ok">✓</div>
+      <div class="check-body">
+        <div class="check-title">Estructura de escenarios confirmada (Base vs Intervención) + forzamiento climático</div>
+        <div class="check-detail">SLR AR6 SSP2-4.5 calculado: +7.8/+16.7/+25.7 cm (mediana + VLM GNSS SAN0) · cifras TdR (+10/+22/+38) como prueba de estrés · Tr (10/25/50/100 años) · t=10/20/30 definidos.</div>
+        <div class="check-badges"><span class="pill pill-ok">✓ en TdR</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ── Theme
+function toggleTheme(){
+  const r=document.documentElement;
+  const t=r.getAttribute('data-theme');
+  if(!t)r.setAttribute('data-theme',matchMedia('(prefers-color-scheme:dark)').matches?'light':'dark');
+  else if(t==='dark')r.setAttribute('data-theme','light');
+  else r.removeAttribute('data-theme');
+}
+
+// ── Tabs
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelector(`[onclick="showPage('${id}')"]`).classList.add('active');
+  try{localStorage.setItem('f2_tab',id);}catch(e){}
+}
+
+// ── Restore tab
+try{const t=localStorage.getItem('f2_tab');if(t)showPage(t);}catch(e){}
+
+// ── Checklist counters
+function updateCounters(){
+  const items=document.querySelectorAll('.check-item[data-status]');
+  let ok=0,warn=0,err=0;
+  items.forEach(i=>{
+    if(i.dataset.status==='ok')ok++;
+    else if(i.dataset.status==='warn')warn++;
+    else err++;
+  });
+  document.getElementById('cnt-ok').textContent=ok;
+  document.getElementById('cnt-warn').textContent=warn;
+  document.getElementById('cnt-err').textContent=err;
+  document.getElementById('cnt-total').textContent=items.length;
+}
+updateCounters();
+</script>
+

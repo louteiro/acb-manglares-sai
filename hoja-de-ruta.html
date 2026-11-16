@@ -1,0 +1,1881 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Hoja de Ruta ACB Manglares San Andrés</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+
+<style>
+/* ── TOKEN SYSTEM ── clean document layout, phase-coded color strip on left edge */
+:root {
+  --bg: #ffffff;
+  --bg-subtle: #f7f8fa;
+  --bg-card: #ffffff;
+  --fg: #1a1a2e;
+  --fg-muted: #5c5f72;
+  --fg-faint: #9396a8;
+  --border: #e4e6f0;
+  --border-strong: #c8cad8;
+
+  /* Phase palette */
+  --f1: #2563eb;   --f1-bg: #eff6ff;   --f1-badge: #dbeafe;  --f1-text: #1d4ed8;
+  --f2: #0891b2;   --f2-bg: #ecfeff;   --f2-badge: #cffafe;  --f2-text: #0e7490;
+  --f3: #d97706;   --f3-bg: #fffbeb;   --f3-badge: #fef3c7;  --f3-text: #b45309;
+  --f4: #7c3aed;   --f4-bg: #f5f3ff;   --f4-badge: #ede9fe;  --f4-text: #6d28d9;
+  --f5: #059669;   --f5-bg: #ecfdf5;   --f5-badge: #d1fae5;  --f5-text: #047857;
+  --f6: #dc2626;   --f6-bg: #fef2f2;   --f6-badge: #fee2e2;  --f6-text: #b91c1c;
+
+  /* Deliverable accent */
+  --e-color: #1e293b; --e-bg: #f1f5f9; --e-badge: #e2e8f0;
+
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 14px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.05);
+  --shadow: 0 4px 12px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.04);
+
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f111a; --bg-subtle: #161828; --bg-card: #1c1f30;
+    --fg: #e8eaf6; --fg-muted: #9ba0bc; --fg-faint: #5c6080;
+    --border: #272b42; --border-strong: #383d58;
+    --f1-bg:#1e3a8a22; --f1-badge:#1e3a8a44; --f1-text:#93c5fd;
+    --f2-bg:#164e6322; --f2-badge:#164e6344; --f2-text:#67e8f9;
+    --f3-bg:#78350f22; --f3-badge:#78350f44; --f3-text:#fcd34d;
+    --f4-bg:#4c1d9522; --f4-badge:#4c1d9544; --f4-text:#c4b5fd;
+    --f5-bg:#064e3b22; --f5-badge:#064e3b44; --f5-text:#6ee7b7;
+    --f6-bg:#7f1d1d22; --f6-badge:#7f1d1d44; --f6-text:#fca5a5;
+    --e-bg:#0f172a; --e-badge:#1e293b;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f111a; --bg-subtle: #161828; --bg-card: #1c1f30;
+  --fg: #e8eaf6; --fg-muted: #9ba0bc; --fg-faint: #5c6080;
+  --border: #272b42; --border-strong: #383d58;
+  --f1-bg:#1e3a8a22; --f1-badge:#1e3a8a44; --f1-text:#93c5fd;
+  --f2-bg:#164e6322; --f2-badge:#164e6344; --f2-text:#67e8f9;
+  --f3-bg:#78350f22; --f3-badge:#78350f44; --f3-text:#fcd34d;
+  --f4-bg:#4c1d9522; --f4-badge:#4c1d9544; --f4-text:#c4b5fd;
+  --f5-bg:#064e3b22; --f5-badge:#064e3b44; --f5-text:#6ee7b7;
+  --f6-bg:#7f1d1d22; --f6-badge:#7f1d1d44; --f6-text:#fca5a5;
+  --e-bg:#0f172a; --e-badge:#1e293b;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--fg);
+  font-size: 14px;
+  line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0;
+}
+
+/* ── NAV TABS ── */
+.nav-bar {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 20;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding-block: 0;
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 10px 0 0;
+  -webkit-overflow-scrolling: touch;
+}
+.nav-inner::-webkit-scrollbar { display: none; }
+.tab-btn {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--fg-muted);
+  padding: 7px 14px;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  border: 1px solid transparent;
+  border-bottom: none;
+  transition: color .15s, background .15s;
+  white-space: nowrap;
+}
+.tab-btn:hover { color: var(--fg); background: var(--bg-subtle); }
+.tab-btn.active {
+  color: var(--fg);
+  background: var(--bg);
+  border-color: var(--border);
+  border-bottom-color: var(--bg);
+  position: relative;
+  z-index: 1;
+  font-weight: 600;
+}
+
+/* ── PAGE ── */
+.page { display: none; padding: 28px 0 48px; }
+.page.active { display: block; }
+
+/* ── SECTION HEADER ── */
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--fg-faint);
+  margin-bottom: 20px;
+}
+
+.page-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--fg);
+  text-wrap: balance;
+  margin-bottom: 6px;
+}
+.page-subtitle {
+  font-size: 14px;
+  color: var(--fg-muted);
+  margin-bottom: 28px;
+}
+
+/* ── PHASE CARD ── */
+.phase-card {
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--phase-color, var(--border-strong));
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  padding: 20px 20px 20px 18px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 16px;
+}
+.phase-header {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+.phase-tag {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--phase-badge);
+  color: var(--phase-text);
+  font-family: var(--font-mono);
+}
+.phase-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--fg);
+}
+.phase-months {
+  font-size: 12px;
+  color: var(--fg-muted);
+  margin-left: auto;
+}
+.phase-desc {
+  font-size: 13.5px;
+  color: var(--fg-muted);
+  margin-bottom: 14px;
+  line-height: 1.55;
+}
+
+/* ── ACTIVITY GRID ── */
+.activity-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 10px;
+  margin-top: 4px;
+}
+.activity-item {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+}
+.activity-item strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg);
+  margin-bottom: 3px;
+}
+.activity-item span {
+  font-size: 12px;
+  color: var(--fg-muted);
+  line-height: 1.45;
+}
+
+/* ── HITO BADGE ── */
+.hito-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border);
+}
+.hito-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--phase-color); flex-shrink: 0; }
+.hito-label { font-size: 12px; font-weight: 600; color: var(--phase-text); }
+.hito-desc { font-size: 12px; color: var(--fg-muted); }
+
+/* ── CONECTORES ENTRE FASES ── */
+.phase-connector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: -4px 0 8px;
+  color: var(--fg-faint);
+  font-size: 11px;
+}
+.connector-arrow { font-size: 14px; color: var(--fg-faint); }
+
+/* ── CRONOGRAMA ── */
+.gantt-wrap { overflow-x: auto; margin-bottom: 28px; }
+.gantt {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 700px;
+  font-size: 12px;
+}
+.gantt th {
+  background: var(--bg-subtle);
+  color: var(--fg-muted);
+  font-weight: 600;
+  padding: 8px 6px;
+  text-align: center;
+  border: 1px solid var(--border);
+  white-space: nowrap;
+}
+.gantt th.activity-col { text-align: left; min-width: 180px; padding-left: 10px; }
+.gantt td {
+  border: 1px solid var(--border);
+  padding: 7px 6px;
+  text-align: center;
+  vertical-align: middle;
+}
+.gantt td.activity-name {
+  text-align: left;
+  padding-left: 10px;
+  font-weight: 500;
+  color: var(--fg);
+  white-space: nowrap;
+}
+.gantt td.activity-name .phase-dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.cell-active {
+  border-radius: 3px;
+  height: 18px;
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+}
+.gantt tr:hover td { background: var(--bg-subtle); }
+.gantt .hito-cell { font-size: 14px; }
+.gantt .q-header { background: var(--fg); color: var(--bg); font-weight: 700; }
+
+/* ── ENTREGABLES TABLE ── */
+.entregables-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.entregable-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+.entregable-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.entregable-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  background: var(--e-badge);
+  color: var(--fg-muted);
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+.entregable-title { font-size: 14px; font-weight: 700; color: var(--fg); flex: 1; min-width: 0; }
+.entregable-meta {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.meta-pill {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.pill-mes { background: var(--e-badge); color: var(--fg-muted); }
+.pill-eur { background: #d1fae5; color: #047857; }
+.pill-eur-big { background: #bbf7d0; color: #065f46; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .pill-eur { background:#064e3b44; color:#6ee7b7; }
+  :root:not([data-theme="light"]) .pill-eur-big { background:#064e3b66; color:#a7f3d0; }
+}
+:root[data-theme="dark"] .pill-eur { background:#064e3b44; color:#6ee7b7; }
+:root[data-theme="dark"] .pill-eur-big { background:#064e3b66; color:#a7f3d0; }
+
+.entregable-body { padding: 14px 18px; }
+.contenido-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.contenido-list li {
+  display: flex;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--fg-muted);
+  line-height: 1.45;
+}
+.contenido-list li::before {
+  content: "—";
+  color: var(--fg-faint);
+  flex-shrink: 0;
+  font-weight: 500;
+}
+.contenido-list li strong { color: var(--fg); font-weight: 600; }
+
+.fases-tag {
+  display: inline-flex;
+  gap: 4px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+.fase-mini {
+  font-size: 10px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  padding: 2px 7px;
+  border-radius: 999px;
+  letter-spacing: .04em;
+}
+
+/* ── FLUJO PAGE ── */
+.flujo-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 680px;
+  margin: 0 auto;
+}
+.flujo-node {
+  border: 1.5px solid var(--border);
+  border-left: 4px solid var(--phase-color);
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  box-shadow: var(--shadow-sm);
+}
+.flujo-node-title { font-size: 14px; font-weight: 700; color: var(--fg); margin-bottom: 4px; }
+.flujo-node-sub { font-size: 12.5px; color: var(--fg-muted); }
+.flujo-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3px 0;
+  gap: 1px;
+}
+.flujo-arrow-line { width: 2px; height: 10px; background: var(--border-strong); }
+.flujo-arrow-head { width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 7px solid var(--border-strong); }
+.flujo-io {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 8px;
+}
+.flujo-box {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+}
+.flujo-box-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--fg-faint); margin-bottom: 3px; }
+.flujo-box-text { font-size: 12px; color: var(--fg-muted); line-height: 1.4; }
+
+/* ── KEY NUMBERS ── */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.kpi-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 14px 12px;
+  box-shadow: var(--shadow-sm);
+}
+.kpi-value {
+  font-size: 22px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--fg);
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+.kpi-label { font-size: 12px; color: var(--fg-muted); line-height: 1.3; }
+.kpi-sub { font-size: 11px; color: var(--fg-faint); margin-top: 2px; }
+
+/* ── SUPUESTOS ── */
+.supuesto-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+.supuesto-row:last-child { border-bottom: none; }
+.supuesto-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--fg-faint);
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+.supuesto-text { color: var(--fg-muted); flex: 1; min-width: 0; }
+.supuesto-text strong { color: var(--fg); display: block; margin-bottom: 2px; }
+
+/* Responsive */
+@media (max-width: 600px) {
+  .page-title { font-size: 18px; }
+  .kpi-row { grid-template-columns: repeat(2, 1fr); }
+  .flujo-io { grid-template-columns: 1fr; }
+  .entregable-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+}
+</style>
+
+<!-- NAV -->
+<nav class="nav-bar">
+  <div class="nav-inner">
+    <button class="tab-btn active" onclick="showPage('overview')">Visión general</button>
+    <button class="tab-btn" onclick="showPage('fases')">6 Fases</button>
+    <button class="tab-btn" onclick="showPage('cronograma')">Cronograma</button>
+    <button class="tab-btn" onclick="showPage('entregables')">Entregables</button>
+    <button class="tab-btn" onclick="showPage('flujo')">Flujo metodológico</button>
+    <button class="tab-btn" onclick="showPage('riesgos')">Análisis de riesgo</button>
+    <button class="tab-btn" onclick="showPage('datos')">Disponibilidad de datos</button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════ PAGE: OVERVIEW -->
+<div id="page-overview" class="page active">
+  <p class="section-label">ACB Manglares · San Andrés, Colombia</p>
+  <h1 class="page-title">Hoja de Ruta — Plan de Trabajo</h1>
+  <p class="page-subtitle">Análisis Costo-Beneficio de AbE en manglares del Archipiélago · FORLIANCE GmbH / Proyecto IKI «De Raíces a Mareas» · 12 meses · Oct 2026 – Oct 2027</p>
+
+  <div class="kpi-row">
+    <div class="kpi-card">
+      <div class="kpi-value">6</div>
+      <div class="kpi-label">Fases metodológicas</div>
+      <div class="kpi-sub">F1 → F6 en secuencia lógica</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value">12</div>
+      <div class="kpi-label">Meses de ejecución</div>
+      <div class="kpi-sub">Oct 2026 – Oct 2027</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value">5</div>
+      <div class="kpi-label">Entregables formales</div>
+      <div class="kpi-sub">E1–E5, pago por hito</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value">42 k€</div>
+      <div class="kpi-label">Valor total contrato</div>
+      <div class="kpi-sub">6.300 × 4 + 16.800 €</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value">149,6</div>
+      <div class="kpi-label">ha de manglar (2022)</div>
+      <div class="kpi-sub">Biomaps, departamento · el −74,2 % desde 1985 no es verosímil (E1 §11.4)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value">320</div>
+      <div class="kpi-label">tC/ha — blue carbon</div>
+      <div class="kpi-sub">Campo, INVEMAR + CORALINA 2022</div>
+    </div>
+  </div>
+
+  <!-- Phase legend cards -->
+  <p class="section-label">Las 6 fases del ACB</p>
+  <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:12px; margin-bottom:32px;">
+
+    <div class="phase-card" style="--phase-color:var(--f1);--phase-badge:var(--f1-badge);--phase-text:var(--f1-text)">
+      <div class="phase-header">
+        <span class="phase-tag">F1</span>
+        <span class="phase-title">Diagnóstico Línea Base</span>
+        <span class="phase-months">Mes 1–3</span>
+      </div>
+      <p class="phase-desc">Revisión documental acotada, cartografía LULC multi-temporal, datos secundarios MangRes y proyecciones SLR.</p>
+    </div>
+
+    <div class="phase-card" style="--phase-color:var(--f2);--phase-badge:var(--f2-badge);--phase-text:var(--f2-text)">
+      <div class="phase-header">
+        <span class="phase-tag">F2</span>
+        <span class="phase-title">Diagnóstico Integrado + ACIs</span>
+        <span class="phase-months">Mes 2–4</span>
+      </div>
+      <p class="phase-desc">AHP-WLC en QGIS, InVEST CV (8 corridas), taller participativo, selección de 3 Áreas Críticas de Intervención.</p>
+    </div>
+
+    <div class="phase-card" style="--phase-color:var(--f3);--phase-badge:var(--f3-badge);--phase-text:var(--f3-text)">
+      <div class="phase-header">
+        <span class="phase-tag">F3</span>
+        <span class="phase-title">Costos de Intervención</span>
+        <span class="phase-months">Mes 4–7</span>
+      </div>
+      <p class="phase-desc">CAPEX + OPEX por ACI. Curva logística de recuperación ecológica. Flujos a 30/50/100 años para el Escenario Intervención.</p>
+    </div>
+
+    <div class="phase-card" style="--phase-color:var(--f4);--phase-badge:var(--f4-badge);--phase-text:var(--f4-text)">
+      <div class="phase-header">
+        <span class="phase-tag">F4</span>
+        <span class="phase-title">Modelado Hidrodinámico</span>
+        <span class="phase-months">Mes 5–8</span>
+      </div>
+      <p class="phase-desc">ADCIRC+SWAN o XBeach. 4 periodos de retorno × 2 escenarios. Mapas de inundación diferencial como input de monetización.</p>
+    </div>
+
+    <div class="phase-card" style="--phase-color:var(--f5);--phase-badge:var(--f5-badge);--phase-text:var(--f5-text)">
+      <div class="phase-header">
+        <span class="phase-tag">F5</span>
+        <span class="phase-title">Valoración Ecosistémica</span>
+        <span class="phase-months">Mes 7–10</span>
+      </div>
+      <p class="phase-desc">Daños evitados, InVEST CBC (3 matrices). Prefactibilidad Verra VCS+CCB (ref. Vida Manglar).</p>
+    </div>
+
+    <div class="phase-card" style="--phase-color:var(--f6);--phase-badge:var(--f6-badge);--phase-text:var(--f6-text)">
+      <div class="phase-header">
+        <span class="phase-tag">F6</span>
+        <span class="phase-title">ACB y Marco Decisión</span>
+        <span class="phase-months">Mes 9–12</span>
+      </div>
+      <p class="phase-desc">VPN/TIR/B-C con la tasa social de descuento ambiental de la Res. DNP 1092/2022 (9,5 / 6,4 / 3,5 %). Análisis de sensibilidad (tablas tornado). Matriz priorización. Taller final FORLIANCE.</p>
+    </div>
+
+  </div>
+
+  <!-- Key concepts -->
+  <p class="section-label">Principios metodológicos</p>
+  <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:12px;">
+    <div class="activity-item">
+      <strong>Lógica contrafactual</strong>
+      <span>El ACB mide la diferencia entre dos trayectorias futuras. VPN = Σ[(Bt − Ct)/(1+r)^t] aplicado sobre el diferencial Base − Intervención.</span>
+    </div>
+    <div class="activity-item">
+      <strong>Tasa de descuento: Res. DNP 1092/2022</strong>
+      <span>Tasa social real y escalonada para proyectos ambientales: 9,5 % (años 0–5), 6,4 % (6–25) y 3,5 % (26 en adelante). Sensibilidad con la tasa única del 9 % (art. 1).</span>
+    </div>
+    <div class="activity-item">
+      <strong>Horizonte temporal: 30–100 años</strong>
+      <span>Proyecciones a t=10, 20, 30 para SLR. Flujos de costos y beneficios a 30/50/100 años para robustecer el VPN.</span>
+    </div>
+    <div class="activity-item">
+      <strong>LULC coherente entre modelos</strong>
+      <span>6 clases unificadas: Manglar Maduro, Degradado, Recuperación, Área Deforestada, Cuerpos Agua, Infraestructura. Misma resolución/proyección.</span>
+    </div>
+    <div class="activity-item">
+      <strong>SLR idéntico en ambos escenarios</strong>
+      <span>+10 cm (t=10) · +22 cm (t=20) · +38 cm (t=30) · RCP4.5 San Andrés. No es variable diferencial: actúa igual en Base e Intervención.</span>
+    </div>
+    <div class="activity-item">
+      <strong>Escenario Base = "costo de inacción"</strong>
+      <span>No es el estado actual — es la trayectoria futura sin intervención. Captura la pérdida por pulsos (huracanes) y urbana, con una tasa provisional ≤ 1 %/año (CORALINA 1996–2009) hasta tener la serie propia (E1 act. 1.3).</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ PAGE: FASES -->
+<div id="page-fases" class="page">
+  <p class="section-label">Propuesta metodológica detallada</p>
+  <h1 class="page-title">Las 6 Fases</h1>
+  <p class="page-subtitle">Actividades específicas, outputs esperados e hitos de entregable por fase</p>
+
+  <!-- F1 -->
+  <div class="phase-card" style="--phase-color:var(--f1);--phase-badge:var(--f1-badge);--phase-text:var(--f1-text)">
+    <div class="phase-header">
+      <span class="phase-tag">F1</span>
+      <span class="phase-title">Diagnóstico y Línea Base Ecosistémica</span>
+      <span class="phase-months">Mes 1 – 3</span>
+    </div>
+    <p class="phase-desc">Construye el estado de referencia del sistema manglar en San Andrés. Revisión documental acotada (≤2-3 cortes temporales) y recopilación de datos secundarios operacionalizables en modelos posteriores.</p>
+    <div class="activity-grid">
+      <div class="activity-item">
+        <strong>Revisión documental acotada</strong>
+        <span>Literatura clave: INVEMAR, CORALINA, MangRes, MapBiomas/BIOMAPS. Informes de ordenamiento ambiental de manglares INVEMAR-CORALINA como documento base.</span>
+      </div>
+      <div class="activity-item">
+        <strong>Cartografía LULC multi-temporal</strong>
+        <span>2-3 cortes temporales (ej. 2000, 2015, 2022). Clasificación 6 clases unificadas. Fuente primaria: MapBiomas/BIOMAPS + imágenes satelitales.</span>
+      </div>
+      <div class="activity-item">
+        <strong>Inventario stocks de carbono</strong>
+        <span>320 tC/ha (campo, INVEMAR+CORALINA 2022, 34 parcelas). Verificación de gaps con literatura caribeña. Input directo para InVEST CBC.</span>
+      </div>
+      <div class="activity-item">
+        <strong>Datos hidrológicos MangRes</strong>
+        <span>6 sitios de piezómetros: Smith Channel, Dorna Pond, Cove Sea Side + 3 adicionales. Salinidad, nivel freático, flujo hídrico.</span>
+      </div>
+      <div class="activity-item">
+        <strong>Proyecciones SLR San Andrés</strong>
+        <span>+10 cm (t=10) / +22 cm (t=20) / +38 cm (t=30). Fuente: IPCC RCP4.5 + datos FORLIANCE. Idénticas para ambos escenarios.</span>
+      </div>
+      <div class="activity-item">
+        <strong>Datos socioeconómicos y activos</strong>
+        <span>Valor infraestructura turística en zona de impacto. Densidad poblacional (DANE). Datos pesqueros: precios y rendimiento por especie.</span>
+      </div>
+    </div>
+    <div class="hito-row">
+      <div class="hito-dot"></div>
+      <span class="hito-label">E1 · Mes 3</span>
+      <span class="hito-desc">Plan de Trabajo (este documento) + Informe Línea Base con matrices de datos y cartografía de referencia — 6.300 €</span>
+    </div>
+  </div>
+
+  <div class="phase-connector"><span class="connector-arrow">↓</span><span>F1 provee los rasters LULC base y stocks C que alimentan todos los modelos</span></div>
+
+  <!-- F2 -->
+  <div class="phase-card" style="--phase-color:var(--f2);--phase-badge:var(--f2-badge);--phase-text:var(--f2-text)">
+    <div class="phase-header">
+      <span class="phase-tag">F2</span>
+      <span class="phase-title">Diagnóstico Integrado + Selección de ACIs</span>
+      <span class="phase-months">Mes 2 – 4</span>
+    </div>
+    <p class="phase-desc">Integra los datos de F1 en un modelo espacial AHP-WLC para priorizar áreas críticas. Corre InVEST Coastal Vulnerability (8 corridas independientes) como capa de validación biofísica. Cierra con taller participativo y declaración formal de 3 ACIs + escenarios por ACI.</p>
+    <div class="activity-grid">
+      <div class="activity-item">
+        <strong>Modelo AHP-WLC en QGIS</strong>
+        <span>3 dimensiones: D1 Riesgo Socioecon. (45%) · D2 Viabilidad Ecológica (35%) · D3 Factibilidad Intervención (20%). CR &lt; 0,10. 15-20 combinaciones de sensibilidad.</span>
+      </div>
+      <div class="activity-item">
+        <strong>InVEST Coastal Vulnerability (CV)</strong>
+        <span>8 corridas: 4 cortes temporales × 2 escenarios. Sin matrices de transición — solo rasters por corte. Variables cambian: cobertura manglar + SLR. Geomorfología y slope estáticos.</span>
+      </div>
+      <div class="activity-item">
+        <strong>Declaración de escenarios</strong>
+        <span>Escenario Base: pérdida por pulsos y urbana, tasa provisional ≤ 1 %/año (CORALINA 1996–2009), definitiva con la serie propia. Escenario Intervención: restauración ecológica progresiva. Supuestos cuantitativos formalizados.</span>
+      </div>
+      <div class="activity-item">
+        <strong>Taller participativo (Taller 1)</strong>
+        <span>½ día focalizado. Dic 2026–Ene 2027. CORALINA + comunidades + turismo + pesca. Trabajan sobre mapa técnico preliminar: ajustan pesos, añaden conocimiento local.</span>
+      </div>
+      <div class="activity-item">
+        <strong>ACIs candidatas (pre-taller)</strong>
+        <span>Old Point y Cocoplum (concentran el 70 % del manglar de la isla), Sound Bay (con Cocoplum, el sitio con más pérdida en 1996–2009) y Smith Channel (manglar interior, dosel más alto). Según el diagnóstico preliminar del E1; es un insumo para el taller, no el resultado final.</span>
+      </div>
+      <div class="activity-item">
+        <strong>Output: 3 tripletes ACI</strong>
+        <span>Para cada área: {ACI + Escenario Base + Escenario Intervención}. Acta firmada FORLIANCE-CORALINA. Input que autoriza continuar a F3.</span>
+      </div>
+    </div>
+    <div class="hito-row">
+      <div class="hito-dot"></div>
+      <span class="hito-label">E2 · Mes 4</span>
+      <span class="hito-desc">Informe Diagnóstico Integrado (F1+F2): mapas AHP-WLC, resultados InVEST CV, acta de selección de ACIs — 6.300 €</span>
+    </div>
+  </div>
+
+  <div class="phase-connector"><span class="connector-arrow">↓</span><span>Los 3 tripletes ACI activan la construcción de costos e hidrodiámica</span></div>
+
+  <!-- F3 -->
+  <div class="phase-card" style="--phase-color:var(--f3);--phase-badge:var(--f3-badge);--phase-text:var(--f3-text)">
+    <div class="phase-header">
+      <span class="phase-tag">F3</span>
+      <span class="phase-title">Costos de Intervención</span>
+      <span class="phase-months">Mes 4 – 7</span>
+    </div>
+    <p class="phase-desc">Construye el inventario de costos del Escenario Intervención por cada ACI. Incluye la curva de recuperación ecológica que determina el ritmo de acumulación de beneficios en F5.</p>
+    <div class="activity-grid">
+      <div class="activity-item">
+        <strong>CAPEX por ACI</strong>
+        <span>Costos de capital: enriquecimiento vegetal, rehabilitación hidrológica, remoción de residuos sólidos. Cotizaciones comparadas con proyectos Caribe.</span>
+      </div>
+      <div class="activity-item">
+        <strong>OPEX a largo plazo</strong>
+        <span>Operación y monitoreo a 30/50/100 años. Calendario de reinversiones. Fuente: literatura restauración de manglares Colombia + Vida Manglar.</span>
+      </div>
+      <div class="activity-item">
+        <strong>Curva logística de recuperación</strong>
+        <span>Función logística calibrada con datos Caribe. Define a qué ritmo sube la cobertura y servicios en el Escenario Intervención. Conecta F3 → F5.</span>
+      </div>
+      <div class="activity-item">
+        <strong>LULC proyectado Escenario Intervención</strong>
+        <span>Rasters de cobertura manga restaurada a t=10, 20, 30. Coherente con clasificación F1. Input directo para InVEST CBC y modelo hidrodinámico F4.</span>
+      </div>
+    </div>
+    <div class="hito-row">
+      <div class="hito-dot"></div>
+      <span class="hito-label">E3 · Mes 7</span>
+      <span class="hito-desc">Informe de Costos: inventario CAPEX/OPEX por ACI, tablas de flujos de costos y curva de recuperación ecológica — 6.300 €</span>
+    </div>
+  </div>
+
+  <div class="phase-connector"><span class="connector-arrow">↓</span><span>F3 se ejecuta en paralelo con F4; ambos alimentan F5</span></div>
+
+  <!-- F4 -->
+  <div class="phase-card" style="--phase-color:var(--f4);--phase-badge:var(--f4-badge);--phase-text:var(--f4-text)">
+    <div class="phase-header">
+      <span class="phase-tag">F4</span>
+      <span class="phase-title">Modelado Hidrodinámico</span>
+      <span class="phase-months">Mes 5 – 8 · paralelo a F3</span>
+    </div>
+    <p class="phase-desc">Cuantifica el diferencial de protección costera entre ambos escenarios. Los mapas de inundación son el input físico que la monetización (F5) convierte en daños evitados anuales.</p>
+    <div class="activity-grid">
+      <div class="activity-item">
+        <strong>Plataforma: ADCIRC+SWAN o XBeach</strong>
+        <span>Selección basada en batimetría disponible y granularidad requerida. Batimetría GEBCO/SRTM30_PLUS + datos de campo disponibles.</span>
+      </div>
+      <div class="activity-item">
+        <strong>8+ simulaciones por ACI</strong>
+        <span>4 periodos de retorno: 10 · 25 · 50 · 100 años × 2 escenarios (Base/Intervención). Output: mapas de profundidad y extensión de inundación.</span>
+      </div>
+      <div class="activity-item">
+        <strong>Evento calibración: Huracán Iota</strong>
+        <span>Cat. 5, noviembre 2020, Providencia. Daños espacialmente documentados → caso ideal para validar el modelo hidrodinámico antes de proyecciones.</span>
+      </div>
+      <div class="activity-item">
+        <strong>LULC coherente con InVEST</strong>
+        <span>El LULC de entrada al modelo debe ser el mismo que en InVEST CV y CBC: misma clasificación, misma resolución, misma proyección WGS84 UTM17N.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="phase-connector"><span class="connector-arrow">↓</span><span>Mapas de inundación F4 + flujos de carbono CBC → monetización en F5</span></div>
+
+  <!-- F5 -->
+  <div class="phase-card" style="--phase-color:var(--f5);--phase-badge:var(--f5-badge);--phase-text:var(--f5-text)">
+    <div class="phase-header">
+      <span class="phase-tag">F5</span>
+      <span class="phase-title">Valoración Económica de Servicios Ecosistémicos</span>
+      <span class="phase-months">Mes 7 – 10</span>
+    </div>
+    <p class="phase-desc">Convierte los outputs biofísicos de F4 en flujos monetarios anuales. Tres servicios pasan el filtro triple (relevancia, datos, monetizabilidad). Incluye prefactibilidad de créditos de carbono Verra VCS+CCB.</p>
+    <div class="activity-grid">
+      <div class="activity-item">
+        <strong>① Protección costera (daños evitados)</strong>
+        <span>Δinundación (F4) × valor de activos en zona de impacto → daños evitados anuales. Núcleo cuantitativo del ACB. Fuente catastro + imágenes.</span>
+      </div>
+      <div class="activity-item">
+        <strong>② Carbono azul — InVEST CBC</strong>
+        <span>3 tablas independientes: stocks iniciales · matriz transición LULC · matriz perturbación de carbono. ΔCO₂ netas × precio mercado voluntario + impuesto Colombia.</span>
+      </div>
+      <div class="activity-item">
+        <strong>Servicios excluidos con justificación</strong>
+        <span>Calidad agua (NDR: datos insuficientes en isla) · Turismo/paisaje (riesgo doble conteo) · Valor existencia (sin valoración contingente propia) · Hábitat pesquero (InVEST HQ: excluido por acuerdo de alcance).</span>
+      </div>
+      <div class="activity-item">
+        <strong>Prefactibilidad Verra VCS+CCB</strong>
+        <span>Ref. metodológica: Vida Manglar (INVEMAR-CVS-Cispatá, 9.128 ha, 30.000 tCO₂/año, primer proyecto certificado Colombia). Lecciones gobernanza y pagos.</span>
+      </div>
+      <div class="activity-item">
+        <strong>Flujos de beneficios anuales</strong>
+        <span>2 series temporales (protección costera, carbono) por escenario y ACI, a 30/50/100 años. Input directo para F6.</span>
+      </div>
+    </div>
+    <div class="hito-row">
+      <div class="hito-dot"></div>
+      <span class="hito-label">E4 · Mes 10</span>
+      <span class="hito-desc">Informe de Valoración Ecosistémica: outputs InVEST CBC, mapas de inundación F4, series de beneficios monetizados — 6.300 €</span>
+    </div>
+  </div>
+
+  <div class="phase-connector"><span class="connector-arrow">↓</span><span>F5 entrega los 2 flujos de beneficios que se descuentan en el ACB final</span></div>
+
+  <!-- F6 -->
+  <div class="phase-card" style="--phase-color:var(--f6);--phase-badge:var(--f6-badge);--phase-text:var(--f6-text)">
+    <div class="phase-header">
+      <span class="phase-tag">F6</span>
+      <span class="phase-title">ACB Integrado y Marco de Decisión</span>
+      <span class="phase-months">Mes 9 – 12</span>
+    </div>
+    <p class="phase-desc">Integra costos (F3) y beneficios (F5) en el ACB formal. Calcula indicadores de decisión, analiza incertidumbre y produce el marco de priorización para FORLIANCE y CORALINA.</p>
+    <div class="activity-grid">
+      <div class="activity-item">
+        <strong>Indicadores centrales</strong>
+        <span>VPN · TIR · Ratio B/C con la tasa escalonada de la Res. DNP 1092/2022 (9,5 / 6,4 / 3,5 %). Fórmula: VPN = Σ[(Bt − Ct)/(1+r)^t] sobre el diferencial contrafactual.</span>
+      </div>
+      <div class="activity-item">
+        <strong>Análisis de sensibilidad</strong>
+        <span>Tablas tornado: tasa descuento (escalonada Res. 1092 vs 9 % única) · tasa degradación Base (±20 %) · precio carbono (mercado voluntario vs impuesto CO) · tasa recuperación manglar.</span>
+      </div>
+      <div class="activity-item">
+        <strong>Análisis de incertidumbre</strong>
+        <span>Monte Carlo sobre parámetros clave. Umbrales de robustez: VPN positivo bajo escenario conservador de todos los parámetros simultáneamente.</span>
+      </div>
+      <div class="activity-item">
+        <strong>Matriz de priorización de ACIs</strong>
+        <span>Rankeo de las 3 áreas por VPN, TIR, B/C, co-beneficios y factibilidad institucional. Recomendación de secuencia de implementación.</span>
+      </div>
+      <div class="activity-item">
+        <strong>Taller final (Taller 2)</strong>
+        <span>Presentación de resultados a FORLIANCE, CORALINA y actores clave. Validación del marco de decisión y discusión de acciones prioritarias.</span>
+      </div>
+      <div class="activity-item">
+        <strong>Informe ACB final</strong>
+        <span>Documento técnico completo con notas metodológicas, limitaciones declaradas y anexos de datos. Entregable E5 — 40 % del contrato.</span>
+      </div>
+    </div>
+    <div class="hito-row">
+      <div class="hito-dot"></div>
+      <span class="hito-label">E5 · Mes 12</span>
+      <span class="hito-desc">Informe ACB Final: análisis costo-beneficio integrado, marcos de decisión, taller final y todos los anexos — 16.800 €</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ PAGE: CRONOGRAMA -->
+<div id="page-cronograma" class="page">
+  <p class="section-label">Programación temporal</p>
+  <h1 class="page-title">Cronograma 12 Meses</h1>
+  <p class="page-subtitle">Oct 2026 – Oct 2027 · ★ = entregable formal · Las fases se solapan por diseño</p>
+
+  <div class="gantt-wrap">
+    <table class="gantt">
+      <thead>
+        <tr>
+          <th class="activity-col">Actividad</th>
+          <th class="q-header" colspan="3">Q1</th>
+          <th class="q-header" colspan="3">Q2</th>
+          <th class="q-header" colspan="3">Q3</th>
+          <th class="q-header" colspan="3">Q4</th>
+        </tr>
+        <tr>
+          <th class="activity-col">— </th>
+          <th>Oct</th><th>Nov</th><th>Dic</th>
+          <th>Ene</th><th>Feb</th><th>Mar</th>
+          <th>Abr</th><th>May</th><th>Jun</th>
+          <th>Jul</th><th>Ago</th><th>Oct</th>
+        </tr>
+      </thead>
+      <tbody id="gantt-body"></tbody>
+    </table>
+  </div>
+
+  <!-- Legend -->
+  <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:8px;">
+    <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--fg-muted)">
+      <div style="width:24px;height:10px;border-radius:3px;background:var(--f1)"></div>F1 Línea Base
+    </div>
+    <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--fg-muted)">
+      <div style="width:24px;height:10px;border-radius:3px;background:var(--f2)"></div>F2 ACIs
+    </div>
+    <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--fg-muted)">
+      <div style="width:24px;height:10px;border-radius:3px;background:var(--f3)"></div>F3 Costos
+    </div>
+    <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--fg-muted)">
+      <div style="width:24px;height:10px;border-radius:3px;background:var(--f4)"></div>F4 Hidrodinámica
+    </div>
+    <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--fg-muted)">
+      <div style="width:24px;height:10px;border-radius:3px;background:var(--f5)"></div>F5 Valoración
+    </div>
+    <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--fg-muted)">
+      <div style="width:24px;height:10px;border-radius:3px;background:var(--f6)"></div>F6 ACB Final
+    </div>
+    <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--fg-muted)">★ Entregable</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ PAGE: ENTREGABLES -->
+<div id="page-entregables" class="page">
+  <p class="section-label">Hitos formales del contrato</p>
+  <h1 class="page-title">Los 5 Entregables</h1>
+  <p class="page-subtitle">Contenido específico, plazos y montos según TdR ajustado (sept. 2026) — Total: 42.000 €</p>
+
+  <div class="entregables-grid">
+
+    <div class="entregable-card">
+      <div class="entregable-header">
+        <span class="entregable-num">E1</span>
+        <span class="entregable-title">Plan de Trabajo e Informe de Línea Base</span>
+        <div class="entregable-meta">
+          <span class="meta-pill pill-mes">Mes 3 · Dic 2026</span>
+          <span class="meta-pill pill-eur">6.300 €</span>
+        </div>
+      </div>
+      <div class="entregable-body">
+        <ul class="contenido-list">
+          <li><strong>Plan de trabajo detallado</strong> — Propuesta metodológica por fase, cronograma de 12 meses, supuestos y riesgos</li>
+          <li><strong>Informe diagnóstico línea base</strong> — Estado ecosistemas manglar San Andrés: extensión, condición, amenazas y tendencias</li>
+          <li><strong>Cartografía LULC base</strong> — 2–3 cortes temporales, clasificación 6 clases, formato GDB ISO 19139, WGS84 UTM17N</li>
+          <li><strong>Matrices de datos secundarios</strong> — Stocks carbono (320 tC/ha), piezómetros MangRes, batimetría, activos socioeconómicos</li>
+          <li><strong>Protocolo de escenarios (borrador)</strong> — Supuestos cuantitativos Base/Intervención para validar en F2</li>
+        </ul>
+        <div class="fases-tag">
+          <span class="fase-mini" style="background:var(--f1-badge);color:var(--f1-text)">F1</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="entregable-card">
+      <div class="entregable-header">
+        <span class="entregable-num">E2</span>
+        <span class="entregable-title">Informe Diagnóstico Integrado y Selección de ACIs</span>
+        <div class="entregable-meta">
+          <span class="meta-pill pill-mes">Mes 4 · Feb 2027</span>
+          <span class="meta-pill pill-eur">6.300 €</span>
+        </div>
+      </div>
+      <div class="entregable-body">
+        <ul class="contenido-list">
+          <li><strong>Modelo AHP-WLC completo</strong> — Matrices de comparación por parejas, pesos finales, análisis de consistencia (CR &lt; 0,10), 15-20 combinaciones de sensibilidad</li>
+          <li><strong>Resultados InVEST Coastal Vulnerability</strong> — 8 corridas (4 cortes × 2 escenarios), Índice de Exposición Costera (IEC, 1–5) por segmento</li>
+          <li><strong>Mapa de priorización de ACIs</strong> — Ranking espacial integrado AHP-WLC + CV con justificación técnica por área candidata</li>
+          <li><strong>Memoria del Taller de Validación</strong> — Lista asistentes, ajustes de pesos, conflictos identificados, acuerdos de factibilidad institucional</li>
+          <li><strong>Acta de selección formal</strong> — 3 ACIs definidas con su escenario base, escenario intervención y horizonte temporal. Firmada FORLIANCE-CORALINA</li>
+        </ul>
+        <div class="fases-tag">
+          <span class="fase-mini" style="background:var(--f1-badge);color:var(--f1-text)">F1</span>
+          <span class="fase-mini" style="background:var(--f2-badge);color:var(--f2-text)">F2</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="entregable-card">
+      <div class="entregable-header">
+        <span class="entregable-num">E3</span>
+        <span class="entregable-title">Informe de Costos e Inventario de Intervención</span>
+        <div class="entregable-meta">
+          <span class="meta-pill pill-mes">Mes 7 · May 2027</span>
+          <span class="meta-pill pill-eur">6.300 €</span>
+        </div>
+      </div>
+      <div class="entregable-body">
+        <ul class="contenido-list">
+          <li><strong>Inventario CAPEX por ACI</strong> — Costos de restauración: enriquecimiento vegetal, hidrología, residuos. Cotizaciones comparadas con región Caribe</li>
+          <li><strong>Proyección OPEX a largo plazo</strong> — Flujos de operación y monitoreo a 30/50/100 años. Calendario de reinversiones</li>
+          <li><strong>Curva logística de recuperación ecológica</strong> — Función calibrada con datos Caribe. Conecta directamente con flujos de beneficios en F5</li>
+          <li><strong>Rasters LULC Escenario Intervención</strong> — Cobertura manglar restaurada proyectada a t=10, 20, 30. Coherentes con F1 y requeridos por F4</li>
+          <li><strong>Tablas de flujos de costos</strong> — Series anuales CAPEX+OPEX por ACI, en USD y pesos colombianos, format input para ACB en F6</li>
+        </ul>
+        <div class="fases-tag">
+          <span class="fase-mini" style="background:var(--f3-badge);color:var(--f3-text)">F3</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="entregable-card">
+      <div class="entregable-header">
+        <span class="entregable-num">E4</span>
+        <span class="entregable-title">Informe de Valoración Ecosistémica</span>
+        <div class="entregable-meta">
+          <span class="meta-pill pill-mes">Mes 10 · Ago 2027</span>
+          <span class="meta-pill pill-eur">6.300 €</span>
+        </div>
+      </div>
+      <div class="entregable-body">
+        <ul class="contenido-list">
+          <li><strong>Modelado hidrodinámico ADCIRC+SWAN / XBeach</strong> — 8+ simulaciones por ACI (4TR × 2 escenarios), mapas de inundación diferencial, calibración con Huracán Iota (Providencia 2020)</li>
+          <li><strong>InVEST CBC — carbono azul</strong> — 3 tablas: stocks iniciales + matriz transición LULC + matriz perturbación. Flujos anuales tCO₂ netas por escenario</li>
+          <li><strong>Flujos de beneficios monetizados</strong> — 2 series anuales (protección costera · carbono) por ACI a 30/50/100 años</li>
+          <li><strong>Informe de prefactibilidad Verra VCS+CCB</strong> — Evaluación inicial de elegibilidad para créditos de carbono. Referencia metodológica: Vida Manglar (Morrosquillo)</li>
+        </ul>
+        <div class="fases-tag">
+          <span class="fase-mini" style="background:var(--f4-badge);color:var(--f4-text)">F4</span>
+          <span class="fase-mini" style="background:var(--f5-badge);color:var(--f5-text)">F5</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="entregable-card" style="border-color:var(--f6);border-left-width:4px">
+      <div class="entregable-header">
+        <span class="entregable-num">E5</span>
+        <span class="entregable-title">Informe ACB Final — Análisis Integrado y Marco de Decisión</span>
+        <div class="entregable-meta">
+          <span class="meta-pill pill-mes">Mes 12 · Oct 2027</span>
+          <span class="meta-pill pill-eur-big">16.800 € · 40 %</span>
+        </div>
+      </div>
+      <div class="entregable-body">
+        <ul class="contenido-list">
+          <li><strong>ACB integrado por ACI</strong> — VPN / TIR / B-C con la tasa escalonada de la Res. DNP 1092/2022, horizonte 30/50/100 años. Diferencial contrafactual Base−Intervención descontado</li>
+          <li><strong>Análisis de sensibilidad</strong> — Tablas tornado: tasa descuento (escalonada Res. 1092 vs 9 % única), degradación (±20 %), precio carbono, tasa recuperación ecológica</li>
+          <li><strong>Análisis Monte Carlo</strong> — Distribuciones de probabilidad sobre parámetros clave. Umbral de robustez: VPN positivo en escenario conservador</li>
+          <li><strong>Matriz de priorización de ACIs</strong> — Rankeo multidimensional con recomendación de secuencia de implementación</li>
+          <li><strong>Memoria Taller Final (Taller 2)</strong> — Presentación de resultados, validación del marco de decisión con FORLIANCE y CORALINA</li>
+          <li><strong>Nota metodológica y limitaciones</strong> — Servicios excluidos con justificación, brechas de datos, recomendaciones para estudios futuros</li>
+          <li><strong>Geodatabase y archivos de entrega</strong> — Estructura de carpetas estándar, GDB ISO 19139, scripts reproducibles, documentación</li>
+        </ul>
+        <div class="fases-tag">
+          <span class="fase-mini" style="background:var(--f6-badge);color:var(--f6-text)">F6</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ PAGE: FLUJO -->
+<div id="page-flujo" class="page">
+  <p class="section-label">Arquitectura metodológica</p>
+  <h1 class="page-title">Flujo de Datos y Modelos</h1>
+  <p class="page-subtitle">Cómo los outputs de cada fase alimentan la siguiente — y por qué el orden importa</p>
+
+  <div class="flujo-col">
+
+    <div class="flujo-node" style="--phase-color:var(--f1)">
+      <div class="flujo-node-title"><span class="phase-tag" style="--phase-badge:var(--f1-badge);--phase-text:var(--f1-text)">F1</span>&ensp;Diagnóstico Línea Base · Meses 1–3</div>
+      <div class="flujo-io">
+        <div class="flujo-box">
+          <div class="flujo-box-label">Entradas</div>
+          <div class="flujo-box-text">MapBiomas/BIOMAPS · MangRes piezómetros · INVEMAR stocks C · DANE · IDEAM / FORLIANCE SLR · batimetría SRTM</div>
+        </div>
+        <div class="flujo-box">
+          <div class="flujo-box-label">Outputs clave</div>
+          <div class="flujo-box-text">Rasters LULC 2–3 cortes · Stocks C por clase (320 tC/ha) · SLR t=10/20/30 · Matrices de datos socioecon.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flujo-arrow"><div class="flujo-arrow-line"></div><div class="flujo-arrow-head"></div></div>
+
+    <div class="flujo-node" style="--phase-color:var(--f2)">
+      <div class="flujo-node-title"><span class="phase-tag" style="--phase-badge:var(--f2-badge);--phase-text:var(--f2-text)">F2</span>&ensp;Diagnóstico Integrado + ACIs · Meses 2–4</div>
+      <div class="flujo-io">
+        <div class="flujo-box">
+          <div class="flujo-box-label">Entradas desde F1</div>
+          <div class="flujo-box-text">Rasters LULC · datos ecológicos · activos en riesgo · NMM + SLR</div>
+        </div>
+        <div class="flujo-box">
+          <div class="flujo-box-label">Outputs clave</div>
+          <div class="flujo-box-text">Mapa AHP-WLC · IEC InVEST CV (8 runs) · 3 tripletes ACI {área + escenario base + escenario intervención}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flujo-arrow"><div class="flujo-arrow-line"></div><div class="flujo-arrow-head"></div></div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div class="flujo-node" style="--phase-color:var(--f3)">
+        <div class="flujo-node-title"><span class="phase-tag" style="--phase-badge:var(--f3-badge);--phase-text:var(--f3-text)">F3</span>&ensp;Costos · Mes 4–7</div>
+        <div class="flujo-node-sub">CAPEX + OPEX · Curva recuperación · LULC proyectado Escenario Intervención</div>
+      </div>
+      <div class="flujo-node" style="--phase-color:var(--f4)">
+        <div class="flujo-node-title"><span class="phase-tag" style="--phase-badge:var(--f4-badge);--phase-text:var(--f4-text)">F4</span>&ensp;Hidrodinámica · Mes 5–8</div>
+        <div class="flujo-node-sub">ADCIRC+SWAN / XBeach · 4TR × 2 escenarios · Mapas de inundación diferencial</div>
+      </div>
+    </div>
+
+    <div class="flujo-arrow"><div class="flujo-arrow-line"></div><div class="flujo-arrow-head"></div></div>
+
+    <div class="flujo-node" style="--phase-color:var(--f5)">
+      <div class="flujo-node-title"><span class="phase-tag" style="--phase-badge:var(--f5-badge);--phase-text:var(--f5-text)">F5</span>&ensp;Valoración Ecosistémica · Meses 7–10</div>
+      <div class="flujo-io">
+        <div class="flujo-box">
+          <div class="flujo-box-label">Entradas</div>
+          <div class="flujo-box-text">Mapas inundación F4 · Flujos CBC (3 matrices) · LULC F1/F3 · precios carbono + mercado pesquero</div>
+        </div>
+        <div class="flujo-box">
+          <div class="flujo-box-label">Outputs clave</div>
+          <div class="flujo-box-text">Serie anual daños evitados · Serie anual ΔCO₂ netas · Serie anual Δrendimiento pesquero · Prefactibilidad Verra</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flujo-arrow"><div class="flujo-arrow-line"></div><div class="flujo-arrow-head"></div></div>
+
+    <div class="flujo-node" style="--phase-color:var(--f6)">
+      <div class="flujo-node-title"><span class="phase-tag" style="--phase-badge:var(--f6-badge);--phase-text:var(--f6-text)">F6</span>&ensp;ACB Integrado · Meses 9–12</div>
+      <div class="flujo-io">
+        <div class="flujo-box">
+          <div class="flujo-box-label">Entradas</div>
+          <div class="flujo-box-text">Flujos de costos F3 · Flujos de beneficios F5 (3 servicios × 3 ACIs)</div>
+        </div>
+        <div class="flujo-box">
+          <div class="flujo-box-label">Outputs finales</div>
+          <div class="flujo-box-text">VPN / TIR / B-C · Sensibilidad tornado · Monte Carlo · Matriz priorización ACIs · Informe E5</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Supuestos -->
+  <div style="margin-top:32px">
+    <p class="section-label">Supuestos transversales</p>
+    <div style="border:1px solid var(--border);border-radius:var(--radius);background:var(--bg-card);padding:16px 20px;box-shadow:var(--shadow-sm)">
+      <div class="supuesto-row">
+        <span class="supuesto-num">S1</span>
+        <div class="supuesto-text"><strong>Tasa de descuento: Res. DNP 1092/2022 (art. 2)</strong>Real y escalonada para proyectos ambientales: 9,5 % (años 0–5), 6,4 % (6–25) y 3,5 % (26 en adelante). Sensibilidad con el 9 % único (art. 1). Decidido el 13 nov 2026 (E1, sección 5.2).</div>
+      </div>
+      <div class="supuesto-row">
+        <span class="supuesto-num">S2</span>
+        <div class="supuesto-text"><strong>SLR idéntico en ambos escenarios</strong>No es variable de decisión — actúa igual en Base e Intervención. No produce diferencial entre escenarios.</div>
+      </div>
+      <div class="supuesto-row">
+        <span class="supuesto-num">S3</span>
+        <div class="supuesto-text"><strong>Tasa de pérdida del Escenario Base: ≤ 1 %/año (provisional)</strong>Cota superior a partir de CORALINA (168 ha en 1996 → 149 ha en 2009, San Andrés). La cifra anterior (~11,6 ha/año, 430 ha perdidas 1985–2022) salía de leer el −74,2 % de Biomaps como pérdida sobre ≈580 ha en 1985, casi 3 veces el total que CORALINA midió para todo el archipiélago; se descarta (E1 §11.4). La tasa definitiva sale de la serie propia (act. 1.3) y se varía ±20 % en sensibilidad.</div>
+      </div>
+      <div class="supuesto-row">
+        <span class="supuesto-num">S4</span>
+        <div class="supuesto-text"><strong>Stocks de carbono de campo (no literatura genérica)</strong>320 tC/ha medidos en campo (INVEMAR+CORALINA 2022, 34 parcelas). Reemplaza valores genéricos como ~421 tC/ha (Kauffman).</div>
+      </div>
+      <div class="supuesto-row">
+        <span class="supuesto-num">S5</span>
+        <div class="supuesto-text"><strong>LULC coherente entre InVEST CV, CBC y modelo hidrodinámico</strong>Misma clasificación 6 clases, misma resolución espacial, misma proyección WGS84 UTM17N. Definido en F2 como parámetro marco.</div>
+      </div>
+      <div class="supuesto-row">
+        <span class="supuesto-num">S6</span>
+        <div class="supuesto-text"><strong>San Andrés ≠ Providencia (lógica de escenarios distinta)</strong>San Andrés: degradación crónica antropogénica. Providencia: perturbación aguda post-Iota 2020 (≈70 % de la cobertura de manglar afectada y &gt;90 % de árboles muertos o caídos en las parcelas de INVEMAR; Rodríguez-Rodríguez et al., 2021). No se combinan en el mismo ACB.</div>
+      </div>
+      <div class="supuesto-row">
+        <span class="supuesto-num">S7</span>
+        <div class="supuesto-text"><strong>Confidencialidad total</strong>Toda la información generada es confidencial. No puede divulgarse sin autorización expresa por escrito del Proyecto IKI (Sección 6, TdR ajustado sept. 2026).</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ PAGE: RIESGOS -->
+<div id="page-riesgos" class="page">
+  <p class="section-label">Análisis crítico · Basado en Matriz de Disponibilidad de Datos (19-10-2026)</p>
+  <h1 class="page-title">Riesgos por Fase</h1>
+  <p class="page-subtitle">53 datos requeridos — 18 críticos sin recibir — 1 dato revisado (1,9 %). Análisis sobre el estado real de la consultoría al día 5.</p>
+
+  <!-- Semáforo global -->
+  <div class="kpi-row" style="margin-bottom:28px">
+    <div class="kpi-card" style="border-left:4px solid #dc2626">
+      <div class="kpi-value" style="color:#dc2626">18</div>
+      <div class="kpi-label">Críticos sin recibir</div>
+      <div class="kpi-sub">De 53 datos totales</div>
+    </div>
+    <div class="kpi-card" style="border-left:4px solid #d97706">
+      <div class="kpi-value" style="color:#d97706">1,9 %</div>
+      <div class="kpi-label">Datos revisados</div>
+      <div class="kpi-sub">1 de 53 (Límites insulares)</div>
+    </div>
+    <div class="kpi-card" style="border-left:4px solid #0891b2">
+      <div class="kpi-value" style="color:#0891b2">53</div>
+      <div class="kpi-label">Datos en matriz</div>
+      <div class="kpi-sub">F1: 21 · F2: 4 · F3: 6 · F4: 11 · F5: 8 · F6: 3</div>
+    </div>
+    <div class="kpi-card" style="border-left:4px solid #059669">
+      <div class="kpi-value" style="color:#059669">6+</div>
+      <div class="kpi-label">Geoservicios verificados</div>
+      <div class="kpi-sub">Gobernación SAI + INVEMAR operativos</div>
+    </div>
+  </div>
+
+  <!-- RIESGO F1 -->
+  <div class="phase-card" style="--phase-color:var(--f1);--phase-badge:var(--f1-badge);--phase-text:var(--f1-text);margin-bottom:16px">
+    <div class="phase-header">
+      <span class="phase-tag">F1</span>
+      <span class="phase-title">Diagnóstico Línea Base</span>
+      <span class="phase-months">21 datos · 8 críticos sin recibir</span>
+    </div>
+    <p class="phase-desc">La fase más cargada de datos. La mayoría de los geoservicios de la Gobernación SAI e INVEMAR están operativos y comprobados al 19-10-2026, pero los datos de campo de MangRes (parcelas, stocks C) aún no han llegado. El riesgo principal es la <strong>dependencia de MangRes</strong> para los parámetros de vegetación y carbono que alimentan F4 y F5.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-top:4px">
+
+      <div class="risk-item risk-red">
+        <div class="risk-header"><span class="risk-badge">🔴 Crítico</span> MangRes — parcelas y stocks C (1.04, 1.05, 5.04, 5.05)</div>
+        <div class="risk-body">Sin datos de campo de MangRes no hay parámetros de vegetación locales para F4 (rugosidad) ni stocks de carbono validados para F5. El TdR lo compromete, pero la entrega aún no ha ocurrido.
+          <div class="risk-alt"><strong>Alt. 1:</strong> INVEMAR SIGMA WMS/WFS — manglares 1:5.000 + sectores (comprobados). <strong>Alt. 2:</strong> Geoportal Gobernación AmbientalSAI id 11-12. Para carbono: Simard et al. 2019 (ORNL DAAC) y IPCC Wetlands 2013 como contraste, no sustituto.</div>
+          <div class="risk-action">⚡ Acción inmediata: solicitar por escrito a FORLIANCE fecha comprometida de entrega de datos MangRes. Si no llega antes del Mes 2, activar Alt. 1 + comunicar brecha formal.</div>
+        </div>
+      </div>
+
+      <div class="risk-item risk-red">
+        <div class="risk-header"><span class="risk-badge">🔴 Crítico</span> Cartografía LULC multi-temporal (1.07)</div>
+        <div class="risk-body">El LULC es el input maestro de todos los modelos (InVEST CV, CBC, hidrodinámico). No está listado explícitamente en los TdR. Requiere clasificación propia o fuente existente con cobertura 1:5.000 en SAI.
+          <div class="risk-alt"><strong>Alt. 1:</strong> INVEMAR CLIMARES20 — coberturas y uso 1:5.000 (SAI/Providencia, ids 1-4, convenio CORALINA 2013). Verificado. <strong>Alt. 2:</strong> GEE con Sentinel-2 para cortes adicionales.</div>
+          <div class="risk-action">⚡ Acción: cargar CLIMARES20 en QGIS esta semana, evaluar si la leyenda es compatible con las 6 clases unificadas del ACB. Si no: clasificación propia con ortofoto 2025 IGAC.</div>
+        </div>
+      </div>
+
+      <div class="risk-item risk-red">
+        <div class="risk-header"><span class="risk-badge">🔴 Crítico</span> Catastro y activos (1.18, 1.19)</div>
+        <div class="risk-body">UrbanoSAI (catastro) está operativo pero sin avalúos en el servicio REST. Infraestructura (muelles, aeropuerto, hoteles) no publicaba capas el 19-10-2026. Ambos son inputs directos de la valoración de daños evitados (F5).
+          <div class="risk-alt"><strong>Alt. 1:</strong> Geoportal Gobernación UrbanoSAI (construcciones + terrenos + manzanas, comprobado). Avalúos: solicitar al gestor catastral por FORLIANCE. <strong>Alt. 2:</strong> Google Open Buildings / Microsoft Global Building Footprints.</div>
+          <div class="risk-action">⚡ Acción Mes 1: solicitar avalúos catastrales y capas de infraestructura vía FORLIANCE (carta formal). Probar MovilidadSAI, Salud, SitiosDeInteres en paralelo.</div>
+        </div>
+      </div>
+
+      <div class="risk-item risk-yellow">
+        <div class="risk-header"><span class="risk-badge">🟡 Alto</span> Modelo de priorización existente (1.09)</div>
+        <div class="risk-body">El TdR lo cita pero no asegura acceso. Sin los pesos originales del modelo de priorización no se puede hacer el análisis de sensibilidad de 15-20 combinaciones exigido.
+          <div class="risk-alt"><strong>Alt. 1:</strong> INVEMAR SIGMA Zonificación + Mosaico de restauración (verificar cobertura en Archipiélago). <strong>Alt. 2:</strong> Reconstrucción propia del AHP con capas de la misma matriz.</div>
+          <div class="risk-action">Solicitar el modelo con pesos explícitos a INVEMAR/CORALINA. La Alt. 2 es técnicamente sólida y preferible si da más control sobre los criterios.</div>
+        </div>
+      </div>
+
+      <div class="risk-item risk-yellow">
+        <div class="risk-header"><span class="risk-badge">🟡 Alto</span> Ortofoto IGAC 2025 (1.02)</div>
+        <div class="risk-body">El servicio REST de la Gobernación solo sirve para visualización/exportación. Los GeoTIFF originales hay que pedirlos al IGAC. Sin ellos, la fotointerpretación y validación del LULC es más lenta.
+          <div class="risk-alt"><strong>Alt. 1:</strong> MapServer Gobernación para guía visual (comprobado, 15-03-2025). <strong>Alt. 2:</strong> Sentinel-2 10 m por Copernicus Browser (cuenta gratuita).</div>
+        </div>
+      </div>
+
+      <div class="risk-item risk-green">
+        <div class="risk-header"><span class="risk-badge">🟢 Cubierto</span> Límites, APs, ecosistemas marinos</div>
+        <div class="risk-body">CartografiaBaseSAI (límite, barrios, vías, batimetría id 4) y AmbientalSAI (manglar, AMP, arrecifes, pastos) verificados y operativos. INVEMAR CLIMARES20 para erosión y geomorfología también accesible.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RIESGO F2 -->
+  <div class="phase-card" style="--phase-color:var(--f2);--phase-badge:var(--f2-badge);--phase-text:var(--f2-text);margin-bottom:16px">
+    <div class="phase-header">
+      <span class="phase-tag">F2</span>
+      <span class="phase-title">Diagnóstico Integrado + ACIs</span>
+      <span class="phase-months">4 datos · 2 críticos</span>
+    </div>
+    <p class="phase-desc">La selección de ACIs depende de que F1 entregue sus capas a tiempo. El riesgo principal es el <strong>Taller 1</strong> (dic–ene): si los actores no llegan a acuerdo, no hay ACIs formales y F3/F4 quedan en pausa.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-top:4px">
+
+      <div class="risk-item risk-red">
+        <div class="risk-header"><span class="risk-badge">🔴 Crítico</span> Taller de validación y pesos AHP (2.04)</div>
+        <div class="risk-body">Sin acta firmada de selección de ACIs con pesos acordados, el modelo AHP-WLC no tiene legitimidad y el ACB no puede arrancar. El taller está programado dic 2026–ene 2027: si se retrasa, se cae el cronograma entero.
+          <div class="risk-alt"><strong>Contingencia:</strong> presentar mapa técnico preliminar (F1 terminado) ANTES del taller para reducir el tiempo de discusión. Preparar 3 escenarios de pesos alternativos para someterlos a votación en la sesión.</div>
+          <div class="risk-action">⚡ Acción: confirmar con FORLIANCE y CORALINA la fecha del taller antes del Mes 2. Tener el mapa AHP-WLC preliminar listo para diciembre.</div>
+        </div>
+      </div>
+
+      <div class="risk-item risk-yellow">
+        <div class="risk-header"><span class="risk-badge">🟡 Alto</span> Datos de presiones (2.02) y potencial restauración (2.03)</div>
+        <div class="risk-body">SIGMA Presiones sin cobertura confirmada en el Archipiélago. Sin datos de presiones el Escenario Base es menos sólido.
+          <div class="risk-alt"><strong>Alt. 1:</strong> Geoportal Gobernación DisposicionResiduosSAI (puntos de residuos). <strong>Alt. 2:</strong> Global Mangrove Watch capa de restauración (disponible en visor). INVEMAR SIGMA Mosaico de Restauración (comprobado en directorio).</div>
+        </div>
+      </div>
+
+      <div class="risk-item risk-yellow">
+        <div class="risk-header"><span class="risk-badge">🟡 Cascada</span> Cartografía integrada de activos (2.01)</div>
+        <div class="risk-body">Depende de que lleguen 1.16 + 1.18 + 1.19 antes del Mes 3. Si alguno falta, la superposición con el mapa de priorización es incompleta. Riesgo de propagación al mapa AHP-WLC final.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RIESGO F3 -->
+  <div class="phase-card" style="--phase-color:var(--f3);--phase-badge:var(--f3-badge);--phase-text:var(--f3-text);margin-bottom:16px">
+    <div class="phase-header">
+      <span class="phase-tag">F3</span>
+      <span class="phase-title">Costos de Intervención</span>
+      <span class="phase-months">6 datos · 0 críticos bloqueantes</span>
+    </div>
+    <p class="phase-desc">F3 es la fase con <strong>menor riesgo de datos</strong>: todos sus inputs son datos de mercado o literatura accesible. El riesgo es metodológico: la curva logística de recuperación ecológica requiere calibración con datos del Caribe que pueden no existir para SAI específicamente.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-top:4px">
+
+      <div class="risk-item risk-yellow">
+        <div class="risk-header"><span class="risk-badge">🟡 Metodológico</span> Sobrecosto insular (3.01, 3.02)</div>
+        <div class="risk-body">Los costos de mano de obra y materiales en SAI tienen un sobrecosto de transporte y logística que no captura la literatura continental. Sin cotizaciones locales, el CAPEX puede estar subestimado 20-40 %.
+          <div class="risk-alt"><strong>Alt. 1:</strong> Salario mínimo 2026 Mintrabajo como piso + multiplicador insular estimado. <strong>Alt. 2:</strong> SECOP II — contratos de restauración ambiental en islas caribeñas (datos abiertos). <strong>Alt. 3:</strong> Bayraktarov et al. 2016 (DOI: 10.1890/15-1077) como referencia de costos de restauración costera.</div>
+        </div>
+      </div>
+
+      <div class="risk-item risk-yellow">
+        <div class="risk-header"><span class="risk-badge">🟡 Macroeconómico</span> Tasa de descuento DNP vs. 5 % (6.01 / F3)</div>
+        <div class="risk-body">Resuelto (13 nov 2026): se usa la tasa ambiental escalonada de la Res. DNP 1092/2022 (9,5 / 6,4 / 3,5 %), con el 9 % único como sensibilidad. Queda por acordar con FORLIANCE qué otras variantes entran en la sensibilidad.
+          <div class="risk-action">⚡ Acción: acordar con FORLIANCE si el proyecto sigue IKI/GIZ (que acepta tasas más bajas para proyectos ambientales) o el marco DNP. Documentar la decisión en E2.</div>
+        </div>
+      </div>
+
+      <div class="risk-item risk-green">
+        <div class="risk-header"><span class="risk-badge">🟢 Cubierto</span> Precios y OPEX</div>
+        <div class="risk-body">IPC (DANE) y TRM (Banrep) disponibles. Protocolos de monitoreo de INVEMAR SIGMA accesibles vía SIAM. RR.HH.: tablas de honorarios de Patrimonio Natural / FORLIANCE como referencia.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RIESGO F4 -->
+  <div class="phase-card" style="--phase-color:var(--f4);--phase-badge:var(--f4-badge);--phase-text:var(--f4-text);margin-bottom:16px">
+    <div class="phase-header">
+      <span class="phase-tag">F4</span>
+      <span class="phase-title">Modelado Hidrodinámico</span>
+      <span class="phase-months">11 datos · 4 críticos · cuello de botella técnico</span>
+    </div>
+    <p class="phase-desc">F4 es la <strong>fase de mayor riesgo técnico</strong>. La batimetría nearshore es el cuello de botella declarado: si no llega, no hay malla para ningún modelo. El MDT costero de 30 m es insuficiente para XBeach en zona urbana. La validación con Huracán Iota requiere cruzar datos de tres fuentes diferentes.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-top:4px">
+
+      <div class="risk-item risk-red">
+        <div class="risk-header"><span class="risk-badge">🔴 Crítico / Cuellobotella</span> Batimetría nearshore DIMAR-CIOH (4.01, 4.02)</div>
+        <div class="risk-body">Sin batimetría de alta resolución (&lt;10 m) no hay malla para ADCIRC+SWAN ni XBeach. DIMAR requiere solicitud formal que puede tardar semanas.
+          <div class="risk-alt"><strong>Alt. 1:</strong> Geoportal Gobernación CartografiaBaseSAI id 4 — verificado, pero revisar resolución y fecha. <strong>Alt. 2:</strong> Batimetría derivada de satélite (Sentinel-2 SDB) calibrada con ICESat-2 ATL03 (NASA Earthdata).</div>
+          <div class="risk-action">⚡ Solicitar en el Mes 1. La batimetría tarda: pedir a FORLIANCE que firme la carta a DIMAR-CIOH esta semana. Solicitar cartas náuticas CIOH en paralelo (CECOLDO DIMAR).</div>
+        </div>
+      </div>
+
+      <div class="risk-item risk-red">
+        <div class="risk-header"><span class="risk-badge">🔴 Crítico</span> MDT costero ≤5 m (4.04)</div>
+        <div class="risk-body">El DEM disponible más preciso es FABDEM (30 m). Para XBeach en zona urbana de SAI, 30 m es insuficiente para simular inundación en calles y edificios.
+          <div class="risk-alt"><strong>Alt. 1:</strong> Pedir MDT/MDS fotogramétrico derivado de la ortofoto IGAC 2025 al IGAC (misma solicitud que los GeoTIFF). <strong>Alt. 2:</strong> Copernicus DEM GLO-30 / FABDEM como aproximación, con nota de limitación explícita en el informe.</div>
+          <div class="risk-action">⚡ Incluir solicitud de MDT fotogramétrico en la carta al IGAC/Gobernación (Mes 1). Si no llega, usar XBeach en perfil 1D y declarar incertidumbre.</div>
+        </div>
+      </div>
+
+      <div class="risk-item risk-red">
+        <div class="risk-header"><span class="risk-badge">🔴 Crítico</span> Niveles extremos y períodos de retorno (4.07)</div>
+        <div class="risk-body">Las tablas de storm tide para 10/25/50/100 años en SAI requieren análisis estadístico o base de datos global de extremos. Sin ellas no hay eventos de diseño.
+          <div class="risk-alt"><strong>Alt. 1:</strong> COAST-RP (Dullaart et al.) — dataset global verificado, incluye ciclones tropicales, descarga directa (4TU). <strong>Alt. 2:</strong> GTSM series de nivel de agua CMIP6 (Copernicus CDS, requiere cuenta).</div>
+        </div>
+      </div>
+
+      <div class="risk-item risk-yellow">
+        <div class="risk-header"><span class="risk-badge">🟡 Alto</span> Validación con Huracán Iota (4.11)</div>
+        <div class="risk-body">El mapa ARIA DPM Sentinel-1 del 22-11-2020 está rotulado como "Eta 2020", no "Iota". Hay que confirmar cobertura sobre el Archipiélago. UNOSAT (1.20) ya está descargado (09-11): en SAI solo 31 estructuras dañadas + 221 potencialmente dañadas, en puntos y sin profundidad de inundación; en Providencia, 1100. La validación en SAI es débil por el tamaño de muestra; faltan cotas observadas (pedir a INVEMAR/SINA) y la máscara de nubes de SAI (UNOSAT).
+          <div class="risk-alt"><strong>Alt. 1:</strong> NASA Disasters ARIA DPM (ImageServer verificado en directorio). <strong>Alt. 2:</strong> Sentinel-1 propio (Copernicus Browser) + UNOSAT evaluación de daños SAI y Providencia (descarga verificada).</div>
+        </div>
+      </div>
+
+      <div class="risk-item risk-yellow">
+        <div class="risk-header"><span class="risk-badge">🟡 Alto</span> ERA5 subestima picos de huracán (4.08, 4.09)</div>
+        <div class="risk-body">ERA5 es el reanálisis de referencia pero subestima los picos de ciclones tropicales. Para periodos de retorno de 50-100 años con eventos de categoría 3-5, el sesgo puede ser significativo.
+          <div class="risk-alt"><strong>Alt:</strong> STORM (Bloemendaal et al.) — trayectorias sintéticas de ciclones calibradas (4TU). Combinar ERA5 con modelo paramétrico de Holland para campos de viento de ciclón.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RIESGO F5 -->
+  <div class="phase-card" style="--phase-color:var(--f5);--phase-badge:var(--f5-badge);--phase-text:var(--f5-text);margin-bottom:16px">
+    <div class="phase-header">
+      <span class="phase-tag">F5</span>
+      <span class="phase-title">Valoración Ecosistémica</span>
+      <span class="phase-months">8 datos · 3 críticos</span>
+    </div>
+    <p class="phase-desc">F5 recibe los outputs de F3 y F4. Sus riesgos son de <strong>doble naturaleza</strong>: datos (avalúos, stocks de carbono) y metodológicos (funciones de daño sin calibración local, precios de carbono volátiles).</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-top:4px">
+
+      <div class="risk-item risk-red">
+        <div class="risk-header"><span class="risk-badge">🔴 Crítico</span> Avalúos catastrales (5.01)</div>
+        <div class="risk-body">El servicio REST UrbanoSAI no incluye avalúos — solo huellas de construcción. Sin valores por predio, los daños evitados son estimaciones gruesas (costo de reposición × área).
+          <div class="risk-alt"><strong>Alt. 1:</strong> UrbanoSAI (huellas + área m²) × costo de reposición DANE (estadísticas de construcción). <strong>Alt. 2:</strong> Funciones de daño JRC Huizinga et al. 2017 (curvas Sudamérica) aplicadas a clases de uso.</div>
+          <div class="risk-action">⚡ Solicitar en el Mes 1-2 vía FORLIANCE: los avalúos tardan. Si no llegan, documentar el método alternativo con sus limitaciones en la nota metodológica de E5.</div>
+        </div>
+      </div>
+
+      <div class="risk-item risk-red">
+        <div class="risk-header"><span class="risk-badge">🔴 Crítico</span> Stocks de carbono campo (5.04, 5.05)</div>
+        <div class="risk-body">MangRes es la fuente para biomasa y carbono del suelo en SAI. Sin estos datos, los 320 tC/ha del informe de campo INVEMAR+CORALINA 2022 son el respaldo más sólido disponible, pero el suelo orgánico puede no estar desagregado por clase LULC.
+          <div class="risk-alt"><strong>Alt. carbono biomasa:</strong> Simard et al. 2019 ORNL DAAC — mapa global de biomasa de manglar (Earthdata, cuenta gratuita). <strong>Alt. carbono suelo:</strong> Sanderman et al. 2018 (DOI: 10.1088/1748-9326/aabe1c). Solo para contraste, no para sustituir datos de campo.</div>
+        </div>
+      </div>
+
+      <div class="risk-item risk-yellow">
+        <div class="risk-header"><span class="risk-badge">🟡 Metodológico</span> Funciones de daño sin calibración local</div>
+        <div class="risk-body">Las curvas globales de JRC (Huizinga 2017) no están calibradas para el tejido urbano caribeño de SAI (materiales, densidad, tipo constructivo). El error puede ser ±30-50 % en los daños estimados.
+          <div class="risk-alt"><strong>Calibración parcial:</strong> cruzar con daños documentados de Iota (UNOSAT 1.20 + NASA ARIA 4.11) para ajustar las curvas al contexto local.</div>
+        </div>
+      </div>
+
+      <div class="risk-item risk-yellow">
+        <div class="risk-header"><span class="risk-badge">🟡 Alto</span> Precio del carbono (5.07, 5.08)</div>
+        <div class="risk-body">El mercado voluntario de carbono ha sido volátil (USD 3-50/tCO₂e). El impuesto nacional de Colombia está fijado en Res. DIAN 000003/2026 pero sube anualmente. Una variación de ±50 % en el precio cambia el VPN de F6 significativamente.
+          <div class="risk-alt"><strong>Fuentes:</strong> Ecosystem Marketplace (mercado voluntario) + World Bank Carbon Pricing Dashboard. DIAN Res. 000003/2026 para el impuesto nacional (URL verificado).</div>
+          <div class="risk-action">Usar rango de precios en el análisis de sensibilidad de F6: precio mínimo (impuesto CO) / precio medio (mercado voluntario actual) / precio alto (proyección 2030).</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RIESGO F6 -->
+  <div class="phase-card" style="--phase-color:var(--f6);--phase-badge:var(--f6-badge);--phase-text:var(--f6-text);margin-bottom:16px">
+    <div class="phase-header">
+      <span class="phase-tag">F6</span>
+      <span class="phase-title">ACB y Marco de Decisión</span>
+      <span class="phase-months">3 datos · 1 crítico</span>
+    </div>
+    <p class="phase-desc">F6 es la fase de síntesis. Su riesgo principal no es de datos sino de <strong>coherencia metodológica</strong> acumulada: cualquier supuesto inconsistente en F1-F5 se amplifica aquí. El riesgo específico es la tasa de descuento.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-top:4px">
+
+      <div class="risk-item risk-red">
+        <div class="risk-header"><span class="risk-badge">🔴 Crítico</span> Tasa de descuento: DNP 9 % vs. 5 % metodología</div>
+        <div class="risk-body">Resuelto (13 nov 2026): el ACB usa la tasa ambiental escalonada de la Res. DNP 1092/2022 (9,5 % años 0–5; 6,4 % años 6–25; 3,5 % desde el año 26), no el 5 % del borrador anterior.
+          <div class="risk-alt"><strong>Pendiente:</strong> confirmar con FORLIANCE si la tasa se aplica por tramos de años (lectura actual) o como una sola tasa según el horizonte total.</div>
+          <div class="risk-action">⚡ Acción: documentar el acuerdo de tasa en el acta de E1 (Plan de Trabajo) para que quede formalizado desde el inicio.</div>
+        </div>
+      </div>
+
+      <div class="risk-item risk-yellow">
+        <div class="risk-header"><span class="risk-badge">🟡 Alto</span> Criterios de decisión con CORALINA (6.03)</div>
+        <div class="risk-body">Depende del Taller 2 (final). Si los criterios de decisión no quedan acordados antes del cierre, el marco de priorización puede ser impugnado institucionalmente.</div>
+      </div>
+
+      <div class="risk-item risk-green">
+        <div class="risk-header"><span class="risk-badge">🟢 Cubierto</span> Literatura de referencia ACB</div>
+        <div class="risk-body">Menéndez et al. 2020 (Nature Scientific Reports) y bases de datos BID/Banco Mundial/TNC disponibles. Acceso verificado. Comparadores sólidos para calibrar la magnitud de los resultados.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MAPA DE CALOR DE RIESGO -->
+  <div style="margin-top:28px">
+    <p class="section-label">Mapa de exposición al riesgo</p>
+    <div style="border:1px solid var(--border);border-radius:var(--radius);background:var(--bg-card);overflow:hidden;box-shadow:var(--shadow-sm)">
+      <div style="display:grid;grid-template-columns:160px repeat(4,1fr);font-size:12px">
+        <div style="background:var(--bg-subtle);padding:10px 12px;font-weight:700;border-bottom:1px solid var(--border)">Fase</div>
+        <div style="background:var(--bg-subtle);padding:10px 8px;font-weight:600;text-align:center;border-bottom:1px solid var(--border);border-left:1px solid var(--border)">Datos</div>
+        <div style="background:var(--bg-subtle);padding:10px 8px;font-weight:600;text-align:center;border-bottom:1px solid var(--border);border-left:1px solid var(--border)">Técnico</div>
+        <div style="background:var(--bg-subtle);padding:10px 8px;font-weight:600;text-align:center;border-bottom:1px solid var(--border);border-left:1px solid var(--border)">Institucional</div>
+        <div style="background:var(--bg-subtle);padding:10px 8px;font-weight:600;text-align:center;border-bottom:1px solid var(--border);border-left:1px solid var(--border)">Cronograma</div>
+        <!-- F1 -->
+        <div style="padding:10px 12px;border-bottom:1px solid var(--border);font-weight:600;color:var(--f1-text);border-left:3px solid var(--f1)">F1 Línea Base</div>
+        <div style="background:#fee2e244;text-align:center;padding:10px;border-bottom:1px solid var(--border);border-left:1px solid var(--border);font-weight:700;color:#b91c1c">ALTO</div>
+        <div style="background:#fef3c744;text-align:center;padding:10px;border-bottom:1px solid var(--border);border-left:1px solid var(--border);font-weight:600;color:#b45309">MEDIO</div>
+        <div style="background:#d1fae544;text-align:center;padding:10px;border-bottom:1px solid var(--border);border-left:1px solid var(--border);font-weight:600;color:#047857">BAJO</div>
+        <div style="background:#fee2e244;text-align:center;padding:10px;border-bottom:1px solid var(--border);border-left:1px solid var(--border);font-weight:700;color:#b91c1c">ALTO</div>
+        <!-- F2 -->
+        <div style="padding:10px 12px;border-bottom:1px solid var(--border);font-weight:600;color:var(--f2-text);border-left:3px solid var(--f2)">F2 ACIs</div>
+        <div style="background:#fef3c744;text-align:center;padding:10px;border-bottom:1px solid var(--border);border-left:1px solid var(--border);font-weight:600;color:#b45309">MEDIO</div>
+        <div style="background:#fef3c744;text-align:center;padding:10px;border-bottom:1px solid var(--border);border-left:1px solid var(--border);font-weight:600;color:#b45309">MEDIO</div>
+        <div style="background:#fee2e244;text-align:center;padding:10px;border-bottom:1px solid var(--border);border-left:1px solid var(--border);font-weight:700;color:#b91c1c">ALTO</div>
+        <div style="background:#fee2e244;text-align:center;padding:10px;border-bottom:1px solid var(--border);border-left:1px solid var(--border);font-weight:700;color:#b91c1c">ALTO</div>
+        <!-- F3 -->
+        <div style="padding:10px 12px;border-bottom:1px solid var(--border);font-weight:600;color:var(--f3-text);border-left:3px solid var(--f3)">F3 Costos</div>
+        <div style="background:#d1fae544;text-align:center;padding:10px;border-bottom:1px solid var(--border);border-left:1px solid var(--border);font-weight:600;color:#047857">BAJO</div>
+        <div style="background:#fef3c744;text-align:center;padding:10px;border-bottom:1px solid var(--border);border-left:1px solid var(--border);font-weight:600;color:#b45309">MEDIO</div>
+        <div style="background:#d1fae544;text-align:center;padding:10px;border-bottom:1px solid var(--border);border-left:1px solid var(--border);font-weight:600;color:#047857">BAJO</div>
+        <div style="background:#d1fae544;text-align:center;padding:10px;border-bottom:1px solid var(--border);border-left:1px solid var(--border);font-weight:600;color:#047857">BAJO</div>
+        <!-- F4 -->
+        <div style="padding:10px 12px;border-bottom:1px solid var(--border);font-weight:600;color:var(--f4-text);border-left:3px solid var(--f4)">F4 Hidrodinámica</div>
+        <div style="background:#fee2e244;text-align:center;padding:10px;border-bottom:1px solid var(--border);border-left:1px solid var(--border);font-weight:700;color:#b91c1c">ALTO</div>
+        <div style="background:#fee2e244;text-align:center;padding:10px;border-bottom:1px solid var(--border);border-left:1px solid var(--border);font-weight:700;color:#b91c1c">ALTO</div>
+        <div style="background:#d1fae544;text-align:center;padding:10px;border-bottom:1px solid var(--border);border-left:1px solid var(--border);font-weight:600;color:#047857">BAJO</div>
+        <div style="background:#fee2e244;text-align:center;padding:10px;border-bottom:1px solid var(--border);border-left:1px solid var(--border);font-weight:700;color:#b91c1c">ALTO</div>
+        <!-- F5 -->
+        <div style="padding:10px 12px;border-bottom:1px solid var(--border);font-weight:600;color:var(--f5-text);border-left:3px solid var(--f5)">F5 Valoración</div>
+        <div style="background:#fee2e244;text-align:center;padding:10px;border-bottom:1px solid var(--border);border-left:1px solid var(--border);font-weight:700;color:#b91c1c">ALTO</div>
+        <div style="background:#fef3c744;text-align:center;padding:10px;border-bottom:1px solid var(--border);border-left:1px solid var(--border);font-weight:600;color:#b45309">MEDIO</div>
+        <div style="background:#d1fae544;text-align:center;padding:10px;border-bottom:1px solid var(--border);border-left:1px solid var(--border);font-weight:600;color:#047857">BAJO</div>
+        <div style="background:#fef3c744;text-align:center;padding:10px;border-bottom:1px solid var(--border);border-left:1px solid var(--border);font-weight:600;color:#b45309">MEDIO</div>
+        <!-- F6 -->
+        <div style="padding:10px 12px;font-weight:600;color:var(--f6-text);border-left:3px solid var(--f6)">F6 ACB Final</div>
+        <div style="background:#d1fae544;text-align:center;padding:10px;border-left:1px solid var(--border);font-weight:600;color:#047857">BAJO</div>
+        <div style="background:#fef3c744;text-align:center;padding:10px;border-left:1px solid var(--border);font-weight:600;color:#b45309">MEDIO</div>
+        <div style="background:#fef3c744;text-align:center;padding:10px;border-left:1px solid var(--border);font-weight:600;color:#b45309">MEDIO</div>
+        <div style="background:#fef3c744;text-align:center;padding:10px;border-left:1px solid var(--border);font-weight:600;color:#b45309">MEDIO</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ PAGE: DATOS -->
+<div id="page-datos" class="page">
+  <p class="section-label">Matriz de Disponibilidad de Datos · 19-10-2026</p>
+  <h1 class="page-title">Disponibilidad de Datos y Alternativas</h1>
+  <p class="page-subtitle">53 datos requeridos en 6 fases. Filtrar por fase o prioridad. Las alternativas provienen de geoservicios verificados el 19-10-2026.</p>
+
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px" id="data-filters">
+    <button class="filter-btn active" onclick="filterData('all')">Todos (53)</button>
+    <button class="filter-btn" onclick="filterData('F1')">F1 (21)</button>
+    <button class="filter-btn" onclick="filterData('F2')">F2 (4)</button>
+    <button class="filter-btn" onclick="filterData('F3')">F3 (6)</button>
+    <button class="filter-btn" onclick="filterData('F4')">F4 (11)</button>
+    <button class="filter-btn" onclick="filterData('F5')">F5 (8)</button>
+    <button class="filter-btn" onclick="filterData('F6')">F6 (3)</button>
+    <button class="filter-btn" onclick="filterData('Crítica')">🔴 Críticos (18)</button>
+  </div>
+
+  <div id="data-list" style="display:flex;flex-direction:column;gap:10px"></div>
+</div>
+
+<style>
+/* ── RISK CARDS ── */
+.risk-item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  background: var(--bg-card);
+}
+.risk-red { border-left: 3px solid #dc2626; }
+.risk-yellow { border-left: 3px solid #d97706; }
+.risk-green { border-left: 3px solid #059669; }
+.risk-header { font-size: 13px; font-weight: 700; color: var(--fg); margin-bottom: 6px; display:flex; gap:8px; align-items:flex-start; flex-wrap:wrap; }
+.risk-badge { font-size: 11px; font-weight: 600; white-space: nowrap; }
+.risk-body { font-size: 12.5px; color: var(--fg-muted); line-height: 1.5; }
+.risk-alt { margin-top: 8px; padding: 8px 10px; background: var(--bg-subtle); border-radius: 5px; font-size: 12px; border-left: 2px solid var(--border-strong); }
+.risk-action { margin-top: 6px; font-size: 12px; font-weight: 600; color: var(--fg); }
+
+/* ── DATA TABLE FILTER BUTTONS ── */
+.filter-btn {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: var(--font-body);
+  color: var(--fg-muted);
+  cursor: pointer;
+  transition: all .15s;
+}
+.filter-btn:hover { border-color: var(--border-strong); color: var(--fg); }
+.filter-btn.active { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+
+/* ── DATA ROW ── */
+.data-row {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  padding: 12px 14px;
+  display: grid;
+  grid-template-columns: 52px 1fr auto;
+  gap: 10px;
+  align-items: start;
+}
+.data-id { font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--fg-faint); padding-top: 2px; }
+.data-body { min-width: 0; }
+.data-title { font-size: 13px; font-weight: 600; color: var(--fg); margin-bottom: 3px; }
+.data-meta { font-size: 12px; color: var(--fg-muted); margin-bottom: 6px; }
+.data-alts { display: flex; flex-direction: column; gap: 4px; }
+.data-alt { font-size: 11.5px; color: var(--fg-muted); background: var(--bg-subtle); border-radius: 4px; padding: 5px 8px; border-left: 2px solid var(--border-strong); }
+.data-alt a { color: inherit; text-decoration: underline; text-underline-offset: 2px; opacity:.7; }
+.data-badges { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; flex-shrink: 0; }
+.prio-critica { background: #fee2e2; color: #b91c1c; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 999px; white-space: nowrap; }
+.prio-alta { background: #fef3c7; color: #b45309; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 999px; white-space: nowrap; }
+.prio-media { background: var(--e-badge); color: var(--fg-muted); font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 999px; white-space: nowrap; }
+.verified-si { font-size: 10px; color: #047857; font-weight: 600; }
+.verified-ver { font-size: 10px; color: var(--fg-faint); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .prio-critica { background:#7f1d1d44; color:#fca5a5; }
+  :root:not([data-theme="light"]) .prio-alta { background:#78350f44; color:#fcd34d; }
+}
+:root[data-theme="dark"] .prio-critica { background:#7f1d1d44; color:#fca5a5; }
+:root[data-theme="dark"] .prio-alta { background:#78350f44; color:#fcd34d; }
+</style>
+
+<script>
+// ── Tabs
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ── Data table
+const dataItems = [
+  {id:'1.01',f:'F1',mes:'Mes 1',cat:'Cartografía base',name:'Límite insular, línea de costa, sectores, barrios, vías',prio:'Crítica',ver:'Sí',
+   alt1:{name:'Geoportal Gobernación SAI — CartografiaBaseSAI',url:'https://geoportal.sanandres.gov.co/server/rest/services/CartografiaBaseSAI/MapServer',tipo:'ArcGIS REST'},
+   alt2:{name:'IGAC — Datos abiertos geoespaciales',url:'https://www.igac.gov.co/datos-abiertos/datos-abiertos-geoespaciales',tipo:'Descarga'}},
+  {id:'1.02',f:'F1',mes:'Mes 1',cat:'Cartografía base',name:'Ortofoto de alta resolución IGAC 2025',prio:'Crítica',ver:'Sí',
+   alt1:{name:'Geoportal Gobernación — Ortofoto IGAC 2025',url:'https://geoportal.sanandres.gov.co/server/rest/services/Ortofoto_San_Andres_Providencia_Santa_Catalina_2025_IGAC/MapServer',tipo:'ArcGIS REST (solo viz)'},
+   alt2:{name:'Copernicus Browser — Sentinel-2 (10 m)',url:'https://browser.dataspace.copernicus.eu/',tipo:'Descarga/WMS'}},
+  {id:'1.03',f:'F1',mes:'Mes 1',cat:'Límites y AP',name:'Áreas protegidas: AMP Seaflower, PNR Johnny Cay, Old Point',prio:'Alta',ver:'Sí',
+   alt1:{name:'AmbientalSAI — AMP id 21, PNR id 25',url:'https://geoportal.sanandres.gov.co/server/rest/services/AmbientalSAI/MapServer',tipo:'ArcGIS REST'},
+   alt2:{name:'RUNAP / WDPA Protected Planet',url:'https://runap.parquesnacionales.gov.co/',tipo:'Descarga'}},
+  {id:'1.04',f:'F1',mes:'Mes 1',cat:'Manglar',name:'Extensión actual del manglar (cobertura)',prio:'Crítica',ver:'Sí',
+   alt1:{name:'INVEMAR SIGMA — Manglares Colombia (WMS/WFS)',url:'https://gis.invemar.org.co/arcgis/rest/services/SIGMA/MANGLARES_COLOMBIA/MapServer/WMSServer?request=GetCapabilities&service=WMS',tipo:'WMS+WFS'},
+   alt2:{name:'AmbientalSAI — Manglar id 11, Buffer id 12',url:'https://geoportal.sanandres.gov.co/server/rest/services/AmbientalSAI/MapServer/11',tipo:'ArcGIS REST'}},
+  {id:'1.05',f:'F1',mes:'Mes 1',cat:'Manglar',name:'Estado de salud, especies, estructura (parcelas MangRes)',prio:'Crítica',ver:'Sí',
+   alt1:{name:'INVEMAR SIGMA — Sectores de manglar',url:'https://gis.invemar.org.co/arcgis/rest/services/SIGMA/SECTORES_MANGLARES/MapServer',tipo:'ArcGIS REST'},
+   alt2:{name:'Informes técnicos CORALINA–INVEMAR (SIAM)',url:'https://siam.invemar.org.co/',tipo:'Consulta documental'}},
+  {id:'1.06',f:'F1',mes:'Mes 2',cat:'Manglar',name:'Serie histórica de cobertura (2-3 cortes temporales)',prio:'Alta',ver:'Verificar',
+   alt1:{name:'Global Mangrove Watch (1996-2020)',url:'https://www.globalmangrovewatch.org/',tipo:'Descarga/visor'},
+   alt2:{name:'GEE — Sentinel-2 SR Harmonized',url:'https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED',tipo:'GEE'}},
+  {id:'1.07',f:'F1',mes:'Mes 2',cat:'LULC',name:'LULC en 2-3 cortes temporales (1:5.000)',prio:'Crítica',ver:'Sí',
+   alt1:{name:'INVEMAR CLIMARES20 — LULC SAI/Providencia (ids 1-4)',url:'https://gis.invemar.org.co/arcgis/rest/services/CLIMARES20/CLIMARES20_TM_Caso_SAI_Providencia/MapServer',tipo:'ArcGIS REST'},
+   alt2:{name:'IGAC/IDEAM — Corine Land Cover Colombia (WMS)',url:'https://data.amerigeoss.org/dataset/servicio-wms-colombia-igac-corine',tipo:'WMS'}},
+  {id:'1.08',f:'F1',mes:'Mes 2',cat:'Ecosistemas',name:'Arrecifes, pastos marinos, comunidades, playas',prio:'Alta',ver:'Sí',
+   alt1:{name:'AmbientalSAI — Arrecifes 22, Pastos 26, Playas 14',url:'https://geoportal.sanandres.gov.co/server/rest/services/AmbientalSAI/MapServer',tipo:'ArcGIS REST'},
+   alt2:{name:'Allen Coral Atlas',url:'https://allencoralatlas.org/atlas/',tipo:'Descarga'}},
+  {id:'1.09',f:'F1',mes:'Mes 1',cat:'Priorización',name:'Modelo multicriterio de priorización de restauración',prio:'Crítica',ver:'Sí',
+   alt1:{name:'INVEMAR SIGMA — Zonificación y Mosaico de restauración',url:'https://gis.invemar.org.co/arcgis/rest/services/SIGMA/ZONIFICACION/MapServer',tipo:'ArcGIS REST'},
+   alt2:{name:'Reconstrucción propia del AHP con capas de la matriz',url:'',tipo:'Elaboración propia'}},
+  {id:'1.10',f:'F1',mes:'Mes 1',cat:'Clima',name:'Proyecciones SLR (SSP, horizontes 2050/2100)',prio:'Crítica',ver:'Sí',
+   alt1:{name:'NASA IPCC AR6 Sea Level Projection Tool',url:'https://sealevel.nasa.gov/ipcc-ar6-sea-level-projection-tool',tipo:'Descarga'},
+   alt2:{name:'INVEMAR CLIMARES20 — Inundación futura SAI (ids 6-13)',url:'https://gis.invemar.org.co/arcgis/rest/services/CLIMARES20/CLIMARES20_TM_Caso_SAI_Providencia/MapServer',tipo:'ArcGIS REST'}},
+  {id:'1.11',f:'F1',mes:'Mes 2',cat:'Clima',name:'Proyecciones temperatura y precipitación',prio:'Media',ver:'Sí',
+   alt1:{name:'INVEMAR CLIMARES20 — TCNCC Amenazas',url:'https://gis.invemar.org.co/arcgis/rest/services/CLIMARES20/CLIMARES20_TM_TCNCC_Amenazas/MapServer',tipo:'ArcGIS REST'},
+   alt2:{name:'Copernicus Interactive Climate Atlas (CMIP6)',url:'https://atlas.climate.copernicus.eu/atlas',tipo:'Visor/descarga'}},
+  {id:'1.12',f:'F1',mes:'Mes 1',cat:'Clima',name:'Trayectorias históricas de tormentas/huracanes (Iota 2020)',prio:'Alta',ver:'Verificar',
+   alt1:{name:'NOAA IBTrACS',url:'https://www.ncei.noaa.gov/products/international-best-track-archive',tipo:'Descarga SHP/CSV'},
+   alt2:{name:'NOAA NHC HURDAT2 (Atlántico)',url:'https://www.nhc.noaa.gov/data/#hurdat',tipo:'Descarga'}},
+  {id:'1.13',f:'F1',mes:'Mes 2',cat:'Amenazas',name:'Amenaza por inundación y erosión costera actual',prio:'Alta',ver:'Sí',
+   alt1:{name:'INVEMAR CLIMARES20 — Erosión, geomorfología, inundación SAI',url:'https://gis.invemar.org.co/arcgis/rest/services/CLIMARES20/CLIMARES20_TM_Caso_SAI_Providencia/MapServer',tipo:'ArcGIS REST'},
+   alt2:{name:'INVEMAR Erosión costera nacional',url:'https://gis.invemar.org.co/arcgis/rest/services/ErosionCostera/1_TM_ErosionCostera/MapServer',tipo:'ArcGIS REST'}},
+  {id:'1.14',f:'F1',mes:'Mes 2',cat:'Política',name:'Planes territoriales de CC y riesgo (PIGCCT, PTACCSA 2022, POT)',prio:'Media',ver:'Sí',
+   alt1:{name:'Gobernación SAI — PTACCSA 2022',url:'https://tic.sanandres.gov.co/index.php/transparencia/salud-publica/publicaciones/publicaciones-del-2020-al-2022/salud-publica-1/20761-ptaccsa-cambio-climatico-2022/file',tipo:'Descarga PDF'},
+   alt2:{name:'Minambiente — PIGCCT',url:'https://www.minambiente.gov.co/cambio-climatico-y-gestion-del-riesgo/planes-integrales-de-gestion-del-cambio-climatico-territorial/',tipo:'Consulta'}},
+  {id:'1.15',f:'F1',mes:'Mes 1',cat:'Normativa',name:'Marco normativo de manglares (Res. 1263/2018, Ley 2243/2022)',prio:'Media',ver:'Verificar',
+   alt1:{name:'SUIN-Juriscol',url:'https://www.suin-juriscol.gov.co/',tipo:'Consulta'},
+   alt2:{name:'Función Pública — Gestor normativo',url:'https://www.funcionpublica.gov.co/eva/gestornormativo/index.php',tipo:'Consulta'}},
+  {id:'1.16',f:'F1',mes:'Mes 2',cat:'Socioeconómico',name:'Población por manzana/sector (DANE CNPV 2018)',prio:'Alta',ver:'Verificar',
+   alt1:{name:'DANE — CNPV 2018 + Marco Geoestadístico Nacional',url:'https://geoportal.dane.gov.co/',tipo:'Descarga/servicios'},
+   alt2:{name:'WorldPop / Meta HRSL — densidad en grilla',url:'https://data.humdata.org/dataset/colombia-high-resolution-population-density-maps-demographic-estimates',tipo:'Descarga'}},
+  {id:'1.17',f:'F1',mes:'Mes 2',cat:'Socioeconómico',name:'Medios de vida, pesca artesanal, turismo, gobernanza local',prio:'Media',ver:'Verificar',
+   alt1:{name:'DANE — GEIH, cuentas departamentales',url:'https://www.dane.gov.co/',tipo:'Descarga'},
+   alt2:{name:'Informes CORALINA / talleres con actores',url:'',tipo:'Solicitud'}},
+  {id:'1.18',f:'F1',mes:'Mes 1',cat:'Activos',name:'Edificaciones y predios (huellas construcción, manzanas)',prio:'Crítica',ver:'Sí',
+   alt1:{name:'Geoportal Gobernación — UrbanoSAI (construcciones, terrenos)',url:'https://geoportal.sanandres.gov.co/server/rest/services/UrbanoSAI/MapServer',tipo:'ArcGIS REST'},
+   alt2:{name:'Google Open Buildings / Microsoft Building Footprints',url:'https://sites.research.google/open-buildings/',tipo:'Descarga'}},
+  {id:'1.19',f:'F1',mes:'Mes 1',cat:'Activos',name:'Infraestructura crítica (vías, muelles, aeropuerto, hoteles)',prio:'Crítica',ver:'Sí',
+   alt1:{name:'Geoportal Gobernación — Infraestructura, MovilidadSAI, Salud',url:'https://geoportal.sanandres.gov.co/server/rest/services/Infraestructura/MapServer',tipo:'ArcGIS REST (vacía al 19-10)'},
+   alt2:{name:'OpenStreetMap — Geofabrik Colombia',url:'https://download.geofabrik.de/south-america/colombia.html',tipo:'Descarga'}},
+  {id:'1.20',f:'F1',mes:'Mes 2',cat:'Iota',name:'Daños del huracán Iota (2020) por edificación — ✅ DESCARGADO 09-11-2026: UNOSAT TC20201123COL (SAI 31 dañadas + 221 potencialmente dañadas; Providencia 1100 + 10). Puntos, no polígonos; SAI sin máscara de nubes (conteo mínimo)',prio:'Alta',ver:'Sí',
+   alt1:{name:'UNOSAT TC20201123COL vía HDX (la ficha AmeriGEOSS es un harvest sin recursos, API 404) — zip SHP + GDB con SAI y Providencia',url:'https://data.amerigeoss.org/dataset/damage-assessment-in-san-andres-island-providencia-and-santa-catalina-department-colombia',tipo:'Descargado (script R)'},
+   alt2:{name:'Mejora INVEMAR: daño a manglar post-Iota (parcelas carbono 2021 en SAI; Expedición Cangrejo Negro en Providencia), cotas de inundación observadas y perfiles de playa post-evento',url:'',tipo:'Solicitud (reunión 10-11)'}},
+  {id:'1.21',f:'F1',mes:'Mes 3',cat:'Mercado',name:'Precios del recurso pesquero y desembarcos',prio:'Media',ver:'Sí',
+   alt1:{name:'AUNAP — SEPEC',url:'http://sepec.aunap.gov.co/',tipo:'Consulta/descarga'},
+   alt2:{name:'AUNAP — Estadísticas desembarco artesanal',url:'https://intranet.aunap.gov.co/wp-content/uploads/2025/10/Estadisticas-de-desembarco-y-esfuerzo-de-las-pesquerias-artesanales-de-Colombia.pdf',tipo:'Descarga PDF'}},
+  // F2
+  {id:'2.01',f:'F2',mes:'Mes 3',cat:'Activos integrados',name:'Cartografía integrada de activos socioeconómicos',prio:'Crítica',ver:'—',
+   alt1:{name:'Integración propia: 1.16 + 1.18 + 1.19',url:'',tipo:'Elaboración propia'},
+   alt2:{name:'Depende de que lleguen 1.16, 1.18 y 1.19 antes del Mes 3',url:'',tipo:'Cascada'}},
+  {id:'2.02',f:'F2',mes:'Mes 3',cat:'Manglar',name:'Presiones sobre el manglar (rellenos, residuos, urbanización)',prio:'Alta',ver:'Sí',
+   alt1:{name:'INVEMAR SIGMA — Presiones',url:'https://gis.invemar.org.co/arcgis/rest/services/SIGMA/PRESIONES/MapServer',tipo:'ArcGIS REST'},
+   alt2:{name:'Geoportal Gobernación — DisposicionResiduosSAI',url:'https://geoportal.sanandres.gov.co/server/rest/services/DisposicionResiduosSAI/MapServer',tipo:'ArcGIS REST'}},
+  {id:'2.03',f:'F2',mes:'Mes 3',cat:'Restauración',name:'Áreas con potencial de restauración',prio:'Alta',ver:'Sí',
+   alt1:{name:'Global Mangrove Watch — capa de restauración',url:'https://www.globalmangrovewatch.org/',tipo:'Visor/descarga'},
+   alt2:{name:'INVEMAR SIGMA — Mosaico de restauración',url:'https://gis.invemar.org.co/arcgis/rest/services/SIGMA/MOSAICO_RESTAURACION/MapServer',tipo:'ArcGIS REST'}},
+  {id:'2.04',f:'F2',mes:'Mes 3',cat:'Gobernanza',name:'Criterios de decisión y pesos AHP acordados con CORALINA',prio:'Crítica',ver:'—',
+   alt1:{name:'Taller de validación (dic 2026–ene 2027)',url:'',tipo:'Taller'},
+   alt2:{name:'Literatura AHP aplicada a restauración de manglar',url:'',tipo:'Consulta documental'}},
+  // F3
+  {id:'3.01',f:'F3',mes:'Mes 3',cat:'Costos',name:'Jornales de siembra, limpieza, mantenimiento',prio:'Alta',ver:'Verificar',
+   alt1:{name:'Mintrabajo — salario mínimo y jornal 2026',url:'https://www.mintrabajo.gov.co/',tipo:'Consulta'},
+   alt2:{name:'Bayraktarov et al. 2016 — costos restauración costera',url:'https://doi.org/10.1890/15-1077',tipo:'Literatura'}},
+  {id:'3.02',f:'F3',mes:'Mes 3',cat:'Costos',name:'Materiales, embarcaciones, combustible, EPP',prio:'Alta',ver:'Verificar',
+   alt1:{name:'Cotizaciones locales vía coordinador logístico del proyecto',url:'',tipo:'Solicitud'},
+   alt2:{name:'SECOP II — contratos públicos similares',url:'https://www.datos.gov.co/',tipo:'Descarga'}},
+  {id:'3.03',f:'F3',mes:'Mes 3',cat:'Costos',name:'RR.HH. técnicos (supervisión, ecólogo, sociólogo)',prio:'Alta',ver:'Verificar',
+   alt1:{name:'Tablas de honorarios Patrimonio Natural / FORLIANCE',url:'',tipo:'Solicitud'},
+   alt2:{name:'SECOP II — honorarios en contratos de restauración',url:'https://www.colombiacompra.gov.co/',tipo:'Consulta'}},
+  {id:'3.04',f:'F3',mes:'Mes 4',cat:'Costos',name:'Costos de permisos, estudios y socialización',prio:'Media',ver:'—',
+   alt1:{name:'Tarifas de evaluación ambiental CORALINA',url:'',tipo:'Solicitud'},
+   alt2:{name:'SECOP II',url:'https://www.datos.gov.co/',tipo:'Descarga'}},
+  {id:'3.05',f:'F3',mes:'Mes 4',cat:'Costos',name:'Costos de monitoreo científico y gobernanza (OPEX)',prio:'Media',ver:'Verificar',
+   alt1:{name:'Protocolos de monitoreo INVEMAR SIGMA',url:'https://siam.invemar.org.co/',tipo:'Consulta'},
+   alt2:{name:'Bayraktarov et al. 2016',url:'https://doi.org/10.1890/15-1077',tipo:'Literatura'}},
+  {id:'3.06',f:'F3',mes:'Mes 4',cat:'Macroeconómico',name:'IPC y tasa de cambio COP/EUR/USD',prio:'Media',ver:'Verificar',
+   alt1:{name:'DANE — IPC',url:'https://www.dane.gov.co/index.php/estadisticas-por-tema/precios-y-costos/indice-de-precios-al-consumidor-ipc',tipo:'Descarga'},
+   alt2:{name:'Banco de la República — TRM',url:'https://www.banrep.gov.co/es/estadisticas/trm',tipo:'Descarga'}},
+  // F4
+  {id:'4.01',f:'F4',mes:'Mes 1',cat:'Batimetría',name:'Batimetría nearshore muy alta resolución (≤10 m)',prio:'Crítica',ver:'Sí',
+   alt1:{name:'Geoportal Gobernación — CartografiaBaseSAI Batimetría id 4',url:'https://geoportal.sanandres.gov.co/server/rest/services/CartografiaBaseSAI/MapServer/4',tipo:'ArcGIS REST'},
+   alt2:{name:'Batimetría SDB Sentinel-2 + ICESat-2 ATL03',url:'https://openaltimetry.earthdatacloud.nasa.gov/',tipo:'Descarga/elaboración propia'}},
+  {id:'4.02',f:'F4',mes:'Mes 1',cat:'Batimetría',name:'Cartas náuticas DIMAR-CIOH',prio:'Crítica',ver:'Sí',
+   alt1:{name:'DIMAR — CIOH (solicitud formal)',url:'https://www.dimar.mil.co/',tipo:'Solicitud'},
+   alt2:{name:'CECOLDO DIMAR (repositorio oceanográfico)',url:'https://cecoldodigital.dimar.mil.co/',tipo:'Consulta/descarga'}},
+  {id:'4.03',f:'F4',mes:'Mes 2',cat:'Batimetría',name:'Batimetría regional GEBCO (~450 m)',prio:'Media',ver:'Verificar',
+   alt1:{name:'GEBCO (WMS y descarga)',url:'https://download.gebco.net/',tipo:'Descarga/WMS'},
+   alt2:{name:'SRTM15+',url:'https://topex.ucsd.edu/WWW_html/srtm15_plus.html',tipo:'Descarga'}},
+  {id:'4.04',f:'F4',mes:'Mes 1',cat:'Topografía',name:'MDT costero (≤5 m ideal, mínimo ≤10 m)',prio:'Crítica',ver:'Sí',
+   alt1:{name:'Geoportal Gobernación — Curvas nivel + pedir MDT IGAC 2025',url:'https://geoportal.sanandres.gov.co/server/rest/services/CartografiaBaseSAI/MapServer/0',tipo:'ArcGIS REST / Solicitud'},
+   alt2:{name:'FABDEM (30 m, sin edificios) / Copernicus DEM GLO-30',url:'https://data.bris.ac.uk/data/dataset/s5hqmjcdj8yo2ibzi9b4ew3sn',tipo:'Descarga'}},
+  {id:'4.05',f:'F4',mes:'Mes 2',cat:'Topografía',name:'Línea de costa muy alta resolución (1:1.000)',prio:'Alta',ver:'Sí',
+   alt1:{name:'Geoportal Gobernación — Límite de Isla 1:800',url:'https://geoportal.sanandres.gov.co/server/rest/services/CartografiaBaseSAI/MapServer/3',tipo:'ArcGIS REST'},
+   alt2:{name:'Digitalización propia sobre ortofoto IGAC 2025',url:'',tipo:'Elaboración propia'}},
+  {id:'4.06',f:'F4',mes:'Mes 2',cat:'Forzamiento',name:'Marea astronómica y nivel del mar observado',prio:'Alta',ver:'Verificar',
+   alt1:{name:'Modelo global de mareas TPXO',url:'https://www.tpxo.net/global',tipo:'Descarga (registro)'},
+   alt2:{name:'IOC Sea Level Station Monitoring Facility',url:'https://www.ioc-sealevelmonitoring.org/',tipo:'Descarga'}},
+  {id:'4.07',f:'F4',mes:'Mes 2',cat:'Forzamiento',name:'Niveles extremos (storm tide) TR 10/25/50/100 años',prio:'Crítica',ver:'Sí',
+   alt1:{name:'COAST-RP (Dullaart et al.) — incluye ciclones tropicales',url:'https://data.4tu.nl/datasets/4e291b8f-a37e-4378-8ca6-954a44fdc8fb',tipo:'Descarga'},
+   alt2:{name:'GTSM — series nivel de agua CMIP6 (Copernicus CDS)',url:'https://cds.climate.copernicus.eu/datasets/sis-water-level-change-timeseries-cmip6',tipo:'Descarga (cuenta CDS)'}},
+  {id:'4.08',f:'F4',mes:'Mes 2',cat:'Forzamiento',name:'Oleaje (Hs, Tp, dirección): series y extremos',prio:'Alta',ver:'Verificar',
+   alt1:{name:'ERA5 — Copernicus CDS',url:'https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels',tipo:'Descarga (cuenta CDS)'},
+   alt2:{name:'Copernicus Marine — reanálisis global de oleaje',url:'https://data.marine.copernicus.eu/product/GLOBAL_MULTIYEAR_WAV_001_032/description',tipo:'Descarga (cuenta CMEMS)'}},
+  {id:'4.09',f:'F4',mes:'Mes 3',cat:'Forzamiento',name:'Ciclones sintéticos y campos de viento/presión',prio:'Media',ver:'Verificar',
+   alt1:{name:'STORM — trayectorias sintéticas (Bloemendaal et al.)',url:'https://data.4tu.nl/articles/dataset/STORM_IBTrACS_present_climate_synthetic_tropical_cyclone_tracks/12706085',tipo:'Descarga'},
+   alt2:{name:'IBTrACS + modelo paramétrico de Holland',url:'https://www.ncei.noaa.gov/products/international-best-track-archive',tipo:'Descarga'}},
+  {id:'4.10',f:'F4',mes:'Mes 4',cat:'Parámetros',name:'Rugosidad del fondo y vegetación (Manning)',prio:'Alta',ver:'Verificar',
+   alt1:{name:'Derivado de LULC + ecosistemas marinos + parcelas MangRes',url:'',tipo:'Elaboración propia'},
+   alt2:{name:'Simard et al. 2019 — altura de dosel de manglar (ORNL DAAC)',url:'https://daac.ornl.gov/cgi-bin/dsviewer.pl?ds_id=1665',tipo:'Descarga (Earthdata)'}},
+  {id:'4.11',f:'F4',mes:'Mes 3',cat:'Iota',name:'Extensión observada de inundación Iota (validación)',prio:'Media',ver:'Sí',
+   alt1:{name:'NASA Disasters — ARIA DPM Sentinel-1 22-11-2020',url:'https://maps.disasters.nasa.gov/ags04/rest/services/hurricane_eta_2020/aria_dpm_sentinel1_20201122/ImageServer',tipo:'ArcGIS ImageServer'},
+   alt2:{name:'Sentinel-1 propio (Copernicus Browser)',url:'https://browser.dataspace.copernicus.eu/',tipo:'Descarga'}},
+  // F5
+  {id:'5.01',f:'F5',mes:'Mes 2',cat:'Valoración',name:'Valor infraestructura pública y privada (avalúos)',prio:'Crítica',ver:'Sí',
+   alt1:{name:'UrbanoSAI + avalúos del gestor catastral (solicitud)',url:'https://geoportal.sanandres.gov.co/server/rest/services/UrbanoSAI/MapServer',tipo:'ArcGIS REST + Solicitud'},
+   alt2:{name:'DANE — estadísticas de construcción (costo reposición)',url:'https://www.dane.gov.co/index.php/estadisticas-por-tema/construccion',tipo:'Descarga'}},
+  {id:'5.02',f:'F5',mes:'Mes 5',cat:'Valoración',name:'Funciones de profundidad-daño por tipo de activo',prio:'Alta',ver:'Verificar',
+   alt1:{name:'JRC — Huizinga et al. 2017 (curvas globales Sudamérica)',url:'https://publications.jrc.ec.europa.eu/repository/handle/JRC105688',tipo:'Descarga'},
+   alt2:{name:'Calibración local con daños de Iota (1.20)',url:'',tipo:'Elaboración propia'}},
+  {id:'5.03',f:'F5',mes:'Mes 5',cat:'Valoración',name:'Actividad económica expuesta (hoteles, comercio)',prio:'Media',ver:'Verificar',
+   alt1:{name:'Registro Nacional de Turismo (RNT)',url:'https://rnt.confecamaras.co/',tipo:'Consulta'},
+   alt2:{name:'DANE — cuentas departamentales',url:'https://www.dane.gov.co/',tipo:'Descarga'}},
+  {id:'5.04',f:'F5',mes:'Mes 1',cat:'Carbono',name:'Carbono en biomasa de manglar (aérea y subterránea)',prio:'Crítica',ver:'Verificar',
+   alt1:{name:'Simard et al. 2019 — biomasa y altura de manglar (ORNL DAAC)',url:'https://daac.ornl.gov/cgi-bin/dsviewer.pl?ds_id=1665',tipo:'Descarga (Earthdata)'},
+   alt2:{name:'IPCC 2013 Wetlands Supplement (factores por defecto)',url:'https://www.ipcc-nggip.iges.or.jp/public/wetlands/',tipo:'Consulta'}},
+  {id:'5.05',f:'F5',mes:'Mes 1',cat:'Carbono',name:'Carbono orgánico del suelo de manglar',prio:'Crítica',ver:'Verificar',
+   alt1:{name:'Sanderman et al. 2018 (DOI: 10.1088/1748-9326/aabe1c)',url:'https://doi.org/10.1088/1748-9326/aabe1c',tipo:'Literatura/descarga'},
+   alt2:{name:'IPCC 2013 Wetlands Supplement',url:'https://www.ipcc-nggip.iges.or.jp/public/wetlands/',tipo:'Consulta'}},
+  {id:'5.06',f:'F5',mes:'Mes 6',cat:'Carbono',name:'Metodología estimación créditos carbono azul (Verra VM0033)',prio:'Alta',ver:'Verificar',
+   alt1:{name:'Verra VM0033 — restauración humedales mareales',url:'https://verra.org/methodologies/vm0033-methodology-for-tidal-wetland-and-seagrass-restoration-v2-1/',tipo:'Consulta'},
+   alt2:{name:'Plan Vivo / Gold Standard',url:'https://www.planvivo.org/',tipo:'Consulta'}},
+  {id:'5.07',f:'F5',mes:'Mes 8',cat:'Carbono',name:'Precio mercado voluntario carbono azul (USD/tCO₂e)',prio:'Alta',ver:'Verificar',
+   alt1:{name:'Ecosystem Marketplace — State of Voluntary Carbon Market',url:'https://www.ecosystemmarketplace.com/',tipo:'Consulta'},
+   alt2:{name:'World Bank — Carbon Pricing Dashboard',url:'https://carbonpricingdashboard.worldbank.org/',tipo:'Consulta'}},
+  {id:'5.08',f:'F5',mes:'Mes 8',cat:'Carbono',name:'Impuesto nacional al carbono Colombia (DIAN 2026)',prio:'Alta',ver:'Sí',
+   alt1:{name:'DIAN — Resolución 000003 de 2026',url:'https://normograma.dian.gov.co/dian/compilacion/docs/resolucion_dian_0003_2026.htm',tipo:'Consulta'},
+   alt2:{name:'Ley 2277 de 2022 (base tCO₂e y actualización anual)',url:'https://www.suin-juriscol.gov.co/',tipo:'Consulta'}},
+  // F6
+  {id:'6.01',f:'F6',mes:'Mes 8',cat:'Parámetros ACB',name:'Tasa social de descuento oficial (DNP 9 %)',prio:'Crítica',ver:'Sí',
+   alt1:{name:'DNP — Resolución 1092 de 2022 (9 % efectiva anual)',url:'https://dnp.gov.co/publicaciones/Revista-Juridica/Paginas/Adopci%C3%B3n-de-la-Tasa-Social-de-Descuento-para-la-evaluaci%C3%B3n-de-proyectos-de-inversi%C3%B3n.aspx',tipo:'Consulta'},
+   alt2:{name:'Tasas decrecientes DNP para proyectos ambientales horizonte largo',url:'',tipo:'Consulta documental'}},
+  {id:'6.02',f:'F6',mes:'Mes 9',cat:'Referencias',name:'ACB y valoraciones de referencia de iniciativas similares',prio:'Media',ver:'Verificar',
+   alt1:{name:'Menéndez et al. 2020 — valor global de manglares en reducción de riesgo',url:'https://doi.org/10.1038/s41598-020-61136-6',tipo:'Literatura'},
+   alt2:{name:'Informes ACB AbE en el Caribe (BID, Banco Mundial, TNC)',url:'',tipo:'Consulta documental'}},
+  {id:'6.03',f:'F6',mes:'Mes 9',cat:'Gobernanza',name:'Criterios de decisión finales acordados con CORALINA',prio:'Alta',ver:'—',
+   alt1:{name:'Resultado del taller de validación (2.04)',url:'',tipo:'Taller'},
+   alt2:{name:'—',url:'',tipo:''}}
+];
+
+let currentFilter = 'all';
+function filterData(f) {
+  currentFilter = f;
+  document.querySelectorAll('#data-filters .filter-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  renderData();
+}
+
+function renderData() {
+  const list = document.getElementById('data-list');
+  const items = currentFilter === 'all' ? dataItems
+    : currentFilter === 'Crítica' ? dataItems.filter(d => d.prio === 'Crítica')
+    : dataItems.filter(d => d.f === currentFilter);
+  list.innerHTML = items.map(d => {
+    const prioCls = d.prio === 'Crítica' ? 'prio-critica' : d.prio === 'Alta' ? 'prio-alta' : 'prio-media';
+    const verCls = d.ver === 'Sí' ? 'verified-si' : 'verified-ver';
+    const verLabel = d.ver === 'Sí' ? '✓ Verificado' : d.ver === 'Verificar' ? '○ Verificar' : '';
+    const a1link = d.alt1.url ? `<a href="${d.alt1.url}" target="_blank">${d.alt1.url.length > 55 ? d.alt1.url.slice(0,52)+'…' : d.alt1.url}</a>` : '';
+    const a2link = d.alt2.url ? `<a href="${d.alt2.url}" target="_blank">${d.alt2.url.length > 55 ? d.alt2.url.slice(0,52)+'…' : d.alt2.url}</a>` : '';
+    return `<div class="data-row">
+      <div class="data-id">${d.id}<br><span style="color:var(--fg-faint);font-size:10px">${d.f} · ${d.mes}</span></div>
+      <div class="data-body">
+        <div class="data-title">${d.name}</div>
+        <div class="data-meta">${d.cat}</div>
+        <div class="data-alts">
+          <div class="data-alt"><strong>Alt.1</strong> ${d.alt1.name} <span style="color:var(--fg-faint)">— ${d.alt1.tipo}</span>${a1link ? '<br>'+a1link : ''}</div>
+          ${d.alt2.name !== '—' ? `<div class="data-alt"><strong>Alt.2</strong> ${d.alt2.name} <span style="color:var(--fg-faint)">— ${d.alt2.tipo}</span>${a2link ? '<br>'+a2link : ''}</div>` : ''}
+        </div>
+      </div>
+      <div class="data-badges"><span class="${prioCls}">${d.prio}</span>${verLabel ? `<span class="${verCls}">${verLabel}</span>` : ''}</div>
+    </div>`;
+  }).join('');
+}
+
+renderData();
+
+// ── Gantt data
+const phases = {
+  f1: { color: '#2563eb', label: 'F1' },
+  f2: { color: '#0891b2', label: 'F2' },
+  f3: { color: '#d97706', label: 'F3' },
+  f4: { color: '#7c3aed', label: 'F4' },
+  f5: { color: '#059669', label: 'F5' },
+  f6: { color: '#dc2626', label: 'F6' },
+};
+
+// months 1-12; mark which months are active per activity
+const activities = [
+  { phase:'f1', name:'Revisión documental', months:[1,2,3] },
+  { phase:'f1', name:'Cartografía LULC multi-temporal', months:[1,2,3] },
+  { phase:'f1', name:'Inventario stocks carbono', months:[2,3] },
+  { phase:'f1', name:'Datos hidrológicos MangRes', months:[1,2,3] },
+  { phase:'f1', name:'Datos socioecon. y activos', months:[2,3] },
+  { hito: true, name:'★ E1 — Plan Trabajo + Línea Base', month: 3, eur:'6.300 €' },
+
+  { phase:'f2', name:'Modelo AHP-WLC en QGIS', months:[2,3,4] },
+  { phase:'f2', name:'InVEST Coastal Vulnerability (8 runs)', months:[3,4] },
+  { phase:'f2', name:'Taller validación Taller 1', months:[3,4] },
+  { phase:'f2', name:'Selección 3 ACIs + declaración escenarios', months:[4] },
+  { hito: true, name:'★ E2 — Diagnóstico Integrado + ACIs', month: 4, eur:'6.300 €' },
+
+  { phase:'f3', name:'Inventario CAPEX por ACI', months:[4,5,6] },
+  { phase:'f3', name:'Proyección OPEX largo plazo', months:[5,6,7] },
+  { phase:'f3', name:'Curva logística recuperación', months:[6,7] },
+  { phase:'f3', name:'LULC proyectado Escenario Intervención', months:[5,6,7] },
+
+  { phase:'f4', name:'Setup modelo ADCIRC+SWAN/XBeach', months:[5,6] },
+  { phase:'f4', name:'Simulaciones: 4 TR × 2 escenarios', months:[6,7,8] },
+  { phase:'f4', name:'Calibración Huracán Iota (Providencia)', months:[6,7] },
+  { hito: true, name:'★ E3 — Informe Costos', month: 7, eur:'6.300 €' },
+
+  { phase:'f5', name:'InVEST CBC (3 matrices, 2 escenarios)', months:[7,8,9] },
+  { phase:'f5', name:'Monetización daños evitados', months:[8,9,10] },
+  { phase:'f5', name:'Prefactibilidad Verra VCS+CCB', months:[9,10] },
+  { hito: true, name:'★ E4 — Valoración Ecosistémica', month: 10, eur:'6.300 €' },
+
+  { phase:'f6', name:'ACB integrado: VPN/TIR/B-C', months:[9,10,11] },
+  { phase:'f6', name:'Análisis sensibilidad + Monte Carlo', months:[10,11] },
+  { phase:'f6', name:'Matriz priorización ACIs', months:[11] },
+  { phase:'f6', name:'Taller final (Taller 2)', months:[12] },
+  { phase:'f6', name:'Informe ACB Final + geodatabase', months:[11,12] },
+  { hito: true, name:'★ E5 — Informe ACB Final', month: 12, eur:'16.800 €' },
+];
+
+const tbody = document.getElementById('gantt-body');
+activities.forEach(act => {
+  const tr = document.createElement('tr');
+  if (act.hito) {
+    const td0 = document.createElement('td');
+    td0.className = 'activity-name';
+    td0.style.fontWeight = '700';
+    td0.style.color = 'var(--fg)';
+    td0.innerHTML = act.name + ' <span style="font-size:11px;color:var(--fg-faint);font-weight:400">' + act.eur + '</span>';
+    tr.appendChild(td0);
+    for (let m = 1; m <= 12; m++) {
+      const td = document.createElement('td');
+      td.className = 'hito-cell';
+      if (m === act.month) td.textContent = '★';
+      tr.appendChild(td);
+    }
+    tr.style.background = 'var(--bg-subtle)';
+  } else {
+    const p = phases[act.phase];
+    const td0 = document.createElement('td');
+    td0.className = 'activity-name';
+    td0.innerHTML = `<span class="phase-dot" style="background:${p.color}"></span>${act.name}`;
+    tr.appendChild(td0);
+    for (let m = 1; m <= 12; m++) {
+      const td = document.createElement('td');
+      if (act.months.includes(m)) {
+        const bar = document.createElement('span');
+        bar.className = 'cell-active';
+        bar.style.background = p.color;
+        bar.style.opacity = '0.85';
+        td.appendChild(bar);
+      }
+      tr.appendChild(td);
+    }
+  }
+  tbody.appendChild(tr);
+});
+</script>
+
+</body></html>
