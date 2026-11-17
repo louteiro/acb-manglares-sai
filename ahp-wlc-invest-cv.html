@@ -57,6 +57,31 @@ body{
 }
 
 
+
+/* ── LÓGICA DE CAPAS ── */
+.lg-flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:4px 0 18px}
+.lg-flow span{background:var(--bg-subtle);border:1px solid var(--border);border-radius:999px;padding:5px 12px;font-size:12.5px;font-weight:600}
+.lg-flow i{font-style:normal;color:var(--fg-faint);font-weight:700}
+.lg-types{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin-bottom:26px}
+.lg-type{border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;background:var(--bg-card);font-size:12.5px}
+.lg-type b{display:block;margin-bottom:2px}
+.lg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;margin-bottom:12px}
+.lg-card{background:var(--bg-card);border:1px solid var(--border);border-top:4px solid var(--dc);border-radius:var(--radius);padding:14px 16px;box-shadow:var(--shadow)}
+.lg-head{display:flex;justify-content:space-between;gap:8px;align-items:flex-start;margin-bottom:8px}
+.lg-name{font-weight:700;font-size:13.5px;line-height:1.3}
+.lg-row{display:grid;grid-template-columns:78px 1fr;gap:8px;font-size:12.5px;line-height:1.45;padding:3px 0}
+.lg-row>span:first-child{color:var(--fg-faint);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.04em;padding-top:1px}
+.lg-row.warn>span:last-child{color:var(--warn)}
+.lg-dimh{display:flex;align-items:baseline;gap:10px;margin:26px 0 10px}
+.lg-dimh h2{font-size:17px;font-weight:700}
+.lg-dimh span{font-size:12.5px;color:var(--fg-muted)}
+.chip{font-size:10px;font-weight:700;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.chip-c{background:var(--accent-soft);color:var(--accent)}
+.chip-m{background:var(--err-soft);color:var(--err)}
+.chip-b{background:var(--ok-soft);color:var(--ok)}
+.chip-r{background:var(--bg-deep);color:var(--fg-muted)}
+.chip-x{background:var(--warn-soft);color:var(--warn)}
+
 /* ── CARTOGRAFÍA MANGLAR ── */
 .carto-svg{width:100%;height:auto;display:block}
 .carto-svg .axis{stroke:var(--border-strong);stroke-width:1.5}
@@ -98,11 +123,13 @@ body::before{
 .nav-title{font-weight:800;font-size:13px;letter-spacing:-.2px;padding:12px 16px 12px 0;border-right:1px solid var(--border);margin-right:8px;white-space:nowrap;}
 .tab-btn{
   background:none;border:none;font-family:var(--font-body);font-size:13px;font-weight:500;
-  color:var(--fg-muted);cursor:pointer;padding:14px 14px;border-bottom:2px solid transparent;
+  color:var(--fg-muted);cursor:pointer;padding:14px 12px;border-bottom:2px solid transparent;
   transition:color .15s,border-color .15s;white-space:nowrap;
 }
 .tab-btn:hover{color:var(--fg);}
 .tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:700;}
+.run-phase{font-size:10.5px;font-weight:700;margin:2px 0 4px;text-transform:uppercase;letter-spacing:.03em}
+.nav-group{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;line-height:1.25;color:var(--fg-faint);border-left:1px solid var(--border);padding:2px 4px 2px 12px;margin-left:6px;white-space:nowrap;}
 .theme-toggle{
   margin-left:auto;background:var(--bg-subtle);border:1px solid var(--border);
   border-radius:6px;font-size:13px;padding:5px 10px;cursor:pointer;font-family:var(--font-body);
@@ -321,11 +348,13 @@ body::before{
     <div class="nav-title">ACB Manglares · F2</div>
     <button class="tab-btn active" onclick="showPage('ahp')">AHP-WLC</button>
     <button class="tab-btn" onclick="showPage('cv')">InVEST CV</button>
-    <button class="tab-btn" onclick="showPage('scenarios')">Escenarios</button>
-    <button class="tab-btn" onclick="showPage('runs')">Corridas CV</button>
+    <button class="tab-btn" onclick="showPage('logica')">Lógica de capas</button>
     <button class="tab-btn" onclick="showPage('timeline')">Datos críticos</button>
     <button class="tab-btn" onclick="showPage('carto')">Cartografía manglar</button>
     <button class="tab-btn" onclick="showPage('taller')">Checklist taller</button>
+    <span class="nav-group">F2–F4<br>Escenarios LULC</span>
+    <button class="tab-btn" onclick="showPage('scenarios')">Escenarios</button>
+    <button class="tab-btn" onclick="showPage('runs')">Corridas CV</button>
     <button class="theme-toggle" onclick="toggleTheme()">◑ tema</button>
   </div>
 </div>
@@ -1168,46 +1197,46 @@ body::before{
 <div id="page-runs" class="page">
   <p class="section-label">InVEST CV · Plan de corridas</p>
   <h1 class="page-title">8 corridas de InVEST CV</h1>
-  <p class="page-subtitle">4 cortes temporales × 2 escenarios. Sin matrices de transición (InVEST CV no las usa — eso es InVEST CBC). Cada corrida produce un raster IEC y un CSV de shore-points.</p>
+  <p class="page-subtitle">4 cortes temporales × 2 escenarios = 8 corridas, 7 distintas (RUN-05 es la misma que RUN-01). Cada corrida da el índice de exposición por punto de costa (vector + CSV) y, comparando con y sin hábitats, el papel del hábitat. Sin matrices de transición (InVEST CV no las usa, eso es InVEST CBC).</p>
 
   <div class="runs-grid">
     <div class="run-card run-base">
-      <div class="run-id">RUN-01</div>
+      <div class="run-id">RUN-01</div><div class="run-phase" style="color:var(--ok)">F2 · imprescindible antes del Taller</div>
       <div class="run-title">Base · t=0 (actual)</div>
       <div class="run-detail">LULC 2022 · SLR = 0 cm<br>Manglar actual (cifra reconciliada en act. 1.3; Biomaps 149,6 ha solo contraste · C2 dominante)</div>
     </div>
     <div class="run-card run-base">
-      <div class="run-id">RUN-02</div>
+      <div class="run-id">RUN-02</div><div class="run-phase" style="color:var(--cv)">F2–F3 · no depende del Taller</div>
       <div class="run-title">Base · t=10 años</div>
       <div class="run-detail">LULC_base_2032 · SLR +10 cm<br>Continuación tendencia histórica pérdida</div>
     </div>
     <div class="run-card run-base">
-      <div class="run-id">RUN-03</div>
+      <div class="run-id">RUN-03</div><div class="run-phase" style="color:var(--cv)">F2–F3 · no depende del Taller</div>
       <div class="run-title">Base · t=20 años</div>
       <div class="run-detail">LULC_base_2042 · SLR +22 cm<br>Degradación avanzada ACI</div>
     </div>
     <div class="run-card run-base">
-      <div class="run-id">RUN-04</div>
+      <div class="run-id">RUN-04</div><div class="run-phase" style="color:var(--cv)">F2–F3 · no depende del Taller</div>
       <div class="run-title">Base · t=30 años</div>
       <div class="run-detail">LULC_base_2052 · SLR +38 cm<br>Estado final «no actuar»</div>
     </div>
     <div class="run-card run-int">
-      <div class="run-id">RUN-05</div>
+      <div class="run-id">RUN-05</div><div class="run-phase" style="color:var(--fg-faint)">No se corre: = RUN-01</div>
       <div class="run-title">Intervención · t=0</div>
       <div class="run-detail">LULC 2022 · SLR = 0 cm<br>Igual que RUN-01 (línea base compartida)</div>
     </div>
     <div class="run-card run-int">
-      <div class="run-id">RUN-06</div>
+      <div class="run-id">RUN-06</div><div class="run-phase" style="color:var(--warn)">Post-Taller 1 · necesita las ACI</div>
       <div class="run-title">Intervención · t=10</div>
       <div class="run-detail">LULC_int_2032 · SLR +10 cm<br>Restauración incipiente (curva logística año 5–10)</div>
     </div>
     <div class="run-card run-int">
-      <div class="run-id">RUN-07</div>
+      <div class="run-id">RUN-07</div><div class="run-phase" style="color:var(--warn)">Post-Taller 1 · necesita las ACI</div>
       <div class="run-title">Intervención · t=20</div>
       <div class="run-detail">LULC_int_2042 · SLR +22 cm<br>Manglar en consolidación (50–70% cobertura)</div>
     </div>
     <div class="run-card run-int">
-      <div class="run-id">RUN-08</div>
+      <div class="run-id">RUN-08</div><div class="run-phase" style="color:var(--warn)">Post-Taller 1 · necesita las ACI</div>
       <div class="run-title">Intervención · t=30</div>
       <div class="run-detail">LULC_int_2052 · SLR +38 cm<br>Manglar maduro restaurado (C1, rank 1)</div>
     </div>
@@ -1215,14 +1244,15 @@ body::before{
 
   <div class="two-col">
     <div class="card">
-      <div class="card-title">🔄 Qué cambia entre corridas del mismo escenario</div>
-      <div class="card-sub">Tres inputs se actualizan en cada corte temporal.</div>
+      <div class="card-title">🔄 Qué cambia entre corridas</div>
+      <div class="card-sub">En la práctica, solo el hábitat. Es lo que hace comparables las corridas.</div>
       <ul class="crit-list" style="gap:6px">
-        <li class="crit-item"><div class="crit-dot" style="background:var(--cv)"></div><div><strong>LULC raster:</strong> 1 raster por corte temporal (GeoTIFF, misma resolución y CRS)<div class="crit-src">Generado con Python/QGIS a partir de la curva logística</div></div></li>
-        <li class="crit-item"><div class="crit-dot" style="background:var(--cv)"></div><div><strong>Sea Level Change:</strong> valor escalar en el CSV de shore-points<div class="crit-src">+0 / +10 / +22 / +38 cm según horizonte (NASA AR6)</div></div></li>
-        <li class="crit-item"><div class="crit-dot" style="background:var(--cv)"></div><div><strong>Natural Habitats rank:</strong> cambia si el LULC cambia clase de manglar<div class="crit-src">Tabla habitat_protection_ranking.csv se actualiza por corte</div></div></li>
-        <li class="crit-item"><div class="crit-dot" style="background:var(--cv)"></div><div><strong>Lo que NO cambia:</strong> geomorfología, batimetría, oleaje, viento, MDT<div class="crit-src">Inputs físicos estáticos en todas las corridas</div></div></li>
+        <li class="crit-item"><div class="crit-dot" style="background:var(--cv)"></div><div><strong>LULC raster:</strong> 1 raster por corte temporal (GeoTIFF, misma resolución y CRS)<div class="crit-src">Generado con Python/QGIS a partir de la tasa de pérdida (Base) o la curva logística (Intervención)</div></div></li>
+        <li class="crit-item"><div class="crit-dot" style="background:var(--cv)"></div><div><strong>Natural Habitats:</strong> cambia la clase de manglar y su rango de protección<div class="crit-src">habitat_protection_ranking.csv con rangos fijos; es la única variable cuyo efecto se puede comparar entre corridas</div></div></li>
+        <li class="crit-item"><div class="crit-dot" style="background:var(--warn)"></div><div><strong>Sea Level Change: no mueve el índice.</strong> InVEST pasa cada variable continua a rangos 1–5 por cuantiles dentro de cada corrida; un valor igual en toda la isla (+10 / +22 / +38 cm) da el mismo rango a todos los puntos<div class="crit-src">Solo aportaría si variase en el espacio (p. ej. con hundimiento vertical local). El nivel del mar entra de verdad en la F4, en los niveles extremos del modelo hidrodinámico</div></div></li>
+        <li class="crit-item"><div class="crit-dot" style="background:var(--fg-faint)"></div><div><strong>Lo que NO cambia:</strong> geomorfología, batimetría, oleaje, viento, MDT<div class="crit-src">Inputs físicos estáticos en todas las corridas</div></div></li>
       </ul>
+      <div style="margin-top:10px;font-size:11.5px;color:var(--fg-muted)"><strong>Cómo comparar:</strong> no restar los índices brutos de dos corridas, porque los cuantiles se recalculan en cada una. Comparar el papel del hábitat, o recalcular el índice con los mismos cortes en todas las corridas a partir de los resultados intermedios.</div>
     </div>
     <div class="card">
       <div class="card-title">📦 InVEST CV vs. InVEST CBC — diferencia clave</div>
@@ -1245,6 +1275,28 @@ body::before{
       <div style="margin-top:8px;font-size:11.5px;color:var(--fg-muted)">InVEST CV <strong>no usa</strong> matrices de transición. CBC sí las necesita (3 tablas CSV). Ambos comparten el raster LULC como input.</div>
     </div>
   </div>
+
+  <div class="lg-dimh"><h2 style="color:var(--cv)">Cómo enlaza InVEST CV con la F4</h2><span>el CV no da metros ni hectáreas: decide dónde y cómo se gasta el modelo hidrodinámico</span></div>
+  <p class="page-subtitle" style="margin-bottom:14px">La F4 (ADCIRC+SWAN, XBeach o anidado) monta una malla por ACI y corre ≈16 simulaciones por ACI (4 periodos de retorno × 2 escenarios × horizontes de nivel del mar). Da ΔHs, Δha inundadas y Δm de profundidad, que la F5 convierte en daños evitados. Es caro y solo cubre unos pocos sitios; el CV cubre toda la costa con poco esfuerzo.</p>
+  <div class="lg-grid">
+    <div class="lg-card" style="--dc:var(--ok)"><div class="lg-head"><div class="lg-name">1 · Elegir los sitios</div><span class="chip chip-b">F2 → Taller 1</span></div>
+      <div class="lg-row"><span>Corrida</span><span>RUN-01 (Base t0)</span></div>
+      <div class="lg-row"><span>Uso</span><span>El índice entra en el AHP como criterio de amenaza (D1); el AHP ayuda a escoger las ACI en el Taller, y las ACI son los dominios de la F4.</span></div>
+      <div class="lg-row"><span>Enlace</span><span>El más fuerte: la F4 modela donde CV + AHP señalan exposición y protección por el manglar.</span></div></div>
+    <div class="lg-card" style="--dc:var(--cv)"><div class="lg-head"><div class="lg-name">2 · Acotar el dominio dentro de cada ACI</div><span class="chip chip-c">F4 · act. 4.1</span></div>
+      <div class="lg-row"><span>Corrida</span><span>RUN-01, papel del hábitat por punto de costa</span></div>
+      <div class="lg-row"><span>Uso</span><span>Muestra los tramos donde el manglar más reduce la exposición; cruzado con población y activos detrás, indica dónde poner la malla fina de XBeach o los perfiles transversales.</span></div>
+      <div class="lg-row"><span>Enlace</span><span>Las ≈16 corridas por ACI se concentran donde está el beneficio.</span></div></div>
+    <div class="lg-card" style="--dc:var(--cv)"><div class="lg-head"><div class="lg-name">3 · Elegir el modelo</div><span class="chip chip-c">F4 · act. 4.2</span></div>
+      <div class="lg-row"><span>Corrida</span><span>RUN-01, rangos de cada variable por punto</span></div>
+      <div class="lg-row"><span>Uso</span><span>Si domina el oleaje → XBeach; si domina la marea de tormenta → ADCIRC+SWAN; si ambos → anidado.</span></div>
+      <div class="lg-row"><span>Enlace</span><span>Sustenta con datos el criterio «mecanismo dominante» de la matriz de selección de modelo de la F4.</span></div></div>
+    <div class="lg-card" style="--dc:var(--warn)"><div class="lg-head"><div class="lg-name">4 · Contrastar y extender</div><span class="chip chip-x">Post-Taller · F4–F5</span></div>
+      <div class="lg-row"><span>Corrida</span><span>RUN-02 a 04 frente a RUN-06 a 08</span></div>
+      <div class="lg-row"><span>Uso</span><span>Si un tramo tiene un papel del hábitat casi nulo en el CV y la F4 le da una gran reducción de inundación, revisar rugosidad o malla.</span></div>
+      <div class="lg-row"><span>Enlace</span><span>Extiende el resultado de forma cualitativa a la costa que la F4 no modela.</span></div></div>
+  </div>
+  <div class="carto-callout" style="--dc:var(--cv);--dc-soft:var(--cv-soft, var(--bg-subtle))"><b>En resumen:</b> el CV y la F4 no compiten. La F4 da la magnitud del beneficio (lo que se monetiza en la F5) en unos pocos sitios; el CV dice dónde mirar con lupa. El índice del CV nunca entra en la monetización.</div>
 </div>
 
 <!-- ════════════════════ PAGE: TIMELINE ════════════════════ -->
@@ -1330,6 +1382,42 @@ body::before{
   </div>
 </div>
 
+
+
+<!-- ════════════════════ PAGE: LÓGICA DE CAPAS ════════════════════ -->
+<div id="page-logica" class="page">
+  <p class="section-label">Fase 2 · cómo se construye cada criterio</p>
+  <h1 class="page-title">Lógica de capas</h1>
+  <p class="page-subtitle">Qué aporta cada capa al AHP-WLC y a InVEST CV, cómo entra en el cálculo, en qué sentido puntúa y qué vigilar. Resumen para justificar cada elección en el Entregable 2 y en el Taller 1.</p>
+
+  <div class="lg-flow"><span>Capa</span><i>→</i><span>Indicador (distancia, densidad, clase)</span><i>→</i><span>Normalización 0–1 con su sentido</span><i>→</i><span>Peso AHP</span><i>→</i><span>Suma ponderada (WLC)</span><i>→</i><span>Máscaras</span><i>→</i><span>Ranking de sectores</span></div>
+
+  <div class="lg-types">
+    <div class="lg-type"><b><span class="chip chip-c">Criterio ponderado</span></b>Se normaliza y suma con su peso.</div>
+    <div class="lg-type"><b><span class="chip chip-b">Capa base</span></b>De ella salen otros criterios; no se pondera aparte.</div>
+    <div class="lg-type"><b><span class="chip chip-m">Máscara</span></b>Excluye (urbano consolidado, aeropuerto); no suma.</div>
+    <div class="lg-type"><b><span class="chip chip-r">Referencia</span></b>Se compara con el resultado; no suma.</div>
+    <div class="lg-type"><b><span class="chip chip-x">Fuera del AHP</span></b>Se usa en escenarios o modelos, no en la priorización.</div>
+  </div>
+
+  <div class="carto-callout" style="--dc:var(--warn);--dc-soft:var(--warn-soft)">
+    <b>Regla contra el doble conteo:</b> cada fenómeno entra una sola vez. Amenaza de inundación o índice de InVEST CV; índice MGN o población + edificaciones; LULC como base o sus métricas derivadas. La máscara urbana se aplica al final, sobre la suma, no como criterio.
+  </div>
+
+  <div class="lg-dimh"><h2 style="color:var(--err)">D1 · Exposición y riesgo socioeconómico</h2><span>≈ 45 % · dónde la pérdida de manglar haría más daño</span></div>
+  <div class='lg-grid'><div class='lg-card' style='--dc:var(--err)'><div class='lg-head'><div class='lg-name'>Población por manzana (DANE 2018)</div><span class='chip chip-c'>Criterio ponderado</span></div><div class='lg-row'><span>Aporta</span><span>Personas expuestas que el manglar protege.</span></div><div class='lg-row'><span>Entra</span><span>Densidad hab/ha por manzana, rasterizada.</span></div><div class='lg-row'><span>Sentido</span><span>↑ más población = más prioridad.</span></div><div class='lg-row warn'><span>Cuidado</span><span>Censo 2018 sin población turística flotante.</span></div></div><div class='lg-card' style='--dc:var(--err)'><div class='lg-head'><div class='lg-name'>Edificaciones y predios (UrbanoSAI)</div><span class='chip chip-c'>Criterio ponderado</span></div><div class='lg-row'><span>Aporta</span><span>Activos construidos expuestos.</span></div><div class='lg-row'><span>Entra</span><span>Densidad de huellas o % de área construida en una ventana.</span></div><div class='lg-row'><span>Sentido</span><span>↑ más edificación = más prioridad.</span></div><div class='lg-row warn'><span>Cuidado</span><span>Sin avalúos: es un proxy de valor por superficie.</span></div></div><div class='lg-card' style='--dc:var(--err)'><div class='lg-head'><div class='lg-name'>Infraestructura crítica</div><span class='chip chip-c'>Criterio ponderado</span></div><div class='lg-row'><span>Aporta</span><span>Servicios cuya pérdida tiene efecto en cadena (salud, vías, muelles, energía).</span></div><div class='lg-row'><span>Entra</span><span>Distancia o densidad, ponderada por tipo de activo.</span></div><div class='lg-row'><span>Sentido</span><span>↑ más cerca = más prioridad.</span></div><div class='lg-row warn'><span>Cuidado</span><span>Capas de la Gobernación vacías: OSM provisional.</span></div></div><div class='lg-card' style='--dc:var(--err)'><div class='lg-head'><div class='lg-name'>Amenaza de inundación actual y futura</div><span class='chip chip-c'>Criterio ponderado</span></div><div class='lg-row'><span>Aporta</span><span>Dónde llega el agua hoy y con nivel del mar más alto.</span></div><div class='lg-row'><span>Entra</span><span>Manchas reclasificadas en clases (fuera, futura, actual).</span></div><div class='lg-row'><span>Sentido</span><span>↑ dentro de la mancha = más prioridad.</span></div><div class='lg-row warn'><span>Cuidado</span><span>Se solapa con el índice de InVEST CV: usar uno como criterio y el otro como contraste.</span></div></div><div class='lg-card' style='--dc:var(--err)'><div class='lg-head'><div class='lg-name'>Erosión costera</div><span class='chip chip-c'>Criterio ponderado</span></div><div class='lg-row'><span>Aporta</span><span>Franjas donde la costa ya retrocede y pierde protección.</span></div><div class='lg-row'><span>Entra</span><span>Distancia a tramos erosivos, clasificados por intensidad.</span></div><div class='lg-row'><span>Sentido</span><span>↑ más cerca de erosión alta = más prioridad.</span></div><div class='lg-row warn'><span>Cuidado</span><span>Capa de una sola fecha.</span></div></div><div class='lg-card' style='--dc:var(--err)'><div class='lg-head'><div class='lg-name'>Exposición socioeconómica por manzana (MGN)</div><span class='chip chip-c'>Criterio ponderado</span></div><div class='lg-row'><span>Aporta</span><span>Índice compuesto de exposición social por manzana.</span></div><div class='lg-row'><span>Entra</span><span>Valor del índice normalizado.</span></div><div class='lg-row'><span>Sentido</span><span>↑ más exposición = más prioridad.</span></div><div class='lg-row warn'><span>Cuidado</span><span>Ya mezcla población y vivienda: usar este índice o las dos capas anteriores, no ambos.</span></div></div><div class='lg-card' style='--dc:var(--err)'><div class='lg-head'><div class='lg-name'>Proyecciones del nivel del mar (AR6)</div><span class='chip chip-x'>Escenarios</span></div><div class='lg-row'><span>Aporta</span><span>Cuánto sube el mar a 10, 20 y 30 años.</span></div><div class='lg-row'><span>Entra</span><span>No entra al AHP: es casi uniforme en la isla y se usa en los escenarios de CV y F4.</span></div><div class='lg-row warn'><span>Cuidado</span><span>Como criterio daría diferencias artificiales entre sitios.</span></div></div><div class='lg-card' style='--dc:var(--err)'><div class='lg-head'><div class='lg-name'>Daños del huracán Iota (UNOSAT)</div><span class='chip chip-c'>Criterio ponderado</span></div><div class='lg-row'><span>Aporta</span><span>Daño observado en un evento real.</span></div><div class='lg-row'><span>Entra</span><span>Densidad kernel (dañada = 1, potencialmente dañada = 0,5).</span></div><div class='lg-row'><span>Sentido</span><span>↑ más daño = más prioridad.</span></div><div class='lg-row warn'><span>Cuidado</span><span>Conteo mínimo (zonas con nubes sin analizar): peso bajo o solo validación.</span></div></div><div class='lg-card' style='--dc:var(--err)'><div class='lg-head'><div class='lg-name'>Medios de vida (pesca, turismo)</div><span class='chip chip-c'>Criterio ponderado</span></div><div class='lg-row'><span>Aporta</span><span>Dependencia económica directa del ecosistema.</span></div><div class='lg-row'><span>Entra</span><span>Distancia a muelles, zonas de pesca y frentes turísticos.</span></div><div class='lg-row'><span>Sentido</span><span>↑ más cerca = más prioridad.</span></div><div class='lg-row warn'><span>Cuidado</span><span>Proxy espacial; no mide ingresos.</span></div></div></div>
+  <p class="carto-note">El índice de exposición de InVEST CV (por punto de costa) entra aquí como criterio de amenaza, agregado por sector; su diferencia entre escenarios (habitat_role) indica dónde el manglar reduce más la exposición.</p>
+
+  <div class="lg-dimh"><h2 style="color:var(--ok)">D2 · Viabilidad y potencial ecológico</h2><span>≈ 35 % · dónde cabe restaurar y dónde funcionará</span></div>
+  <div class='lg-grid'><div class='lg-card' style='--dc:var(--ok)'><div class='lg-head'><div class='lg-name'>Extensión de manglar actual (SIGMA 2021)</div><span class='chip chip-b'>Capa base</span></div><div class='lg-row'><span>Aporta</span><span>Dónde hay manglar y de qué tamaño son los parches.</span></div><div class='lg-row'><span>Entra</span><span>Base de las métricas de parche, conectividad y clases LULC; tamaño de parche como criterio.</span></div><div class='lg-row'><span>Sentido</span><span>↑ parche más grande = más viable.</span></div><div class='lg-row warn'><span>Cuidado</span><span>Sin el manglar dañado de Providencia 2021.</span></div></div><div class='lg-card' style='--dc:var(--ok)'><div class='lg-head'><div class='lg-name'>Estado y estructura (parcelas)</div><span class='chip chip-c'>Criterio ponderado</span></div><div class='lg-row'><span>Aporta</span><span>Condición del bosque: densidad, DAP, altura, mortalidad.</span></div><div class='lg-row'><span>Entra</span><span>Índice de condición por sector, asignado a sus polígonos.</span></div><div class='lg-row'><span>Sentido</span><span>↑ degradado pero con estructura residual = más prioridad.</span></div><div class='lg-row warn'><span>Cuidado</span><span>Datos puntuales: se asignan por sector, no se interpolan por píxel. Pendientes de INVEMAR.</span></div></div><div class='lg-card' style='--dc:var(--ok)'><div class='lg-head'><div class='lg-name'>Cambio de cobertura de manglar</div><span class='chip chip-c'>Criterio ponderado</span></div><div class='lg-row'><span>Aporta</span><span>Dónde se perdió manglar recientemente.</span></div><div class='lg-row'><span>Entra</span><span>Pérdida = alta, estable = moderada, ganancia = baja (como el criterio de INVEMAR).</span></div><div class='lg-row'><span>Sentido</span><span>↑ pérdida reversible = más prioridad.</span></div><div class='lg-row warn'><span>Cuidado</span><span>Sin fechas y con ruido de 1–3 píxeles en bordes: filtrar parches pequeños.</span></div></div><div class='lg-card' style='--dc:var(--ok)'><div class='lg-head'><div class='lg-name'>Cobertura y uso del suelo (LULC)</div><span class='chip chip-b'>Capa base</span></div><div class='lg-row'><span>Aporta</span><span>Qué hay en cada sitio y en su entorno.</span></div><div class='lg-row'><span>Entra</span><span>Excluye lo urbano, puntúa lo restaurable (degradado, abierto intermareal) y alimenta métricas de vecindad.</span></div><div class='lg-row'><span>Sentido</span><span>↑ restaurable y rodeado de natural = más prioridad.</span></div><div class='lg-row warn'><span>Cuidado</span><span>No ponderarla aparte si ya entran parche y conectividad. Clases no manglar de 2008.</span></div></div><div class='lg-card' style='--dc:var(--ok)'><div class='lg-head'><div class='lg-name'>Pastos marinos, coral y comunidades marinas</div><span class='chip chip-c'>Criterio ponderado</span></div><div class='lg-row'><span>Aporta</span><span>Conectividad del sistema arrecife–pasto–manglar.</span></div><div class='lg-row'><span>Entra</span><span>Distancia o presencia en un radio.</span></div><div class='lg-row'><span>Sentido</span><span>↑ más cerca = más viable.</span></div><div class='lg-row warn'><span>Cuidado</span><span>Capas sin fecha clara; versión INVEMAR pedida.</span></div></div><div class='lg-card' style='--dc:var(--ok)'><div class='lg-head'><div class='lg-name'>Geomorfología costera</div><span class='chip chip-c'>Criterio ponderado</span></div><div class='lg-row'><span>Aporta</span><span>Aptitud física del sitio: el manglar crece en costas bajas y protegidas.</span></div><div class='lg-row'><span>Entra</span><span>Tipos reclasificados: laguna o llanura intermareal alta; playa expuesta o costa rocosa baja.</span></div><div class='lg-row'><span>Sentido</span><span>↑ costa baja y abrigada = más viable.</span></div><div class='lg-row warn'><span>Cuidado</span><span>En InVEST CV la misma capa mide erosionabilidad: es otro uso.</span></div></div><div class='lg-card' style='--dc:var(--ok)'><div class='lg-head'><div class='lg-name'>Áreas protegidas</div><span class='chip chip-c'>Criterio ponderado</span></div><div class='lg-row'><span>Aporta</span><span>Protección legal y gestión a largo plazo.</span></div><div class='lg-row'><span>Entra</span><span>Dentro o fuera (o por categoría de manejo).</span></div><div class='lg-row'><span>Sentido</span><span>↑ dentro = más viable.</span></div><div class='lg-row warn'><span>Cuidado</span><span>También podría ir en D3: elegir una sola dimensión.</span></div></div><div class='lg-card' style='--dc:var(--ok)'><div class='lg-head'><div class='lg-name'>Priorización por sectores y modelo de INVEMAR</div><span class='chip chip-r'>Referencia</span></div><div class='lg-row'><span>Aporta</span><span>Priorizaciones oficiales previas.</span></div><div class='lg-row'><span>Entra</span><span>No se suma: se compara con el ranking resultante del AHP.</span></div><div class='lg-row warn'><span>Cuidado</span><span>Ya incluye estado y presiones: sumarlo duplicaría criterios.</span></div></div><div class='lg-card' style='--dc:var(--ok)'><div class='lg-head'><div class='lg-name'>Presiones (poblados, muelles, escuelas)</div><span class='chip chip-c'>Criterio ponderado</span></div><div class='lg-row'><span>Aporta</span><span>Presión antrópica sobre el manglar.</span></div><div class='lg-row'><span>Entra</span><span>Distancia a cada fuente de presión.</span></div><div class='lg-row'><span>Sentido</span><span>↑ más lejos = más viable (sentido inverso).</span></div><div class='lg-row warn'><span>Cuidado</span><span>Tensión buscada con D1: lo poblado da riesgo (D1) pero resta viabilidad (D2).</span></div></div></div>
+
+  <div class="lg-dimh"><h2 style="color:var(--warn)">D3 · Factibilidad de intervención</h2><span>≈ 20 % · dónde se puede ejecutar</span></div>
+  <div class='lg-grid'><div class='lg-card' style='--dc:var(--warn)'><div class='lg-head'><div class='lg-name'>Marco normativo y zonificación de manglar</div><span class='chip chip-c'>Criterio ponderado</span></div><div class='lg-row'><span>Aporta</span><span>Qué se permite hacer en cada sitio.</span></div><div class='lg-row'><span>Entra</span><span>Zonas de la zonificación vigente reclasificadas (recuperación, preservación, uso sostenible).</span></div><div class='lg-row'><span>Sentido</span><span>↑ zona de recuperación = más factible.</span></div><div class='lg-row warn'><span>Cuidado</span><span>Vigencia de la zonificación 2009 por confirmar con CORALINA.</span></div></div><div class='lg-card' style='--dc:var(--warn)'><div class='lg-head'><div class='lg-name'>Tenencia predial</div><span class='chip chip-c'>Criterio ponderado</span></div><div class='lg-row'><span>Aporta</span><span>Facilidad para intervenir según quién es el dueño.</span></div><div class='lg-row'><span>Entra</span><span>Clases de tenencia (pública o baldía, colectiva raizal, privada).</span></div><div class='lg-row'><span>Sentido</span><span>↑ pública = más factible.</span></div><div class='lg-row warn'><span>Cuidado</span><span>La tierra raizal exige consulta previa: no la penaliza, pero alarga plazos.</span></div></div><div class='lg-card' style='--dc:var(--warn)'><div class='lg-head'><div class='lg-name'>Planes territoriales (POT, PIGCCT)</div><span class='chip chip-c'>Criterio ponderado</span></div><div class='lg-row'><span>Aporta</span><span>Compatibilidad con el uso del suelo previsto.</span></div><div class='lg-row'><span>Entra</span><span>Suelo de protección alto; expansión urbana bajo o excluido.</span></div><div class='lg-row'><span>Sentido</span><span>↑ protección = más factible.</span></div><div class='lg-row warn'><span>Cuidado</span><span>Planes de distinta fecha y escala.</span></div></div><div class='lg-card' style='--dc:var(--warn)'><div class='lg-head'><div class='lg-name'>Actores locales</div><span class='chip chip-r'>Taller</span></div><div class='lg-row'><span>Aporta</span><span>Disposición de comunidades y autoridades por sitio.</span></div><div class='lg-row'><span>Entra</span><span>No es capa: puntuación cualitativa de cada área candidata en el Taller 1.</span></div><div class='lg-row'><span>Sentido</span><span>↑ más apoyo = más factible.</span></div><div class='lg-row warn'><span>Cuidado</span><span>Hay que documentar cómo se puntuó.</span></div></div><div class='lg-card' style='--dc:var(--warn)'><div class='lg-head'><div class='lg-name'>Accesibilidad operativa</div><span class='chip chip-c'>Criterio ponderado</span></div><div class='lg-row'><span>Aporta</span><span>Facilidad y costo logístico de llegar al sitio.</span></div><div class='lg-row'><span>Entra</span><span>Distancia a vías y muelles.</span></div><div class='lg-row'><span>Sentido</span><span>↑ más cerca = más factible.</span></div><div class='lg-row warn'><span>Cuidado</span><span>Se compensa con la presión de D2 (lo accesible suele estar más presionado).</span></div></div></div>
+
+  <div class="lg-dimh"><h2 style="color:var(--cv)">InVEST Coastal Vulnerability</h2><span>índice de exposición 1–5 por punto de costa</span></div>
+  <div class='lg-grid'><div class='lg-card' style='--dc:var(--cv)'><div class='lg-head'><div class='lg-name'>Geomorfología</div><span class='chip chip-c'>Variable CV</span></div><div class='lg-row'><span>Aporta</span><span>Erosionabilidad de la costa.</span></div><div class='lg-row'><span>Entra</span><span>Rango 1–5 por tipo (playa alta, roca baja).</span></div><div class='lg-row'><span>Sentido</span><span>↑ rango = más exposición.</span></div><div class='lg-row warn'><span>Cuidado</span><span>Capa CLIMARES20 en mano.</span></div></div><div class='lg-card' style='--dc:var(--cv)'><div class='lg-head'><div class='lg-name'>Relieve</div><span class='chip chip-c'>Variable CV</span></div><div class='lg-row'><span>Aporta</span><span>Altura del terreno detrás de la costa.</span></div><div class='lg-row'><span>Entra</span><span>Elevación media en un radio (MDT).</span></div><div class='lg-row'><span>Sentido</span><span>↓ más bajo = más exposición.</span></div><div class='lg-row warn'><span>Cuidado</span><span>Falta el MDT: bloquea.</span></div></div><div class='lg-card' style='--dc:var(--cv)'><div class='lg-head'><div class='lg-name'>Hábitats naturales</div><span class='chip chip-c'>Variable CV</span></div><div class='lg-row'><span>Aporta</span><span>Protección de manglar, arrecife y pastos.</span></div><div class='lg-row'><span>Entra</span><span>Rango y distancia de protección por hábitat.</span></div><div class='lg-row'><span>Sentido</span><span>Presencia = menos exposición.</span></div><div class='lg-row warn'><span>Cuidado</span><span>Única capa que cambia entre escenarios Base e Intervención.</span></div></div><div class='lg-card' style='--dc:var(--cv)'><div class='lg-head'><div class='lg-name'>Exposición al viento</div><span class='chip chip-c'>Variable CV</span></div><div class='lg-row'><span>Aporta</span><span>Fuerza del viento que llega a cada punto.</span></div><div class='lg-row'><span>Entra</span><span>Viento extremo por sector y fetch.</span></div><div class='lg-row'><span>Sentido</span><span>↑ = más exposición.</span></div><div class='lg-row warn'><span>Cuidado</span><span>Fuente ERA5.</span></div></div><div class='lg-card' style='--dc:var(--cv)'><div class='lg-head'><div class='lg-name'>Exposición al oleaje</div><span class='chip chip-c'>Variable CV</span></div><div class='lg-row'><span>Aporta</span><span>Oleaje oceánico y generado localmente.</span></div><div class='lg-row'><span>Entra</span><span>Potencia de ola por sector; usa la batimetría a lo largo del fetch.</span></div><div class='lg-row'><span>Sentido</span><span>↑ = más exposición.</span></div><div class='lg-row warn'><span>Cuidado</span><span>Sin batimetría no se calcula el oleaje local.</span></div></div><div class='lg-card' style='--dc:var(--cv)'><div class='lg-head'><div class='lg-name'>Potencial de marea de tormenta</div><span class='chip chip-c'>Variable CV</span></div><div class='lg-row'><span>Aporta</span><span>Cuánto puede subir el agua por la plataforma.</span></div><div class='lg-row'><span>Entra</span><span>Distancia a la isóbata del borde de plataforma (−30 m).</span></div><div class='lg-row'><span>Sentido</span><span>↑ plataforma ancha = más exposición.</span></div><div class='lg-row warn'><span>Cuidado</span><span>Isla oceánica: probar con y sin esta variable.</span></div></div><div class='lg-card' style='--dc:var(--cv)'><div class='lg-head'><div class='lg-name'>Nivel del mar</div><span class='chip chip-x'>Escenarios</span></div><div class='lg-row'><span>Aporta</span><span>Subida del mar en cada horizonte.</span></div><div class='lg-row'><span>Entra</span><span>Valor por punto de costa en cada corrida (+10 / +22 / +38 cm, AR6).</span></div><div class='lg-row warn'><span>Cuidado</span><span>InVEST convierte cada variable a rangos 1–5 por cuantiles dentro de cada corrida: un valor igual en toda la isla no cambia el índice. Solo aporta si varía en el espacio (p. ej. con hundimiento vertical local).</span></div></div></div>
+  <p class="carto-note">En InVEST CV la batimetría no es una variable propia de «pendiente costera»: se usa para el oleaje local y para la isóbata de la marea de tormenta. Conviene corregirlo en la pestaña InVEST CV.</p>
+</div>
 
 <!-- ════════════════════ PAGE: CARTOGRAFÍA MANGLAR ════════════════════ -->
 <div id="page-carto" class="page">
