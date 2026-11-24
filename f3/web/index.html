@@ -1,0 +1,224 @@
+<meta name="dash-one-writer">
+<link rel="stylesheet" href="f3.css">
+<div class="f3" lang="es">
+  <header class="f3-head" id="cabecera">
+    <p class="f3-kicker">ACB Manglares · Archipiélago de San Andrés · FORLIANCE / IKI «De Raíces a Mareas»</p>
+    <h1 class="f3-title">Fase 3 — Cuantificación de costos de intervención</h1>
+    <p class="f3-lede">Con 10 ha provisionales por ACI, la inversión inicial (CAPEX) de las tres áreas candidatas suma <b data-draw="kpi-capex-t" data-source="kpi" data-field="capex_m" data-row="0">—</b> M COP y el valor presente de todos los costos a 50 años, con la tasa de la Res. DNP 1092/2022, es de <b data-draw="kpi-vp50-t" data-source="kpi" data-field="vp50_m" data-row="0">—</b> M COP. Es una estimación preliminar: las áreas, la mezcla de intervenciones y varios precios unitarios dependen del taller F2 y de cotizaciones pendientes.</p>
+  </header>
+
+  <nav class="f3-tabs" role="tablist" aria-label="Pasos de la Fase 3">
+    <button class="f3-tab" role="tab" data-tab="resumen" aria-selected="true">Resumen</button>
+    <button class="f3-tab" role="tab" data-tab="datos" aria-selected="false">0 · Datos</button>
+    <button class="f3-tab" role="tab" data-tab="parametros" aria-selected="false">Parámetros</button>
+    <button class="f3-tab" role="tab" data-tab="capex" aria-selected="false">3.1 CAPEX</button>
+    <button class="f3-tab" role="tab" data-tab="opex" aria-selected="false">3.2 OPEX</button>
+    <button class="f3-tab" role="tab" data-tab="curva" aria-selected="false">Curva de recuperación</button>
+    <button class="f3-tab" role="tab" data-tab="flujos" aria-selected="false">3.3 Flujos</button>
+    <button class="f3-tab" role="tab" data-tab="sensibilidad" aria-selected="false">Sensibilidad</button>
+    <button class="f3-tab" role="tab" data-tab="metodo" aria-selected="false">Método y Python</button>
+  </nav>
+
+  <!-- ============ RESUMEN ============ -->
+  <section id="resumen" class="f3-page" role="tabpanel">
+    <div class="f3-kpis">
+      <div class="f3-card" id="k-capex"><div class="f3-klabel">CAPEX 3 ACI</div><div class="f3-kval"><span data-draw="kpi-capex" data-source="kpi" data-field="capex_m" data-row="0">—</span> <small>M COP</small></div><div class="f3-ksub">Años 0–2, con contingencia insular</div></div>
+      <div class="f3-card" id="k-opex"><div class="f3-klabel">OPEX medio anual</div><div class="f3-kval"><span data-draw="kpi-opex" data-source="kpi" data-field="opex_m" data-row="0">—</span> <small>M COP/año</small></div><div class="f3-ksub">Promedio años 1–30, 3 ACI</div></div>
+      <div class="f3-card" id="k-vp30"><div class="f3-klabel">VP costos · 30 años</div><div class="f3-kval"><span data-draw="kpi-vp30" data-source="kpi" data-field="vp30_m" data-row="0">—</span> <small>M COP</small></div><div class="f3-ksub">Res. 1092/2022 (escalonada)</div></div>
+      <div class="f3-card" id="k-vp50"><div class="f3-klabel">VP costos · 50 años</div><div class="f3-kval"><span data-draw="kpi-vp50" data-source="kpi" data-field="vp50_m" data-row="0">—</span> <small>M COP</small></div><div class="f3-ksub">Monte Carlo P10–P90: <span data-draw="kpi-p10" data-source="kpi" data-field="p10_m" data-row="0">—</span>–<span data-draw="kpi-p90" data-source="kpi" data-field="p90_m" data-row="0">—</span> M</div></div>
+      <div class="f3-card" id="k-vp100"><div class="f3-klabel">VP costos · 100 años</div><div class="f3-kval"><span data-draw="kpi-vp100" data-source="kpi" data-field="vp100_m" data-row="0">—</span> <small>M COP</small></div><div class="f3-ksub">En EUR: <span data-draw="kpi-eur100" data-source="kpi" data-field="vp100_keur" data-row="0">—</span> mil €</div></div>
+    </div>
+
+    <div class="f3-grid2">
+      <div class="f3-card" id="estado-datos">
+        <h2 class="f3-h2">Estado de los datos de la fase</h2>
+        <p class="f3-note">Cuántos insumos ya están cubiertos por una fuente oficial, cuántos usan un proxy o un supuesto, y cuántos hay que pedir.</p>
+        <div class="f3-chart f3-chart-s" data-draw="estado-chart" data-source="estado"></div>
+      </div>
+      <div class="f3-card" id="bench">
+        <h2 class="f3-h2">Costo por hectárea frente a referencias (USD/ha)</h2>
+        <p class="f3-note">CAPEX + OPEX de los 3 primeros años, comparado con la mediana y la media globales de Goto et al. (2025) y con un caso colombiano (CATIE 2025, Timbiquí).</p>
+        <div class="f3-chart" data-draw="bench-chart" data-source="benchmark"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DATOS ============ -->
+  <section id="datos" class="f3-page" role="tabpanel" hidden>
+    <h2 class="f3-h2">Paso 0 · Necesidades de datos de la Fase 3</h2>
+    <p class="f3-note">Filas 3.01–3.06 de la Matriz de disponibilidad del proyecto, más los insumos nuevos que pide el modelo (N1–N9). «Encontrado fuera» = fuente oficial o científica ya localizada; «Proxy» = valor de un proyecto comparable; «Supuesto» = valor provisional del consultor; «Solicitar» / «Falta» = dato que hay que pedir.</p>
+    <div class="f3-scroll">
+      <table class="f3-table" id="tabla-datos" data-source="necesidades" data-row-key="id">
+        <thead><tr><th data-field="id">ID</th><th data-field="dato">Dato</th><th data-field="estado">Estado</th><th data-field="lo_que_hay">Lo que hay</th><th data-field="siguiente_paso">Siguiente paso</th><th data-field="a_quien">A quién</th><th data-field="url">Fuente</th></tr></thead>
+        <tbody data-draw="tabla-datos"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ PARÁMETROS ============ -->
+  <section id="parametros" class="f3-page" role="tabpanel" hidden>
+    <h2 class="f3-h2">Parámetros del modelo</h2>
+    <p class="f3-note">Todos los valores en COP constantes de 2026 salvo indicación. El rango bajo–alto alimenta el tornado y el Monte Carlo. Edita estos valores en el script de Python y vuelve a generar los CSV cuando lleguen los datos reales.</p>
+    <div class="f3-scroll">
+      <table class="f3-table" id="tabla-param" data-source="parametros" data-row-key="id">
+        <thead><tr><th data-field="grupo">Grupo</th><th data-field="parametro">Parámetro</th><th data-field="valor" class="num">Valor</th><th data-field="unidad">Unidad</th><th data-field="rango_bajo" class="num">Bajo</th><th data-field="rango_alto" class="num">Alto</th><th data-field="estado">Estado</th><th data-field="fuente">Fuente</th></tr></thead>
+        <tbody data-draw="tabla-param"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ CAPEX ============ -->
+  <section id="capex" class="f3-page" role="tabpanel" hidden>
+    <h2 class="f3-h2">Actividad 3.1 · CAPEX por ACI y categoría de los TdR</h2>
+    <p class="f3-note">Mano de obra, insumos, estudios técnicos, permisos y socialización, equipos de monitoreo, supervisión técnica y contingencia por logística insular (25 %, rango 15–40 %).</p>
+    <div class="f3-card" id="capex-cat"><div class="f3-chart" data-draw="capex-chart" data-source="capex"></div></div>
+    <div class="f3-grid2">
+      <div class="f3-card" id="capex-int">
+        <h3 class="f3-h3">Costo directo por intervención</h3>
+        <p class="f3-note">Sin costos fijos por ACI ni contingencia.</p>
+        <div class="f3-chart" data-draw="capexint-chart" data-source="capex_int"></div>
+      </div>
+      <div class="f3-card" id="capex-acis">
+        <h3 class="f3-h3">ACI candidatas (pre-taller F2)</h3>
+        <p class="f3-note">Fracción del área donde se aplica cada intervención. Áreas y fracciones provisionales.</p>
+        <div class="f3-scroll">
+          <table class="f3-table" data-source="acis" data-row-key="aci">
+            <thead><tr><th data-field="aci">ACI</th><th data-field="perfil">Perfil</th><th data-field="ha_provisional" class="num">ha</th><th data-field="frac_enriquecimiento" class="num">Siembra</th><th data-field="frac_hidrologica" class="num">Hidrol.</th><th data-field="frac_residuos" class="num">Residuos</th><th data-field="capex_cop_ha" class="num">CAPEX COP/ha</th><th data-field="capex_usd_ha" class="num">USD/ha</th></tr></thead>
+            <tbody data-draw="tabla-acis"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OPEX ============ -->
+  <section id="opex" class="f3-page" role="tabpanel" hidden>
+    <h2 class="f3-h2">Actividad 3.2 · OPEX y calendario de reinversiones</h2>
+    <p class="f3-note">Mantenimiento (replante de marras y limpieza), monitoreo científico bianual hasta el año 30 y quinquenal después, monitoreo comunitario con guardabosques, gobernanza, re-limpieza de caños cada 5 años y reposición de equipos cada 10 años.</p>
+    <div class="f3-card" id="opex-anual">
+      <div class="f3-row">
+        <h3 class="f3-h3">OPEX anual por componente, años 1–30</h3>
+        <select class="dash-select" id="sel-aci" aria-label="ACI">
+          <option value="Dorna Pond">Dorna Pond</option>
+          <option value="Cove Sea Side">Cove Sea Side</option>
+          <option value="Smith Channel">Smith Channel</option>
+        </select>
+      </div>
+      <div class="f3-chart" data-draw="opex-chart" data-source="opex_anual"></div>
+    </div>
+    <div class="f3-grid2">
+      <div class="f3-card" id="opex-comp">
+        <h3 class="f3-h3">Promedio anual por componente (3 ACI)</h3>
+        <p class="f3-note">El monitoreo comunitario es el rubro mayor: conviene validar su dimensionamiento con CORALINA.</p>
+        <div class="f3-chart f3-chart-s" data-draw="opexcomp-chart" data-source="opex_comp"></div>
+      </div>
+      <div class="f3-card" id="reinv">
+        <h3 class="f3-h3">Calendario de reinversiones (años 1–100)</h3>
+        <div class="f3-chart f3-chart-s" data-draw="reinv-chart" data-source="reinversiones"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CURVA ============ -->
+  <section id="curva" class="f3-page" role="tabpanel" hidden>
+    <h2 class="f3-h2">Curva logística de recuperación ecológica (F3 → F5)</h2>
+    <p class="f3-note">Fracción de la función del manglar de referencia alcanzada en el Escenario Intervención. C(t) = C₀ + (Cₘₐₓ − C₀) / (1 + e<sup>−k(t − t₅₀)</sup>). La cobertura vegetal se calibra con la equivalencia de vegetación juvenil en menos de 15 años y la estructura arbórea —la que da protección costera— con el diámetro adulto a unos 25 años (Osland et al. 2020, Tampa Bay). Pendiente calibrar con parcelas MangRes del Caribe insular. Las marcas en t = 10, 20 y 30 son los cortes de los rasters LULC del Escenario Intervención.</p>
+    <div class="f3-card" id="curva-chart-card"><div class="f3-chart f3-chart-l" data-draw="curva-chart" data-source="curva"></div></div>
+    <div class="f3-card" id="curva-cortes">
+      <h3 class="f3-h3">Valores en los cortes LULC</h3>
+      <div class="f3-scroll">
+        <table class="f3-table" data-source="curva" data-row-key="anio">
+          <thead><tr><th data-field="anio" class="num">Año</th><th data-field="cobertura_vegetal" class="num">Cobertura vegetal</th><th data-field="estructura_proteccion" class="num">Estructura (protección)</th><th data-field="estructura_alterno_lento" class="num">Estructura · alterno lento</th></tr></thead>
+          <tbody data-draw="tabla-curva"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FLUJOS ============ -->
+  <section id="flujos" class="f3-page" role="tabpanel" hidden>
+    <h2 class="f3-h2">Actividad 3.3 · Flujos de costos a 30, 50 y 100 años</h2>
+    <p class="f3-note">Barras: CAPEX y OPEX en COP constantes de 2026 (3 ACI). Línea: total en términos nominales (inflación 5 % en 2027, 4 % en 2028 y 3 % —meta del Banco de la República— después). Listos para integrarse en el modelo ACB de la Fase 6.</p>
+    <div class="f3-card" id="flujos-chart-card">
+      <div class="f3-row">
+        <h3 class="f3-h3">Flujo anual de costos</h3>
+        <select class="dash-select" id="sel-h" aria-label="Horizonte">
+          <option value="30">30 años</option>
+          <option value="50">50 años</option>
+          <option value="100">100 años</option>
+        </select>
+      </div>
+      <div class="f3-chart f3-chart-l" data-draw="flujos-chart" data-source="flujos_total"></div>
+    </div>
+    <div class="f3-card" id="tabla-resumen-card">
+      <h3 class="f3-h3">Resumen por ACI y horizonte</h3>
+      <p class="f3-note">VP con la TSD ambiental escalonada de la Res. DNP 1092/2022 (9,5 % años 0–5; 6,4 % años 6–25; 3,5 % desde el año 26) y, para comparar, con el 5 % de la Hoja de Ruta. Montos en millones de COP.</p>
+      <div class="f3-scroll">
+        <table class="f3-table" data-source="resumen_m" data-row-key="clave">
+          <thead><tr><th data-field="aci">ACI</th><th data-field="horizonte" class="num">Horizonte</th><th data-field="constante_m" class="num">Suma constante</th><th data-field="nominal_m" class="num">Suma nominal</th><th data-field="vp1092_m" class="num">VP Res. 1092</th><th data-field="vp5_m" class="num">VP 5 %</th></tr></thead>
+          <tbody data-draw="tabla-resumen"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SENSIBILIDAD ============ -->
+  <section id="sensibilidad" class="f3-page" role="tabpanel" hidden>
+    <h2 class="f3-h2">Análisis de sensibilidad de costos</h2>
+    <p class="f3-note">Sobre el VP de costos a 50 años de las 3 ACI (Res. 1092). El Plan de Trabajo exige una estimación puntual y un escenario alterno; se añaden un tornado y un Monte Carlo para la Fase 6.</p>
+    <div class="f3-card" id="tornado">
+      <h3 class="f3-h3">Tornado: cambio en el VP al mover cada parámetro a su valor bajo y alto</h3>
+      <div class="f3-chart f3-chart-l" data-draw="tornado-chart" data-source="tornado"></div>
+    </div>
+    <div class="f3-grid2">
+      <div class="f3-card" id="escenarios">
+        <h3 class="f3-h3">Escenario puntual frente a alterno</h3>
+        <p class="f3-note">El alterno sube a su valor alto la contingencia, el jornal local, las marras, el monitoreo, la rehabilitación hidrológica, los residuos, los insumos de vivero y la TRM.</p>
+        <div class="f3-chart" data-draw="esc-chart" data-source="escenarios"></div>
+      </div>
+      <div class="f3-card" id="montecarlo">
+        <h3 class="f3-h3">Monte Carlo (distribuciones triangulares)</h3>
+        <p class="f3-note"><span data-draw="mc-n" data-source="mc_pct" data-field="vp_res1092_cop" data-where="estadistico=Iteraciones">—</span> iteraciones. La mediana queda por encima de la estimación puntual porque la mayoría de los rangos son asimétricos hacia arriba.</p>
+        <div class="f3-chart" data-draw="mc-chart" data-source="mc_hist mc_pct"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MÉTODO ============ -->
+  <section id="metodo" class="f3-page" role="tabpanel" hidden>
+    <h2 class="f3-h2">Método y modelo en Python</h2>
+    <div class="f3-card f3-prose" id="metodo-texto">
+      <p>Todo lo que muestra este tablero sale del script <code>modelo_costos_f3.py</code> (Python estándar, sin dependencias), que escribe los CSV adjuntos. Para actualizar: edita <code>PARAMS</code> y <code>ACIS</code>, ejecuta <code>python3 modelo_costos_f3.py</code> y sustituye los archivos en Fuentes.</p>
+      <h3 class="f3-h3">Cadena de cálculo</h3>
+      <ol>
+        <li><b>Jornal</b> = (SMMLV × factor prestacional + auxilio de transporte) / 30 × prima local.</li>
+        <li><b>CAPEX por ACI</b> = mano de obra + insumos + estudios + permisos + equipos + supervisión, más la contingencia insular sobre el total. Calendario: estudios, permisos y equipos en el año 0; obras al 70 % en el año 1 y al 30 % en el año 2.</li>
+        <li><b>OPEX</b> año a año: marras (años 1–2), limpieza (alta en años 1–3, baja después), monitoreo científico, guardabosques, gobernanza y reinversiones.</li>
+        <li><b>Precios nominales</b> = constantes × índice acumulado de inflación.</li>
+        <li><b>VP</b> = Σ Cₜ × FDₜ, con FDₜ acumulando la tasa del tramo de cada año (Res. 1092).</li>
+        <li><b>Sensibilidad</b>: tornado con los rangos de cada parámetro; Monte Carlo con triangulares (bajo, valor base, alto).</li>
+      </ol>
+      <h3 class="f3-h3">Decisiones abiertas</h3>
+      <ul>
+        <li>La Res. 1092 fija la TSD ambiental según el horizonte de evaluación. Aquí se aplica como tasa decreciente por tramos de años; la lectura alternativa (una sola tasa según el horizonte total, 3,5 % para 30 años o más) baja el VP. Conviene acordarlo con FORLIANCE.</li>
+        <li>La Hoja de Ruta usa 5 % real: hay que alinearla con la Res. 1092, como pide FORLIANCE.</li>
+        <li>No se incluyen costos de oportunidad del suelo ni la reposición de daños por huracán; pueden entrar como sensibilidad en la Fase 6.</li>
+      </ul>
+      <details>
+        <summary>Fuentes principales</summary>
+        <ul>
+          <li>Decretos 1469 y 1470 de 2025 (SMMLV y auxilio de transporte 2026).</li>
+          <li>DNP, Resolución 1092 de 2022 (tasa social de descuento).</li>
+          <li>Goto, G. M. et al. (2025). Implementation costs of restoring global mangrove forests. <i>One Earth</i>. doi:10.1016/j.oneear.2025.101342.</li>
+          <li>Bayraktarov, E. et al. (2016). The cost and feasibility of marine coastal restoration. <i>Ecological Applications</i> 26: 1055–1074.</li>
+          <li>Osland, M. J. et al. (2020). Rapid peat development beneath created, maturing mangrove forests. <i>Ecological Applications</i>.</li>
+          <li>Su, J., Friess, D. A., Gasparatos, A. (2021). A meta-analysis of the ecological and economic outcomes of mangrove restoration. <i>Nature Communications</i>. doi:10.1038/s41467-021-25349-1.</li>
+          <li>CATIE (2025). Planes de intervención de 3 sitios para la restauración ecológica de manglares, Consejo Comunitario del Cuerval (Timbiquí, Cauca).</li>
+          <li>Matriz de disponibilidad de datos y Plan de Trabajo (E1) del proyecto.</li>
+        </ul>
+      </details>
+    </div>
+  </section>
+</div>
+<script src="f3-core.js"></script>
+<script src="f3-charts.js"></script>

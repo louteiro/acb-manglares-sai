@@ -1,0 +1,13 @@
+parametro,valor_bajo,valor_alto,delta_bajo_cop,delta_alto_cop,amplitud_cop
+Guardabosques comunitarios (2 personas a medio tiempo),0.5,1.5,-729377349,729377349,1458754699
+"Gobernanza, comunicación y gestión de permisos",8000000,25000000,-292372045,417674350,710046395
+"Campaña de monitoreo científico (biomasa, carbono, agua)",18000000,45000000,-218675483,273344354,492019837
+Prima de mercado local sobre el jornal mínimo (San Andrés),0.95,1.35,-35258070,246806489,282064559
+"Equipo menor (motobomba, excavación puntual)",3000000,12000000,-77459279,154918559,232377838
+"Densidad de siembra (2,5 × 2,5 m)",1100,2500,-81561717,146811090,228372806
+Limpieza/apertura manual de caños,60,150,-75147652,150295304,225442955
+Contingencia por logística insular,0.15,0.4,-89015001,133522502,222537504
+Dedicación de supervisión por ACI,0.2,0.5,-72047288,144094577,216141865
+"Estudios técnicos (topografía, hidrología, diagnóstico)",25000000,80000000,-75000000,131250000,206250000
+Mantenimiento año 4 en adelante,2,8,-66437729,132875457,199313186
+"Factor prestacional (seg. social, prestaciones, parafiscales)",1.45,1.6,-91125059,104142925,195267984
