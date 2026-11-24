@@ -1,0 +1,15 @@
+id,nombre,inicio,fin,tipo,depende,estado
+4.1,"4.1 Batimetría (vías a/b/c, pasos B.1–B.5)",2026-12-01,2027-03-26,actividad,—,En curso
+H2.0,H2.0 Lista corta acordada con INVEMAR,2026-12-11,2026-12-11,hito,Respuesta de INVEMAR (actividad 2.3),Pendiente
+H2.2,H2.2 Pesos fijados y ACI propuestas,2027-01-04,2027-01-04,hito,"H2.0, encuesta de pesos",Pendiente
+H2.3,H2.3 Tres ACI aprobadas,2027-01-29,2027-01-29,hito,Taller 1,Pendiente
+CORTE,Fecha de corte: datos oficiales sustituyen a la SDB,2027-01-29,2027-01-29,hito,"D01, D02",Pendiente
+4.2,4.2 Elección del modelo,2027-02-01,2027-03-31,actividad,"H2.3, batimetría v0",Pendiente
+4.3,"4.3 Malla, rugosidad y vegetación",2027-02-28,2027-04-30,actividad,Batimetría v0,Pendiente
+HB.1,HB.1 Topobatimetría v1 aceptada,2027-03-26,2027-03-26,hito,B.1–B.4,Pendiente
+4.4,4.4 Calibración con Iota,2027-04-01,2027-05-07,actividad,HB.1,Pendiente
+H4.1,H4.1 Modelo calibrado con Iota,2027-05-07,2027-05-07,hito,HB.1,Pendiente
+4.5,4.5 Corridas de escenarios,2027-05-08,2027-06-11,actividad,H4.1,Pendiente
+4.6,4.6 Beneficio biofísico,2027-05-20,2027-06-15,actividad,4.5,Pendiente
+4.7,4.7 Redacción del E3,2027-06-01,2027-06-25,actividad,4.6,Pendiente
+E3,E3 Informe Fases 3 y 4,2027-06-25,2027-06-25,hito,H4.1,Pendiente

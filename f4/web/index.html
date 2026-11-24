@@ -1,0 +1,338 @@
+<meta name="dash-one-writer">
+<link rel="stylesheet" href="f4.css">
+<div class="f4" lang="es">
+  <header id="cabecera">
+    <p class="f4-kicker">ACB Manglares · Archipiélago de San Andrés · FORLIANCE / IKI «De Raíces a Mareas» · E1 Plan de Trabajo, sección 5.6</p>
+    <h1 class="f4-title">Fase 4 — Modelado del beneficio biofísico</h1>
+    <p class="f4-lede" data-read lang="es">Con parámetros provisionales, restaurar el manglar en las tres ACI candidatas reduciría la altura de ola al fondo de la franja en <b data-draw="kpi-dif-t" data-source="kpi" data-field="dif_ola_cm" data-row="0">—</b> cm de media frente a no actuar (Tr 100, t = 30), mientras que el nivel de inundación bajaría solo <b data-draw="kpi-nivel-t" data-source="kpi" data-field="dif_nivel_cm" data-row="0">—</b> cm: con franjas de 150–250 m, el beneficio que se puede medir está en el oleaje más que en la marea de tormenta. De los <b data-draw="kpi-ndatos-t" data-source="kpi" data-field="n_datos" data-row="0">—</b> datos que necesita la fase, <b data-draw="kpi-listos-t" data-source="kpi" data-field="n_listos" data-row="0">—</b> ya están en mano o localizados en fuentes abiertas. Es un modelo de cribado en Python: el modelo hidrodinámico (ADCIRC+SWAN o XBeach) lo sustituye cuando la topobatimetría esté aceptada (HB.1, 26 mar 2027).</p>
+  </header>
+
+  <nav class="f4-tabs" role="tablist" aria-label="Actividades de la Fase 4">
+    <button class="f4-tab" role="tab" data-tab="resumen" aria-selected="true">Resumen</button>
+    <button class="f4-tab" role="tab" data-tab="datos" aria-selected="false">0 · Datos</button>
+    <button class="f4-tab" role="tab" data-tab="parametros" aria-selected="false">Parámetros</button>
+    <button class="f4-tab" role="tab" data-tab="batimetria" aria-selected="false">4.1 Batimetría</button>
+    <button class="f4-tab" role="tab" data-tab="modelo" aria-selected="false">4.2 Modelo</button>
+    <button class="f4-tab" role="tab" data-tab="malla" aria-selected="false">4.3 Malla y vegetación</button>
+    <button class="f4-tab" role="tab" data-tab="iota" aria-selected="false">4.4 Calibración Iota</button>
+    <button class="f4-tab" role="tab" data-tab="corridas" aria-selected="false">4.5 Corridas</button>
+    <button class="f4-tab" role="tab" data-tab="beneficio" aria-selected="false">4.6 Beneficio</button>
+    <button class="f4-tab" role="tab" data-tab="sensibilidad" aria-selected="false">Sensibilidad</button>
+    <button class="f4-tab" role="tab" data-tab="metodo" aria-selected="false">4.7 E3 · Método y Python</button>
+  </nav>
+
+  <!-- ============ RESUMEN ============ -->
+  <section id="resumen" class="f4-page" role="tabpanel">
+    <div class="f4-kpis">
+      <div class="f4-card" id="k-dif"><div class="f4-klabel">Reducción de ola · Tr 100, t = 30</div><div class="f4-kval"><span data-draw="kpi-dif" data-source="kpi" data-field="dif_ola_cm" data-row="0">—</span> <small>cm</small></div><div class="f4-ksub">Media de 3 ACI · máx. <span data-draw="kpi-difmax" data-source="kpi" data-field="dif_ola_max_cm" data-row="0">—</span> cm</div></div>
+      <div class="f4-card" id="k-mc"><div class="f4-klabel">Rango Monte Carlo (P10–P90)</div><div class="f4-kval"><span data-draw="mc-p10" data-source="mc_pct" data-field="dif_ola_cm" data-where="estadistico=P10">—</span>–<span data-draw="mc-p90" data-source="mc_pct" data-field="dif_ola_cm" data-where="estadistico=P90">—</span> <small>cm</small></div><div class="f4-ksub">Mismo indicador, parámetros en sus rangos</div></div>
+      <div class="f4-card" id="k-nivel"><div class="f4-klabel">Reducción del nivel de inundación</div><div class="f4-kval"><span data-draw="kpi-nivel" data-source="kpi" data-field="dif_nivel_cm" data-row="0">—</span> <small>cm</small></div><div class="f4-ksub">Tr 100, t = 30, media de 3 ACI</div></div>
+      <div class="f4-card" id="k-corr"><div class="f4-klabel">Corridas del modelo hidrodinámico</div><div class="f4-kval"><span data-draw="kpi-corr" data-source="kpi" data-field="corridas" data-row="0">—</span> <small>corridas</small></div><div class="f4-ksub">22 por ACI: 8 en t = 0, 8 en t = 30, 2 de estrés y 4 de ±σ</div></div>
+      <div class="f4-card" id="k-datos"><div class="f4-klabel">Datos de la fase</div><div class="f4-kval"><span data-draw="kpi-listos" data-source="kpi" data-field="n_listos" data-row="0">—</span> <small>de <span data-draw="kpi-ndatos" data-source="kpi" data-field="n_datos" data-row="0">—</span> listos</small></div><div class="f4-ksub"><span data-draw="kpi-pend" data-source="kpi" data-field="n_pend" data-row="0">—</span> por pedir, generar o recibir</div></div>
+    </div>
+
+    <div class="f4-card" id="camino-critico">
+      <h2 class="f4-h2">Camino crítico de la F4</h2>
+      <p class="f4-note">Batimetría aceptada (HB.1) → malla → calibración con Iota (H4.1) → corridas → E3. Un retraso en la batimetría retrasa el E3 en la misma medida; por eso la vía propia (SDB) avanza desde diciembre aunque las vías oficiales sigan abiertas. La línea roja marca la fecha de los estados de este tablero.</p>
+      <div class="f4-chart f4-chart-l" data-draw="gantt-chart" data-source="hitos"></div>
+    </div>
+
+    <div class="f4-grid2">
+      <div class="f4-card" id="estado-datos">
+        <h2 class="f4-h2">Estado de los datos de la fase</h2>
+        <p class="f4-note">Verde: en mano o localizado en fuente abierta. Ámbar: pedido o por generar. Rojo: hay que pedirlo o falta una decisión.</p>
+        <div class="f4-chart f4-chart-s" data-draw="estado-chart" data-source="estado"></div>
+      </div>
+      <div class="f4-card" id="dif-resumen">
+        <h2 class="f4-h2">Reducción de ola por ACI y Tr (t = 30)</h2>
+        <p class="f4-note">Diferencia entre la altura de ola al fondo de la franja en el Escenario Base y en el de Intervención. Cribado: orden de magnitud, no resultado.</p>
+        <div class="f4-chart" data-draw="difres-chart" data-source="diferencial"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DATOS ============ -->
+  <section id="datos" class="f4-page" role="tabpanel" hidden>
+    <h2 class="f4-h2">Paso 0 · Necesidades de datos de la Fase 4</h2>
+    <p class="f4-note">Filas 4.01–4.11 de la Matriz de disponibilidad del proyecto, más las filas de la F1 que usa la F4 (1.05, 1.07, 1.08, 1.10, 1.12, 1.20) y los insumos nuevos del método del E1. «Tenemos» = ya en el proyecto; «Encontrado fuera» = fuente abierta localizada; «Solicitado» = pedido y pendiente de respuesta; «Solicitar» = hay que pedirlo; «Generar» = lo produce la consultoría; «Falta» = depende de una decisión o fase previa. Estados a 22 nov 2026.</p>
+    <div class="f4-scroll">
+      <table class="f4-table" id="tabla-datos-t" data-source="necesidades" data-row-key="id">
+        <thead><tr><th data-field="id">ID</th><th data-field="actividad">Act.</th><th data-field="dato">Dato</th><th data-field="estado">Estado</th><th data-field="lo_que_hay">Lo que hay</th><th data-field="siguiente_paso">Siguiente paso</th><th data-field="a_quien">A quién</th><th data-field="fecha_limite" class="num">Fecha límite</th><th data-field="url">Fuente</th></tr></thead>
+        <tbody data-draw="tabla-datos"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ PARÁMETROS ============ -->
+  <section id="parametros" class="f4-page" role="tabpanel" hidden>
+    <h2 class="f4-h2">Parámetros del modelo de cribado</h2>
+    <p class="f4-note">Los marcados como «Supuesto» se sustituyen cuando llegan los datos de la pestaña anterior. Los niveles extremos por Tr son marcadores: hasta tener COAST-RP o los niveles de Rey y Ruiz-Salcines, el diferencial absoluto no es interpretable, solo su orden de magnitud y su sensibilidad. Los parámetros de condición del manglar son los mismos que usa el modelo de costos de la F3.</p>
+    <div class="f4-scroll">
+      <table class="f4-table" id="tabla-param-t" data-source="parametros" data-row-key="id">
+        <thead><tr><th data-field="grupo">Grupo</th><th data-field="parametro">Parámetro</th><th data-field="valor" class="num">Valor</th><th data-field="unidad">Unidad</th><th data-field="rango_bajo" class="num">Bajo</th><th data-field="rango_alto" class="num">Alto</th><th data-field="estado">Estado</th><th data-field="fuente">Fuente</th></tr></thead>
+        <tbody data-draw="tabla-param"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ 4.1 BATIMETRÍA ============ -->
+  <section id="batimetria" class="f4-page" role="tabpanel" hidden>
+    <h2 class="f4-h2">Actividad 4.1 · Batimetría (dic 2026 – 26 mar 2027)</h2>
+    <p class="f4-note">Tres vías abiertas a 19 nov 2026; la de DIMAR-CIOH se pidió por transparencia ese día. Bajo el manglar, el MDE y los modelos satelitales pueden dar la cota del dosel y no la del suelo: se corrige con ICESat-2 ATL08 (terreno bajo la vegetación), con las cotas de parcelas y piezómetros de INVEMAR, CORALINA y MangRes si las tienen, y con la relación entre zonación y niveles de marea. Si los datos de DIMAR-CIOH o de INVEMAR llegan antes del 29 ene 2027, sustituyen a la batimetría propia en las zonas que cubran y sirven para calibrarla; si llegan después, solo se usan para validar, para no mover el HB.1. La malla se prototipa desde el 28 feb con una versión v0.</p>
+    <div class="f4-card" id="bati-cronograma"><div class="f4-chart" data-draw="bati-chart" data-source="batimetria"></div></div>
+    <div class="f4-card" id="bati-pasos">
+      <h3 class="f4-h3">Vías y pasos B.1–B.5</h3>
+      <div class="f4-scroll">
+        <table class="f4-table" data-source="batimetria" data-row-key="id">
+          <thead><tr><th data-field="paso">Vía o paso</th><th data-field="descripcion">Qué se hace</th><th data-field="inicio" class="num">Inicio</th><th data-field="fin" class="num">Fin</th><th data-field="estado">Estado</th><th data-field="herramientas">Herramientas</th></tr></thead>
+          <tbody data-draw="tabla-bati"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="f4-card f4-prose" id="bati-python">
+      <h3 class="f4-h3">Esqueleto en Python de la vía c</h3>
+      <ol>
+        <li><b>Compilación (B.1):</b> <code>sliderule.icesat2.atl24x()</code> o ATL03 con filtro de fotones de fondo; sondas de la carta digitalizadas en QGIS y exportadas a GeoPackage; corrección de marea de cada punto ICESat-2 a su hora con <code>pyTMD</code> (FES2014).</li>
+        <li><b>SDB (B.2):</b> Sentinel-2 L1C → ACOLITE (reflectancia de superficie) → cociente log(B2)/log(B3) calibrado por regresión con los puntos; en paralelo, LightGBM y una U-Net (PyTorch) con bandas B1–B5 y el cociente como entrada.</li>
+        <li><b>Unión (B.3):</b> <code>rasterio</code> + <code>scipy.interpolate</code> para fundir SDB, carta y MDE de 5 m en una sola superficie de 5–10 m referida al nivel medio local; bajo el manglar, la cota del suelo se corrige con los fotones de terreno de ICESat-2 ATL08.</li>
+        <li><b>Incertidumbre (B.4):</b> validación cruzada por bloques espaciales; error medio y RMSE por tramos de profundidad; mapa de σ que pasa a las corridas ±σ de la actividad 4.5.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ 4.2 MODELO ============ -->
+  <section id="modelo" class="f4-page" role="tabpanel" hidden>
+    <h2 class="f4-h2">Actividad 4.2 · Elección del modelo hidrodinámico (meses 4–5)</h2>
+    <p class="f4-note">Matriz de decisión con los cuatro criterios del E1. Los puntajes (1–5) son una propuesta del consultor para discutir con FORLIANCE; solo cambia entre casos el criterio de batimetría. Los TdR piden un único modelo: el anidamiento ADCIRC+SWAN → XBeach se acuerda con FORLIANCE (E1, actividad 4.2). La decisión se toma con las ACI fijadas (H2.3) y la batimetría v0.</p>
+    <div class="f4-card" id="matriz-card">
+      <div class="f4-row">
+        <h3 class="f4-h3">Puntaje ponderado por opción</h3>
+      </div>
+      <div class="f4-chart" data-draw="matriz-chart" data-source="matriz_tot"></div>
+    </div>
+    <div class="f4-card" id="matriz-detalle">
+      <div class="f4-row">
+        <h3 class="f4-h3">Criterios y puntajes</h3>
+        <select class="dash-select" id="sel-caso" aria-label="Caso de batimetría">
+          <option value="Solo SDB y carta">Solo SDB y carta</option>
+          <option value="Con batimetría CIOH">Con batimetría CIOH</option>
+        </select>
+      </div>
+      <div class="f4-scroll">
+        <table class="f4-table" data-source="matriz" data-row-key="criterio,caso">
+          <thead><tr><th data-field="criterio">Criterio</th><th data-field="peso" class="num">Peso</th><th data-field="adcirc_swan" class="num">ADCIRC+SWAN</th><th data-field="xbeach" class="num">XBeach</th><th data-field="anidado" class="num">Anidado</th><th data-field="nota">Nota</th></tr></thead>
+          <tbody data-draw="tabla-matriz"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4.3 MALLA ============ -->
+  <section id="malla" class="f4-page" role="tabpanel" hidden>
+    <h2 class="f4-h2">Actividad 4.3 · Malla, rugosidad y vegetación (meses 5–6)</h2>
+    <p class="f4-note">ADCIRC+SWAN: malla no estructurada de 20–50 m en plataforma y laguna (OceanMesh2D). XBeach: malla de 2–10 m por ACI alineada con el oleaje dominante. La rugosidad se asigna por clase LULC, la misma leyenda de seis clases que usan InVEST CV y CBC, en WGS84 / UTM 17N.</p>
+    <div class="f4-card" id="rugosidad">
+      <h3 class="f4-h3">Manning por clase LULC (propuesta)</h3>
+      <p class="f4-note">Valores de partida para el modelo de marea de tormenta; se calibran con Iota. En XBeach el manglar se representa con el término de arrastre de la vegetación, no con Manning.</p>
+      <div class="f4-scroll">
+        <table class="f4-table" data-source="rugosidad" data-row-key="clase">
+          <thead><tr><th data-field="clase">Clase</th><th data-field="manning_n" class="num">n de Manning</th><th data-field="rango_bajo" class="num">Rango</th><th data-field="estado">Estado</th><th data-field="fuente">Justificación</th></tr></thead>
+          <tbody data-draw="tabla-rug"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="f4-card" id="vegetacion">
+      <h3 class="f4-h3">Parámetros de vegetación de Rhizophora mangle</h3>
+      <p class="f4-note">La base de parcelas de INVEMAR (BDD_SAI, recibida el 17 nov 2026) da densidad, DAP y altura de los árboles en 8 estaciones de San Andrés, entre ellas Smith Channel, El Cove y Bahía Hooker. No incluye la altura de las raíces fúlcreas, que se estima con las relaciones de Ohira et al. (2013).</p>
+      <div class="f4-scroll">
+        <table class="f4-table" data-source="vegetacion" data-row-key="parametro">
+          <thead><tr><th data-field="parametro">Parámetro</th><th data-field="valor" class="num">Valor</th><th data-field="unidad">Unidad</th><th data-field="estado">Estado</th><th data-field="fuente">Fuente</th><th data-field="uso">Uso</th></tr></thead>
+          <tbody data-draw="tabla-veg"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4.4 IOTA ============ -->
+  <section id="iota" class="f4-page" role="tabpanel" hidden>
+    <h2 class="f4-h2">Actividad 4.4 · Calibración y validación con Iota (hito H4.1, 7 may 2027)</h2>
+    <p class="f4-note">Primer paso de la calibración, ya posible sin batimetría: el campo de viento paramétrico de Holland (1980) sobre el best track del NHC, interpolado cada hora, con radio de vientos máximos de 8 n mi y asimetría por traslación. Se compara con lo observado. La marea de tormenta y la inundación se calibran después con el modelo hidrodinámico; al no haber cotas de inundación medidas, la validación es de extensión (UNOSAT, ARIA), no de niveles. En San Andrés, UNOSAT solo da un conteo mínimo (31 estructuras dañadas y 221 potencialmente dañadas, sin máscara de nubes), por lo que la calibración hidrodinámica se apoya en Providencia. El daño al manglar y las cotas observadas tras Iota se pidieron a INVEMAR el 10 nov 2026.</p>
+    <div class="f4-card" id="iota-viento">
+      <h3 class="f4-h3">Viento modelado durante el paso de Iota</h3>
+      <div class="f4-chart f4-chart-l" data-draw="iota-chart" data-source="iota_viento calibracion"></div>
+    </div>
+    <div class="f4-card" id="iota-calib">
+      <h3 class="f4-h3">Objetivos de calibración</h3>
+      <p class="f4-note">El viento de 10 min en el aeropuerto de San Andrés y las horas de viento huracanado en Providencia quedan cerca de lo observado. El pico en Providencia sale por encima del mínimo de 115 kt del NHC porque la trayectoria horaria pasa más cerca del radio de vientos máximos. La marea de tormenta de «casi 3 m» que reporta el NHC en San Andrés hay que contrastarla con el mareógrafo y con DIMAR antes de usarla como objetivo.</p>
+      <div class="f4-scroll">
+        <table class="f4-table" data-source="calibracion" data-row-key="id">
+          <thead><tr><th data-field="indicador">Indicador</th><th data-field="observado" class="num">Observado</th><th data-field="modelo_cribado" class="num">Modelo</th><th data-field="unidad">Unidad</th><th data-field="fuente">Fuente</th></tr></thead>
+          <tbody data-draw="tabla-calib"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="f4-card" id="iota-track">
+      <h3 class="f4-h3">Best track de Iota cerca del Archipiélago</h3>
+      <div class="f4-scroll">
+        <table class="f4-table" data-source="iota_track" data-row-key="fecha">
+          <thead><tr><th data-field="fecha">Fecha (UTC)</th><th data-field="lat" class="num">Lat °N</th><th data-field="lon" class="num">Lon °</th><th data-field="presion_hpa" class="num">hPa</th><th data-field="viento_kt" class="num">kt</th><th data-field="dist_sai_km" class="num">Dist. SAI (km)</th><th data-field="dist_pva_km" class="num">Dist. Providencia (km)</th></tr></thead>
+          <tbody data-draw="tabla-track"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4.5 CORRIDAS ============ -->
+  <section id="corridas" class="f4-page" role="tabpanel" hidden>
+    <h2 class="f4-h2">Actividad 4.5 · Corridas de escenarios (meses 7–8)</h2>
+    <p class="f4-note">Por ACI, 22 corridas. En t = 0 los dos escenarios tienen la misma cobertura, porque la restauración aún no ha empezado: se corren los 4 Tr con el LULC actual y con el mismo dominio sin manglar (8 corridas), que dan el papel protector del manglar existente. En t = 30 se corren el Escenario Base y el de Intervención con el ANM central de +26 cm (8 corridas), que dan el beneficio de la intervención. Se añaden una corrida de estrés por escenario con Tr 100 en t = 100 (ANM +97 cm) y 4 corridas con la batimetría ±σ en Tr 100.</p>
+    <p class="f4-note" id="interpolacion">Entre t = 0 y t = 30 el daño anual esperado no se interpola de forma lineal, sino según la fracción de manglar restaurado cada año (curva logística de la F3, cortes t = 10 y 20). De t = 30 a los horizontes de 50 y 100 años se mantiene la cobertura de t = 30 y el daño se escala con el ANM de cada horizonte (+45 y +97 cm); la corrida de estrés acota ese supuesto.</p>
+    <div class="f4-grid2">
+      <div class="f4-card" id="forz-card">
+        <h3 class="f4-h3">Nivel de las corridas por Tr y horizonte</h3>
+        <p class="f4-note">Niveles extremos provisionales + ANM (SSP2-4.5 + GNSS SAN0).</p>
+        <div class="f4-chart" data-draw="forz-chart" data-source="forzamiento"></div>
+      </div>
+      <div class="f4-card" id="forz-tabla">
+        <h3 class="f4-h3">Tabla de forzamiento (m s.n.m.m.)</h3>
+        <div class="f4-scroll">
+          <table class="f4-table" data-source="forzamiento" data-row-key="tr">
+            <thead><tr><th data-field="tr">Tr</th><th data-field="nivel_t0_m" class="num">t = 0</th><th data-field="nivel_t10_m" class="num">t = 10</th><th data-field="nivel_t20_m" class="num">t = 20</th><th data-field="nivel_t30_m" class="num">t = 30</th><th data-field="nivel_t50_m" class="num">t = 50</th><th data-field="nivel_t100_m" class="num">t = 100</th></tr></thead>
+            <tbody data-draw="tabla-forz"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="f4-card" id="corridas-tabla">
+      <div class="f4-row">
+        <h3 class="f4-h3">Matriz de corridas</h3>
+        <select class="dash-select" id="sel-aci-corr" aria-label="ACI">
+          <option value="Old Point / Bahía Hooker">Old Point / Bahía Hooker</option>
+          <option value="Cove Sea Side">Cove Sea Side</option>
+          <option value="Smith Channel">Smith Channel</option>
+        </select>
+      </div>
+      <div class="f4-scroll">
+        <table class="f4-table" data-source="corridas" data-row-key="id">
+          <thead><tr><th data-field="id">ID</th><th data-field="tr" class="num">Tr</th><th data-field="escenario">Escenario</th><th data-field="anm">ANM</th><th data-field="nivel_m" class="num">Nivel (m)</th><th data-field="lulc">LULC</th><th data-field="tipo">Tipo</th><th data-field="estado">Estado</th></tr></thead>
+          <tbody data-draw="tabla-corridas"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4.6 BENEFICIO ============ -->
+  <section id="beneficio" class="f4-page" role="tabpanel" hidden>
+    <h2 class="f4-h2">Actividad 4.6 · Beneficio biofísico (cribado)</h2>
+    <p class="f4-note">Ola limitada por profundidad en el borde (H₀ = γ·h) y decaimiento hiperbólico a través de la franja, H(x) = H₀ / (1 + β·x), la forma de Mendez y Losada (2004). β es el coeficiente de Rhizophora sana (Kelty et al., 2022) escalado por la condición del manglar de cada escenario y reducido cuando la lámina supera la zona de raíces. La atenuación del nivel usa tasas por kilómetro de manglar (Krauss et al., 2009; Zhang et al., 2012). Los anchos de franja son provisionales. Como contraste a escala de isla, el modelo hidrodinámico se acompaña de InVEST CV con los hábitats de ambos escenarios en t = 30 y el ANM de +26 cm.</p>
+    <div class="f4-card" id="prot-card">
+      <h3 class="f4-h3">Papel protector del manglar actual (t = 0)</h3>
+      <p class="f4-note">Reducción de la altura de ola al fondo de la franja del manglar actual frente al mismo dominio sin manglar. Corresponde a las 8 corridas de t = 0 de cada ACI.</p>
+      <div class="f4-chart" data-draw="prot-chart" data-source="proteccion"></div>
+    </div>
+    <div class="f4-grid2">
+      <div class="f4-card" id="cond-card">
+        <h3 class="f4-h3">Condición del manglar por escenario</h3>
+        <p class="f4-note">Base: pérdida crónica de 1 %/año (E1, 11.6). Intervención: curva logística de estructura arbórea de la F3.</p>
+        <div class="f4-chart" data-draw="cond-chart" data-source="condicion"></div>
+      </div>
+      <div class="f4-card" id="perfil-card">
+        <div class="f4-row">
+          <h3 class="f4-h3">Altura de ola a través de la franja (t = 30)</h3>
+          <div class="f4-ctrls">
+            <select class="dash-select" id="sel-aci-perfil" aria-label="ACI">
+              <option value="Old Point / Bahía Hooker">Old Point / Bahía Hooker</option>
+              <option value="Cove Sea Side">Cove Sea Side</option>
+              <option value="Smith Channel">Smith Channel</option>
+            </select>
+            <select class="dash-select" id="sel-tr-perfil" aria-label="Periodo de retorno">
+              <option value="100">Tr 100</option>
+              <option value="10">Tr 10</option>
+            </select>
+          </div>
+        </div>
+        <div class="f4-chart" data-draw="perfil-chart" data-source="perfil"></div>
+      </div>
+    </div>
+    <div class="f4-card" id="dif-card">
+      <div class="f4-row">
+        <h3 class="f4-h3">Reducción de ola por Tr y corte</h3>
+        <select class="dash-select" id="sel-aci-dif" aria-label="ACI">
+          <option value="Old Point / Bahía Hooker">Old Point / Bahía Hooker</option>
+          <option value="Cove Sea Side">Cove Sea Side</option>
+          <option value="Smith Channel">Smith Channel</option>
+        </select>
+      </div>
+      <p class="f4-note">El diferencial crece con el tiempo porque la Intervención madura mientras el Base se degrada, y con el Tr porque la ola de partida es mayor. En t = 50 y 100 se mantiene la cobertura de t = 30 y solo sube el ANM. Es la entrada física de la valoración de daños evitados de la F5 (actividad 5.2).</p>
+      <div class="f4-chart" data-draw="dif-chart" data-source="diferencial"></div>
+      <div class="f4-scroll">
+        <table class="f4-table" data-source="beneficio" data-row-key="clave">
+          <thead><tr><th data-field="tr">Tr</th><th data-field="escenario">Escenario</th><th data-field="condicion" class="num">Condición</th><th data-field="lamina_m" class="num">Lámina (m)</th><th data-field="H0_m" class="num">H₀ (m)</th><th data-field="H_fondo_m" class="num">H al fondo (m)</th><th data-field="reduccion_ola_pct" class="num">Reducción de ola</th><th data-field="atenuacion_nivel_cm" class="num">Atenuación de nivel (cm)</th></tr></thead>
+          <tbody data-draw="tabla-beneficio"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SENSIBILIDAD ============ -->
+  <section id="sensibilidad" class="f4-page" role="tabpanel" hidden>
+    <h2 class="f4-h2">Sensibilidad del diferencial de ola</h2>
+    <p class="f4-note">Sobre la reducción media de ola de las 3 ACI en Tr 100, t = 30. El tornado indica qué medir primero: los niveles extremos y el error vertical de la batimetría pesan más que los parámetros de vegetación, lo que confirma que la batimetría y los niveles por Tr son el camino crítico.</p>
+    <div class="f4-card" id="tornado"><div class="f4-chart f4-chart-l" data-draw="tornado-chart" data-source="tornado"></div></div>
+    <div class="f4-card" id="montecarlo">
+      <h3 class="f4-h3">Monte Carlo (distribuciones triangulares)</h3>
+      <p class="f4-note"><span data-draw="mc-n" data-source="mc_pct" data-field="dif_ola_cm" data-where="estadistico=Iteraciones">—</span> iteraciones. P10–P90: <span data-draw="mc-p10-b" data-source="mc_pct" data-field="dif_ola_cm" data-where="estadistico=P10">—</span>–<span data-draw="mc-p90-b" data-source="mc_pct" data-field="dif_ola_cm" data-where="estadistico=P90">—</span> cm.</p>
+      <div class="f4-chart" data-draw="mc-chart" data-source="mc_hist mc_pct"></div>
+    </div>
+  </section>
+
+  <!-- ============ MÉTODO ============ -->
+  <section id="metodo" class="f4-page" role="tabpanel" hidden>
+    <h2 class="f4-h2">Actividad 4.7 · E3 y modelo en Python</h2>
+    <div class="f4-card f4-prose" id="metodo-texto">
+      <p>Todo lo que muestra este tablero sale de dos scripts en Python estándar, sin dependencias, guardados en el proyecto: <code>modelo_beneficio_f4.py</code> (forzamiento, corridas, viento de Iota, cribado del beneficio y sensibilidad) y <code>tablas_f4.py</code> (datos, hitos, batimetría, matriz de modelo, rugosidad y vegetación). Para actualizar: edita <code>PARAMS</code>, <code>ACIS</code> o las listas, ejecuta los dos scripts y sustituye los CSV en Fuentes.</p>
+      <h3 class="f4-h3">Qué entra en el E3 (25 jun 2027)</h3>
+      <ul>
+        <li>Topobatimetría v1 con su mapa de incertidumbre e informe de validación (anexo).</li>
+        <li>Nota de elección del modelo (4.2), modelo calibrado e informe de calibración con Iota (4.4).</li>
+        <li>Campos de altura de ola, nivel y velocidad de las 66 corridas (4.5) y mapas y tablas de diferencias por ACI y Tr (4.6).</li>
+      </ul>
+      <h3 class="f4-h3">Cadena del cribado</h3>
+      <ol>
+        <li><b>Lámina</b> en el frente del manglar: h = nivel extremo (Tr) + ANM (t) − cota del suelo.</li>
+        <li><b>Ola incidente</b> limitada por profundidad: H₀ = γ·h.</li>
+        <li><b>Condición</b> del manglar: Base C(t) = C₀·e^(−λt); Intervención según la logística de la F3.</li>
+        <li><b>Decaimiento</b>: β = β_ref · C(t) · f(h), con f(h) = 1 bajo la zona de raíces y menor por encima; H al fondo = H₀ / (1 + β·W).</li>
+        <li><b>Nivel</b>: Δη = [s_manglar·C + s_desnudo·(1 − C)] · W.</li>
+        <li><b>Diferencial</b> = Base − Intervención, por ACI, Tr y corte (t = 10, 20, 30); en t = 50 y 100, con la cobertura de t = 30 y el ANM de cada horizonte.</li>
+        <li><b>Papel protector actual</b> (t = 0) = dominio sin manglar − manglar actual.</li>
+        <li><b>Viento de Iota</b>: perfil de Holland con B = ρ·e·V²/Δp, conversión a superficie y a 10 min, y asimetría por traslación.</li>
+      </ol>
+      <h3 class="f4-h3">Decisiones abiertas</h3>
+      <ul>
+        <li>ACI: el tablero usa como candidatas Old Point / Bahía Hooker, Cove Sea Side (El Cove) y Smith Channel, todas con parcelas de INVEMAR. La lista corta se acuerda con INVEMAR y FORLIANCE (H2.0, 11 dic 2026) a partir de la capa sectores_SAI y las parcelas BDD_SAI, y las tres ACI se validan en el Taller 1 (H2.3). El modelo de costos de la F3 debe usar las mismas.</li>
+        <li>Modelo único o anidado, y recursos de cómputo para ADCIRC+SWAN.</li>
+        <li>Marea de tormenta de Iota en San Andrés: el «casi 3 m» del NHC parece alto frente a Velásquez-Calderón et al. (2026), que no hallan láminas de más de 2 m a 100 años; hay que contrastarlo con el mareógrafo.</li>
+      </ul>
+      <details>
+        <summary>Fuentes principales</summary>
+        <ul>
+          <li>Plan de Trabajo (E1), secciones 4.2, 5.2, 5.6, 6, 7 y 11.6; Matriz de disponibilidad de datos del proyecto.</li>
+          <li>NOAA/NHC (2021). <i>Hurricane Iota (AL312020). Tropical Cyclone Report</i>, con el best track (tabla 1).</li>
+          <li>Holland, G. J. (1980). An analytic model of the wind and pressure profiles in hurricanes. <i>Monthly Weather Review</i> 108: 1212–1218.</li>
+          <li>Mendez, F. J. y Losada, I. J. (2004). An empirical model to estimate the propagation of random breaking and nonbreaking waves over vegetation fields. <i>Coastal Engineering</i> 51: 103–118.</li>
+          <li>Kelty, K. et al. (2022). Prototype-scale physical model of wave attenuation through a mangrove forest of moderate cross-shore thickness. <i>Frontiers in Marine Science</i> 8: 780946.</li>
+          <li>Lopez-Arias, F. et al. (2024). Integrated drag coefficient formula for estimating the wave attenuation capacity of Rhizophora sp. mangrove forests. <i>Frontiers in Marine Science</i> 11: 1383368.</li>
+          <li>Maza, M., Lara, J. L. y Losada, I. J. (2019). Experimental analysis of wave attenuation and drag forces in a realistic fringe Rhizophora mangrove forest. <i>Advances in Water Resources</i> 131: 103376.</li>
+          <li>Ohira, W. et al. (2013). Mangrove stilt root morphology modeling for estimating hydraulic drag in tsunami inundation simulation. <i>Trees</i> 27: 141–148.</li>
+          <li>Zhang, K. et al. (2012). The role of mangroves in attenuating storm surges. <i>Estuarine, Coastal and Shelf Science</i> 102–103: 11–23.</li>
+          <li>Krauss, K. W. et al. (2009). Water level observations in mangrove swamps during two hurricanes in Florida. <i>Wetlands</i> 29: 142–149.</li>
+          <li>Velásquez-Calderón, C. S. et al. (2026). Assessing hurricane storm surge risk under near-past climate conditions… <i>Ocean and Coastal Management</i> 283: 108404.</li>
+          <li>Harper, B. A., Kepert, J. D. y Ginger, J. D. (2010). <i>Guidelines for converting between various wind averaging periods in tropical cyclone conditions</i>. OMM, TD-1555.</li>
+        </ul>
+      </details>
+    </div>
+  </section>
+</div>
+<script src="f4-core.js"></script>
+<script src="f4-charts.js"></script>

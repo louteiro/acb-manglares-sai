@@ -1,0 +1,121 @@
+clave,aci,tr,corte,escenario,condicion,lamina_m,H0_m,beta_1m,H_fondo_m,reduccion_ola_pct,atenuacion_nivel_cm
+Old Point / Bahía Hooker|10|10|Base,Old Point / Bahía Hooker,10,10,Base,0.181,0.38,0.19,0.00181,0.131,31.1,3.2
+Old Point / Bahía Hooker|10|10|Intervención,Old Point / Bahía Hooker,10,10,Intervención,0.396,0.38,0.19,0.00396,0.096,49.7,4.7
+Old Point / Bahía Hooker|10|20|Base,Old Point / Bahía Hooker,10,20,Base,0.164,0.47,0.24,0.00164,0.167,29.0,3.1
+Old Point / Bahía Hooker|10|20|Intervención,Old Point / Bahía Hooker,10,20,Intervención,0.785,0.47,0.24,0.00785,0.079,66.2,7.3
+Old Point / Bahía Hooker|10|30|Base,Old Point / Bahía Hooker,10,30,Base,0.148,0.56,0.28,0.00148,0.204,27.0,3.0
+Old Point / Bahía Hooker|10|30|Intervención,Old Point / Bahía Hooker,10,30,Intervención,0.927,0.56,0.28,0.00927,0.084,69.9,8.3
+Old Point / Bahía Hooker|10|50|Base,Old Point / Bahía Hooker,10,50,Base,0.148,0.75,0.38,0.00148,0.274,27.0,3.0
+Old Point / Bahía Hooker|10|50|Intervención,Old Point / Bahía Hooker,10,50,Intervención,0.927,0.75,0.38,0.00927,0.113,69.9,8.3
+Old Point / Bahía Hooker|10|100|Base,Old Point / Bahía Hooker,10,100,Base,0.148,1.27,0.63,0.00148,0.463,27.0,3.0
+Old Point / Bahía Hooker|10|100|Intervención,Old Point / Bahía Hooker,10,100,Intervención,0.927,1.27,0.63,0.00927,0.191,69.9,8.3
+Old Point / Bahía Hooker|25|10|Base,Old Point / Bahía Hooker,25,10,Base,0.181,0.68,0.34,0.00181,0.234,31.1,3.2
+Old Point / Bahía Hooker|25|10|Intervención,Old Point / Bahía Hooker,25,10,Intervención,0.396,0.68,0.34,0.00396,0.171,49.7,4.7
+Old Point / Bahía Hooker|25|20|Base,Old Point / Bahía Hooker,25,20,Base,0.164,0.77,0.39,0.00164,0.273,29.0,3.1
+Old Point / Bahía Hooker|25|20|Intervención,Old Point / Bahía Hooker,25,20,Intervención,0.785,0.77,0.39,0.00785,0.13,66.2,7.3
+Old Point / Bahía Hooker|25|30|Base,Old Point / Bahía Hooker,25,30,Base,0.148,0.86,0.43,0.00148,0.314,27.0,3.0
+Old Point / Bahía Hooker|25|30|Intervención,Old Point / Bahía Hooker,25,30,Intervención,0.927,0.86,0.43,0.00927,0.13,69.9,8.3
+Old Point / Bahía Hooker|25|50|Base,Old Point / Bahía Hooker,25,50,Base,0.148,1.05,0.53,0.00148,0.383,27.0,3.0
+Old Point / Bahía Hooker|25|50|Intervención,Old Point / Bahía Hooker,25,50,Intervención,0.927,1.05,0.53,0.00927,0.158,69.9,8.3
+Old Point / Bahía Hooker|25|100|Base,Old Point / Bahía Hooker,25,100,Base,0.148,1.57,0.79,0.00143,0.578,26.4,3.0
+Old Point / Bahía Hooker|25|100|Intervención,Old Point / Bahía Hooker,25,100,Intervención,0.927,1.57,0.79,0.00896,0.242,69.1,8.3
+Old Point / Bahía Hooker|50|10|Base,Old Point / Bahía Hooker,50,10,Base,0.181,0.98,0.49,0.00181,0.337,31.1,3.2
+Old Point / Bahía Hooker|50|10|Intervención,Old Point / Bahía Hooker,50,10,Intervención,0.396,0.98,0.49,0.00396,0.246,49.7,4.7
+Old Point / Bahía Hooker|50|20|Base,Old Point / Bahía Hooker,50,20,Base,0.164,1.07,0.53,0.00164,0.38,29.0,3.1
+Old Point / Bahía Hooker|50|20|Intervención,Old Point / Bahía Hooker,50,20,Intervención,0.785,1.07,0.53,0.00785,0.181,66.2,7.3
+Old Point / Bahía Hooker|50|30|Base,Old Point / Bahía Hooker,50,30,Base,0.148,1.16,0.58,0.00148,0.423,27.0,3.0
+Old Point / Bahía Hooker|50|30|Intervención,Old Point / Bahía Hooker,50,30,Intervención,0.927,1.16,0.58,0.00927,0.175,69.9,8.3
+Old Point / Bahía Hooker|50|50|Base,Old Point / Bahía Hooker,50,50,Base,0.148,1.35,0.67,0.00148,0.493,27.0,3.0
+Old Point / Bahía Hooker|50|50|Intervención,Old Point / Bahía Hooker,50,50,Intervención,0.927,1.35,0.67,0.00927,0.203,69.9,8.3
+Old Point / Bahía Hooker|50|100|Base,Old Point / Bahía Hooker,50,100,Base,0.148,1.87,0.93,0.00126,0.711,24.0,3.0
+Old Point / Bahía Hooker|50|100|Intervención,Old Point / Bahía Hooker,50,100,Intervención,0.927,1.87,0.93,0.0079,0.314,66.4,8.3
+Old Point / Bahía Hooker|100|10|Base,Old Point / Bahía Hooker,100,10,Base,0.181,1.28,0.64,0.00181,0.441,31.1,3.2
+Old Point / Bahía Hooker|100|10|Intervención,Old Point / Bahía Hooker,100,10,Intervención,0.396,1.28,0.64,0.00396,0.322,49.7,4.7
+Old Point / Bahía Hooker|100|20|Base,Old Point / Bahía Hooker,100,20,Base,0.164,1.37,0.68,0.00164,0.486,29.0,3.1
+Old Point / Bahía Hooker|100|20|Intervención,Old Point / Bahía Hooker,100,20,Intervención,0.785,1.37,0.68,0.00785,0.231,66.2,7.3
+Old Point / Bahía Hooker|100|30|Base,Old Point / Bahía Hooker,100,30,Base,0.148,1.46,0.73,0.00148,0.533,27.0,3.0
+Old Point / Bahía Hooker|100|30|Intervención,Old Point / Bahía Hooker,100,30,Intervención,0.927,1.46,0.73,0.00927,0.22,69.9,8.3
+Old Point / Bahía Hooker|100|50|Base,Old Point / Bahía Hooker,100,50,Base,0.148,1.65,0.82,0.00138,0.613,25.7,3.0
+Old Point / Bahía Hooker|100|50|Intervención,Old Point / Bahía Hooker,100,50,Intervención,0.927,1.65,0.82,0.00864,0.261,68.4,8.3
+Old Point / Bahía Hooker|100|100|Base,Old Point / Bahía Hooker,100,100,Base,0.148,2.17,1.08,0.00114,0.845,22.2,3.0
+Old Point / Bahía Hooker|100|100|Intervención,Old Point / Bahía Hooker,100,100,Intervención,0.927,2.17,1.08,0.00713,0.39,64.1,8.3
+Cove Sea Side|10|10|Base,Cove Sea Side,10,10,Base,0.181,0.38,0.19,0.00181,0.14,26.6,2.6
+Cove Sea Side|10|10|Intervención,Cove Sea Side,10,10,Intervención,0.396,0.38,0.19,0.00396,0.106,44.2,3.7
+Cove Sea Side|10|20|Base,Cove Sea Side,10,20,Base,0.164,0.47,0.24,0.00164,0.177,24.7,2.5
+Cove Sea Side|10|20|Intervención,Cove Sea Side,10,20,Intervención,0.785,0.47,0.24,0.00785,0.091,61.1,5.8
+Cove Sea Side|10|30|Base,Cove Sea Side,10,30,Base,0.148,0.56,0.28,0.00148,0.216,22.9,2.4
+Cove Sea Side|10|30|Intervención,Cove Sea Side,10,30,Intervención,0.927,0.56,0.28,0.00927,0.098,65.0,6.6
+Cove Sea Side|10|50|Base,Cove Sea Side,10,50,Base,0.148,0.75,0.38,0.00148,0.289,22.9,2.4
+Cove Sea Side|10|50|Intervención,Cove Sea Side,10,50,Intervención,0.927,0.75,0.38,0.00927,0.131,65.0,6.6
+Cove Sea Side|10|100|Base,Cove Sea Side,10,100,Base,0.148,1.27,0.63,0.00148,0.49,22.9,2.4
+Cove Sea Side|10|100|Intervención,Cove Sea Side,10,100,Intervención,0.927,1.27,0.63,0.00927,0.222,65.0,6.6
+Cove Sea Side|25|10|Base,Cove Sea Side,25,10,Base,0.181,0.68,0.34,0.00181,0.25,26.6,2.6
+Cove Sea Side|25|10|Intervención,Cove Sea Side,25,10,Intervención,0.396,0.68,0.34,0.00396,0.19,44.2,3.7
+Cove Sea Side|25|20|Base,Cove Sea Side,25,20,Base,0.164,0.77,0.39,0.00164,0.29,24.7,2.5
+Cove Sea Side|25|20|Intervención,Cove Sea Side,25,20,Intervención,0.785,0.77,0.39,0.00785,0.15,61.1,5.8
+Cove Sea Side|25|30|Base,Cove Sea Side,25,30,Base,0.148,0.86,0.43,0.00148,0.332,22.9,2.4
+Cove Sea Side|25|30|Intervención,Cove Sea Side,25,30,Intervención,0.927,0.86,0.43,0.00927,0.151,65.0,6.6
+Cove Sea Side|25|50|Base,Cove Sea Side,25,50,Base,0.148,1.05,0.53,0.00148,0.405,22.9,2.4
+Cove Sea Side|25|50|Intervención,Cove Sea Side,25,50,Intervención,0.927,1.05,0.53,0.00927,0.184,65.0,6.6
+Cove Sea Side|25|100|Base,Cove Sea Side,25,100,Base,0.148,1.57,0.79,0.00143,0.61,22.3,2.4
+Cove Sea Side|25|100|Intervención,Cove Sea Side,25,100,Intervención,0.927,1.57,0.79,0.00896,0.281,64.2,6.6
+Cove Sea Side|50|10|Base,Cove Sea Side,50,10,Base,0.181,0.98,0.49,0.00181,0.36,26.6,2.6
+Cove Sea Side|50|10|Intervención,Cove Sea Side,50,10,Intervención,0.396,0.98,0.49,0.00396,0.274,44.2,3.7
+Cove Sea Side|50|20|Base,Cove Sea Side,50,20,Base,0.164,1.07,0.53,0.00164,0.403,24.7,2.5
+Cove Sea Side|50|20|Intervención,Cove Sea Side,50,20,Intervención,0.785,1.07,0.53,0.00785,0.208,61.1,5.8
+Cove Sea Side|50|30|Base,Cove Sea Side,50,30,Base,0.148,1.16,0.58,0.00148,0.447,22.9,2.4
+Cove Sea Side|50|30|Intervención,Cove Sea Side,50,30,Intervención,0.927,1.16,0.58,0.00927,0.203,65.0,6.6
+Cove Sea Side|50|50|Base,Cove Sea Side,50,50,Base,0.148,1.35,0.67,0.00148,0.521,22.9,2.4
+Cove Sea Side|50|50|Intervención,Cove Sea Side,50,50,Intervención,0.927,1.35,0.67,0.00927,0.236,65.0,6.6
+Cove Sea Side|50|100|Base,Cove Sea Side,50,100,Base,0.148,1.87,0.93,0.00126,0.747,20.2,2.4
+Cove Sea Side|50|100|Intervención,Cove Sea Side,50,100,Intervención,0.927,1.87,0.93,0.0079,0.362,61.2,6.6
+Cove Sea Side|100|10|Base,Cove Sea Side,100,10,Base,0.181,1.28,0.64,0.00181,0.47,26.6,2.6
+Cove Sea Side|100|10|Intervención,Cove Sea Side,100,10,Intervención,0.396,1.28,0.64,0.00396,0.357,44.2,3.7
+Cove Sea Side|100|20|Base,Cove Sea Side,100,20,Base,0.164,1.37,0.68,0.00164,0.516,24.7,2.5
+Cove Sea Side|100|20|Intervención,Cove Sea Side,100,20,Intervención,0.785,1.37,0.68,0.00785,0.267,61.1,5.8
+Cove Sea Side|100|30|Base,Cove Sea Side,100,30,Base,0.148,1.46,0.73,0.00148,0.563,22.9,2.4
+Cove Sea Side|100|30|Intervención,Cove Sea Side,100,30,Intervención,0.927,1.46,0.73,0.00927,0.256,65.0,6.6
+Cove Sea Side|100|50|Base,Cove Sea Side,100,50,Base,0.148,1.65,0.82,0.00138,0.646,21.6,2.4
+Cove Sea Side|100|50|Intervención,Cove Sea Side,100,50,Intervención,0.927,1.65,0.82,0.00864,0.302,63.3,6.6
+Cove Sea Side|100|100|Base,Cove Sea Side,100,100,Base,0.148,2.17,1.08,0.00114,0.884,18.5,2.4
+Cove Sea Side|100|100|Intervención,Cove Sea Side,100,100,Intervención,0.927,2.17,1.08,0.00713,0.447,58.8,6.6
+Smith Channel|10|10|Base,Smith Channel,10,10,Base,0.181,0.38,0.19,0.00181,0.149,21.3,1.9
+Smith Channel|10|10|Intervención,Smith Channel,10,10,Intervención,0.396,0.38,0.19,0.00396,0.119,37.2,2.8
+Smith Channel|10|20|Base,Smith Channel,10,20,Base,0.164,0.47,0.24,0.00164,0.189,19.7,1.9
+Smith Channel|10|20|Intervención,Smith Channel,10,20,Intervención,0.785,0.47,0.24,0.00785,0.108,54.1,4.4
+Smith Channel|10|30|Base,Smith Channel,10,30,Base,0.148,0.56,0.28,0.00148,0.229,18.2,1.8
+Smith Channel|10|30|Intervención,Smith Channel,10,30,Intervención,0.927,0.56,0.28,0.00927,0.117,58.2,5.0
+Smith Channel|10|50|Base,Smith Channel,10,50,Base,0.148,0.75,0.38,0.00148,0.307,18.2,1.8
+Smith Channel|10|50|Intervención,Smith Channel,10,50,Intervención,0.927,0.75,0.38,0.00927,0.157,58.2,5.0
+Smith Channel|10|100|Base,Smith Channel,10,100,Base,0.148,1.27,0.63,0.00148,0.52,18.2,1.8
+Smith Channel|10|100|Intervención,Smith Channel,10,100,Intervención,0.927,1.27,0.63,0.00927,0.266,58.2,5.0
+Smith Channel|25|10|Base,Smith Channel,25,10,Base,0.181,0.68,0.34,0.00181,0.267,21.3,1.9
+Smith Channel|25|10|Intervención,Smith Channel,25,10,Intervención,0.396,0.68,0.34,0.00396,0.213,37.2,2.8
+Smith Channel|25|20|Base,Smith Channel,25,20,Base,0.164,0.77,0.39,0.00164,0.309,19.7,1.9
+Smith Channel|25|20|Intervención,Smith Channel,25,20,Intervención,0.785,0.77,0.39,0.00785,0.177,54.1,4.4
+Smith Channel|25|30|Base,Smith Channel,25,30,Base,0.148,0.86,0.43,0.00148,0.352,18.2,1.8
+Smith Channel|25|30|Intervención,Smith Channel,25,30,Intervención,0.927,0.86,0.43,0.00927,0.18,58.2,5.0
+Smith Channel|25|50|Base,Smith Channel,25,50,Base,0.148,1.05,0.53,0.00148,0.43,18.2,1.8
+Smith Channel|25|50|Intervención,Smith Channel,25,50,Intervención,0.927,1.05,0.53,0.00927,0.22,58.2,5.0
+Smith Channel|25|100|Base,Smith Channel,25,100,Base,0.148,1.57,0.79,0.00143,0.646,17.7,1.8
+Smith Channel|25|100|Intervención,Smith Channel,25,100,Intervención,0.927,1.57,0.79,0.00896,0.335,57.3,5.0
+Smith Channel|50|10|Base,Smith Channel,50,10,Base,0.181,0.98,0.49,0.00181,0.385,21.3,1.9
+Smith Channel|50|10|Intervención,Smith Channel,50,10,Intervención,0.396,0.98,0.49,0.00396,0.308,37.2,2.8
+Smith Channel|50|20|Base,Smith Channel,50,20,Base,0.164,1.07,0.53,0.00164,0.43,19.7,1.9
+Smith Channel|50|20|Intervención,Smith Channel,50,20,Intervención,0.785,1.07,0.53,0.00785,0.246,54.1,4.4
+Smith Channel|50|30|Base,Smith Channel,50,30,Base,0.148,1.16,0.58,0.00148,0.475,18.2,1.8
+Smith Channel|50|30|Intervención,Smith Channel,50,30,Intervención,0.927,1.16,0.58,0.00927,0.243,58.2,5.0
+Smith Channel|50|50|Base,Smith Channel,50,50,Base,0.148,1.35,0.67,0.00148,0.552,18.2,1.8
+Smith Channel|50|50|Intervención,Smith Channel,50,50,Intervención,0.927,1.35,0.67,0.00927,0.282,58.2,5.0
+Smith Channel|50|100|Base,Smith Channel,50,100,Base,0.148,1.87,0.93,0.00126,0.786,15.9,1.8
+Smith Channel|50|100|Intervención,Smith Channel,50,100,Intervención,0.927,1.87,0.93,0.0079,0.428,54.2,5.0
+Smith Channel|100|10|Base,Smith Channel,100,10,Base,0.181,1.28,0.64,0.00181,0.503,21.3,1.9
+Smith Channel|100|10|Intervención,Smith Channel,100,10,Intervención,0.396,1.28,0.64,0.00396,0.402,37.2,2.8
+Smith Channel|100|20|Base,Smith Channel,100,20,Base,0.164,1.37,0.68,0.00164,0.55,19.7,1.9
+Smith Channel|100|20|Intervención,Smith Channel,100,20,Intervención,0.785,1.37,0.68,0.00785,0.315,54.1,4.4
+Smith Channel|100|30|Base,Smith Channel,100,30,Base,0.148,1.46,0.73,0.00148,0.597,18.2,1.8
+Smith Channel|100|30|Intervención,Smith Channel,100,30,Intervención,0.927,1.46,0.73,0.00927,0.305,58.2,5.0
+Smith Channel|100|50|Base,Smith Channel,100,50,Base,0.148,1.65,0.82,0.00138,0.683,17.2,1.8
+Smith Channel|100|50|Intervención,Smith Channel,100,50,Intervención,0.927,1.65,0.82,0.00864,0.359,56.5,5.0
+Smith Channel|100|100|Base,Smith Channel,100,100,Base,0.148,2.17,1.08,0.00114,0.927,14.6,1.8
+Smith Channel|100|100|Intervención,Smith Channel,100,100,Intervención,0.927,2.17,1.08,0.00713,0.524,51.7,5.0

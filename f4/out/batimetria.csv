@@ -1,0 +1,8 @@
+id,paso,descripcion,inicio,fin,estado,herramientas
+a,Vía a · DIMAR-CIOH,"Batimetría CIOH 2015–2017 (monohaz + multihaz), pedida por transparencia el 19 nov 2026. Vía preferente por sus parámetros de calidad",2026-11-19,2027-01-29,Solicitado,Solicitud por transparencia
+b,Vía b · INVEMAR,"Batimetría propia de INVEMAR, sin control de calidad del CIOH",2026-11-11,2027-01-29,Solicitado,Email; evaluación con sondas de la carta
+B.1,B.1 Compilación,"Sondas e isóbatas de la carta CIOH 201, perfiles ICESat-2 ATL03, GEBCO/SRTM15+ en el dominio exterior",2026-12-01,2026-12-31,Por empezar,"GDAL, SlideRule, QGIS"
+B.2,B.2 Batimetría derivada de satélite,"Cociente de bandas calibrado con ICESat-2 y sondas, y red U-Net con los mismos puntos",2026-12-01,2027-02-28,Por empezar,"ACOLITE, scikit-learn, LightGBM, PyTorch"
+B.3,B.3 Unión con el MDE,Unión con el MDE de 5 m y el Límite de Isla 1:800 en una referencia vertical común (nivel medio local); cota del suelo bajo el manglar corregida con ICESat-2 ATL08,2027-02-01,2027-03-20,Por empezar,"GDAL, pyTMD (FES2014/TPXO)"
+B.4,B.4 Validación e incertidumbre,Validación cruzada con sondas reservadas; error por rango de profundidad y mapa de σ,2027-02-01,2027-03-20,Por empezar,Python
+B.5,B.5 Aceptación (HB.1),"Cubre las tres ACI sin huecos, error documentado, revisión del equipo de inteligencia espacial de FORLIANCE",2027-03-26,2027-03-26,Por empezar,Revisión Antonio (FORLIANCE)

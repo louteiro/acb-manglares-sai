@@ -1,0 +1,61 @@
+clave,aci,tr,corte,dif_ola_cm,dif_ola_pct_H0,dif_nivel_cm
+Old Point / Bahía Hooker|10|10,Old Point / Bahía Hooker,10,10,3.5,18.6,1.4
+Old Point / Bahía Hooker|10|20,Old Point / Bahía Hooker,10,20,8.7,37.2,4.2
+Old Point / Bahía Hooker|10|30,Old Point / Bahía Hooker,10,30,12.0,42.8,5.3
+Old Point / Bahía Hooker|10|50,Old Point / Bahía Hooker,10,50,16.1,42.8,5.3
+Old Point / Bahía Hooker|10|100,Old Point / Bahía Hooker,10,100,27.2,42.8,5.3
+Old Point / Bahía Hooker|25|10,Old Point / Bahía Hooker,25,10,6.3,18.6,1.4
+Old Point / Bahía Hooker|25|20,Old Point / Bahía Hooker,25,20,14.3,37.2,4.2
+Old Point / Bahía Hooker|25|30,Old Point / Bahía Hooker,25,30,18.4,42.8,5.3
+Old Point / Bahía Hooker|25|50,Old Point / Bahía Hooker,25,50,22.5,42.8,5.3
+Old Point / Bahía Hooker|25|100,Old Point / Bahía Hooker,25,100,33.6,42.8,5.3
+Old Point / Bahía Hooker|50|10,Old Point / Bahía Hooker,50,10,9.1,18.6,1.4
+Old Point / Bahía Hooker|50|20,Old Point / Bahía Hooker,50,20,19.9,37.2,4.2
+Old Point / Bahía Hooker|50|30,Old Point / Bahía Hooker,50,30,24.8,42.8,5.3
+Old Point / Bahía Hooker|50|50,Old Point / Bahía Hooker,50,50,28.9,42.8,5.3
+Old Point / Bahía Hooker|50|100,Old Point / Bahía Hooker,50,100,39.6,42.4,5.3
+Old Point / Bahía Hooker|100|10,Old Point / Bahía Hooker,100,10,11.9,18.6,1.4
+Old Point / Bahía Hooker|100|20,Old Point / Bahía Hooker,100,20,25.5,37.2,4.2
+Old Point / Bahía Hooker|100|30,Old Point / Bahía Hooker,100,30,31.3,42.8,5.3
+Old Point / Bahía Hooker|100|50,Old Point / Bahía Hooker,100,50,35.2,42.7,5.3
+Old Point / Bahía Hooker|100|100,Old Point / Bahía Hooker,100,100,45.5,41.9,5.3
+Cove Sea Side|10|10,Cove Sea Side,10,10,3.3,17.6,1.2
+Cove Sea Side|10|20,Cove Sea Side,10,20,8.6,36.4,3.4
+Cove Sea Side|10|30,Cove Sea Side,10,30,11.8,42.1,4.2
+Cove Sea Side|10|50,Cove Sea Side,10,50,15.8,42.1,4.2
+Cove Sea Side|10|100,Cove Sea Side,10,100,26.7,42.1,4.2
+Cove Sea Side|25|10,Cove Sea Side,25,10,6.0,17.6,1.2
+Cove Sea Side|25|20,Cove Sea Side,25,20,14.0,36.4,3.4
+Cove Sea Side|25|30,Cove Sea Side,25,30,18.1,42.1,4.2
+Cove Sea Side|25|50,Cove Sea Side,25,50,22.1,42.1,4.2
+Cove Sea Side|25|100,Cove Sea Side,25,100,32.9,41.9,4.2
+Cove Sea Side|50|10,Cove Sea Side,50,10,8.6,17.6,1.2
+Cove Sea Side|50|20,Cove Sea Side,50,20,19.5,36.4,3.4
+Cove Sea Side|50|30,Cove Sea Side,50,30,24.4,42.1,4.2
+Cove Sea Side|50|50,Cove Sea Side,50,50,28.4,42.1,4.2
+Cove Sea Side|50|100,Cove Sea Side,50,100,38.4,41.1,4.2
+Cove Sea Side|100|10,Cove Sea Side,100,10,11.3,17.6,1.2
+Cove Sea Side|100|20,Cove Sea Side,100,20,24.9,36.4,3.4
+Cove Sea Side|100|30,Cove Sea Side,100,30,30.7,42.1,4.2
+Cove Sea Side|100|50,Cove Sea Side,100,50,34.4,41.7,4.2
+Cove Sea Side|100|100,Cove Sea Side,100,100,43.6,40.2,4.2
+Smith Channel|10|10,Smith Channel,10,10,3.0,15.9,0.9
+Smith Channel|10|20,Smith Channel,10,20,8.1,34.3,2.5
+Smith Channel|10|30,Smith Channel,10,30,11.2,40.0,3.2
+Smith Channel|10|50,Smith Channel,10,50,15.0,40.0,3.2
+Smith Channel|10|100,Smith Channel,10,100,25.4,40.0,3.2
+Smith Channel|25|10,Smith Channel,25,10,5.4,15.9,0.9
+Smith Channel|25|20,Smith Channel,25,20,13.2,34.3,2.5
+Smith Channel|25|30,Smith Channel,25,30,17.2,40.0,3.2
+Smith Channel|25|50,Smith Channel,25,50,21.0,40.0,3.2
+Smith Channel|25|100,Smith Channel,25,100,31.1,39.7,3.2
+Smith Channel|50|10,Smith Channel,50,10,7.8,15.9,0.9
+Smith Channel|50|20,Smith Channel,50,20,18.4,34.3,2.5
+Smith Channel|50|30,Smith Channel,50,30,23.2,40.0,3.2
+Smith Channel|50|50,Smith Channel,50,50,27.0,40.0,3.2
+Smith Channel|50|100,Smith Channel,50,100,35.8,38.3,3.2
+Smith Channel|100|10,Smith Channel,100,10,10.2,15.9,0.9
+Smith Channel|100|20,Smith Channel,100,20,23.5,34.3,2.5
+Smith Channel|100|30,Smith Channel,100,30,29.2,40.0,3.2
+Smith Channel|100|50,Smith Channel,100,50,32.4,39.3,3.2
+Smith Channel|100|100,Smith Channel,100,100,40.2,37.1,3.2

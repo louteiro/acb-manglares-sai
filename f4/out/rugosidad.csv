@@ -1,0 +1,9 @@
+clase,manning_n,rango_bajo,rango_alto,estado,fuente
+Manglar maduro,0.14,0.1,0.2,Proxy,Rango de valores para bosque inundable en modelos de marea de tormenta; sustituir por el término de arrastre en XBeach
+Manglar degradado,0.08,0.05,0.12,Supuesto,Interpolado entre manglar maduro y área deforestada
+Manglar en recuperación,0.1,0.06,0.14,Supuesto,Sigue la curva de condición de la F3
+Área deforestada,0.035,0.025,0.05,Proxy,Valor habitual para suelo desnudo o herbáceo
+Agua y zonas inundables,0.02,0.015,0.025,Proxy,Valor habitual para aguas abiertas
+Infraestructura,0.12,0.08,0.15,Proxy,Valor habitual para zona urbana densa
+Arrecife (fondo),0.04,0.03,0.06,Supuesto,Fondo rugoso; calibrar con Iota
+Pastos marinos (fondo),0.03,0.025,0.035,Supuesto,Fondo vegetado sumergido

@@ -1,0 +1,29 @@
+id,grupo,parametro,valor,unidad,rango_bajo,rango_alto,estado,fuente,url
+eta_10,Forzamiento,"Nivel extremo (marea + marea de tormenta + setup), Tr 10",0.6,m s.n.m.m.,0.36,0.84,Supuesto,Marcador provisional hasta COAST-RP / niveles 10–100 de Rey y Ruiz-Salcines (solicitados); Velásquez-Calderón et al. (2026): ninguna zona > 2 m de lámina a 100 años,https://data.4tu.nl/datasets/4e291b8f-a37e-4378-8ca6-954a44fdc8fb
+eta_25,Forzamiento,"Nivel extremo (marea + marea de tormenta + setup), Tr 25",0.9,m s.n.m.m.,0.54,1.26,Supuesto,Marcador provisional hasta COAST-RP / niveles 10–100 de Rey y Ruiz-Salcines (solicitados); Velásquez-Calderón et al. (2026): ninguna zona > 2 m de lámina a 100 años,https://data.4tu.nl/datasets/4e291b8f-a37e-4378-8ca6-954a44fdc8fb
+eta_50,Forzamiento,"Nivel extremo (marea + marea de tormenta + setup), Tr 50",1.2,m s.n.m.m.,0.72,1.68,Supuesto,Marcador provisional hasta COAST-RP / niveles 10–100 de Rey y Ruiz-Salcines (solicitados); Velásquez-Calderón et al. (2026): ninguna zona > 2 m de lámina a 100 años,https://data.4tu.nl/datasets/4e291b8f-a37e-4378-8ca6-954a44fdc8fb
+eta_100,Forzamiento,"Nivel extremo (marea + marea de tormenta + setup), Tr 100",1.5,m s.n.m.m.,0.9,2.1,Supuesto,Marcador provisional hasta COAST-RP / niveles 10–100 de Rey y Ruiz-Salcines (solicitados); Velásquez-Calderón et al. (2026): ninguna zona > 2 m de lámina a 100 años,https://data.4tu.nl/datasets/4e291b8f-a37e-4378-8ca6-954a44fdc8fb
+anm_10,Forzamiento,ANM t = 10 (SSP2-4.5 mediana + GNSS SAN0),0.08,m,,,Proyecto,"E1 Plan de Trabajo, sección 5.2 (ficha de antecedentes ANM)",
+anm_20,Forzamiento,ANM t = 20 (SSP2-4.5 mediana + GNSS SAN0),0.17,m,,,Proyecto,"E1 Plan de Trabajo, sección 5.2 (ficha de antecedentes ANM)",
+anm_30,Forzamiento,ANM t = 30 (SSP2-4.5 mediana + GNSS SAN0),0.26,m,,,Proyecto,"E1 Plan de Trabajo, sección 5.2 (ficha de antecedentes ANM)",
+anm_50,Forzamiento,ANM t = 50 (SSP2-4.5 mediana + GNSS SAN0),0.45,m,,,Proyecto,"E1 Plan de Trabajo, sección 5.2 (ficha de antecedentes ANM)",
+anm_100,Forzamiento,ANM t = 100 (SSP2-4.5 mediana + GNSS SAN0),0.97,m,,,Proyecto,"E1 Plan de Trabajo, sección 5.2 (ficha de antecedentes ANM)",
+gamma,Forzamiento,Índice de rotura en fondo somero (ola limitada por profundidad),0.5,H/h,0.4,0.6,Proxy,"Rango habitual 0,4–0,6 en planicies someras; calibrar con XBeach",
+z_suelo,Forzamiento,Cota del suelo del manglar en el frente de la ACI,0.3,m s.n.m.m.,0.1,0.5,Supuesto,"Corregir con ICESat-2 ATL08 (terreno bajo el dosel), cotas de parcelas y piezómetros y zonación–marea (E1, actividad 4.1)",
+sigma_z,Forzamiento,"Error vertical de la topobatimetría (±σ, corridas de Tr 100)",0.5,m,0.25,1.0,Supuesto,Se sustituye por el σ de la validación B.4 (hito HB.1),
+beta_ref,Vegetación,Coeficiente de decaimiento de ola en Rhizophora sana (H/H₀ = 1/(1+βx)),0.01,1/m,0.004,0.021,Proxy,"Kelty et al. (2022): 0,004–0,010 m⁻¹ baja densidad y 0,008–0,021 m⁻¹ alta densidad; Lopez-Arias et al. (2024), campo R. mangle: 0,001–0,01 m⁻¹",https://doi.org/10.3389/fmars.2021.780946
+h_raiz,Vegetación,Altura de la zona de raíces fúlcreas,1.5,m,1.0,2.0,Supuesto,Ohira et al. (2013) la relaciona con el DAP; medir en parcelas MangRes/INVEMAR,
+phi_tronco,Vegetación,Eficacia relativa de la columna sobre las raíces (troncos),0.25,fracción,0.1,0.4,Supuesto,"Maza et al. (2019): la atenuación depende del área frontal, que cae con la profundidad",
+s_mangle,Vegetación,Atenuación de la marea de tormenta en manglar sano,35,cm/km,9.4,50,Proxy,"Zhang et al. (2012): 20–50 cm/km (Wilma); Krauss et al. (2009): 4,2–9,4 cm/km",https://doi.org/10.1016/j.ecss.2012.02.021
+s_desnudo,Vegetación,Atenuación sin manglar (terreno abierto),8,cm/km,6,10,Proxy,Zhang et al. (2012): 6–10 cm/km sin manglar,https://doi.org/10.1016/j.ecss.2012.02.021
+c0,Escenarios,Condición inicial del manglar en la ACI,0.2,fracción,,,Proyecto,Mismo valor que modelo_costos_f3.py (curva de recuperación),
+cmax,Escenarios,Condición máxima alcanzable (Intervención),0.95,fracción,,,Proyecto,modelo_costos_f3.py; Su et al. (2021),
+t50_est,Escenarios,Punto medio de la curva de estructura arbórea,14,años,10,20,Proyecto,modelo_costos_f3.py; Osland et al. (2020),
+k_est,Escenarios,Pendiente de la curva de estructura arbórea,0.22,1/año,0.15,0.3,Proyecto,modelo_costos_f3.py,
+perdida_base,Escenarios,Tasa de pérdida crónica del Escenario Base,0.01,1/año,0.005,0.02,Proyecto,E1 sección 11.6: ≤ 1 %/año hasta tener la serie propia (actividad 1.3),
+pn,Viento Iota,Presión ambiental,1010,hPa,1008,1012,Supuesto,Valor típico del Caribe en noviembre,
+rmw,Viento Iota,Radio de vientos máximos (8 n mi),14.816,km,14.816,27.78,Oficial,NHC TCR Iota: RMW ≈ 8 n mi en el pico,https://www.nhc.noaa.gov/data/tcr/AL312020_Iota.pdf
+k_sup,Viento Iota,Reducción de viento de gradiente a superficie (1 min),0.9,×,0.8,0.95,Supuesto,Valor habitual sobre el mar; calibrar,
+f_10min,Viento Iota,Conversión 1 min → 10 min en mar abierto,0.93,×,0.88,0.95,Proxy,"Harper et al. (2010), guía OMM de conversión de promedios de viento",
+alfa_tras,Viento Iota,Fracción de la velocidad de traslación sumada al viento,0.5,×,0.0,0.7,Supuesto,Asimetría simple; el lado sur (izquierdo) de un ciclón que va al oeste recibe menos viento,
+rho_aire,Viento Iota,Densidad del aire,1.15,kg/m³,,,Supuesto,Valor estándar tropical,
