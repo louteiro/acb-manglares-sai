@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>F5 — Valoración económica · Seguimiento · ACB Manglares San Andrés</title>
+<style>
+:root{
+  --bg:#fff;--bg-subtle:#f6f8f7;--card:#fff;--fg:#14211b;--muted:#566a60;--faint:#8fa198;
+  --border:#e1e8e4;--border-strong:#c5d1cb;
+  --f5:#059669;--f5-bg:#ecfdf5;--f5-badge:#d1fae5;--f5-text:#047857;
+  --f3:#d97706;--f3-badge:#fef3c7;--f3-text:#b45309;
+  --f4:#7c3aed;--f4-badge:#ede9fe;--f4-text:#6d28d9;
+  --f6:#dc2626;--f6-badge:#fee2e2;--f6-text:#b91c1c;
+  --f1:#2563eb;--f1-badge:#dbeafe;--f1-text:#1d4ed8;
+  --warn-bg:#fffbeb;--warn-bd:#fde68a;--warn-tx:#92400e;
+  --ok:#059669;--prog:#2563eb;--block:#dc2626;--pend:#9ca3af;
+  --r:10px;--rs:6px;--sh:0 1px 3px rgba(0,0,0,.07),0 1px 2px rgba(0,0,0,.04);
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#0e1512;--bg-subtle:#141d19;--card:#18231e;--fg:#e6efe9;--muted:#9db1a6;--faint:#61766b;
+  --border:#24332c;--border-strong:#33463d;
+  --f5-bg:#064e3b33;--f5-badge:#064e3b66;--f5-text:#6ee7b7;
+  --f3-badge:#78350f55;--f3-text:#fcd34d;--f4-badge:#4c1d9555;--f4-text:#c4b5fd;
+  --f6-badge:#7f1d1d55;--f6-text:#fca5a5;--f1-badge:#1e3a8a55;--f1-text:#93c5fd;
+  --warn-bg:#78350f33;--warn-bd:#78350f;--warn-tx:#fcd34d;color-scheme:dark}}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--fg);font-size:14px;line-height:1.55;padding:0 max(16px,env(safe-area-inset-left))}
+header.top{padding:20px 0 6px;display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;justify-content:space-between}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+h1{font-size:21px;font-weight:700;margin-top:2px}
+.sub{color:var(--muted);font-size:13px}
+.tools{display:flex;gap:6px;flex-wrap:wrap}
+button,.btn{font:inherit;font-size:12px;font-weight:600;border:1px solid var(--border-strong);background:var(--card);color:var(--fg);padding:6px 11px;border-radius:var(--rs);cursor:pointer}
+button:hover{background:var(--bg-subtle)}
+nav{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--border);margin-top:10px}
+.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;padding-top:6px}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;background:none;border:1px solid transparent;border-bottom:none;border-radius:var(--rs) var(--rs) 0 0;padding:7px 13px;font-size:13px;font-weight:500;color:var(--muted)}
+.tab.active{background:var(--bg);border-color:var(--border);color:var(--fg);font-weight:650;position:relative;top:1px}
+.tab .pct{font-family:var(--mono);font-size:10.5px;margin-left:5px;color:var(--faint)}
+.page{display:none;padding:24px 0 56px;max-width:1150px}
+.page.active{display:block}
+h2{font-size:18px;font-weight:700;margin-bottom:4px}
+h3{font-size:14px;font-weight:700;margin:22px 0 8px}
+.lead{color:var(--muted);margin-bottom:18px;max-width:860px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--sh);padding:16px 18px;margin-bottom:14px}
+.grid{display:grid;gap:12px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.kpis{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:20px}
+.kpi{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--f5);border-radius:var(--r);padding:12px 14px}
+.kpi b{display:block;font-size:21px;font-variant-numeric:tabular-nums;line-height:1.15}
+.kpi span{font-size:12px;color:var(--muted)}
+.tag{display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:700;padding:1px 7px;border-radius:999px;background:var(--f5-badge);color:var(--f5-text);vertical-align:1px}
+.tag.f1{background:var(--f1-badge);color:var(--f1-text)}.tag.f3{background:var(--f3-badge);color:var(--f3-text)}
+.tag.f4{background:var(--f4-badge);color:var(--f4-text)}.tag.f6{background:var(--f6-badge);color:var(--f6-text)}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin:10px 0 4px}
+.meta div{background:var(--bg-subtle);border:1px solid var(--border);border-radius:var(--rs);padding:8px 10px;font-size:12.5px}
+.meta div b{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);margin-bottom:2px}
+.bar{height:8px;background:var(--bg-subtle);border:1px solid var(--border);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--f5);border-radius:99px;transition:width .25s}
+.prow{display:grid;grid-template-columns:minmax(170px,240px) 1fr 48px;gap:10px;align-items:center;margin:7px 0;font-size:13px}
+.prow .n{font-family:var(--mono);font-size:12px;color:var(--muted);text-align:right}
+table{border-collapse:collapse;width:100%;font-size:12.5px}
+th{background:var(--bg-subtle);color:var(--muted);font-weight:600;text-align:left;padding:7px 9px;border-bottom:2px solid var(--border);white-space:nowrap}
+td{padding:7px 9px;border-bottom:1px solid var(--border);vertical-align:top}
+tr:last-child td{border-bottom:none}
+.tw{overflow-x:auto}
+select{font:inherit;font-size:12px;padding:3px 6px;border:1px solid var(--border-strong);border-radius:var(--rs);background:var(--card);color:var(--fg)}
+select.st-pend{border-left:4px solid var(--pend)}select.st-prog{border-left:4px solid var(--prog)}
+select.st-ok{border-left:4px solid var(--ok)}select.st-block{border-left:4px solid var(--block)}
+input[type=number],input[type=text],input[type=date]{font:inherit;font-size:12.5px;padding:4px 7px;border:1px solid var(--border-strong);border-radius:var(--rs);background:var(--card);color:var(--fg);width:100%}
+textarea{font:inherit;font-size:13px;width:100%;min-height:90px;padding:8px 10px;border:1px solid var(--border-strong);border-radius:var(--rs);background:var(--card);color:var(--fg);resize:vertical}
+.steps{list-style:none;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:26px 1fr;gap:10px;padding:11px 0;border-bottom:1px dashed var(--border)}
+.steps li:last-child{border-bottom:none}
+.steps li::before{content:counter(s);width:24px;height:24px;border-radius:50%;background:var(--f5-badge);color:var(--f5-text);font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center}
+.steps li.done::before{content:"✓";background:var(--f5);color:#fff}
+.steps .t{font-weight:650}
+.steps .d{color:var(--muted);font-size:13px;margin:2px 0 6px}
+.chk{display:flex;flex-direction:column;gap:4px}
+.chk label{display:flex;gap:8px;align-items:flex-start;font-size:13px;cursor:pointer}
+.chk input{margin-top:3px;accent-color:var(--f5);flex-shrink:0}
+.chk label.on span{color:var(--faint);text-decoration:line-through}
+.note{background:var(--warn-bg);border:1px solid var(--warn-bd);color:var(--warn-tx);border-radius:var(--rs);padding:9px 12px;font-size:12.5px;margin:10px 0}
+.info{background:var(--f5-bg);border:1px solid var(--f5-badge);color:var(--f5-text);border-radius:var(--rs);padding:9px 12px;font-size:12.5px;margin:10px 0}
+.pc{font-family:var(--mono);font-size:11px;color:var(--warn-tx);background:var(--warn-bg);border:1px solid var(--warn-bd);padding:0 5px;border-radius:4px;white-space:nowrap}
+.calc{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;align-items:end}
+.calc label{font-size:11.5px;color:var(--muted);display:flex;flex-direction:column;gap:3px}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px;margin-top:12px}
+.out div{background:var(--bg-subtle);border:1px solid var(--border);border-radius:var(--rs);padding:9px 11px}
+.out b{display:block;font-size:18px;font-variant-numeric:tabular-nums}
+.out span{font-size:11.5px;color:var(--muted)}
+.gantt{min-width:780px}
+.gantt td,.gantt th{padding:5px 4px;text-align:center;font-size:11.5px}
+.gantt td:first-child,.gantt th:first-child{text-align:left;padding-left:8px;white-space:nowrap}
+.gantt .on{background:var(--f5);border-radius:3px;height:14px}
+.gantt .on.f6{background:var(--f6)}.gantt .on.f4{background:var(--f4)}
+.gantt .ms{color:var(--f6);font-weight:700}
+.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:8px;align-items:stretch;margin:6px 0 18px}
+.flow .box{border:1px solid var(--border);border-top:3px solid var(--c);border-radius:var(--r);padding:10px 12px;background:var(--card);font-size:12.5px}
+.flow .box b{display:block;font-size:13px;margin-bottom:3px}
+.flow .arr{display:flex;align-items:center;color:var(--faint);font-size:18px}
+.yes{color:var(--ok);font-weight:700}.no{color:var(--block);font-weight:700}
+.small{font-size:12px;color:var(--muted)}
+.ref{font-size:12px;color:var(--muted);margin-top:8px}
+a{color:var(--f5-text)}
+@media(max-width:720px){.flow{grid-template-columns:1fr}.flow .arr{justify-content:center;transform:rotate(90deg)}.prow{grid-template-columns:1fr 1fr 40px}}
+@media print{nav,.tools{display:none}.page{display:block!important;page-break-after:always}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div>
+    <div class="eyebrow">ACB Manglares San Andrés · FORLIANCE / IKI «De Raíces a Mareas» · Apoyo al E1</div>
+    <h1>Fase 5 — Valoración económica de servicios ecosistémicos</h1>
+    <div class="sub">Meses 8–11 (jun – sep 2027) · Objetivo específico 5 · Actividades 5.1–5.4 del Plan de Trabajo (sección 5.7) · Productos al E4 (24 sep 2027)</div>
+  </div>
+  <div class="tools">
+    <button onclick="exportState()">Exportar avance (.json)</button>
+    <label class="btn">Importar<input type="file" accept=".json" hidden onchange="importState(event)"></label>
+    <button onclick="resetState()">Reiniciar</button>
+  </div>
+</header>
+
+<nav><div class="tabs" id="tabs"></div></nav>
+
+<!-- ═════════ RESUMEN ═════════ -->
+<section class="page" id="p-resumen" data-label="Resumen">
+  <h2>Resumen de la fase</h2>
+  <p class="lead">La F5 convierte el diferencial biofísico entre el Escenario Base y el de Intervención (F4) en flujos monetarios anuales por ACI y horizonte, sin descontar: el descuento se aplica en la F6. Solo se valoran los servicios que son relevantes en el Archipiélago, tienen datos suficientes y se pueden expresar en dinero sin doble conteo.</p>
+
+  <div class="kpis">
+    <div class="kpi"><b>4</b><span>Actividades (5.1–5.4)</span></div>
+    <div class="kpi"><b>2</b><span>Servicios valorados: protección costera y carbono azul</span></div>
+    <div class="kpi"><b>3</b><span>ACI × 3 horizontes (30 / 50 / 100 años)</span></div>
+    <div class="kpi"><b>4 × 4</b><span>Situaciones × periodos de retorno para el daño anual esperado</span></div>
+    <div class="kpi"><b id="k-global">0 %</b><span>Avance global de la fase (checklists)</span></div>
+    <div class="kpi" style="border-left-color:var(--f6)"><b id="k-days">—</b><span>Días hasta el E4 (24 sep 2027)</span></div>
+  </div>
+
+  <h3>Cadena de la fase</h3>
+  <div class="flow">
+    <div class="box" style="--c:var(--f4)"><b><span class="tag f4">F1 · F3 · F4</span> Entradas</b>Inventario de activos y población (F1); LULC t = 0/10/20/30 y curva logística (F3, act. 3.4); niveles máximos de agua por corrida y simulación de Iota (F4, act. 4.4–4.6).</div>
+    <div class="arr">→</div>
+    <div class="box" style="--c:var(--f5)"><b><span class="tag">F5</span> Valoración</b>5.1 filtro de servicios · 5.2 daños evitados (curvas profundidad-daño + daño anual esperado) · 5.3 carbono azul (InVEST CBC) · 5.4 prefactibilidad de créditos.</div>
+    <div class="arr">→</div>
+    <div class="box" style="--c:var(--f6)"><b><span class="tag f6">F6 · E4</span> Salidas</b>Series anuales de daños evitados y de tCO₂e con su valor y sus rangos (pasan al Monte Carlo); valor de protección del manglar actual; informe de prefactibilidad.</div>
+  </div>
+
+  <div class="grid g2">
+    <div class="card">
+      <h3 style="margin-top:0">Avance por pestaña</h3>
+      <div id="progress-list"></div>
+      <p class="small" style="margin-top:8px">El avance se calcula con las casillas marcadas en cada pestaña. Se guarda en este navegador; usa «Exportar avance» para conservarlo o pasarlo a otro equipo.</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Hitos que condicionan la fase</h3>
+      <div class="tw"><table>
+        <tr><th>Hito</th><th>Fecha</th><th>Qué aporta a la F5</th></tr>
+        <tr><td><span class="tag f4">H4.1</span> Modelo calibrado con Iota</td><td>7 may 2027</td><td>Simulación de Iota para el control de las curvas (paso 5 de la act. 5.2)</td></tr>
+        <tr><td>Valor de los activos (avalúos)</td><td>31 may 2027</td><td>Fecha límite de la matriz de datos; si no llega, valor de reposición con DANE</td></tr>
+        <tr><td><span class="tag f4">E3</span> Informe Fases 3 y 4</td><td>25 jun 2027</td><td>Mapas de inundación por Tr y escenario, LULC proyectados y curva logística</td></tr>
+        <tr><td><span class="tag f6">H6.1</span> Criterios de decisión</td><td>2 jul 2027</td><td>Fija qué indicadores de la F5 entran en la matriz (p. ej., personas beneficiadas)</td></tr>
+        <tr><td><span class="tag f6">E4</span> Informe Fases 5 y 6</td><td>24 sep 2027</td><td>Entrega de los productos de la F5 (límite 30 sep)</td></tr>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="note">La F5 arranca con la F4 todavía cerrándose (E3 el 25 jun). Si la topobatimetría (HB.1, 26 mar 2027) se retrasa, el retraso pasa a los daños evitados; el carbono azul (5.3) no depende de la F4 y puede adelantarse.</div>
+</section>
+
+<!-- ═════════ INSUMOS ═════════ -->
+<section class="page" id="p-insumos" data-label="Insumos">
+  <h2>Insumos y dependencias</h2>
+  <p class="lead">Todo lo que la F5 necesita de otras fases y de terceros, con la fecha límite de la matriz de datos (capítulo 6 del E1) y la alternativa si no llega. Actualiza el estado de cada fila.</p>
+  <div class="card tw">
+    <table id="tbl-insumos">
+      <tr><th>Insumo</th><th>Origen</th><th>Usa</th><th>Fecha límite</th><th>Alternativa</th><th>Estado</th></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ═════════ 5.1 ═════════ -->
+<section class="page" id="p-a51" data-label="5.1 Servicios">
+  <h2>Actividad 5.1 — Selección de servicios</h2>
+  <p class="lead">Se aplica un filtro de tres criterios a los servicios de la sección 11.8 del E1. Pasan la protección costera (núcleo del ACB) y el carbono azul (obligatorio por los TdR). El resto se excluye con su justificación.</p>
+  <div class="meta">
+    <div><b>Cuándo</b>Mes 8 (jun 2027)</div>
+    <div><b>Con quién</b>Gabriela (FORLIANCE) valida la selección</div>
+    <div><b>Herramientas</b>Matriz de filtro</div>
+    <div><b>Producto</b>Justificación de servicios valorados y excluidos</div>
+  </div>
+  <div class="card tw">
+    <table>
+      <tr><th>Servicio</th><th>Relevante en SAI</th><th>Datos suficientes</th><th>Sin doble conteo</th><th>Decisión</th><th>Justificación (E1)</th></tr>
+      <tr><td><b>Protección costera</b></td><td class="yes">Sí</td><td class="yes">Sí (F4 + inventario F1)</td><td class="yes">Sí</td><td class="yes">Se valora</td><td>Núcleo del ACB: daños evitados (act. 5.2)</td></tr>
+      <tr><td><b>Carbono azul</b></td><td class="yes">Sí</td><td class="yes">Sí (parcelas INVEMAR, SIGMA, literatura)</td><td class="yes">Sí</td><td class="yes">Se valora</td><td>Obligatorio por los TdR (act. 5.3 y 5.4)</td></tr>
+      <tr><td>Soporte a la pesca</td><td class="yes">Sí</td><td class="no">No: sin serie de precios en playa</td><td class="yes">Sí</td><td class="no">Se excluye</td><td>Fuera del alcance acordado con FORLIANCE; solo se describe (sección 12.2)</td></tr>
+      <tr><td>Turismo y paisaje</td><td class="yes">Sí</td><td>Parcial</td><td class="no">No</td><td class="no">Se excluye</td><td>Riesgo de doble conteo con los daños evitados; el lucro cesante turístico solo entra en la sensibilidad</td></tr>
+      <tr><td>Calidad del agua</td><td>Parcial</td><td class="no">No</td><td class="no">No</td><td class="no">Se excluye</td><td>Doble conteo y falta de datos</td></tr>
+      <tr><td>Valor de existencia</td><td class="yes">Sí</td><td class="no">No (requiere valoración contingente)</td><td>—</td><td class="no">Se excluye</td><td>Fuera del alcance</td></tr>
+    </table>
+  </div>
+  <h3>Checklist</h3>
+  <div class="card chk" data-group="a51">
+    <label><input type="checkbox" data-id="a51-1"><span>Matriz de filtro aplicada a todos los servicios de la sección 11.8</span></label>
+    <label><input type="checkbox" data-id="a51-2"><span>Justificación escrita de cada exclusión (pesca, turismo, agua, existencia)</span></label>
+    <label><input type="checkbox" data-id="a51-3"><span>Confirmado con FORLIANCE que la pesca queda fuera del alcance (solo descripción)</span></label>
+    <label><input type="checkbox" data-id="a51-4"><span>Lucro cesante turístico definido como variable de sensibilidad para la F6</span></label>
+    <label><input type="checkbox" data-id="a51-5"><span>Selección validada por Gabriela (FORLIANCE)</span></label>
+  </div>
+  <div class="note">La hoja de ruta y el E1 de octubre incluían el beneficio pesquero (InVEST HQ). El E1 vigente lo excluye. Si FORLIANCE pide recuperarlo, hacen falta desembarcos por especie y precios en playa de la Secretaría de Agricultura y Pesca / AUNAP.</div>
+</section>
+
+<!-- ═════════ 5.2 ═════════ -->
+<section class="page" id="p-a52" data-label="5.2 Daños evitados">
+  <h2>Actividad 5.2 — Daños evitados (protección costera)</h2>
+  <p class="lead">Para cada periodo de retorno y escenario se cruza la profundidad de inundación de la F4 con el inventario de activos, mediante curvas profundidad-daño (Huizinga et al., 2017). El daño anual esperado se integra sobre la probabilidad de excedencia (Menéndez et al., 2020) y el beneficio es la diferencia entre escenarios.</p>
+  <div class="meta">
+    <div><b>Cuándo</b>Meses 8–10 (jun – ago 2027)</div>
+    <div><b>Con quién</b>Gobernación (avalúos) a través de FORLIANCE; Gabriela (FORLIANCE)</div>
+    <div><b>Herramientas</b>Python (geopandas, rasterio, numpy); QGIS para exposición y mapas</div>
+    <div><b>Producto</b>Daño anual esperado por situación; serie anual de daños evitados por ACI con rango; valor de protección del manglar actual; mapas de daño por Tr</div>
+  </div>
+
+  <h3>Pasos del método</h3>
+  <div class="card"><ol class="steps" data-group="a52">
+    <li data-step="a52-s1"><div><div class="t">Activos expuestos</div><div class="d">Inventario de la F1 (UrbanoSAI, OSM y capas de la Gobernación, hoteles del RNT, población DANE por manzana), clasificado por tipo y recortado a la zona de influencia de cada ACI (act. 4.6), no solo a su polígono.</div>
+      <div class="chk"><label><input type="checkbox" data-id="a52-1a"><span>Inventario clasificado: residencial, comercial-hotelero, equipamientos, infraestructura vial y portuaria</span></label><label><input type="checkbox" data-id="a52-1b"><span>Zona de influencia por ACI recibida de la F4 y aplicada</span></label></div></div></li>
+    <li data-step="a52-s2"><div><div class="t">Valor de cada activo</div><div class="d">Estructura a costo de reposición (m² × costo unitario por tipo); contenido como fracción de la estructura (Huizinga et al., 2017); avalúo catastral en paralelo como cota inferior. Pesos constantes de 2026.</div>
+      <div class="chk"><label><input type="checkbox" data-id="a52-2a"><span>Fuente del costo unitario de construcción confirmada con FORLIANCE <span class="pc">POR CONFIRMAR</span></span></label><label><input type="checkbox" data-id="a52-2b"><span>Recargo por insularidad justificado</span></label><label><input type="checkbox" data-id="a52-2c"><span>Avalúo catastral (cota inferior) calculado</span></label></div></div></li>
+    <li data-step="a52-s3"><div><div class="t">Profundidad en cada activo</div><div class="d">Nivel máximo del agua de cada corrida de la F4 (act. 4.5) menos la cota del MDE de 5 m, por Tr y escenario: t = 0 (actual y sin manglar) y t = 30 (Base e Intervención).</div>
+      <div class="chk"><label><input type="checkbox" data-id="a52-3a"><span>Rásteres de nivel máximo de las 16 corridas por ACI recibidos</span></label><label><input type="checkbox" data-id="a52-3b"><span>Profundidad extraída en el punto de cada activo</span></label></div></div></li>
+    <li data-step="a52-s4"><div><div class="t">Daño por evento</div><div class="d">Curvas profundidad-daño de Centro y Sudamérica por tipo de activo (fracción 0–1). Daño del evento = Σ fracción × valor. Las zonas con ola rompiente sobre edificaciones se señalan como limitación.</div>
+      <div class="chk"><label><input type="checkbox" data-id="a52-4a"><span>Curvas Huizinga (Tabla S5) asignadas por tipo de activo</span></label><label><input type="checkbox" data-id="a52-4b"><span>Zonas de ola rompiente identificadas y documentadas</span></label></div></div></li>
+    <li data-step="a52-s5"><div><div class="t">Control con Iota</div><div class="d">La misma cadena sobre la simulación de Iota (act. 4.4); edificaciones con daño simulado frente a las 31 dañadas que registró UNOSAT en San Andrés. Si el orden de magnitud no coincide, se revisan los umbrales de las curvas.</div>
+      <div class="chk"><label><input type="checkbox" data-id="a52-5a"><span>Comparación con UNOSAT hecha y documentada</span></label><label><input type="checkbox" data-id="a52-5b"><span>Umbrales de las curvas ajustados, si hizo falta</span></label></div></div></li>
+    <li data-step="a52-s6"><div><div class="t">Daño anual esperado</div><div class="d">Para cada situación, integración de los daños de Tr 10, 25, 50 y 100 sobre p = 0,10; 0,04; 0,02; 0,01 por la regla del trapecio. Daño nulo por debajo de un Tr umbral y constante por encima de Tr 100.</div>
+      <div class="chk"><label><input type="checkbox" data-id="a52-6a"><span>Tr umbral de daño nulo definido con la calibración <span class="pc">POR DEFINIR</span></span></label><label><input type="checkbox" data-id="a52-6b"><span>Daño anual esperado calculado para las 4 situaciones × 3 ACI</span></label></div></div></li>
+    <li data-step="a52-s7"><div><div class="t">Serie anual de daños evitados</div><div class="d">De t = 0 a 30, reparto año a año con la curva logística (act. 3.4); de 30 a 100 años, escalado con el ANM (act. 4.5). Daño evitado = Base − Intervención. El valor de protección del manglar actual (t = 0, actual vs. sin manglar) se reporta aparte y no entra en el ACB.</div>
+      <div class="chk"><label><input type="checkbox" data-id="a52-7a"><span>Serie 0–100 años por ACI generada</span></label><label><input type="checkbox" data-id="a52-7b"><span>Valor de protección del manglar actual reportado aparte</span></label><label><input type="checkbox" data-id="a52-7c"><span>Prueba de razonabilidad: beneficio por hectárea frente al tope de 50.000 USD/ha/año (Narayan et al., 2019)</span></label></div></div></li>
+    <li data-step="a52-s8"><div><div class="t">Incertidumbre</div><div class="d">Rango en cada paso: reposición frente a catastral, banda de las curvas y corridas con batimetría ±σ. Los rangos pasan al Monte Carlo (F6).</div>
+      <div class="chk"><label><input type="checkbox" data-id="a52-8a"><span>Rangos documentados y entregados a la F6</span></label></div></div></li>
+  </ol></div>
+
+  <h3>Matriz de cálculo: daño anual esperado por ACI y situación</h3>
+  <p class="small">Marca el estado de cada cálculo. t = 0 «Actual» frente a «Sin manglar» da el valor de protección del manglar existente; t = 30 «Base» frente a «Intervención» da el beneficio del ACB.</p>
+  <div class="card tw"><table id="tbl-ead"></table></div>
+
+  <h3>Calculadora de daño anual esperado (regla del trapecio)</h3>
+  <div class="card">
+    <p class="small" style="margin-bottom:10px">Introduce el daño por evento (millones de COP de 2026) de cada periodo de retorno en los dos escenarios. Los valores iniciales son de ejemplo, no resultados.</p>
+    <div class="calc">
+      <label>Tr umbral (daño nulo, años)<input type="number" id="ead-thr" value="5" min="1" step="1"></label>
+      <label>Base · Tr 10<input type="number" id="b10" value="200"></label>
+      <label>Base · Tr 25<input type="number" id="b25" value="650"></label>
+      <label>Base · Tr 50<input type="number" id="b50" value="1300"></label>
+      <label>Base · Tr 100<input type="number" id="b100" value="2600"></label>
+      <span></span>
+      <label>Interv. · Tr 10<input type="number" id="i10" value="150"></label>
+      <label>Interv. · Tr 25<input type="number" id="i25" value="520"></label>
+      <label>Interv. · Tr 50<input type="number" id="i50" value="1100"></label>
+      <label>Interv. · Tr 100<input type="number" id="i100" value="2300"></label>
+    </div>
+    <div class="out">
+      <div><b id="ead-b">—</b><span>Daño anual esperado, Base (M COP/año)</span></div>
+      <div><b id="ead-i">—</b><span>Daño anual esperado, Intervención (M COP/año)</span></div>
+      <div><b id="ead-d">—</b><span>Daño evitado (M COP/año)</span></div>
+      <div><b id="ead-p">—</b><span>Reducción relativa</span></div>
+    </div>
+    <p class="ref">Integración: trapecios entre (p<sub>umbral</sub>, 0), (0,10, D10), (0,04, D25), (0,02, D50), (0,01, D100), más D100 × 0,01 por encima de Tr 100. Referencia de orden de magnitud: en la propiedad, el manglar ahorra entre el 7,8 % (Tr 10) y el 9,9 % (Tr 100) del daño a escala global (Menéndez et al., 2020).</p>
+  </div>
+</section>
+
+<!-- ═════════ 5.3 ═════════ -->
+<section class="page" id="p-a53" data-label="5.3 Carbono azul">
+  <h2>Actividad 5.3 — Carbono azul</h2>
+  <p class="lead">InVEST Coastal Blue Carbon con tres tablas (stocks, transiciones y perturbación) sobre los LULC de la F3. Emisiones del Escenario Base y acumulación del de Intervención, valoradas con dos precios: mercado voluntario e impuesto nacional al carbono (Ley 2277 de 2022; 29.070,49 COP/tCO₂e desde el 1 feb 2026, DIAN, Resolución 000003 de 2026).</p>
+  <div class="meta">
+    <div><b>Cuándo</b>Meses 8–10 (jun – ago 2027)</div>
+    <div><b>Con quién</b>El consultor</div>
+    <div><b>Herramientas</b>InVEST CBC y su preprocesador; Python (pandas, rasterio)</div>
+    <div><b>Producto</b>Tablas de entrada; stocks por clase y año; tCO₂e/año por ACI y escenario con rango; valor con los dos precios</div>
+  </div>
+
+  <h3>Pasos del método</h3>
+  <div class="card"><ol class="steps" data-group="a53">
+    <li data-step="a53-s1"><div><div class="t">Mapas de cobertura</div><div class="d">Rásteres LULC de la act. 3.4 (seis clases): t = 0 (2026) común y t = 10, 20, 30 por escenario. Año de análisis 2126; cobertura fija desde t = 30.</div>
+      <div class="chk"><label><input type="checkbox" data-id="a53-1a"><span>7 rásteres LULC recibidos (1 común + 3 × 2 escenarios) en UTM 17N y misma resolución</span></label><label><input type="checkbox" data-id="a53-1b"><span>Leyenda LULC definitiva confirmada (decisión abierta con Antonio)</span></label></div></div></li>
+    <li data-step="a53-s2"><div><div class="t">Tabla de stocks y tasas por clase</div><div class="d">Biomasa aérea y subterránea, hojarasca y suelo hasta 1 m, y tasa anual de acumulación. Fuentes: parcelas INVEMAR (BDD_SAI) con alometría, capa SIGMA y literatura caribeña para el suelo.</div>
+      <div class="chk"><label><input type="checkbox" data-id="a53-2a"><span>Biomasa por clase calculada con BDD_SAI (densidades de madera verificadas en Zanne et al., 2009)</span></label><label><input type="checkbox" data-id="a53-2b"><span>Carbono del suelo a 1 m con fuente citable</span></label><label><input type="checkbox" data-id="a53-2c"><span>Tasa de acumulación del manglar en recuperación <span class="pc">POR DEFINIR</span></span></label><label><input type="checkbox" data-id="a53-2d"><span>Confirmado si el valor de 320 tC/ha es citable <span class="pc">POR VERIFICAR</span></span></label></div></div></li>
+    <li data-step="a53-s3"><div><div class="t">Tabla de transiciones</div><div class="d">Maduro → degradado: perturbación baja; degradado → deforestado: alta; deforestado → recuperación → maduro: acumulación; manglar → agua por ANM: media (supuesto a revisar).</div>
+      <div class="chk"><label><input type="checkbox" data-id="a53-3a"><span>Tabla generada con el preprocesador y revisada a mano</span></label><label><input type="checkbox" data-id="a53-3b"><span>Supuesto manglar → agua contrastado con literatura</span></label></div></div></li>
+    <li data-step="a53-s4"><div><div class="t">Parámetros de perturbación</div><div class="d">Fracción perdida y vida media de las emisiones en biomasa y suelo por nivel de impacto, con los valores por defecto del suplemento de humedales del IPCC (2014).</div>
+      <div class="chk"><label><input type="checkbox" data-id="a53-4a"><span>Parámetros IPCC 2014 cargados y documentados</span></label></div></div></li>
+    <li data-step="a53-s5"><div><div class="t">Corridas</div><div class="d">InVEST CBC por ACI y para el conjunto, con los dos escenarios. C → CO₂e × 44/12.</div>
+      <div class="chk"><label><input type="checkbox" data-id="a53-5a"><span>Corridas Base e Intervención por ACI</span></label><label><input type="checkbox" data-id="a53-5b"><span>Corrida del conjunto (portafolio)</span></label></div></div></li>
+    <li data-step="a53-s6"><div><div class="t">Serie anual del beneficio de carbono</div><div class="d">Secuestro adicional de la Intervención + emisiones evitadas frente al Base; reparto anual con la curva logística (act. 3.4). tCO₂e/año por ACI.</div>
+      <div class="chk"><label><input type="checkbox" data-id="a53-6a"><span>Serie 0–100 años por ACI</span></label></div></div></li>
+    <li data-step="a53-s7"><div><div class="t">Valoración</div><div class="d">Dos precios, en pesos constantes de 2026 y sin descontar. Mercado voluntario de carbono azul con rango; impuesto al carbono 29.070,49 COP/tCO₂e.</div>
+      <div class="chk"><label><input type="checkbox" data-id="a53-7a"><span>Fuente y rango de precios del mercado voluntario <span class="pc">POR CONFIRMAR</span></span></label><label><input type="checkbox" data-id="a53-7b"><span>Tarifa vigente del impuesto revisada en el momento de la valoración (DIAN)</span></label></div></div></li>
+    <li data-step="a53-s8"><div><div class="t">Control e incertidumbre</div><div class="d">Tres corridas (stocks mínimo, central y máximo, act. 1.5); stock de t = 0 contrastado con SIGMA y literatura. El rango pasa al Monte Carlo (F6) y a la prefactibilidad (5.4).</div>
+      <div class="chk"><label><input type="checkbox" data-id="a53-8a"><span>Corridas mínima, central y máxima</span></label><label><input type="checkbox" data-id="a53-8b"><span>Rangos entregados a la F6 y a la act. 5.4</span></label></div></div></li>
+  </ol></div>
+
+  <h3>Plantilla de la tabla de stocks (InVEST CBC)</h3>
+  <div class="card tw"><table id="tbl-stocks"></table>
+    <p class="ref">tC/ha. Rellena los valores centrales a medida que se cierren las fuentes. Referencia preliminar de la BDD_SAI: mediana del carbono en biomasa en San Andrés ≈ 90–100 tC/ha (sin suelo; Smith Channel probablemente sobreestimado por DAP fuera de rango).</p>
+  </div>
+
+  <h3>Calculadora de valor del carbono</h3>
+  <div class="card">
+    <div class="calc">
+      <label>tCO₂e/año (diferencia Interv. − Base)<input type="number" id="c-t" value="500"></label>
+      <label>Precio VCM bajo (USD/tCO₂e)<input type="number" id="c-lo" value="10"></label>
+      <label>Precio VCM alto (USD/tCO₂e)<input type="number" id="c-hi" value="30"></label>
+      <label>TRM (COP/USD) — actualizar<input type="number" id="c-trm" value="4000"></label>
+      <label>Impuesto (COP/tCO₂e)<input type="number" id="c-tax" value="29070.49"></label>
+    </div>
+    <div class="out">
+      <div><b id="c-o1">—</b><span>Valor VCM bajo (M COP/año)</span></div>
+      <div><b id="c-o2">—</b><span>Valor VCM alto (M COP/año)</span></div>
+      <div><b id="c-o3">—</b><span>Valor con el impuesto (M COP/año)</span></div>
+    </div>
+    <p class="ref">Toneladas y precios de ejemplo; la TRM debe tomarse del Banco de la República en la fecha del año base. Sin descontar: el descuento lo aplica la F6 (tasa escalonada DNP 1092/2022).</p>
+  </div>
+</section>
+
+<!-- ═════════ 5.4 ═════════ -->
+<section class="page" id="p-a54" data-label="5.4 Prefactibilidad">
+  <h2>Actividad 5.4 — Prefactibilidad de créditos de carbono</h2>
+  <p class="lead">Se evalúa si la intervención podría generar créditos con la metodología de Gold Standard aplicable a manglar, con Verra VM0033 (versión vigente; v3.0 en consulta) como contraste y Vida Manglar como referencia nacional. La prefactibilidad va más allá de toneladas × precio.</p>
+  <div class="meta">
+    <div><b>Cuándo</b>Meses 9–11 (jul – sep 2027)</div>
+    <div><b>Con quién</b>Gabriela (FORLIANCE); FORLIANCE, FPN e INVEMAR aprueban la metodología <span class="pc">POR CONFIRMAR</span></div>
+    <div><b>Herramientas</b>Estándares y herramientas de cálculo de Gold Standard y Verra</div>
+    <div><b>Producto</b>Informe de prefactibilidad</div>
+  </div>
+
+  <h3>Criterios a evaluar</h3>
+  <div class="card tw"><table id="tbl-pref"></table></div>
+
+  <h3>Prueba de escala mínima</h3>
+  <div class="card">
+    <div class="calc">
+      <label>Superficie en las ACI (ha)<input type="number" id="s-ha" value="150"></label>
+      <label>Remoción neta (tCO₂e/ha/año)<input type="number" id="s-r" value="5.1" step="0.1"></label>
+      <label>Descuentos: fugas + incertidumbre + buffer (%)<input type="number" id="s-d" value="30"></label>
+      <label>Precio (USD/crédito)<input type="number" id="s-p" value="15"></label>
+      <label>Costo anual de certificación, verificación y MRV (USD)<input type="number" id="s-c" value="40000"></label>
+    </div>
+    <div class="out">
+      <div><b id="s-o1">—</b><span>Créditos/año</span></div>
+      <div><b id="s-o2">—</b><span>Ingreso bruto (USD/año)</span></div>
+      <div><b id="s-o3">—</b><span>Cobertura del costo anual</span></div>
+      <div><b id="s-o4">—</b><span>Precio de equilibrio (USD/crédito)</span></div>
+    </div>
+    <p class="ref">Valores de ejemplo. Referencias: Vida Manglar, ≈ 5,1 tCO₂e/ha/año de media en 7.645,7 ha, precio de equilibrio de 22,45 USD/tCO₂e (Hernández Narváez, 2020). Con ≈ 150 ha, unas 50 veces menos que Cispatá, la escala de un proyecto propio es dudosa: valorar un agrupamiento con Providencia u otros proyectos. El costo de certificación está <span class="pc">POR CONFIRMAR</span> con Gold Standard/Verra.</p>
+  </div>
+</section>
+
+<!-- ═════════ CRONOGRAMA ═════════ -->
+<section class="page" id="p-crono" data-label="Cronograma">
+  <h2>Cronograma de la F5</h2>
+  <p class="lead">Semanas de jun a sep 2027 (meses 8–11 del contrato, con inicio oficial el 1 nov 2026). La F6 corre en paralelo desde julio. ◆ = hito.</p>
+  <div class="card tw"><table class="gantt" id="gantt"></table></div>
+  <h3>Fechas propias (opcional)</h3>
+  <div class="card tw"><table id="tbl-fechas">
+    <tr><th>Elemento</th><th>Previsto (E1)</th><th>Inicio real</th><th>Fin real</th></tr>
+  </table></div>
+</section>
+
+<!-- ═════════ PENDIENTES ═════════ -->
+<section class="page" id="p-pend" data-label="Pendientes y riesgos">
+  <h2>Pendientes y riesgos de la fase</h2>
+  <p class="lead">Las marcas [POR CONFIRMAR] / [POR DEFINIR] del E1 que afectan a la F5, y los riesgos del capítulo 10 que llegan hasta ella.</p>
+  <div class="card tw"><table id="tbl-pend"></table></div>
+  <h3>Riesgos</h3>
+  <div class="card tw"><table id="tbl-riesgos"></table></div>
+</section>
+
+<!-- ═════════ PRODUCTOS / E4 ═════════ -->
+<section class="page" id="p-prod" data-label="Productos → E4">
+  <h2>Productos de la F5 y su lugar en el E4</h2>
+  <p class="lead">Los productos de la F5 se presentan con los de la F6 en el E4, Informe de las Fases 5 y 6 (24 sep 2027; límite 30 sep). Marca cada producto cuando esté listo para el borrador.</p>
+  <div class="card tw"><table id="tbl-prod"></table></div>
+  <h3>Notas de seguimiento</h3>
+  <div class="card"><textarea id="notes" placeholder="Decisiones, correos, cambios de alcance…"></textarea></div>
+  <p class="ref">Fuentes del método: Huizinga, J., de Moel, H. y Szewczyk, W. (2017), <i>Global flood depth-damage functions</i>, JRC; Menéndez, P. et al. (2020), <i>Scientific Reports</i> 10, 4404, <a href="https://doi.org/10.1038/s41598-020-61136-6">doi:10.1038/s41598-020-61136-6</a>; IPCC (2014), <i>Wetlands Supplement</i>; Hernández Narváez, D. (2020), tesis de maestría, Universidad Jorge Tadeo Lozano; DIAN, <a href="https://normograma.dian.gov.co/dian/compilacion/docs/resolucion_dian_0003_2026.htm">Resolución 000003 de 2026</a>.</p>
+</section>
+
+<script>
+/* ───────── datos ───────── */
+const ACIS=["ACI 1","ACI 2","ACI 3"];
+const STATUS=[["pend","Pendiente"],["prog","En curso"],["ok","Hecho"],["block","Bloqueado"]];
+
+const INSUMOS=[
+ ["Inventario de edificaciones e infraestructura","F1 (act. 1.6) · UrbanoSAI, OSM, Gobernación","5.2","28 feb 2027","Google Open Buildings u OSM fuera del perímetro urbano","f1"],
+ ["Población por manzana (DANE CNPV 2018)","F1 · DANE","5.2, F6","Ya cubierto","WorldPop / Meta HRSL como contraste","f1"],
+ ["Hoteles georreferenciados (RNT)","Secretaría de Turismo / MinCIT","5.2","—","Capa de construcciones por uso","f1"],
+ ["Avalúos catastrales por predio","Gobernación / gestor catastral, vía FORLIANCE","5.2","31 may 2027","Valor de reposición: m² × costo unitario DANE con recargo insular","f1"],
+ ["Costo unitario de construcción por tipo","FORLIANCE / DANE","5.2","—","Índices de costos de construcción DANE","f1"],
+ ["MDE / MDT de 5 m","F4 (act. 4.1) · CORALINA, Gobernación","5.2","28 feb 2027","MDT por interpolación de curvas; FABDEM solo como último recurso","f4"],
+ ["Nivel máximo del agua de las 16 corridas por ACI","F4 (act. 4.5)","5.2","E3 · 25 jun 2027","—","f4"],
+ ["Zona de influencia de cada ACI","F4 (act. 4.6)","5.2","E3 · 25 jun 2027","—","f4"],
+ ["Simulación de Iota","F4 (act. 4.4) · H4.1","5.2 (control)","7 may 2027","—","f4"],
+ ["Puntos UNOSAT de daño (31 en San Andrés)","UNOSAT, descargado el 9 nov 2026","5.2 (control)","Disponible","—","f1"],
+ ["Corridas con batimetría ±σ","F4 (act. 4.5)","5.2 (incertidumbre)","E3 · 25 jun 2027","—","f4"],
+ ["Rásteres LULC t = 0/10/20/30 por escenario","F3 (act. 3.4)","5.3","E3 · 25 jun 2027","—","f3"],
+ ["Curva logística de recuperación","F3 (act. 3.4)","5.2, 5.3","E3 · 25 jun 2027","—","f3"],
+ ["Parcelas de vegetación y carbono (BDD_SAI)","INVEMAR, recibido el 17 nov 2026","5.3","29 ene 2027","Capa SIGMA y literatura regional","f1"],
+ ["Carbono del suelo a 1 m","INVEMAR+CORALINA 2022 / literatura","5.3","29 ene 2027","Sanderman et al. (2018); Kauffman et al. (2014)","f1"],
+ ["Precios del mercado voluntario de carbono azul","Consultor · Ecosystem Marketplace","5.3, 5.4","—","—","f1"],
+ ["Tarifa del impuesto al carbono","DIAN","5.3","Disponible (2026)","—","f1"],
+ ["Criterios de decisión de la matriz","CORALINA (H6.1)","Indicadores F5 → F6","2 jul 2027","—","f6"]
+];
+
+const PREF=[
+ ["Elegibilidad","Que la actividad (restauración de manglar) y el sitio cumplan las condiciones de aplicabilidad de la metodología"],
+ ["Línea base y adicionalidad","Demostrar que la restauración no ocurriría sin el proyecto (escenario Base del ACB)"],
+ ["Permanencia y riesgo de reversión","Riesgo de huracanes (Iota 2020) y de ANM; aporte al buffer"],
+ ["Fugas","Desplazamiento de la presión (tala, relleno) fuera de las ACI"],
+ ["Escala mínima","Créditos/año frente a costos fijos; opción de agrupamiento con Providencia u otros proyectos"],
+ ["Costos de certificación y verificación","Diseño (PDD), validación, verificaciones periódicas y MRV"],
+ ["Tenencia y derechos sobre el carbono","Quién ostenta los derechos en terrenos de bajamar y bienes de uso público"],
+ ["Comparación con Vida Manglar","Metodología, curva de emisión de créditos, costos y precio de equilibrio"],
+ ["Periodo de recuperación y perfil de riesgo","Flujo de créditos frente a costos en el horizonte del proyecto"]
+];
+
+const PEND=[
+ ["Fuente del costo unitario de construcción por tipo","5.2","FORLIANCE"],
+ ["Tr umbral de daño nulo (cierre de la curva)","5.2","Luis, tras la calibración"],
+ ["Tasa de acumulación del manglar en recuperación (cronosecuencias)","5.3","Luis"],
+ ["Supuesto de perturbación del manglar que pasa a agua por ANM","5.3","Luis"],
+ ["Fuente y rango de precios del mercado voluntario","5.3, 5.4","Luis"],
+ ["Citabilidad del stock de 320 tC/ha","5.3","INVEMAR / CORALINA"],
+ ["Nombre y versión de la metodología de Gold Standard","5.4","Luis"],
+ ["Alcance del carbono azul acordado con FORLIANCE","5.4","Luis, con Gabriela"],
+ ["Aprobación de la metodología por FORLIANCE, FPN e INVEMAR","5.4","FORLIANCE"],
+ ["Leyenda LULC definitiva (jerárquica o por estado)","5.3","Luis, con Antonio"],
+ ["Confirmar la exclusión de la pesca y el tratamiento del lucro cesante turístico","5.1","Gabriela"],
+ ["Fecha del borrador del E4 para revisión","E4","Luis, con FORLIANCE"]
+];
+
+const RIESGOS=[
+ ["La topobatimetría no alcanza la precisión necesaria","Media","Alto: retrasa el E3 y amplía la incertidumbre de los daños evitados","Corridas ±σ; incertidumbre declarada en el ACB"],
+ ["No llegan los avalúos por predio","Media","Medio: el valor de activos depende de costos unitarios","Valor de reposición con DANE; catastral agregado como cota inferior"],
+ ["Calibración con Iota sin observaciones propias","Alta","Medio: curvas sin contraste local fino","Conteo mínimo UNOSAT; calibración apoyada en Providencia"],
+ ["Sin datos de carbono del suelo locales","Media","Medio: más incertidumbre en carbono","SIGMA y literatura; corridas mínima, central y máxima"],
+ ["Escala insuficiente para un proyecto de carbono propio","Alta","Bajo para el ACB; alto para la prefactibilidad","Explorar agrupamiento; reportar precio de equilibrio"]
+];
+
+const PROD=[
+ ["Justificación de servicios valorados y excluidos","5.1","Metodología F5"],
+ ["Daño anual esperado por situación y ACI","5.2","Resultados · protección costera"],
+ ["Serie anual de daños evitados por ACI con rango","5.2","Resultados · insumo del modelo ACB"],
+ ["Valor de protección del manglar existente (t = 0)","5.2","Resultados · recuadro aparte"],
+ ["Mapas de daño por periodo de retorno","5.2","Anexo cartográfico / GDB /F5_Valoracion/"],
+ ["Tablas de entrada de InVEST CBC documentadas","5.3","Anexo metodológico"],
+ ["Stocks por clase y año; tCO₂e/año por ACI y escenario con rango","5.3","Resultados · carbono azul"],
+ ["Valor del carbono con los dos precios","5.3","Resultados · insumo del modelo ACB"],
+ ["Informe de prefactibilidad de créditos","5.4","Capítulo o anexo del E4"],
+ ["Rangos de incertidumbre entregados al Monte Carlo","5.2, 5.3","F6 · sensibilidad"]
+];
+
+/* Gantt: semanas desde lun 31 may 2027 hasta 27 sep 2027 */
+const WEEKS=[];{let d=new Date(2027,4,31);while(d<=new Date(2027,8,27)){WEEKS.push(new Date(d));d.setDate(d.getDate()+7);}}
+const GANTT=[
+ ["F4 · cierre y E3","2027-05-31","2027-06-25","f4"],
+ ["5.1 Selección de servicios","2027-06-01","2027-06-30",""],
+ ["5.2 Daños evitados","2027-06-01","2027-08-31",""],
+ ["5.3 Carbono azul","2027-06-01","2027-08-31",""],
+ ["5.4 Prefactibilidad de créditos","2027-07-01","2027-09-24",""],
+ ["F6 · modelo ACB y sensibilidad","2027-07-01","2027-09-24","f6"]
+];
+const MILES=[["E3 Informe Fases 3 y 4","2027-06-25"],["H6.1 Criterios de decisión","2027-07-02"],["E4 Informe Fases 5 y 6","2027-09-24"]];
+
+/* ───────── estado ───────── */
+const KEY="f5-tracker-acb-sai-v1";
+let S={};
+try{S=JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){S={}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){} refresh();}
+
+/* ───────── construcción ───────── */
+function statusSel(id){const v=S[id]||"pend";return `<select data-st="${id}" class="st-${v}">${STATUS.map(([k,l])=>`<option value="${k}"${k===v?" selected":""}>${l}</option>`).join("")}</select>`}
+
+document.getElementById("tbl-insumos").insertAdjacentHTML("beforeend",INSUMOS.map((r,i)=>`<tr><td><b>${r[0]}</b></td><td><span class="tag ${r[5]}">${r[5].toUpperCase()}</span> ${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td class="small">${r[4]}</td><td>${statusSel("ins-"+i)}</td></tr>`).join(""));
+
+(function(){
+ const sit=[["t = 0","Actual"],["t = 0","Sin manglar"],["t = 30","Base"],["t = 30","Intervención"]];
+ let h=`<tr><th>Situación</th>${ACIS.map(a=>`<th>${a}</th>`).join("")}<th>Uso</th></tr>`;
+ sit.forEach((s,i)=>{h+=`<tr><td><b>${s[0]}</b> · ${s[1]}</td>${ACIS.map((a,j)=>`<td>${statusSel(`ead-${i}-${j}`)}</td>`).join("")}<td class="small">${i<2?"Valor de protección del manglar actual (fuera del ACB)":"Beneficio de la intervención (ACB)"}</td></tr>`});
+ document.getElementById("tbl-ead").innerHTML=h;
+})();
+
+(function(){
+ const cls=["Manglar maduro","Manglar degradado","Manglar en recuperación","Área deforestada","Cuerpos de agua","Infraestructura"];
+ const cols=["Biomasa aérea","Biomasa subterránea","Hojarasca","Suelo (1 m)","Acumulación anual (tC/ha/año)","Fuente"];
+ let h=`<tr><th>Clase LULC</th>${cols.map(c=>`<th>${c}</th>`).join("")}</tr>`;
+ cls.forEach((c,i)=>{h+=`<tr><td><b>${c}</b></td>${cols.map((x,j)=>`<td><input type="${j===5?"text":"number"}" data-val="stk-${i}-${j}" ${j===5?'placeholder="BDD_SAI / SIGMA / lit."':'step="0.1"'}></td>`).join("")}</tr>`});
+ document.getElementById("tbl-stocks").innerHTML=h;
+})();
+
+document.getElementById("tbl-pref").innerHTML=`<tr><th>Criterio</th><th>Qué se evalúa</th><th>Valoración</th><th>Estado</th></tr>`+PREF.map((r,i)=>`<tr><td><b>${r[0]}</b></td><td class="small">${r[1]}</td><td><select data-val="pref-v-${i}"><option value="">—</option><option>Favorable</option><option>Con condiciones</option><option>Desfavorable</option></select></td><td>${statusSel("pref-"+i)}</td></tr>`).join("");
+
+document.getElementById("tbl-pend").innerHTML=`<tr><th>Pendiente</th><th>Actividad</th><th>Responsable</th><th>Estado</th></tr>`+PEND.map((r,i)=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${statusSel("pend-"+i)}</td></tr>`).join("");
+document.getElementById("tbl-riesgos").innerHTML=`<tr><th>Riesgo</th><th>Probabilidad</th><th>Impacto en la F5</th><th>Mitigación</th><th>Estado</th></tr>`+RIESGOS.map((r,i)=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td class="small">${r[2]}</td><td class="small">${r[3]}</td><td><select data-val="rsk-${i}"><option>Vigilado</option><option>Materializado</option><option>Cerrado</option></select></td></tr>`).join("");
+document.getElementById("tbl-prod").innerHTML=`<tr><th>Listo</th><th>Producto</th><th>Actividad</th><th>Lugar en el E4</th></tr>`+PROD.map((r,i)=>`<tr><td class="chk"><label><input type="checkbox" data-id="prod-${i}"></label></td><td>${r[0]}</td><td>${r[1]}</td><td class="small">${r[2]}</td></tr>`).join("");
+
+(function(){
+ const fmt=d=>d.toLocaleDateString("es-ES",{day:"numeric",month:"short"});
+ let h=`<tr><th>Actividad</th>${WEEKS.map(w=>`<th>${fmt(w)}</th>`).join("")}</tr>`;
+ GANTT.forEach(g=>{const a=new Date(g[1]),b=new Date(g[2]);h+=`<tr><td>${g[0]}</td>${WEEKS.map(w=>{const e=new Date(w);e.setDate(e.getDate()+6);return `<td>${(e>=a&&w<=b)?`<div class="on ${g[3]}"></div>`:""}</td>`}).join("")}</tr>`});
+ MILES.forEach(m=>{const d=new Date(m[1]);h+=`<tr><td><b>◆ ${m[0]}</b> <span class="small">${d.toLocaleDateString("es-ES",{day:"numeric",month:"short",year:"numeric"})}</span></td>${WEEKS.map(w=>{const e=new Date(w);e.setDate(e.getDate()+6);return `<td class="ms">${(d>=w&&d<=e)?"◆":""}</td>`}).join("")}</tr>`});
+ document.getElementById("gantt").innerHTML=h;
+ const tf=document.getElementById("tbl-fechas");
+ GANTT.filter(g=>!g[3]).forEach((g,i)=>tf.insertAdjacentHTML("beforeend",`<tr><td>${g[0]}</td><td class="small">${new Date(g[1]).toLocaleDateString("es-ES")} – ${new Date(g[2]).toLocaleDateString("es-ES")}</td><td><input type="date" data-val="fr-${i}-a"></td><td><input type="date" data-val="fr-${i}-b"></td></tr>`));
+})();
+
+/* ───────── pestañas ───────── */
+const pages=[...document.querySelectorAll(".page")];
+const tabs=document.getElementById("tabs");
+pages.forEach((p,i)=>{const b=document.createElement("button");b.className="tab"+(i===0?" active":"");b.dataset.p=p.id;b.innerHTML=`${p.dataset.label}<span class="pct" data-pct="${p.id}"></span>`;b.onclick=()=>show(p.id);tabs.appendChild(b)});
+function show(id){pages.forEach(p=>p.classList.toggle("active",p.id===id));[...tabs.children].forEach(b=>b.classList.toggle("active",b.dataset.p===id));try{localStorage.setItem(KEY+"-tab",id)}catch(e){}window.scrollTo(0,0)}
+let last=null;try{last=localStorage.getItem(KEY+"-tab")}catch(e){}
+show(last&&document.getElementById(last)?last:pages[0].id);
+
+/* ───────── enlazar controles ───────── */
+document.querySelectorAll("input[data-id]").forEach(c=>{c.checked=!!S[c.dataset.id];c.onchange=()=>{S[c.dataset.id]=c.checked;save()}});
+document.querySelectorAll("select[data-st]").forEach(s=>s.onchange=()=>{S[s.dataset.st]=s.value;s.className="st-"+s.value;save()});
+document.querySelectorAll("[data-val]").forEach(el=>{if(S[el.dataset.val]!==undefined)el.value=S[el.dataset.val];el.oninput=el.onchange=()=>{S[el.dataset.val]=el.value;save()}});
+const notes=document.getElementById("notes");notes.value=S.notes||"";notes.oninput=()=>{S.notes=notes.value;save()};
+
+/* ───────── progreso ───────── */
+function pageProgress(p){
+ const cks=[...p.querySelectorAll("input[type=checkbox][data-id]")];
+ const sts=[...p.querySelectorAll("select[data-st]")];
+ const tot=cks.length+sts.length;if(!tot)return null;
+ const done=cks.filter(c=>c.checked).length+sts.reduce((a,s)=>a+(s.value==="ok"?1:s.value==="prog"?0.5:0),0);
+ return done/tot;
+}
+function refresh(){
+ let list="",sum=0,n=0;
+ pages.forEach(p=>{const v=pageProgress(p);const el=document.querySelector(`[data-pct="${p.id}"]`);
+  if(v===null){el.textContent="";return}
+  el.textContent=Math.round(v*100)+"%";sum+=v;n++;
+  list+=`<div class="prow"><span>${p.dataset.label}</span><div class="bar"><i style="width:${v*100}%"></i></div><span class="n">${Math.round(v*100)}%</span></div>`});
+ document.getElementById("progress-list").innerHTML=list;
+ document.getElementById("k-global").textContent=Math.round(n?sum/n*100:0)+" %";
+ document.querySelectorAll(".steps li").forEach(li=>{const c=[...li.querySelectorAll("input[type=checkbox]")];li.classList.toggle("done",c.length&&c.every(x=>x.checked))});
+ document.querySelectorAll(".chk label").forEach(l=>{const c=l.querySelector("input");if(c)l.classList.toggle("on",c.checked)});
+}
+const days=Math.ceil((new Date(2027,8,24)-new Date())/864e5);
+document.getElementById("k-days").textContent=days>0?days:"Entregado";
+
+/* ───────── calculadoras ───────── */
+const num=id=>parseFloat(document.getElementById(id).value)||0;
+const f0=x=>x.toLocaleString("es-ES",{maximumFractionDigits:0});
+const f1=x=>x.toLocaleString("es-ES",{maximumFractionDigits:1});
+function ead(d){const thr=Math.max(1,num("ead-thr"));const pts=[[1/thr,0],[0.10,d[0]],[0.04,d[1]],[0.02,d[2]],[0.01,d[3]]].filter((p,i)=>i===0?p[0]>0.10:true);
+ let s=0;for(let i=1;i<pts.length;i++)s+=(pts[i-1][0]-pts[i][0])*(pts[i-1][1]+pts[i][1])/2;return s+0.01*d[3]}
+function calcEAD(){const b=ead(["b10","b25","b50","b100"].map(num)),i=ead(["i10","i25","i50","i100"].map(num));
+ document.getElementById("ead-b").textContent=f1(b);document.getElementById("ead-i").textContent=f1(i);
+ document.getElementById("ead-d").textContent=f1(b-i);document.getElementById("ead-p").textContent=b?f1((b-i)/b*100)+" %":"—"}
+function calcC(){const t=num("c-t"),trm=num("c-trm");
+ document.getElementById("c-o1").textContent=f1(t*num("c-lo")*trm/1e6);
+ document.getElementById("c-o2").textContent=f1(t*num("c-hi")*trm/1e6);
+ document.getElementById("c-o3").textContent=f1(t*num("c-tax")/1e6)}
+function calcS(){const cr=num("s-ha")*num("s-r")*(1-num("s-d")/100),ing=cr*num("s-p"),c=num("s-c");
+ document.getElementById("s-o1").textContent=f0(cr);document.getElementById("s-o2").textContent=f0(ing);
+ document.getElementById("s-o3").textContent=c?f0(ing/c*100)+" %":"—";document.getElementById("s-o4").textContent=cr?f1(c/cr):"—"}
+document.querySelectorAll(".calc input").forEach(i=>{const k="calc-"+i.id;if(S[k]!==undefined)i.value=S[k];i.addEventListener("input",()=>{S[k]=i.value;save();calcEAD();calcC();calcS()})});
+calcEAD();calcC();calcS();refresh();
+
+/* ───────── exportar / importar ───────── */
+function exportState(){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(S,null,1)],{type:"application/json"}));a.download="F5_seguimiento_"+new Date().toISOString().slice(0,10)+".json";a.click()}
+function importState(e){const f=e.target.files[0];if(!f)return;f.text().then(t=>{try{S=JSON.parse(t);save();location.reload()}catch(err){alert("Archivo no válido")}})}
+function resetState(){if(confirm("¿Borrar todo el avance guardado en este navegador?")){S={};save();location.reload()}}
+</script>
+</body>
+</html>
