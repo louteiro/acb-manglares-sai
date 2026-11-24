@@ -1,0 +1,47 @@
+id,grupo,parametro,valor,unidad,rango_bajo,rango_alto,estado,fuente,url
+smmlv,Macro y mano de obra,Salario mínimo 2026 (SMMLV),1750905,COP/mes,,,Oficial,Decreto 1469 de 2025 (MinTrabajo),https://www.mintrabajo.gov.co/
+aux_transp,Macro y mano de obra,Auxilio de transporte 2026,249095,COP/mes,,,Oficial,Decreto 1470 de 2025 (MinTrabajo),https://www.mintrabajo.gov.co/
+factor_prest,Macro y mano de obra,"Factor prestacional (seg. social, prestaciones, parafiscales)",1.52,×,1.45,1.6,Supuesto,Estimación del consultor; confirmar con contador o con FORLIANCE,
+prima_jornal,Macro y mano de obra,Prima de mercado local sobre el jornal mínimo (San Andrés),1.0,×,0.95,1.35,Supuesto,Pendiente cotización local (fila 3.01 de la matriz),
+trm,Macro y mano de obra,Tasa de cambio COP/USD (TRM),3300,COP/USD,3000,3900,Verificar,Banco de la República — TRM a la firma del contrato (29-oct-2026),https://www.banrep.gov.co/es/estadisticas/trm
+eur,Macro y mano de obra,Tasa de cambio COP/EUR,3550,COP/EUR,,,Verificar,TRM (BanRep) × tipo EUR/USD del BCE a la firma del contrato,https://www.ecb.europa.eu/stats/policy_and_exchange_rates/
+infl_1,Macro y mano de obra,Inflación año 1 (2027),0.05,%/año,,,Supuesto,Convergencia desde el IPC de oct-2026 (DANE) hacia la meta,https://www.dane.gov.co/index.php/estadisticas-por-tema/precios-y-costos/indice-de-precios-al-consumidor-ipc
+infl_2,Macro y mano de obra,Inflación año 2 (2028),0.04,%/año,,,Supuesto,Convergencia hacia la meta del Banco de la República,
+infl_lp,Macro y mano de obra,Inflación de largo plazo,0.03,%/año,,,Oficial,Meta de inflación del Banco de la República (3 %),https://www.banrep.gov.co/es/politica-monetaria
+tsd_0_5,Descuento,TSD ambiental años 0–5,0.095,%/año real,,,Oficial,"DNP, Resolución 1092 de 2022, art. 2",https://dnp.gov.co/publicaciones/Revista-Juridica/Paginas/Adopci%C3%B3n-de-la-Tasa-Social-de-Descuento-para-la-evaluaci%C3%B3n-de-proyectos-de-inversi%C3%B3n.aspx
+tsd_6_25,Descuento,TSD ambiental años 6–25,0.064,%/año real,,,Oficial,"DNP, Resolución 1092 de 2022, art. 2",
+tsd_26,Descuento,TSD ambiental años 26+,0.035,%/año real,,,Oficial,"DNP, Resolución 1092 de 2022, art. 2",
+tsd_hr,Descuento,Tasa de la Hoja de Ruta (comparación),0.05,%/año real,,,Proyecto,Hoja de Ruta ACB (S1) — no coincide con la Res. 1092/2022; FORLIANCE pide seguir la Res. 1092,
+densidad,Enriquecimiento vegetal,"Densidad de siembra (2,5 × 2,5 m)",1600,ind/ha,1100,2500,Supuesto,Diseño provisional; ajustar a la ficha de cada ACI,
+rend_siembra,Enriquecimiento vegetal,Rendimiento recolección + siembra,0.05,jornal/plántula,0.035,0.07,Proxy,"CATIE (2025), Planes de intervención Cuerval, Timbiquí: 40 jornales para 800 plántulas",https://www.ctc-n.org/file-download/download/private/45937
+insumo_plantula,Enriquecimiento vegetal,"Insumos de vivero por plántula (bolsa, sustrato)",1500,COP/plántula,800,3000,Supuesto,Pendiente costos de viveros MangRes / PNN Old Providence,
+prep_sitio,Enriquecimiento vegetal,Preparación del sitio,15,jornal/ha,8,25,Supuesto,Estimación del consultor,
+rh_jornales,Rehabilitación hidrológica,Limpieza/apertura manual de caños,90,jornal/ha,60,150,Supuesto,"Pendiente costos de RH de INVEMAR (Cispatá, 2017) y CORALINA",
+rh_equipo,Rehabilitación hidrológica,"Equipo menor (motobomba, excavación puntual)",6000000,COP/ha,3000000,12000000,Supuesto,Pendiente cotización local,
+res_t_ha,Residuos sólidos,Residuos acumulados por hectárea,5,t/ha,2,10,Supuesto,Pendiente CORALINA / capa DisposicionResiduosSAI (Gobernación),
+res_jornal_t,Residuos sólidos,Jornales de recolección por tonelada,4,jornal/t,2.5,6,Supuesto,Estimación del consultor,
+res_disp_t,Residuos sólidos,Transporte y disposición final por tonelada,350000,COP/t,200000,600000,Supuesto,Pendiente tarifa del relleno de San Andrés,
+bote_usd_ha,Logística e insumos,Embarcación y combustible por campaña,700,USD/ha,400,1200,Proxy,"CATIE (2025): USD 800–1.000 por sitio de 1–1,8 ha",https://www.ctc-n.org/file-download/download/private/45937
+herr_usd_ha,Logística e insumos,"Herramientas, materiales y EPP",200,USD/ha,120,350,Proxy,CATIE (2025): USD 200–300 por sitio,https://www.ctc-n.org/file-download/download/private/45937
+estudios_aci,"Estudios, permisos y supervisión","Estudios técnicos (topografía, hidrología, diagnóstico)",45000000,COP/ACI,25000000,80000000,Supuesto,Pendiente cotización; categoría exigida por los TdR,
+permisos_aci,"Estudios, permisos y supervisión","Permisos, trámites y socialización comunitaria",20000000,COP/ACI,10000000,35000000,Supuesto,Pendiente tarifas de evaluación de CORALINA,
+equipos_usd_aci,"Estudios, permisos y supervisión","Equipos de monitoreo (sensores de nivel, miras)",3500,USD/ACI,2000,6000,Supuesto,Precio de lista de registradores de nivel; cotizar,
+superv_mes,"Estudios, permisos y supervisión",Honorario profesional de supervisión técnica,9000000,COP/mes,6000000,13000000,Supuesto,Pendiente tablas de honorarios de Patrimonio Natural / FORLIANCE (fila 3.03),
+superv_fte,"Estudios, permisos y supervisión",Dedicación de supervisión por ACI,0.3,FTE,0.2,0.5,Supuesto,Estimación del consultor,
+superv_meses,"Estudios, permisos y supervisión",Duración de la fase de implementación,24,meses,,,Supuesto,Años 1–2 del flujo,
+contingencia,"Estudios, permisos y supervisión",Contingencia por logística insular,0.25,% s/CAPEX,0.15,0.4,Supuesto,FORLIANCE pide un rango sustentado; pendiente comparar contratos SECOP II isla vs. continente,
+marras_1,OPEX,Replante de marras año 1,0.3,fracción,0.15,0.5,Supuesto,Ajustar con supervivencia observada en MangRes,
+marras_2,OPEX,Replante de marras año 2,0.15,fracción,0.05,0.3,Supuesto,Ajustar con supervivencia observada en MangRes,
+mant_ini,OPEX,"Mantenimiento años 1–3 (limpieza, control de invasoras)",12,jornal/ha·año,8,20,Proxy,"CATIE (2025): cuadrillas de mantenimiento a 6, 12, 18, 24 y 30 meses",https://www.ctc-n.org/file-download/download/private/45937
+mant_lp,OPEX,Mantenimiento año 4 en adelante,4,jornal/ha·año,2,8,Supuesto,Estimación del consultor,
+rh_relimpieza,OPEX,Re-limpieza de caños cada 5 años,0.3,fracción del CAPEX RH,0.15,0.5,Supuesto,Estimación del consultor,
+monit_camp,OPEX,"Campaña de monitoreo científico (biomasa, carbono, agua)",30000000,COP/campaña·ACI,18000000,45000000,Proxy,CATIE (2025): USD 6.000/año evaluación de indicadores + USD 3.000 informes,https://www.ctc-n.org/file-download/download/private/45937
+guardas,OPEX,Guardabosques comunitarios (2 personas a medio tiempo),1.0,FTE/ACI,0.5,1.5,Supuesto,Esquema de monitoreo comunitario del Plan de Trabajo,
+gobernanza,OPEX,"Gobernanza, comunicación y gestión de permisos",15000000,COP/año·ACI,8000000,25000000,Supuesto,Estimación del consultor,
+reposicion_eq,OPEX,Reposición de equipos de monitoreo,10,años,7,15,Supuesto,Vida útil típica de registradores,
+c0,Curva de recuperación,Condición inicial (fracción del manglar de referencia),0.2,fracción,,,Supuesto,Manglar degradado; calibrar con LULC F1 y parcelas MangRes,
+cmax,Curva de recuperación,Condición máxima alcanzable,0.95,fracción,,,Supuesto,Su et al. (2021): el manglar restaurado rinde por debajo del natural,https://doi.org/10.1038/s41467-021-25349-1
+t50_veg,Curva de recuperación,Punto medio — cobertura vegetal,6,años,4,9,Proxy,Osland et al. (2020): equivalencia de vegetación juvenil en < 15 años,https://pmc.ncbi.nlm.nih.gov/articles/pmid/31991504
+k_veg,Curva de recuperación,Pendiente — cobertura vegetal,0.45,1/año,0.3,0.6,Proxy,"Calibrado para alcanzar ~0,9 a los 12–15 años",
+t50_est,Curva de recuperación,Punto medio — estructura arbórea (protección),14,años,10,20,Proxy,Osland et al. (2020): diámetro de árboles adultos equivalente a ~25 años,https://pmc.ncbi.nlm.nih.gov/articles/pmid/31991504
+k_est,Curva de recuperación,Pendiente — estructura arbórea,0.22,1/año,0.15,0.3,Proxy,"Calibrado para alcanzar ~0,9 a los 25 años",
