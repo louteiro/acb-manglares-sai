@@ -1,0 +1,8 @@
+id,indicador,observado,modelo_cribado,unidad,fuente,url
+C1,"Viento medio 10 min máximo, aeropuerto de San Andrés",33,31.4,kt,NHC TCR (16 nov 13:00 UTC) · modelo 16 nov 14:00 UTC,https://www.nhc.noaa.gov/data/tcr/AL312020_Iota.pdf
+C2,Viento sostenido 1 min máximo en Providencia,115,136.0,kt,NHC TCR: al menos 115 kt (SFMR); sin observación en superficie,https://www.nhc.noaa.gov/data/tcr/AL312020_Iota.pdf
+C3,Horas con viento huracanado (≥ 64 kt) en Providencia,7,7,h,NHC TCR: ~7 h (07:00–14:00 UTC),https://www.nhc.noaa.gov/data/tcr/AL312020_Iota.pdf
+C4,Distancia mínima del centro a Providencia,9.3,14.8,km,NHC TCR: el ojo pasó a menos de 5 n mi al norte (~10:45 UTC); trayectoria interpolada cada hora,https://www.nhc.noaa.gov/data/tcr/AL312020_Iota.pdf
+C5,Marea de tormenta en San Andrés sobre la marea normal,3.0,,m,NHC TCR: «casi 3 m»; contrastar con el mareógrafo (PSMSL 2116 / UHSLC 737) y con DIMAR — objetivo del modelo hidrodinámico,https://www.nhc.noaa.gov/data/tcr/AL312020_Iota.pdf
+C6,Lámina de inundación observada en Providencia,2.2,,m,"Revisión documental del proyecto: 2–2,4 m; validación de extensión con UNOSAT y ARIA",
+C7,"Estructuras dañadas en San Andrés (UNOSAT, conteo mínimo)",31,,estructuras,"UNOSAT, descargado el 9 nov 2026: 31 dañadas y 221 potencialmente dañadas; sin máscara de nubes",https://data.amerigeoss.org/dataset/damage-assessment-in-san-andres-island-providencia-and-santa-catalina-department-colombia

@@ -1,0 +1,10 @@
+parametro,valor,unidad,estado,fuente,uso,url
+Densidad de árboles,"450 (Smith Channel), 167–464 (El Cove), 2.070 (Bahía Hooker)",árboles/ha,Tenemos,"BDD_SAI INVEMAR, árboles vivos con DAP ≥ 2,5 cm (2023–2025)",Área frontal por unidad de volumen,
+DAP medio,"37,7 (Smith Channel), 16,9–23,2 (El Cove), 10,0 (Bahía Hooker)",cm,Tenemos,BDD_SAI INVEMAR (2023–2025),"Con Ohira et al. (2013) da número, altura y diámetro de raíces",
+Altura de los árboles,"En la BDD, por resumir",m,Tenemos,BDD_SAI INVEMAR,Altura de la vegetación en XBeach/SWAN,
+Altura de la zona de raíces fúlcreas,"1,5 (supuesto)",m,Supuesto,"Ohira et al. (2013), a partir del DAP de las parcelas",Corte del área frontal en profundidad,
+Coeficiente de arrastre C_D,"0,6 + 3·10⁴/Re_DAP",—,Proxy,"Kelty et al. (2022), Rhizophora a escala de prototipo",Término de vegetación de XBeach/SWAN,https://doi.org/10.3389/fmars.2021.780946
+"Tasa de atenuación de ola (campo, R. mangle)","0,001–0,01",1/m,Proxy,Lopez-Arias et al. (2024): −34 % de altura a 63 m,Rango de validación,https://doi.org/10.3389/fmars.2024.1383368
+Tasa de atenuación de ola (laboratorio),"0,004–0,021",1/m,Proxy,"Kelty et al. (2022), baja y alta densidad",β del modelo de cribado,https://doi.org/10.3389/fmars.2021.780946
+Atenuación de la marea de tormenta,"9,4–50",cm/km,Proxy,Krauss et al. (2009); Zhang et al. (2012),Atenuación de nivel del cribado,https://doi.org/10.1016/j.ecss.2012.02.021
+Altura del dosel,Por descargar,m,Encontrado fuera,"Simard et al. (2019), ORNL DAAC",Contraste de la estructura,https://daac.ornl.gov/cgi-bin/dsviewer.pl?ds_id=1665

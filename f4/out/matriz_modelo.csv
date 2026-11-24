@@ -1,0 +1,9 @@
+criterio,peso,caso,adcirc_swan,xbeach,anidado,nota
+Tolerancia a la batimetría disponible,0.3,Solo SDB y carta,4,2,3,XBeach exige nearshore ≤ 5–10 m; ADCIRC con malla variable lo tolera mejor
+Tolerancia a la batimetría disponible,0.3,Con batimetría CIOH,4,4,4,Con sondajes oficiales ambos son viables
+Mecanismo dominante (marea de tormenta E–NE / oleaje SE),0.3,Solo SDB y carta,3,3,5,"Si las ACI combinan ambos mecanismos, el anidamiento los cubre"
+Mecanismo dominante (marea de tormenta E–NE / oleaje SE),0.3,Con batimetría CIOH,3,3,5,
+Escala (isla y contorno frente a ACI de pocos km),0.2,Solo SDB y carta,4,3,5,ADCIRC+SWAN da el contorno; XBeach el detalle con vegetación
+Escala (isla y contorno frente a ACI de pocos km),0.2,Con batimetría CIOH,4,3,5,
+Cómputo y plazo (16 corridas por ACI),0.2,Solo SDB y carta,2,4,2,ADCIRC+SWAN pide clúster; XBeach a 2–5 m cabe en equipo local
+Cómputo y plazo (16 corridas por ACI),0.2,Con batimetría CIOH,2,4,2,
